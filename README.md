@@ -16,7 +16,7 @@ $ gem install bundler
 $ git clone git@github.com:TechBooster/C89-FirstStepReVIEW-v2.git
 $ cd C89-FirstStepReVIEW-v2
 $ npm install
-$ grunt pdf
+$ npm run pdf
 ```
 
 その他細かい準備(tex入れたり)は[FirstStepReVIEW](https://github.com/TechBooster/FirstStepReVIEW)に準じる。

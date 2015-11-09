@@ -2,12 +2,11 @@
   "name": "C89-FirstStepReVIEW-v2",
   "version": "0.0.1",
   "private": true,
-  "engines": {
-    "node": "0.10.33",
-    "npm": "1.4.28"
-  },
   "scripts": {
-    "postinstall": "bundle install"
+    "global": "npm install -g grunt-cli && gem install bundler",
+    "postinstall": "bundle install",
+    "pdf": "grunt pdf",
+    "html": "grunt html"
   },
   "devDependencies": {
     "grunt": "0.4.5",
