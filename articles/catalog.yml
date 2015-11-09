@@ -1,7 +1,11 @@
 PREDEF:
   - preface.re
 CHAPS:
-  - mhidaka.re
+  - writing-book.re
+  - setup.re
+  - review-introduction.re
+  - workflow.re
+  - tips.re
 
 APPENDIX:
 
