@@ -1,0 +1,16 @@
+*.html
+*.txt
+*.xml
+*.tex
+
+*-pdf/
+
+*.pdf
+*.epub
+
+*.css
+!epub.css
+
+# switch by grunt task
+review-ext.rb
+layouts/layout.html.erb

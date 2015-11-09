@@ -1,0 +1,20 @@
+{
+  "name": "C89-FirstStepReVIEW-v2",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": "0.10.33",
+    "npm": "1.4.28"
+  },
+  "scripts": {
+    "postinstall": "bundle install"
+  },
+  "devDependencies": {
+    "grunt": "0.4.5",
+    "grunt-contrib-clean": "0.6.0",
+    "grunt-exec": "0.4.6",
+    "grunt-open": "0.2.3",
+    "load-grunt-tasks": "3.3.0"
+  },
+  "dependencies": {}
+}
