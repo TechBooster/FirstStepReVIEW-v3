@@ -1,23 +1,23 @@
 = 環境を整える
 
-TODO
+TODO vvakame
 
 == Atom+language-reviewでエディタを整える
 
-TODO
+TODO vvakame
 
 == Re:VIEWのインストール
 
-TODO
+TODO vvakame
 
 == PDF出力の準備
 
-TODO
+TODO vvakame
 
 == 推奨するディレクトリ構成
 
-TODO
+TODO vvakame
 
 == トラブルシューティング
 
-TODO
+TODO mhidaka

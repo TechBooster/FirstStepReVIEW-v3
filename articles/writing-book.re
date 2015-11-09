@@ -1,11 +1,11 @@
 = 技術書を書くということ
 
-TODO
+TODO mhidaka
 
 == Re:VIEWとは？
 
-TODO
+TODO mhidaka
 
 == なぜRe:VIEWを選ぶべきか
 
-TODO
+TODO vvakame

@@ -10,20 +10,20 @@ TeXの話もレイアウト、スタイルみたいなのは飛ばしてしま�
 初心者がMacTeXインストールせずに、すこしつかえるようにGrifletのインスタントモードみたいなのほしいね。Dockerファイルでいいんかな？これは思いつき。
 //}
 
-TODO
+TODO vvakame
 
 == GitHub
 
-TODO
+TODO vvakame
 
 == Griflet
 
-TODO
+TODO vvakame
 
 == 入稿
 
-TODO
+TODO mhidaka
 
 == 紙面構成の話
 
-TODO
+TODO mhidaka

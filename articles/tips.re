@@ -1,23 +1,23 @@
 = 役に立つ豆知識
 
-TODO
+TODO mhidaka
 
 == gruntの設定とか
 
-TODO
+TODO vvakame
 
 == Webページの生成方法とか
 
-TODO
+TODO mstssk
 
 == epubの生成方法とか
 
-TODO
+TODO mstssk
 
 == 関連各所の紹介？達人出版会とかトップスタジオとか？
 
-TODO
+TODO mhidaka
 
 == 品質を高めるためのチェックポイント
 
-TODO
+TODO mhidaka
