@@ -15,7 +15,7 @@ module.exports = function (grunt) {
 			preprocess: {
 				cwd: "./articles",
 				cmd: function () {
-					var command = "bundle exec review-preproc";
+					var command = "bundle exec review-preproc-peg";
 					var files = [
 						"articles"
 					];
@@ -27,37 +27,37 @@ module.exports = function (grunt) {
 			compile2text: {
 				cwd: "./articles",
 				cmd: function () {
-					return "bundle exec review-compile --all --target=text --footnotetext --stylesheet=style.css";
+					return "bundle exec review-compile-peg --all --target=text --footnotetext --stylesheet=style.css";
 				}
 			},
 			compile2html: {
 				cwd: "./articles",
 				cmd: function () {
-					return "bundle exec review-compile --all --target=html --footnotetext --stylesheet=style.css --chapterlink";
+					return "bundle exec review-compile-peg --all --target=html --footnotetext --stylesheet=style.css --chapterlink";
 				}
 			},
 			compile2latex: {
 				cwd: "./articles",
 				cmd: function () {
-					return "bundle exec review-compile --all --target=latex --footnotetext --stylesheet=style.css";
+					return "bundle exec review-compile-peg --all --target=latex --footnotetext --stylesheet=style.css";
 				}
 			},
 			compile2idgxml: {
 				cwd: "./articles",
 				cmd: function () {
-					return "bundle exec review-compile --all --target=idgxml --footnotetext --stylesheet=style.css";
+					return "bundle exec review-compile-peg --all --target=idgxml --footnotetext --stylesheet=style.css";
 				}
 			},
 			compile2pdf: {
 				cwd: "./articles",
 				cmd: function () {
-					return "bundle exec review-pdfmaker config.yml";
+					return "bundle exec review-pdfmaker-peg config.yml";
 				}
 			},
 			compile2epub: {
 				cwd: "./articles",
 				cmd: function () {
-					return "bundle exec review-epubmaker config.yml";
+					return "bundle exec review-epubmaker-peg config.yml";
 				}
 			}
 		}
