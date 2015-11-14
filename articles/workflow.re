@@ -10,15 +10,30 @@ TeXの話もレイアウト、スタイルみたいなのは飛ばしてしま�
 初心者がMacTeXインストールせずに、すこしつかえるようにGrifletのインスタントモードみたいなのほしいね。Dockerファイルでいいんかな？これは思いつき。
 //}
 
+本書をここまで読んできて、Re:VIEWのいろはについては概ね諒解していただけたと思う。
+この章では、実際に本を作るためのTipsを紹介していく。
+TechBoosterがC81から練り上げてきた本を作るよくできた方法を解説していきます。
+
+== GitHub Oriented Writing
+
+略すとGoW… Gears of Warだ！
+
 TODO vvakame
 
-== GitHub
+書くことの予定表
 
-TODO vvakame
+ * プライベートリポジトリ
+ * pushとpull request
 
 == Griflet
 
 TODO vvakame
+
+書くことの予定表
+
+ * 専用のCI
+ * ビルド環境の準備が不要になる
+ ** 一見さんにも優しい
 
 == 入稿
 
