@@ -1,4 +1,4 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-gem 'review-peg', '0.1.1'
+gem 'review-peg', '0.2.0'
