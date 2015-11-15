@@ -13,3 +13,5 @@ TODO mstssk
 == コンパイルの仕方
 
 TODO mstssk
+TODO mstssk review-preproc などサブコマンドについても少々扱ってほしい
+TODO mstssk *-peg についてコラムがあると嬉しいなー

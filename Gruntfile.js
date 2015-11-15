@@ -7,7 +7,8 @@ module.exports = function (grunt) {
 					'articles/*.pdf',
 					'articles/*.epub',
 					'articles/*.html',
-					'articles/*.css'
+					'articles/*.xml',
+					'articles/*.txt'
 				]
 			}
 		},
@@ -27,25 +28,25 @@ module.exports = function (grunt) {
 			compile2text: {
 				cwd: "./articles",
 				cmd: function () {
-					return "bundle exec review-compile-peg --all --target=text --footnotetext --stylesheet=style.css";
+					return "bundle exec review-compile-peg --all --target=text";
 				}
 			},
 			compile2html: {
 				cwd: "./articles",
 				cmd: function () {
-					return "bundle exec review-compile-peg --all --target=html --footnotetext --stylesheet=style.css --chapterlink";
+					return "bundle exec review-compile-peg --all --target=html --stylesheet=style.css --chapterlink";
 				}
 			},
 			compile2latex: {
 				cwd: "./articles",
 				cmd: function () {
-					return "bundle exec review-compile-peg --all --target=latex --footnotetext --stylesheet=style.css";
+					return "bundle exec review-compile-peg --all --target=latex --footnotetext";
 				}
 			},
 			compile2idgxml: {
 				cwd: "./articles",
 				cmd: function () {
-					return "bundle exec review-compile-peg --all --target=idgxml --footnotetext --stylesheet=style.css";
+					return "bundle exec review-compile-peg --all --target=idgxml";
 				}
 			},
 			compile2pdf: {
