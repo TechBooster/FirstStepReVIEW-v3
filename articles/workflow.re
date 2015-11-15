@@ -14,6 +14,14 @@ TeXの話もレイアウト、スタイルみたいなのは飛ばしてしま�
 この章では、実際に本を作るためのTipsを紹介していく。
 TechBoosterがC81から練り上げてきた本を作るよくできた方法を解説していきます。
 
+== language-review向けの設定
+
+TODO vvakame
+
+=== prhについて
+
+TODO vvakame
+
 == GitHub Oriented Writing
 
 略すとGoW… Gears of Warだ！
