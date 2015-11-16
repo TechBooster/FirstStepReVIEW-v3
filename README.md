@@ -4,9 +4,10 @@
 
 ### 電子書籍として閲覧する場合
 
-https://tcb.mowa-net.jp/griflet/github/TechBooster/C89-FirstStepReVIEW-v2/
+https://griflet.net/github/TechBooster/C89-FirstStepReVIEW-v2/
 
-まだCIサーバは動いてません！
+Twitterログインが必要です。
+見られないときは @amedama か @mhidaka か @vvakame にお伝え下さい。
 
 ## この本のビルドの仕方
 
