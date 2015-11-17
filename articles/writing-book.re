@@ -1,4 +1,4 @@
-= 技術書を書くということ
+={writing-book} 技術書を書くということ
 
 TODO mhidaka
 

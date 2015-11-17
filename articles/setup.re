@@ -28,8 +28,6 @@ review.jsは現在のところ、PDFを生成することなどができませ�
 インストールしたらAtomを立ち上げ、設定からlanguage-reviewをインストールします（@<img>{install-language-review}）。
 もしくは、一度Atomを起動するとMac OS Xであれば@<code>{/usr/local/bin/}にapmコマンドがインストールされますので、@<code>{apm install language-review}とします。
 
-TODO WindowsとかLinuxでの調査
-
 //image[install-language-review][language-reviewをインストールする]{
 //}
 
@@ -84,13 +82,13 @@ $ gem install review
 
 ===[column] Ruby導入の手引き Mac OS X or Linux編
 
-TODO
+TODO vvakame
 
 ===[/column]
 
 ===[column] Ruby導入の手引き Windows編
 
-TODO
+TODO vvakame
 
 ===[/column]
 
@@ -99,8 +97,8 @@ TODO
 #@# NOTE author:vvakame
 
 PDF出力の準備をします。
-Re:VIEW文書をPDFに変換するにはTeXを使います。
-review形式→reviewツール実行→latex形式→latex実行→PDF という流れです。
+Re:VIEW文書をPDFに変換するにはLaTeX（platexまたはlualatexなど）を使います。
+review形式→reviewツール実行→latex形式→platex実行→PDF という流れです。
 
 === Mac OS Xの場合
 
@@ -110,11 +108,16 @@ MacTeX@<fn>{mactex}を使いましょう。
 
 === Linuxの場合
 
-TODO vvakame FirstStepReVIEWから移植してくればいいかなー
+texliveパッケージを利用します。
+Ubuntu、Debianともに次のコマンドで導入できます。
+
+//emlist{
+$ sudo apt-get install texlive-lang-cjk texlive-fonts-recommended
+//}
 
 === Windowsの場合
 
-TODO vvakame FirstStepReVIEWから移植してくればいいかなー
+LaTeX環境の構築の難易度が高いため、Dockerを使うなどしてください。
 
 ==[column] Dockerを使ってどこでもビルド
 
