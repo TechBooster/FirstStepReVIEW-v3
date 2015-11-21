@@ -119,6 +119,30 @@ $ sudo apt-get install texlive-lang-cjk texlive-fonts-recommended
 
 LaTeX環境の構築の難易度が高いため、Dockerを使うなどしてください。
 
+==[column] Dockerとは？
+
+Dockerは最近はやりの仮想環境用のツールです。
+Linuxカーネルに組み込みの機能を使って、軽量かつ無駄の少ない仮想化環境を実現しています。
+そのため、Mac OS XやWindowsでは直接は利用できません。
+しかし、そのためのdocker-machineという仕組みが用意されています。
+
+docker-machineはデフォルトでVirtualBoxを利用して、Linux環境を立ち上げその中で仮想環境を作成します。
+このツールを使うと、Mac OS XやWindows環境でもDockerを利用することができます。
+
+Dockerはざっくり次の使い方をします。
+
+ 1. Dockerfileを書く。Dockerfileはイメージの設計図で、主にコマンドの羅列である。
+ 2. 他人が書いたDockerfileを元に、Docker, Incがtrusted buildを作成してくれる。
+ 3. 他人の作ったイメージを元に自分のDockerfileを書く。
+
+本書ではDockerやdocker-machineのインストール方法や使い方は解説しません。
+その時々で適切なやり方を調べてみてください。
+
+==[/column]
+
+//footnote[docker-machine][@<href>{https://docs.docker.com/machine/}]
+//footnote[docker-hub][@<href>{https://hub.docker.com/}]
+
 ==[column] Dockerを使ってどこでもビルド
 
 Ruby入れたりTeX入れたりめんどくさすぎる！
