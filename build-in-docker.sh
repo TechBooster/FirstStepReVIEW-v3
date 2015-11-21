@@ -1,12 +1,6 @@
 #!/bin/bash
 
-set -eu
+# コマンド手打ちで作業したい時は以下の通り /book に pwd がマウントされます
+# docker run -i -t -v $(pwd):/book vvakame/review /bin/bash
 
-echo "*How to build*"
-echo ""
-echo "cd app"
-echo "./setup.sh"
-echo "npm run pdf"
-echo ""
-
-docker run -i -t -v $(pwd):/app vvakame/review /bin/bash
+docker run -t --rm -v $(pwd):/book vvakame/review /bin/bash -ci "cd /book && ./setup.sh && npm run pdf"
