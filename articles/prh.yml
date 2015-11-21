@@ -5,6 +5,13 @@ rules:
   - expected: TechBooster
     pattern: てっくぶーすたー
     prh: 警告メッセージのカスタマイズができるよ！
+  # ケアレスミス防止用
+  - expected: "@<$1>{$2}" # 先頭 @ はyaml的にアレなのでダブルクォートで囲む
+    pattern:  /@([^{]+){([^}]+)}/
+    specs:
+      - from: "@list{foo}"
+        to:   "@<list>{foo}"
+    prh: Re:VIEW記法の書き方を間違えていませんか？
   # 記号
   # 半角括弧を全角括弧に
   - expected: （$1）
@@ -72,7 +79,7 @@ rules:
     pattern:  綺麗
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
   - expected: こと
-    pattern:  /(記|大|仕)?事(?!情|件|前|後|例|実|体)/
+    pattern:  /(記|大|仕)?事(?!情|件|前|後|例|実|体|態)/
     regexpMustEmpty: $1
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
     specs:
