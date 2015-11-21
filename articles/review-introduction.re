@@ -105,26 +105,26 @@ ReVIEWは、6段階以上の見出しには対応していませんが、一般�
 
 章を参照する構文です。
 
-@<list>{refer_chap}は、３つとも@<chapref>{introduction}を参照しています。
+@<list>{refer_chap}は、３つとも@<chapref>{writing-book}を参照しています。
 
 //list[refer_chap][章の参照]{
-＠<title>{introduction}
+＠<title>{writing-book}
 
-＠<chap>{introduction}
+＠<chap>{writing-book}
 
-＠<chapref>{introduction}
+＠<chapref>{writing-book}
 //}
 
-@<tt>{title}は、その章のキャプションになります（@<title>{introduction}）。
+@<tt>{title}は、その章のキャプションになります（@<title>{writing-book}）。
 
-@<tt>{chap}は、その章の見出し番号になります（@<chap>{introduction}）。
+@<tt>{chap}は、その章の見出し番号になります（@<chap>{writing-book}）。
 
-@<tt>{chapref}は、その章の見出し番号とキャプションになります（@<chapref>{introduction}）。
+@<tt>{chapref}は、その章の見出し番号とキャプションになります（@<chapref>{writing-book}）。
 
 これらの構文の参照先には、ReVIEWの章の識別子を指定します。
 
 章の識別子は、ReVIEWの章のファイル名から拡張子@<tt>{.re}を取り除いた名前です。
-例えば、@<tt>{introduction.re}の章を参照する場合、@<tt>{introduction}が識別子になります。
+例えば、@<tt>{writing-book.re}の章を参照する場合、@<tt>{writing-book}が識別子になります。
 
 ==== 節の参照
 
@@ -133,7 +133,7 @@ ReVIEWは、6段階以上の見出しには対応していませんが、一般�
 //list[refer_section][見出しの参照]{
 ＠<hd>{見出し}
 
-＠<hd>{introduction|ReVIEWの特色}
+＠<hd>{writing-book|ReVIEWの特色}
 //}
 
 同じ章の節を参照する場合、参照先には、節のキャプションだけを記載します。
@@ -141,7 +141,7 @@ ReVIEWは、6段階以上の見出しには対応していませんが、一般�
 異なる章の見出しを参照する場合、章の識別子を指定した上で、縦棒@<tt>{|}で区切って節のキャプションを記述します。
 
 章の識別子は、ReVIEWの章のファイル名から拡張子@<tt>{.re}を取り除いた名前です。
-例えば、@<tt>{introduction.re}の章を参照する場合、@<tt>{introduction}が識別子になります。
+例えば、@<tt>{writing-book.re}の章を参照する場合、@<tt>{writing-book}が識別子になります。
 
 ==== 見出しラベル
 
