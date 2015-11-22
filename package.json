@@ -6,7 +6,7 @@
     "global": "npm install -g grunt-cli && gem install bundler",
     "postinstall": "bundle install",
     "pdf": "$(npm bin)/grunt pdf",
-    "html": "$(npm bin)/gruntgrunt html"
+    "html": "$(npm bin)/grunt html"
   },
   "repository": {
     "type": "git",
