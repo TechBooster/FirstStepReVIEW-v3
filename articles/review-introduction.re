@@ -103,6 +103,8 @@ ReVIEWは、6段階以上の見出しには対応していませんが、一般�
 
 ===== 章の参照
 
+#@# mstssk 「={hoge}」の様に任意に付けるidについても記載したい
+
 章を参照する構文です。
 
 @<list>{refer_chap}は、３つとも@<chapref>{writing-book}を参照しています。
@@ -115,7 +117,7 @@ ReVIEWは、6段階以上の見出しには対応していませんが、一般�
 ＠<chapref>{writing-book}
 //}
 
-@<tt>{title}は、その章のキャプションになります（@ <title>{writing-book}）。
+@<tt>{title}は、その章のキャプションになります（@<title>{writing-book}）。
 
 @<tt>{chap}は、その章の見出し番号になります（@<chap>{writing-book}）。
 
@@ -699,6 +701,76 @@ ReVIEW記法では、文字を装飾することができます。
 == 設定ファイルの解説
 
 TODO mstssk
+
+=== catalog.yml
+
+#@# https://github.com/kmuto/review/wiki/catalog.yml
+#@# https://github.com/kmuto/review/blob/master/doc/catalog.ja.md
+
+catalog.ymlは章立ての設定ファイルです。
+各章の.reファイルを列記し、PDFをビルドをした際の章の順序を定義します。
+
+@<list>{catalog_yml_sample}は、TechBoosterがコミックマーケット88で頒布したJavaScriptoonの実際のcatalog.ymlです（@<fn>{url_javascriptoon}）。
+
+//list[catalog_yml_sample][JavaScriptoonのcatalog.yml]{
+PREDEF:
+  - preface.re
+
+CHAPS:
+  - laco0416.re
+  - mstssk.re
+  - gam0022.re
+  - nyamadan.re
+  - laco0416_stream.re
+  - amedama_fido.re
+  - vvakame.re
+
+APPENDIX:
+
+POSTDEF:
+  - contributors.re
+//}
+
+catalog.ymlの各項目の内容は次のとおりです。
+
+: PREDEF
+  前書きなど目次の前に記載するものを指定します。
+: CHAPS
+  本文の各章を指定します。TechBoosterでは各著者が各章を担当するので、著者名をそのままファイル名に使っています。
+: APPENDIX
+  付録となる章を指定します。
+: POSTDEF
+  後書き。TechBoosterでは著者紹介を載せています。
+
+くわえて、CHAPSはネストすることで@<b>{部}を構成することができます。
+部を構成するには、@<list>{catalog_yml_nested_chaps}のように、部のタイトル名や.reファイル名の下に章のファイルを記述します。
+YAMLに馴染みがないと忘れがちですが、Collection（@<fn>{url_yaml_collection}）にする必要があるのでコロン記号（：）を付け忘れないようにしましょう。
+
+//list[catalog_yml_nested_chaps][部を構成するCHAPSの記述]{
+CHAPS:
+  - "部のタイトル":
+    - chapter1.re
+    - chapter2.re
+  - part2.re:
+    - chapter.3.re
+    - chapter4.re
+  - chapter5.re
+//}
+
+//footnote[url_javascriptoon][https://techbooster.github.io/c88/#scriptoon]
+//footnote[url_yaml_collection][http://www.yaml.org/spec/1.2/spec.html#id2759963]
+
+====[column] 章立ての古い方法
+Re:VIEWのバージョン1.2以前ではcatalog.ymlが無く、PREDEFやCHAPSを個別のファイルに記載していました。
+現在でも古い方法はサポートされていますが、基本的にはcatalog.ymlを使ったほうがいいでしょう。
+また、APPENDIXはバージョン1.3で追加されたので、古い方法ではサポートされていません。
+====[/column]
+
+=== config.yml
+
+https://github.com/kmuto/review/wiki/config.yml
+
+=== スタイル
 
 == コンパイルの仕方
 
