@@ -71,5 +71,5 @@ debug: null
 # 子ビルダに渡すパラメータ
 params:
 
-pubhistory: |
+history: |
   2015年12月31日  初版発行 v1.0.0
