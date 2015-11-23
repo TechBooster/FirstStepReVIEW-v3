@@ -18,7 +18,7 @@ module.exports = grunt => {
 		clean: {
 			review: {
 				src: [
-					`${articles}/${bookConfig.bookname}-pdf/`,
+					`${articles}/${bookConfig.bookname}-*/`, // pdf, epub temp dir
 					`${articles}/*.pdf`,
 					`${articles}/*.epub`,
 					`${articles}/*.html`,
