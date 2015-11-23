@@ -4,6 +4,10 @@ machine:
   services:
     - docker
 
+dependencies:
+  override:
+    - docker pull vvakame/review
+
 test:
   override:
-    - ./build-in-docker.sh
+    - npm run pdf
