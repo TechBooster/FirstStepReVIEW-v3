@@ -2,6 +2,9 @@
   "name": "c89-firststepreview-v2",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "scripts": {
     "global": "npm install -g grunt-cli && gem install bundler",
     "postinstall": "bundle install",

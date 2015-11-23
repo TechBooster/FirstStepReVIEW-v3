@@ -11,8 +11,10 @@ Twitterログインが必要です。
 
 ## この本のビルドの仕方
 
+rbenvやnodebrewを利用してRubyやNode.jsの準備をしている前提。
+もしそうではない場合、適宜sudoを補うこと。
+
 ```
-$ npm install -g grunt-cli
 $ gem install bundler
 $ git clone git@github.com:TechBooster/C89-FirstStepReVIEW-v2.git
 $ cd C89-FirstStepReVIEW-v2
@@ -21,4 +23,11 @@ $ npm run pdf
 ```
 
 その他細かい準備(tex入れたり)は[FirstStepReVIEW](https://github.com/TechBooster/FirstStepReVIEW)に準じる。
+
 めんどくさい場合はRe:VIEWビルド用の[dockerイメージ](https://registry.hub.docker.com/u/vvakame/review/)を用意してあるので使ってください。
+Dockerがうまく動くようになっている場合、以下のコマンドで細かい準備なしにビルドを行うことができる。
+
+```
+$ docker pull vvakame/review
+$ ./build-in-docker.sh
+```
