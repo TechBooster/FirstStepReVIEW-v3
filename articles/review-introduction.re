@@ -757,8 +757,8 @@ CHAPS:
   - chapter5.re
 //}
 
-//footnote[url_javascriptoon][https://techbooster.github.io/c88/#scriptoon]
-//footnote[url_yaml_collection][http://www.yaml.org/spec/1.2/spec.html#id2759963]
+//footnote[url_javascriptoon][@<href>{https://techbooster.github.io/c88/#scriptoon}]
+//footnote[url_yaml_collection][@<href>{http://www.yaml.org/spec/1.2/spec.html#id2759963}]
 
 ====[column] 章立ての古い方法
 Re:VIEWのバージョン1.2以前ではcatalog.ymlが無く、PREDEFやCHAPSを個別のファイルに記載していました。
@@ -768,7 +768,16 @@ Re:VIEWのバージョン1.2以前ではcatalog.ymlが無く、PREDEFやCHAPSを
 
 === config.yml
 
-https://github.com/kmuto/review/wiki/config.yml
+#@# https://github.com/kmuto/review/wiki/config.yml
+
+config.ymlは本を生成する時のメタデータ記述ファイルです。
+書名や、奥付の内容、どの深さまで目次に含めるかなどを設定できます。
+記述できる項目は多いので、Re:VIEW公式のサンプルとWikiを参照してください。
+
+: サンプル
+  @<href>{https://github.com/kmuto/review/blob/master/doc/sample.yml}
+: Wiki
+  @<href>{https://github.com/kmuto/review/wiki/config.yml}
 
 === スタイル
 
