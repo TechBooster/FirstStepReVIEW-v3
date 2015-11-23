@@ -4,15 +4,18 @@
 
 まずはRe:VIEWで執筆するための環境を整えましょう。
 
-TechBoosterでは、GitHubが提供するエディタであるAtom@<fn>{atom}とそれに追加できるパッケージであるlanguage-review@<fn>{language-review}を使い執筆を行い、GitHubなどにpushする前にRuby版のRe:VIEW@<fn>{review}を使ってHTMLやPDFの生成チェックを行う運用になっています。
+TechBoosterでは、GitHubが提供するエディタであるAtom@<fn>{atom}とそれに追加できるパッケージであるlanguage-review@<fn>{language-review}を使い執筆を行います。
+そしてGitHubなどにpushする前にRuby版のRe:VIEW@<fn>{review}を使ってHTMLやPDFの生成チェックを行う運用になっています。
 これは、language-reviewはreview.js@<fn>{review.js}というJavaScriptによるRe:VIEWの移植版を使っているためです。
 review.jsは現在のところ、PDFを生成することなどができませんし、文章の解釈もRuby版と厳密には一致しません。
 
 本書執筆時点での各ツールのバージョンは次のとおり。
 
- * Atom v1.2.0
+#@# TODO 入稿前にここのバージョンを再確認すること
+
+ * Atom v1.2.3
  * language-review 0.12.4
- * Re:VIEW 1.7.0 または review-peg 0.1.3
+ * Re:VIEW 1.7.0 または review-peg 0.2.0
 
 //footnote[atom][@<href>{https://atom.io/}]
 //footnote[language-review][@<href>{https://atom.io/packages/language-review}]
@@ -78,19 +81,44 @@ $ gem install review
 これだけです。
 詳しい使い方は@<chapref>{review-introduction}で解説します。
 
-//footnote[experimental-review][review-pegという実験的パッケージがありますが熱心なRe:VIEW信者でない限りreviewを使えばよいでしょう]
+//footnote[experimental-review][review-pegという実験的パッケージがありますが熱心なRe:VIEW信者でない限り通常のreviewを使えばよいでしょう]
 
-===[column] Ruby導入の手引き Mac OS X or Linux編
+===[column] Ruby導入の手引き Mac OS X, Linux編
 
-TODO vvakame
+Macの場合、何もしなくてもデフォルトでRubyが導入されています。
+この状態だと、gem installするのにsudoが必要になります。
+また、デフォルトのRubyのバージョンは若干古いため、最新のものを入れたほうがよいでしょう。
+システムのデフォルトのままだと、破壊的（かもしれない）操作をするのが怖いですし、イザという時にリセットすることもやりにくいです。
+イザとなったら@<code>{rm -rf ~/.rbenv}すればよい環境を作ると精神的安らぎが得られます。
+
+そのため、本書ではrbenvの利用をお勧めします。
+rbenvのインストール自体は公式サイト@<fn>{rbenv}に譲ります。
+rbenvインストール後の手順は次のとおりです。
+
+//emlist{
+$ rbenv install --list
+# 最新のを適当に入れれば良い 執筆時点では 2.2.3
+$ rbenv install 2.2.3
+# グローバルなrubyコマンドのバージョンを設定する localも可
+$ rbenv global 2.2.3
+# reviewをインストール
+$ gem install review
+# そのままではreview-compileにパスが通ってない状態なのでrehashする
+$ rbenv rehash
+//}
 
 ===[/column]
+
+//footnote[rbenv][@<href>{https://github.com/sstephenson/rbenv#installation}]
 
 ===[column] Ruby導入の手引き Windows編
 
-TODO vvakame
+たぶんRubyInstaller@<fn>{rubyinstaller}とかを使うといいと思います。
+しかし、TechBoosterではWindows環境下ではロクなLaTeX環境を構築できていないので素直に仮想環境を使うとよいと思います。
 
 ===[/column]
+
+//footnote[rubyinstaller][@<href>{http://rubyinstaller.org/}]
 
 == PDF出力の準備
 

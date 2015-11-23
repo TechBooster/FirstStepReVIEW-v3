@@ -39,11 +39,11 @@
 （発行代表 @mhidaka）
 
 === TechBoosterとは
-TechBoosterはAndroidをはじめとしたモバイルのための技術サークル@<fn>{url}です。
+TechBoosterはAndroidをはじめとしたモバイルのための技術サークル@<fn>{techbooster-url}です。
 オープンソースへの貢献や社会還元を目的にサイトでモバイル技術を解説しています。
 
-//footnote[url][TechBoosterのWebサイト @<href>{http://techbooster.org/}]
+//footnote[techbooster-url][TechBoosterのWebサイト @<href>{http://techbooster.org/}]
 
 == お問い合わせ先
 
-本書に関するお問い合わせ https://plus.google.com/+TechboosterOrg/
+本書に関するお問い合わせ @<href>{https://plus.google.com/+TechboosterOrg/}
