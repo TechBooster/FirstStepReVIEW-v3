@@ -1,13 +1,15 @@
 machine:
   timezone:
     Asia/Tokyo
-  services:
-    - docker
+  node:
+    version: 4
 
 dependencies:
-  override:
-    - docker pull vvakame/review
+  pre:
+    - npm run global
 
 test:
   override:
-    - ./build-in-docker.sh
+    - npm run html:
+        environment:
+          REVIEW_POSTFIX: " "

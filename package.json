@@ -6,7 +6,7 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "global": "npm install -g grunt-cli && gem install bundler",
+    "global": "gem install bundler",
     "postinstall": "bundle install",
     "pdf": "$(npm bin)/grunt pdf",
     "html": "$(npm bin)/grunt html"
