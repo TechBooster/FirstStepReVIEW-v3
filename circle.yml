@@ -10,4 +10,4 @@ dependencies:
 
 test:
   override:
-    - npm run pdf
+    - ./build-in-docker.sh
