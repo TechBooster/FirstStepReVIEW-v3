@@ -13,6 +13,7 @@ Twitterログインが必要です。
 
 rbenvやnodebrewを利用してRubyやNode.jsの準備をしている前提。
 もしそうではない場合、適宜sudoを補うこと。
+Node.jsは4.x系以上が必須です。
 
 ```
 $ gem install bundler
