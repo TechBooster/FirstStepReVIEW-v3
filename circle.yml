@@ -1,14 +1,9 @@
 machine:
   timezone:
     Asia/Tokyo
-
-dependencies:
-  pre:
-    # LaTeX入れようかと思ったけど必要になるまではいいや
-    # https://github.com/TechBooster/FirstStepReVIEW/blob/master/article/how_to_install.re
-    - npm install -g grunt-cli
-    - gem install bundler
+  services:
+    - docker
 
 test:
   override:
-    - grunt html
+    - ./build-in-docker.sh
