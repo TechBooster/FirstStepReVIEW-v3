@@ -2,6 +2,59 @@
 
 TODO mhidaka
 
+== 推奨するディレクトリ構成
+
+#@# NOTE author:vvakame
+
+TechBoosterが推奨するディレクトリ構成を述べておきます。
+要点は次のとおりです。
+具体的には@<list>{directory}となります。
+
+ * リポジトリのトップレベルにはファイルをあまり散らかさない
+ * 複数人で執筆した時にそれぞれのファイルが混ざったり邪魔になったりしないようにする
+ * 著者全員で利用するreviewのバージョンを固定する
+ * ビルド手順を統一するために何らかのタスクランナーを使う（TechBoosterの場合Node.js+grunt）
+
+//list[directory][ディレクトリ構成]{
+  ├── README.md
+  ├── circle.yml            （CIサービスであるCircle CIの設定ファイル）
+  ├── setup.sh              （執筆を始めるためにgemやnpmのインストールを行うスクリプト）
+  ├── Gemfile               （bundler経由でRe:VIEWを利用するための設定ファイル）
+  ├── Gemfile.lock          （bundlerでインストールするライブラリのバージョンをロックする）
+  ├── package.json          （gruntを利用するためのnpm用設定ファイル）
+  ├── npm-shrinkwrap.json   （npmでインストールするライブラリのバージョンをロックする）
+  ├── Gruntfile.js          （gruntの動作設定ファイル）
+  ├── articles
+  │   ├── catalog.yml       （Re:VIEW用 章立ての設定ファイル）
+  │   ├── config.yml        （Re:VIEW用 本を生成する時のメタデータ記述ファイル）
+  │   ├── prh.yml           （language-review用校正設定ファイル）
+  │   ├── preface.re
+  │   ├── foo.re
+  │   ├── bar.re
+  │   ├── contributors.re
+  │   ├── images
+  │   │   ├── foo           （foo.re用）
+  │   │   │   └── description-of-foo.png
+  │   │   └── bar           （bar.re用）
+  │   │       └── bar-introduction.png
+  │   ├── layouts           （存在しない場合もある）
+  │   │   └── 省略
+  │   └── sty               （存在しない場合もある）
+  │       └── 省略
+  └── code                  （サンプルコード置き場）
+      ├── foo               （foo.re用）
+      │   └── sample.js
+      └── bar               （bar.re用）
+          └── flush.js
+//}
+
+原稿はarticlesディレクトリに、サンプルコードはcodeディレクトリに入れています。
+articles/imagesやcodeの中は、原稿の章ごとに.reのファイル名と同名のディレクトリを用意し、その中で活動します。
+
+原稿のファイル名は、わかりやすいのが一番！ということで複数名で執筆する場合筆者の名前にしてしまう場合があります。
+vvakame.reというファイル名にしてしまえば、レビューを行ったりビルドエラーなどの問題が発生した時連絡する人がわかりやすい。
+という発想です。
+
 == タスクランナーの設定
 
 #@# NOTE author:vvakame
