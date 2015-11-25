@@ -15,6 +15,8 @@ rbenvやnodebrewを利用してRubyやNode.jsの準備をしている前提。
 もしそうではない場合、適宜sudoを補うこと。
 Node.jsは4.x系以上が必須です。
 
+graphvizを使ったのでbrew install graphvizとかが必要かもしれません。
+
 ```
 $ gem install bundler
 $ git clone git@github.com:TechBooster/C89-FirstStepReVIEW-v2.git
