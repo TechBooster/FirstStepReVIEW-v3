@@ -36,6 +36,7 @@ rm -rf articles/C89-FirstStepReVIEW-v2-pdf/ \
        articles/*.txt
 //}
 
+#@# prh:disable
 それぞれ、pdf、epub、html、idgxml（Adobe InDesign用XML）、text生成時に作成される一時ファイルまたは最終出力ファイルです。
 一番最初の行の C89-FirstStepReVIEW-v2-pdf 部分はarticles/config.ymlのbooknameの設定により変化します。
 特に、最初の行は必ず行わないとPDFを生成しようとした時にエラーになるのでPDF生成処理前には必ず消すようにします。
