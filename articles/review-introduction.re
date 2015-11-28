@@ -770,7 +770,8 @@ Re:VIEWのバージョン1.2以前ではcatalog.ymlが無く、PREDEFやCHAPSを
 
 #@# https://github.com/kmuto/review/wiki/config.yml
 
-config.ymlは本を生成する時のメタデータ記述ファイルです。
+Re:VIEWでは本を生成する時のメタデータをYAMLで記述します。
+ファイル名に決まりはありませんが、TechBoosterではconfig.ymlとしています。
 書名や、奥付の内容、どの深さまで目次に含めるかなどを設定できます。
 記述できる項目は多いので、Re:VIEW公式のサンプルとWikiを参照してください。
 
@@ -779,10 +780,56 @@ config.ymlは本を生成する時のメタデータ記述ファイルです�
 : Wiki
   @<href>{https://github.com/kmuto/review/wiki/config.yml}
 
+@<list>{config_yml}は本書で使っているconfig.ymlです。
+
+//list[config_yml][config.yml]{
+#@# config.ymlからコメントと空行を除外してる
+#@mapoutput(grep -v -e '^#' -e '^$' config.yml)
+bookname: C89-FirstStepReVIEW-v2
+language: ja
+booktitle: はじめてのRe:VIEW v2
+urnid: urn:uid:https://github.com/TechBooster/C89-FirstStepReVIEW-v2
+aut: ["mhidaka", "vvakame", "mstssk"]
+prt: TechBooster
+edt: ["mhidaka"]
+date: 2015-12-31
+history: [["2015-12-31 C89版 v1.0.0"]]
+rights: (C) 2015 TechBooster
+stylesheet: ["style.css"]
+epubversion: 3
+toc: true
+toclevel: 2
+secnolevel: 2
+titlepage: true
+colophon: true
+texstyle: techbooster-doujin
+texdocumentclass: ["jsbook", "b5j,twoside,openany"]
+debug: false
+#@end
+//}
+
+#@# TODO 節にchaprefできない？
+#@# config.ymlの実際の使い方は@<chapref>{how_to_compile}を参照してください。
+config.ymlの実際の使い方は「コンパイルの仕方」の節を参照してください。
+
 === スタイル
 
-== コンパイルの仕方
+=={how_to_compile} コンパイルの仕方
 
 TODO mstssk
 TODO mstssk review-preproc などサブコマンドについても少々扱ってほしい
 TODO mstssk *-peg についてコラムがあると嬉しいなー
+
+config.ymlはRe:VIEWのコマンドに--yamlオプションで指定します。
+たとえば、HTMLを出力する場合は次のようになります。
+
+//cmd{
+review-compile --target=html --yaml=config.yml workflow.re
+//}
+
+@<code>{review-pdfmaker}コマンドを使う場合は、コマンド引数にconfig.ymlを指定すれば、
+config.yml内のbooknameで指定したファイル名でPDFを出力します。
+
+//cmd{
+review-pdfmaker config.yml
+//}
