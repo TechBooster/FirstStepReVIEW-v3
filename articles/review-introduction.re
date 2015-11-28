@@ -810,9 +810,7 @@ debug: false
 #@end
 //}
 
-#@# TODO 節にchaprefできない？
-#@# config.ymlの実際の使い方は@<chapref>{how_to_compile}を参照してください。
-config.ymlの実際の使い方は「コンパイルの仕方」の節を参照してください。
+config.ymlの実際の使い方は@<hd>{how_to_compile}を参照してください。
 
 === PDFの組版を調整する（.styファイル）
 
