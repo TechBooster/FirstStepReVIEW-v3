@@ -710,25 +710,24 @@ TODO mstssk
 catalog.ymlは章立ての設定ファイルです。
 各章の.reファイルを列記し、PDFをビルドをした際の章の順序を定義します。
 
-@<list>{catalog_yml_sample}は、TechBoosterがコミックマーケット88で頒布したJavaScriptoonの実際のcatalog.ymlです（@<fn>{url_javascriptoon}）。
+@<list>{catalog_yml_sample}は、本書で使用している実際のcatalog.ymlです。
 
-//list[catalog_yml_sample][JavaScriptoonのcatalog.yml]{
+//list[catalog_yml_sample][catalog.yml]{
+#@mapfile(catalog.yml)
 PREDEF:
   - preface.re
-
 CHAPS:
-  - laco0416.re
-  - mstssk.re
-  - gam0022.re
-  - nyamadan.re
-  - laco0416_stream.re
-  - amedama_fido.re
-  - vvakame.re
+  - writing-book.re
+  - setup.re
+  - review-introduction.re
+  - workflow.re
+  - tips.re
 
 APPENDIX:
 
 POSTDEF:
   - contributors.re
+#@end
 //}
 
 catalog.ymlの各項目の内容は次のとおりです。
@@ -736,7 +735,7 @@ catalog.ymlの各項目の内容は次のとおりです。
 : PREDEF
   前書きなど目次の前に記載するものを指定します。
 : CHAPS
-  本文の各章を指定します。TechBoosterでは各著者が各章を担当するので、著者名をそのままファイル名に使っています。
+  本文の各章を指定します。TechBoosterでは各著者が各章を担当するので、著者名をそのままファイル名に使うこともあります。
 : APPENDIX
   付録となる章を指定します。
 : POSTDEF
@@ -757,7 +756,6 @@ CHAPS:
   - chapter5.re
 //}
 
-//footnote[url_javascriptoon][@<href>{https://techbooster.github.io/c88/#scriptoon}]
 //footnote[url_yaml_collection][@<href>{http://www.yaml.org/spec/1.2/spec.html#id2759963}]
 
 ====[column] 章立ての古い方法
