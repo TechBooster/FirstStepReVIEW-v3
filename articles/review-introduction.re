@@ -761,9 +761,11 @@ CHAPS:
 //footnote[url_yaml_collection][@<href>{http://www.yaml.org/spec/1.2/spec.html#id2759963}]
 
 ====[column] 章立ての古い方法
+
 Re:VIEWのバージョン1.2以前ではcatalog.ymlが無く、PREDEFやCHAPSを個別のファイルに記載していました。
 現在でも古い方法はサポートされていますが、基本的にはcatalog.ymlを使ったほうがいいでしょう。
 また、APPENDIXはバージョン1.3で追加されたので、古い方法ではサポートされていません。
+
 ====[/column]
 
 === config.yml
