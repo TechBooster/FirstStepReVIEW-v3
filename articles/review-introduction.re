@@ -1,6 +1,8 @@
 ={review-introduction} Re:VIEWの書き方
 
-TODO mstssk
+//lead{
+本章では、Re:VIEWの記法やRe:VIEWで生成される各種ファイルの見た目を変更する方法と、実際にカスタマイズする方法を紹介します。
+//}
 
 =={review_markup} 記法の紹介
 
