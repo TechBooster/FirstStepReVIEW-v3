@@ -56,7 +56,7 @@ articles/imagesやcodeの中は、原稿の章ごとに.reのファイル名と�
 vvakame.reというファイル名にしてしまえば、レビューを行ったりビルドエラーなどの問題が発生した時連絡する人がわかりやすい。
 という発想です。
 
-== タスクランナーの設定
+=={config_task_runner} タスクランナーの設定
 
 #@# NOTE author:vvakame
 

@@ -700,6 +700,103 @@ Re:VIEW記法では、文字を装飾することができます。
 ＠<kw>{キーワード,解説}	キーワードと解説	@<kw>{GNU,GNU is Not Unix}
 //}
 
+== プリプロセッサ命令
+
+Re:VIEWでは、最終的な見た目に影響する記法とは別に、外部の情報を.reファイルに反映するプリプロセッサ命令があります。
+プリプロセッサ命令を使うことで、外部ファイルとしているサンプルコードを自動で.reファイル内に反映したりできます。
+
+プリプロセッサ命令を処理するには@<code>{review-preproc}コマンドを使用します。
+@<code>{review-preproc}コマンドはPDFのビルド時に自動で実行するようにしておくと便利です。
+@<hd>{tips|config_task_runner}を参照してください。
+
+あくまでプリプロセッサ命令は.reファイルの一部をを書き換えるだけです。
+最終的に.reファイルの内容がビルドされることに変わりはありません。
+
+=== ファイルの内容を読み込む
+
+@<code>{mapfile}命令は、外部ファイルの内容をまるっと読み込みます。
+.reファイルで外部ファイルを読み込む箇所に@<code>{#@mapfile(file_name)}と読み込み範囲の終了示す@<code>{#@end}を記述します。
+@<code>{review-preproc}コマンドは@<code>{#@mapfile(file_name)}と@<code>{#@end}の間に@<code>{file_name}というファイルを読み込みます。
+
+たとえばサンプルコードfoo.rbを読み込む場合、@<list>{sample_mapfile_before}のように.reファイルに記述します。
+
+//list[sample_mapfile_before][コンパイル前のmapfile記述]{
+ //list[sample_code][サンプルコード]{
+ #@mapfile(foo.rb)
+ #@end
+ //}
+//}
+
+@<list>{sample_mapfile_before}は@<code>{review-preproc}コマンドの処理後に@<list>{sample_mapfile_after}のようになります。
+Re:VIEWは@<code>{#@〜}の行をPDFやHTMLファイルなどの最終的な成果物には出力せず、foo.rbの内容だけを出力します。
+
+//list[sample_mapfile_after][コンパイル後のmapfile記述]{
+ //list[sample_code][サンプルコード]{
+ #@mapfile(foo.rb)
+ puts "foo"
+ #@end
+ //}
+//}
+
+=== ファイルの内容の一部を読み込む
+
+@<code>{maprange}命令は、外部ファイルの一部を読み込みます。
+ただし、外部のファイル側に読み込み範囲を示すプリプロセッサ命令を記述しておく必要があります。
+
+範囲を示すには@<code>{#@range_begin(range_name)}と@<code>{#@range_end(range_name)}で範囲を括ります。
+@<list>{sample_maprange_source}は@<code>{#@range_begin(range_name)}と@<code>{#@range_end(range_name)}を記述した例です。
+
+//list[sample_maprange_source][maprangeで読み込むsrc.txt]{
+ ここは読み込みません。
+ #@range_begin(sample)
+ ここを読み込みます。
+ #@range_end(sample)
+ ここは読み込みません。
+//}
+
+@<list>{sample_maprange_source}で指定した範囲を読み込むには、.reファイルに@<list>{sample_maprange_before}のように記述します。
+ちなみに、@<code>{#@maprange(...)}は@<code>{#@map(...)}と記述しても動作します。
+
+//list[sample_maprange_before][コンパイル前のmaprange記述]{
+ //list[sample_code][サンプルコード]{
+ #@maprange(src.txt, sample)
+ #@end
+ //}
+//}
+
+@<list>{sample_maprange_before}は@<code>{review-preproc}コマンドの処理後に@<list>{sample_maprange_after}のようになります。
+
+//list[sample_maprange_after][コンパイル後のmaprage]{
+ //list[sample_code][サンプルコード]{
+ #@maprange(src.txt, sample)
+ ここを読み込みます。
+ #@end
+ //}
+//}
+
+=== 外部コマンドの結果を読み込む
+
+@<code>{mapoutput}命令は、外部コマンドの結果を読み込みます。
+この命令はRe:VIEWの記法の枠内に囚われず、任意の処理の結果を.reファイルに埋め込めるため便利です。
+しかし、あくまでコンパイルするマシンにインストールしているコマンドを使用するため、複数人で共同で執筆する場合は注意が必要です。
+
+たとえば、筆者の環境のjavaのバージョンを自動で埋め込む場合は@<list>{sample_mapoutput_before}のように記述します。
+
+//list[sample_mapoutput_before][java -version]{
+ #@mapoutput(java -version 2>&1)
+ #@end
+//}
+
+@<list>{sample_mapoutput_before}はコンパイル後に@<list>{sample_mapoutput_after}のようになります。
+
+//list[sample_mapoutput_after][java -version]{
+ #@mapoutput(java -version 2>&1)
+ java version "1.8.0_05"
+ Java(TM) SE Runtime Environment (build 1.8.0_05-b13)
+ Java HotSpot(TM) 64-Bit Server VM (build 25.5-b02, mixed mode)
+ #@end
+//}
+
 == 設定ファイルの解説
 
 TODO mstssk
