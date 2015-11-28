@@ -814,7 +814,66 @@ debug: false
 #@# config.ymlの実際の使い方は@<chapref>{how_to_compile}を参照してください。
 config.ymlの実際の使い方は「コンパイルの仕方」の節を参照してください。
 
-=== スタイル
+=== PDFの組版を調整する（.styファイル）
+
+Re:VIEWではLaTexを使用してPDFを出力するので、組版に関する設定をLaTeXのスタイル形式で.styという拡張子のファイルに記述します。
+そのファイルの名前をcondig.ymlの@<code>{texstyle}の項目に指定し、スタイルを適用します。
+@<list>{config_style}は、本書で採用しているtechbooster-doujin.styというファイルです。
+
+//list[config_style][sty/techbooster-doujin.sty]{
+#@mapfile(sty/techbooster-doujin.sty)
+%% サンプルコードを更に小さく
+\renewenvironment{reviewemlist}{%
+  \medskip\footnotesize\begin{shaded}\setlength{\baselineskip}{1.2zw}\begin{alltt}}{%
+  \end{alltt}\end{shaded}}
+
+\renewenvironment{reviewlist}{%
+  \begin{shaded}\footnotesize\setlength{\baselineskip}{1.2zw}\begin{alltt}}{%
+  \end{alltt}\end{shaded}\par\vspace*{0.5zw}}
+
+\renewenvironment{reviewcmd}{%
+  \color{white}\medskip\footnotesize\begin{shadedb}\setlength{\baselineskip}{1.2zw}\begin{alltt}}{%
+  \end{alltt}\end{shadedb}}
+
+%% from review-pdfmaker
+\usepackage{fancyhdr}
+\usepackage{ulem}
+\pagestyle{fancy}
+
+\fancyhead{}
+\fancyhead[LE]{\gtfamily\sffamily\bfseries\upshape \leftmark}
+\fancyhead[RO]{\gtfamily\sffamily\bfseries\upshape \rightmark}
+\cfoot{\thepage}
+
+\renewcommand{\sectionmark}[1]{\markright{\thesection~#1}{}}
+\renewcommand{\chaptermark}[1]{\markboth{\prechaptername\ \thechapter\ \postchaptername~#1}{}}
+\renewcommand{\headfont}{\gtfamily\sffamily\bfseries}
+
+\fancypagestyle{plainhead}{%
+\fancyhead{}
+\fancyfoot{} % clear all header and footer fields
+\fancyfoot[CE,CO]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+
+\hypersetup{colorlinks=false}
+%%Helveticaを使う
+\renewcommand{\sfdefault}{phv}
+
+\sloppy
+
+\cfoot{\thepage}
+
+\def\cleardoublepage{%
+\clearpage%
+\if@twoside%
+   \ifodd \c@page \else \hbox{}\thispagestyle{plainhead}\newpage%
+           \if@twocolumn\hbox{}\thispagestyle{plainhead}\newpage\fi%
+   \fi%
+\fi%
+}
+#@end
+//}
 
 =={how_to_compile} コンパイルの仕方
 
