@@ -1,5 +1,7 @@
 ={review-introduction} Re:VIEWの書き方
 
+TODO CHAPSとかcatalog.ymlじゃないやり方の記述が残ってる
+
 //lead{
 本章では、Re:VIEWの記法やRe:VIEWで生成される各種ファイルの見た目を変更する方法と、実際にカスタマイズする方法を紹介します。
 //}
@@ -23,9 +25,6 @@ Re:VIEW記法でマークアップすることで、文章の構造や見た目�
 本章では、執筆にあたって適切なマークアップを選択できるように、利用頻度の高いRe:VIEW記法について解説します。
 
 また本書には、付録としてRe:VIEW記法のチートシートを収録しています。そちらもあわせて参照してください。
-
-#@# あめ玉: first_review_projectで@<chap>の説明がここにあることを仮定してます。入れるか、入れないようであれば連絡ください。
-#@# @<chap> Now available!
 
 === インライン命令とブロック命令
 
@@ -865,7 +864,7 @@ Re:VIEWのバージョン1.2以前ではcatalog.ymlが無く、PREDEFやCHAPSを
 
 ====[/column]
 
-=== config.yml
+==={config_yml} config.yml
 
 #@# https://github.com/kmuto/review/wiki/config.yml
 
@@ -1365,9 +1364,9 @@ index ae31c0a..7abd53b 100644
 --- a/articles/layouts/layout.tex.erb
 +++ b/articles/layouts/layout.tex.erb
 @@ -226,6 +226,9 @@
- 
+
  \reviewmainfont
- 
+
 +\frontmatter
 +\pagenumbering{arabic}
 +
@@ -1387,7 +1386,7 @@ index ae31c0a..7abd53b 100644
 @@ -257,9 +261,6 @@
  <% end %>
  <% end %>
- 
+
 -\renewcommand{\chaptermark}[1]{{}}
 -\frontmatter
 -
@@ -1397,7 +1396,7 @@ index ae31c0a..7abd53b 100644
 @@ -279,8 +280,17 @@
  \tableofcontents
  <% end %>
- 
+
 -\renewcommand{\chaptermark}[1]{\markboth{\prechaptername\thechapter\postchaptername~#1}{}}
 +\begingroup
 +  \cleardoublepage
@@ -1419,9 +1418,9 @@ index ae31c0a..7abd53b 100644
  \reviewcolophon
 -\thispagestyle{empty}
 +\thispagestyle{plainhead}
- 
+
  \vspace*{\fill}
- 
+
 //}
 
 //list[header_footer_plainhead][plainheadページスタイル]{
@@ -1436,20 +1435,171 @@ index ae31c0a..7abd53b 100644
 
 =={how_to_compile} コンパイルの仕方
 
-TODO mstssk
+=== review-compile
+
+@<code>{review-compile}はReVIEWファイル1つを変換して@<code>{--target}オプションで指定するフォーマットに変換します。
+
+最も簡単な例として、HTMLを出力する例を@<list>{review-compile-example-html-1}に示します。
+
+//list[review-compile-example-html-1][review-compileでHTMLを出力する例。]{
+> review-compile --target=html amedama.re
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="ReVIEW" />
+  <title>Google Drive APIを使ってファイルをダウンロードする</title>
+</head>
+<body>
+<h1><a id="h38"></a>第38章　Google Drive APIを使ってファイルをダウンロードする</h1>
+<p>本章では、PythonスクリプトからGoogle Driveに保存されているファイルを取得する方法を紹介します。Androidとは直接関係ありませんが、同様のAPIをAndroid上で利用する際に参考になるかもしれません。</p>
+
+<h2><a id="h38-1"></a>38.1　収録されている背景</h2>
+<p>『Effective Android』同人誌版の執筆が行われていた頃、原稿はGoogle Drive上で管理されていました。一部の技術者の希望によりgitも用いる運用に途中から切り替えたのですが、全員がgitを利用できるわけではないため、原則Google Driveにファイルをアップロードとし、gitは希望者が選択して用いる、という体制になりました<a href="#fn-not_used" class="noteref">*1</a>。</p>
+<div class="footnote"><p class="footnote">[<a id="fn-not_used">*1</a>] 本稿執筆時点ではすでにこの体制は終了しています。</p></div>
+<p>このとき、管理者がGoogle Drive上のファイルを手動でダウンロードしてgitプロジェクトに取り込んでいると聞き、私はその作業を自動化できるかもしれないと考えました。</p>
+<p>Google Drive APIとそのSDKはGoogleから無料で提供されていました。少し調べた結果、今回の目標のためにはそれを使えばよいことが分かりました。</p>
+<ul>
+<li>What Can You Do with the Drive SDK?<br /><?dtp tab ?>
+<a href="https://developers.google.com/drive/about-sdk"
+ class="link">https://developers.google.com/drive/about-sdk</a>
+</li>
+</ul>
+... (以下省略)
+//}
+
+HTML向け出力は、執筆時に「大まかにどのような出力になるのか」を確認するためによく使われます。
+その他にもプレーンテキスト形式にする@<code>{--target=text}、PDFを出力するために必要なTeX形式のファイルを出力する@<code>{--target=latex}、軽量マークアップ言語であるMarkdown形式を出力する@<code>{--target=markdown}などがあります。
+
+//footnote[target_epub_is_not_for_epub][@<code>{--target=epub}は圧縮してEPUB形式とする前のただのHTMLを出力します。]
+
+読者の環境で@<code>{--target}で指定できるフォーマットを調べるには、ReVIEW本体のインストール先にある@<code>{lib/review/???builder.rb}というファイル名のファイルを確認するのが早道です。
+
+//list[supported-target][ReVIEWが対応している出力を確認]{
+> ls lib/review/*builder.rb
+lib/review/builder.rb        lib/review/ewbbuilder.rb    lib/review/idgxmlbuilder.rb
+lib/review/latexbuilder.rb   lib/review/textbuilder.rb   lib/review/epubbuilder.rb
+lib/review/htmlbuilder.rb    lib/review/inaobuilder.rb   lib/review/markdownbuilder.rb
+lib/review/topbuilder.rb
+//}
+
+もっとも、対応する出力形式の多くはReVIEW開発者らが仕事上利用するものであったりするため、執筆時には@<code>{--target=html}を指定する機会が多いと思われます。
+
+@<code>{--check}を指定すると、結果は出力せず、そのフォーマットで入力したファイルが正しく変換出来るかを確認できます。
+例えば、@<code>{footnote}と@<code>{fn}で対応がとれているべき場所でとれていない場合、その旨が表示されます。
+これもまた執筆中にエラーを前もって避けるために便利です。@<fn>{for_pdf}
+
+//list[unpaired-result][＠<fn>と対応する//footnoteがない場合に発生するエラー]{
+> review-compile --check --target=html amedama.re
+amedama.re:11: error: ReVIEW::KeyError
+//}
+
+//footnote[for_pdf][@<code>{review-pdfmaker}にはこの機能がない一方、前述した通り@<code>{review-compile}では直接はPDFを出力しません。対策として@<code>{review-compile --check --target=latex}とすると、PDFで問題が起こる前に修正できます。出来れば@<code>{review-pdfmaker}を使って対象とする全てのファイルに対してチェックを行える何かが欲しいところです。]
+
+出力されたhtmlを、執筆時のデバッグ用途としてではなく見栄えの良い公開用ファイルにすることもできます。
+@<code>{--yaml=(ファイル名)}でReVIEWプロジェクトの設定を読みこませることでスタイルを変更するとよいでしょう。
+なお、@<code>{--help}を指定すると、ファイルを読み込んで変換する代わりに対応するオプションの一覧が表示されます。
+本章で説明されていないオプションも多々あるので、必要に応じて参照してください。
+
+==== 注意: @<code>{review-compile}ではそのままPDFとEPUBは生成できない
+
+現時点では@<code>{review-compile}からは直接PDFとEPUB形式のファイルを生成することはできません。@<fn>{target_epub_is_not_for_epub}
+後述する@<code>{review-pdfmaker}と@<code>{review-epubmaker}をそれぞれ利用してください。
+
+@<code>{review-compile}は主に単一のファイルに対して操作を行う一方、@<code>{review-pdfmaker}と@<code>{review-epubmaker}はReVIEWプロジェクト全体を対象とするため、用途も異なります。
+仮に執筆途中のReVIEWファイルのみ、PDFによるフォーマットを確認したい場合、自身でTeX形式から生成する、あるいは逆に全体を@<code>{review-pdfmaker}で生成したあと、該当する章を@<code>{pdktk}等のコマンドで切り出してください。
+
+=== review-pdfmaker
+
+@<code>{review-pdfmaker}はそのプロジェクトのPDFを生成します。
+引数としてYAMLファイル（@<code>{config.yml}）を一つ指定します。
+
+//list[review-pdfmaker-example-1][review-pdfmakerの実行例]{
+> review-pdfmaker config.yml
+(出力省略)
+//}
+
+YAMLファイルには本のタイトルや筆者名といった本のメタデータとなる設定を記述しておきます。
+その設定の一つ「@<code>{bookname}」が出力されるPDFに対応しています。
+
+@<code>{bookname}で「book」となっている場合、ReVIEWは「@<code>{book-pdf/}」ディレクトリに、途中過程で生成されるファイルを保存した上で、最終的に「book.pdf」を自身のディレクトリに保存します。
+仮にこれらのファイル・ディレクトリがすでに存在している場合、ReVIEWはコマンドの実行を中止します。
+
+//list[review-pdfmaker-example-2][すでにPDFを一度作成したあとに再度review-pdfmakerしたときの実行例]{
+> review-pdfmaker config.yml
+/opt/review/bin/review-pdfmaker:57:in `mkdir': File exists - ./book-pdf (Errno::EEXIST)
+        from /opt/review/bin/review-pdfmaker:57:in `main'
+        from /opt/review/bin/review-pdfmaker:219:in `<main>'
+//}
+
+再度コンパイルする際には、まず手動でPDF（book.pdf）と中間ファイルを収めるディレクトリ（book-pdf/）を削除してから、再度@<code>{review-pdfmaker}を実行します。
+
+@<code>{review-pdfmaker}は内部で@<code>{review-compile --target=latex}を行ったあとに@<code>{platex}や@<code>{dvipdfmx}のようなTeX形式のファイルからPDFへ変換するReVIEW外部のコマンドを実行します。
+ReVIEWの外部のコマンドを実行している際には外部のログがそのまま標準出力や標準エラー出力に反映されるため、面食らうかもしれません。
+
+==={rakefile} 脱線: Rakefile で自動化
+
+コンパイル前にbook.pdf等を手動で削除する作業は少々面倒なため、@<code>{Rakefile}@<fn>{about_rakefile}に詳しい人はしばしば以下のような設定を書いています。
+
+//footnote[about_rakefile][今回のように典型的な作業を自動化するツールの一つです。後述する@<code>{review-init}でも生成されています。]
+
+//list[rakefile-example-1][Rakefileにbook.pdfとbook-pdfの削除を行わせてしまう一例]{
+task :default => :pdf
+
+desc 'generate PDF file'
+task :pdf => "book.pdf"
+
+SRC = FileList['*.re'] +  ["config.yml"]
+file "book.pdf" => SRC do
+  sh "rm -f book.pdf"
+  sh "rm -rf book book-pdf"
+  sh "review-pdfmaker config.yml"
+end
+//}
+
+このように記述しておくと、@<code>{rake}コマンドは関連するReVEWファイルや@<code>{config.yml}に変更があった際に限って削除と@<code>{review-pdfmaker}の実行を行います。
+
+==== 執筆時の注意点
+
+@<code>{review-pdfmaker}は、その書籍に含まれるReVIEWファイルに問題があっても、一見正常にPDFを出力することができます。
+この場合、コマンド自身は「成功」と報告するのですが、該当する章のデータが勝手に抜け落ちている、という事態につながります。
+
+最も単純な事例は、catalog.ymlの@<code>{CHAPS}での指定を忘れることです。
+また、一部の構文エラーについても、そのファイルがなかったこととして、PDFが生成されてしまいます。
+
+これは、複数のReVIEWファイルを用いて原稿執筆している際に若干厄介な問題です。
+特に執筆後半では、見栄えの調整のために@<code>{review-compile}よりも頻繁に@<code>{review-pdfmaker}等を実行することがあるのですが、@<code>{review-compile}エラーで中止する代わりに、コマンドはエラーが発生した章を無視してPDFを生成します。
+
+対策として、執筆時には@<code>{review-compile --target=latex --check}を実行して執筆中の原稿単体で発生している問題を排除してから@<code>{review-pdfmaker}を実行することをおすすめします。
+
+章がまるまる抜け落ちることを利用してページ数が減っていないか確認することも出来ます。
+参考まで、Linuxの@<code>{pdftk}コマンドでページ数を見る例を示します。
+
+//cmd{
+> pdftk book.pdf dump_data_utf8 | grep NumberOfPages
+NumberOfPages: 103
+//}
+
+=== review-epubmaker
+
+@<code>{review-pdfmaker}同様、@<code>{review-epubmaker}はプロジェクトのメタデータとなるYAMLファイルを引数としてEPUBファイルを生成します。
+
+//list[review-epubmaker-example-1][review-epubmakerの例]{
+> review-epubmaker config.yml
+(出力省略)
+> file book.epub
+book.epub: EPUB ebook data
+（電子書籍リーダに読み込ませることで内容を確認出来る）
+//}
+
+@<code>{review-pdfmaker}同様、参照するYAMLファイル内の@<code>{bookname}を元にして出力されるファイル名が決定されます。
+
+また、コンパイルに関わる注意点も@<code>{review-pdfmaker}と同様です。
+PDFとは異なりEPUBでページ数をチェックすることはできませんが、EPUBは実質zip圧縮されたHTMLファイルの塊であるという点を利用して、@<code>{unzip -l}等で自身の原稿ファイルが最終的なEPUBファイルに含まれているかをチェックすることは出来るでしょう。
+
+----
+
 TODO mstssk review-preproc などサブコマンドについても少々扱ってほしい
 TODO mstssk *-peg についてコラムがあると嬉しいなー
-
-config.ymlはRe:VIEWのコマンドに--yamlオプションで指定します。
-たとえば、HTMLを出力する場合は次のようになります。
-
-//cmd{
-review-compile --target=html --yaml=config.yml workflow.re
-//}
-
-@<code>{review-pdfmaker}コマンドを使う場合は、コマンド引数にconfig.ymlを指定すれば、
-config.yml内のbooknameで指定したファイル名でPDFを出力します。
-
-//cmd{
-review-pdfmaker config.yml
-//}
