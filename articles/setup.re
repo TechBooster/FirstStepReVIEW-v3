@@ -4,7 +4,7 @@
 
 まずはRe:VIEWで執筆するための環境を整えましょう。
 
-TechBoosterでは、GitHubが提供するエディタであるAtom@<fn>{atom}とそれに追加できるパッケージであるlanguage-review@<fn>{language-review}を使い執筆を行います。
+TechBoosterでは、GitHubが提供するエディタであるAtom@<fn>{atom}と追加パッケージであるlanguage-review@<fn>{language-review}を使い執筆を行います。
 そしてGitHubなどにpushする前にRuby版のRe:VIEW@<fn>{review}を使ってHTMLやPDFの生成チェックを行う運用になっています。
 これは、language-reviewはreview.js@<fn>{review.js}というJavaScriptによるRe:VIEWの移植版を使っているためです。
 review.jsは現在のところ、PDFを生成することなどができませんし、文章の解釈もRuby版と厳密には一致しません。
@@ -22,11 +22,11 @@ review.jsは現在のところ、PDFを生成することなどができませ�
 //footnote[review][@<href>{https://github.com/kmuto/review}]
 //footnote[review.js][@<href>{https://github.com/vvakame/review.js}]
 
-== Atom+language-reviewでエディタを整える
+== Atomとlanguage-reviewでエディタを用意する
 
 #@# NOTE author:vvakame
 
-まずは、GitHubが作っているエディタであるAtomをインストールします。
+GitHubが作っているエディタであるAtomをインストールします。
 
 インストールしたらAtomを立ち上げ、設定からlanguage-reviewをインストールします（@<img>{install-language-review}）。
 もしくは、一度Atomを起動するとMac OS Xであれば@<code>{/usr/local/bin/}にapmコマンドがインストールされますので、@<code>{apm install language-review}とします。
@@ -43,11 +43,11 @@ review.jsは現在のところ、PDFを生成することなどができませ�
 //image[language-review-grammar2][このように切り替えるのだ]{
 //}
 
-パッケージのインストール後に依存する別パッケージ（linter）のインストールを行うため、動作がおかしい気がする場合Atomを一旦完全に終了させてから起動しなおしてみてください。
+パッケージのインストール時に依存する別パッケージ（linter）のインストールも行っています。動作がおかしい気がする場合Atomを完全に終了させてから起動しなおしてみてください。
 
-また、人柱用ですがMac OS X環境ではAtomのインストールからlanguage-reviewの導入までを行うインストールスクリプトを用意してあります。
+また人柱用ですがMac OS X環境ではAtomのインストールからlanguage-reviewの導入までを行うインストールスクリプトを用意してあります。
 
-//emlist{
+//cmd{
 curl -L https://github.com/vvakame/language-review/raw/master/install.sh | bash
 //}
 
@@ -61,15 +61,15 @@ Atomとlanguage-reviewは便利な機能を持っています。
  * Re:VIEWの記法一覧
  * アウトライン表示とジャンプ
 
-@<img>{language-review-sample}がそのサンプルであります。
+@<img>{language-review-sample}がサンプルです。
 
 //image[language-review-sample][language-reviewの画面サンプル]{
 //}
 
-//footnote[atom-tips][Mac OS Xの場合、Command+Shift+Pでコマンドパレットが開くのでgrammarなどそれっぽいワードを投げ込むとマウスなしで操作できます。]
-//footnote[atom-images-disclaimer][プラグインの導入状態やAtomのバージョンによって、画像どおりの見た目じゃない場合のほうが多いはずです。]
+//footnote[atom-tips][Mac OS Xの場合、Command+Shift+Pでコマンドパレットが開くのでgrammarなどそれっぽいワードを投げ込むとマウスなしで操作できます]
+//footnote[atom-images-disclaimer][プラグインの導入状態やAtomのバージョンによって、画像どおりの見た目じゃない場合のほうが多いはずです]
 
-== Re:VIEWのインストール
+== Re:VIEWをインストールする
 
 #@# NOTE author:vvakame
 
@@ -79,16 +79,16 @@ PDFやepubの生成などの最終出力を行うのに必要なので、重要�
 RubyとRubyGemsはすでに利用可能な環境になっているものとします。
 インストールは単に次のコマンドを実行するだけです@<fn>{experimental-review}。Rubyのインストール方法次第ではsudoが必要かもしれません。
 
-//emlist{
+//cmd{
 $ gem install review
 //}
 
 これだけです。
 詳しい使い方は@<chapref>{review-introduction}で解説します。
 
-とりあえず試してみたい場合、次のコマンドを試してみてください。
+とりあえず試してみたい場合、次のコマンドを実行してください。
 
-//emlist{
+//cmd{
 $ review-init sample
 $ cd sample
 
@@ -101,21 +101,23 @@ $ rake clean pdf
 $ rake clean epub
 //}
 
+このコマンドではHTML、PDF、EPUB形式でサンプルを出力しています。
+
 //footnote[experimental-review][review-pegという実験的パッケージがありますが熱心なRe:VIEW信者でない限り通常のreviewを使えばよいでしょう]
 
-===[column] Ruby導入の手引き Mac OS X, Linux編
+===[column] Ruby導入の手引き Mac OS X、Linux編
 
 Macの場合、何もしなくてもデフォルトでRubyが導入されています。
-この状態だと、gem installするのにsudoが必要になります。
-また、デフォルトのRubyのバージョンは若干古いため、最新のものを入れたほうがよいでしょう。
+この状態だとgem installを実行するときにsudoが必要になります。
+またデフォルトのRubyのバージョンは若干古いため、最新のものを入れたほうがよいでしょう。
 システムのデフォルトのままだと、破壊的（かもしれない）操作をするのが怖いですし、イザという時にリセットすることもやりにくいです。
-イザとなったら@<code>{rm -rf ~/.rbenv}すればよい環境を作ると精神的安らぎが得られます。
+万一の時に@<code>{rm -rf ~/.rbenv}すればよい環境を作ると精神的安らぎが得られます。
 
-そのため、本書ではrbenvの利用をお勧めします。
+そのため本書ではrbenvの利用をお勧めします。
 rbenvのインストール自体は公式サイト@<fn>{rbenv}に譲ります。
 rbenvインストール後の手順は次のとおりです。
 
-//emlist{
+//cmd{
 $ rbenv install --list
 # 最新のを適当に入れれば良い 執筆時点では 2.2.3
 $ rbenv install 2.2.3
@@ -134,27 +136,27 @@ $ rbenv rehash
 ===[column] Ruby導入の手引き Windows編
 
 たぶんRubyInstaller@<fn>{rubyinstaller}とかを使うといいと思います。
-しかし、TechBoosterではWindows環境下ではロクなLaTeX環境を構築できていないので素直に仮想環境を使うとよいと思います。
+しかし、TechBoosterではWindows環境下ではロクなLaTeX環境を構築できていないので素直に仮想環境を使っています。
 
 ===[/column]
 
 //footnote[rubyinstaller][@<href>{http://rubyinstaller.org/}]
 
-== PDF出力の準備
+== PDF出力を準備する
 
 #@# NOTE author:vvakame
 
 PDF出力の準備をします。
 Re:VIEW文書をPDFに変換するにはLaTeX（platexまたはlualatexなど）を使います。
-review形式→reviewツール実行→latex形式→platex実行→PDF という流れです。
+出力時の処理はreview形式→reviewツール実行→latex形式→platex実行→PDF という流れです。
 
-=== Mac OS Xの場合
+==== Mac OS Xの場合
 
 MacTeX@<fn>{mactex}を使いましょう。
 
 //footnote[mactex][@<href>{https://www.tug.org/mactex/}]
 
-=== Linuxの場合
+==== Linuxの場合
 
 texliveパッケージを利用します。
 Ubuntu、Debianともに次のコマンドで導入できます。
@@ -163,7 +165,7 @@ Ubuntu、Debianともに次のコマンドで導入できます。
 $ sudo apt-get install texlive-lang-cjk texlive-fonts-recommended
 //}
 
-=== Windowsの場合
+==== Windowsの場合
 
 LaTeX環境の構築の難易度が高いため、Dockerを使うなどしてください。
 
@@ -196,14 +198,14 @@ Dockerはざっくり次の使い方をします。
 Ruby入れたりTeX入れたりめんどくさすぎる！
 という人のために、Dockerのイメージを用意@<fn>{docker-review}してあります。
 
-//emlist{
+//cmd{
 $ docker run -i -t vvakame/review -v $(pwd):/book /bin/bash
 //}
 
 コマンドを実行すると、reviewとlatexの実行環境が整った状態の環境が使えます。
-コマンド実行時のディレクトリが /book にマウントされるので、適宜コンパイル用のコマンドを実行してください。
+コマンド実行後のディレクトリは@<code>{/book}にマウントされます。適宜コンパイル用のコマンドを実行してください。
 
-TODO vvakame サンプルプロジェクトを用意する
+#@# TODO vvakame サンプルプロジェクトを用意する
 
 ==[/column]
 
