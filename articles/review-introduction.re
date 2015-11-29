@@ -1360,21 +1360,21 @@ Re:VIEWの標準構成は、前書き(preface)や目次についてはローマ�
 こうすることで、本来はリセットされるページカウンタを再設定しています。
 
 //list[number][通しノンブルにする変更]{
-diff --git a/article/layouts/layout.tex.erb b/article/layouts/layout.tex.erb
-index 4a83d4c..b9e72bd 100644
---- a/article/layouts/layout.tex.erb
-+++ b/article/layouts/layout.tex.erb
-@@ -176,6 +176,9 @@
-
+diff --git a/articles/layouts/layout.tex.erb b/articles/layouts/layout.tex.erb
+index ae31c0a..7abd53b 100644
+--- a/articles/layouts/layout.tex.erb
++++ b/articles/layouts/layout.tex.erb
+@@ -226,6 +226,9 @@
+ 
  \reviewmainfont
-
+ 
 +\frontmatter
 +\pagenumbering{arabic}
 +
  <% if values["titlepage"] %>
  <% if custom_titlepage %>
  <%= custom_titlepage %>
-@@ -188,7 +191,8 @@
+@@ -238,7 +241,8 @@
    \end{center}
    \clearpage
    <% end %>
@@ -1384,45 +1384,44 @@ index 4a83d4c..b9e72bd 100644
  \begin{center}%
    \mbox{} \vskip5zw
     \reviewtitlefont%
-@@ -207,9 +211,6 @@
+@@ -257,9 +261,6 @@
  <% end %>
  <% end %>
-
+ 
 -\renewcommand{\chaptermark}[1]{{}}
 -\frontmatter
 -
- %% preface
- <%= values["pre_str"] %>
-
-@@ -218,8 +219,18 @@
+ %%% originaltitle
+ <% if values["originaltitlefile"] %>
+ <%= custom_originaltitlepage %>
+@@ -279,8 +280,17 @@
  \tableofcontents
  <% end %>
-
--\renewcommand{\chaptermark}[1]{\markboth{\prechaptername\thechapter\postchapter
+ 
+-\renewcommand{\chaptermark}[1]{\markboth{\prechaptername\thechapter\postchaptername~#1}{}}
 +\begingroup
 +  \cleardoublepage
 +  \edef\continuenumber{\endgroup
 +    \noexpand\mainmatter
 +    \setcounter{page}{\the\value{page}}%
 +  }
-+
  \mainmatter
 +\continuenumber
 +
-+\renewcommand{\chaptermark}[1]{\markboth{\prechaptername\thechapter\postchapter
++\renewcommand{\chaptermark}[1]{\markboth{\prechaptername\thechapter\postchaptername~#1}{}}
 +
  <%= values["chap_str"] %>
  \renewcommand{\chaptermark}[1]{\markboth{\appendixname\thechapter~#1}{}}
  \reviewappendix
-@@ -228,7 +239,7 @@
- <% if values["colophon"] %>
+@@ -313,7 +323,7 @@
+ <%   else %>
  %% okuduke
  \reviewcolophon
 -\thispagestyle{empty}
 +\thispagestyle{plainhead}
-
+ 
  \vspace*{\fill}
-
+ 
 //}
 
 //list[header_footer_plainhead][plainheadページスタイル]{
