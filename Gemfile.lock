@@ -1,14 +1,14 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    review (1.7.0)
+    review (1.7.1)
     review-peg (0.2.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  review (= 1.7.0)
+  review (= 1.7.1)
   review-peg (= 0.2.2)
 
 BUNDLED WITH

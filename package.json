@@ -29,7 +29,7 @@
     "grunt-contrib-clean": "0.7.0",
     "grunt-exec": "0.4.6",
     "grunt-open": "0.2.3",
-    "js-yaml": "3.4.5",
+    "js-yaml": "3.4.6",
     "load-grunt-tasks": "3.3.0"
   }
 }
