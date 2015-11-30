@@ -7,7 +7,7 @@ const articles = "articles";
 const bookConfig = yaml.safeLoad(fs.readFileSync(`${articles}/config.yml`, "utf8"));
 
 const reviewPrefix = process.env["REVIEW_PREFIX"] || "bundle exec ";
-const reviewPostfix = process.env["REVIEW_POSTFIX"] || "-peg";             // REVIEW_POSTFIX=" " grunt pdf とかすると通常版でビルドできるよ
+const reviewPostfix = process.env["REVIEW_POSTFIX"] || "";             // REVIEW_POSTFIX="-peg" npm run pdf とかするとPEGでビルドできるよ
 const reviewPreproc = `${reviewPrefix}review-preproc${reviewPostfix}`;
 const reviewCompile = `${reviewPrefix}review-compile${reviewPostfix}`;
 const reviewPdfMaker = `${reviewPrefix}review-pdfmaker${reviewPostfix}`;
