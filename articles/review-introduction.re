@@ -841,8 +841,6 @@ Re:VIEWでは本を生成（コンパイル）する時のメタデータをY
 @<list>{config_yml}は本書で使っているconfig.ymlです。
 
 //list[config_yml][config.yml]{
-#@# config.ymlからコメントと空行を除外してる
-#@mapoutput(grep -v -e '^#' -e '^$' config.yml)
 # review-epubmaker向けの設定ファイルの例。
 # ブック名(ファイル名になるもの。ASCII範囲の文字を使用)
 bookname: C89-FirstStepReVIEW-v2
@@ -884,7 +882,6 @@ titlepage: true
 colophon: true
 texstyle: techbooster-doujin
 texdocumentclass: ["jsbook", "b5j,twoside,openany"]
-#@end
 //}
 
 記述できる項目は多いので、Re:VIEW公式のサンプルとWikiを参照してください。
