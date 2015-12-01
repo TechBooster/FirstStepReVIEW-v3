@@ -142,9 +142,81 @@ TODO vvakame サンプルプロジェクトを用意する
 
 //footnote[why-gradle][gradleはgradle wrapperという仕組みがあり、gradle自体を別途導入する必要がないため]
 
-== Webページの生成方法とか
+== HTMLの生成方法
 
-TODO mstssk
+Re:VIEWでは.reファイルからHTMLを出力することができます。
+@<hd>{review-introduction|how_to_compile}でも少し触れていますが、
+HTMLを出力するには@<code>{review-compile}コマンドに@<code>{--target}オプションで@<code>{html}を指定します。
+
+次のコマンドはHTMLへのコンパイル結果を標準出力に出力するだけの、最も単純なケースです。
+
+//cmd{
+review-compile --target=html tips.re
+//}
+
+実際のユースケースでは、保存先のパスを指定したり、CSSファイルを設定したりするでしょう。
+HTMLのバージョンを指定することもできます。
+@<code>{＠<chapref>{chapter\}}や@<code>{＠<hd>{head\}}などの章・見出しの参照をリンクにする@<code>{--chapterlink}というオプションもあります。
+
+//cmd{
+review-compile --target=html --stylesheet=base.css,style.css --htmlversion=5 \
+--chapterlink --output=tips.html tips.re
+//}
+
+CSSファイルやHTMLのバージョンは、@<hd>{review-introduction|config_yml}で解説したconfig.ymlにも記述できます。
+@<code>{--yaml}オプションでconfig.ymlを指定しましょう。
+
+//cmd{
+review-compile --target=html --yaml=config.yml --output=tips.html tips.re
+//}
+
+=== 複数のファイルをHTML化する
+
+複数のファイルを一気にHTMLにコンパイルすることもできます。
+@<code>{--all}オプションを使えば、カレントディレクトリの.reファイルをすべて同名の.htmlファイルにコンパイルします。
+
+//cmd{
+cd articles/
+review-compile --target=html --all
+//}
+
+しかし、これだけでは個々の.reファイルがそれぞれHTMLファイルになるだけです。
+ある章のHTMLを読み終えたら次のHTMLへ…という具合にリンクが欲しいと思いませんか。
+
+@<hd>{review-introduction|紙面レイアウトを変更する}ではlayout.tex.erbファイルを用意することで、
+Re:VIEWが出力するLaTeXソースファイルの構成を変更する方法を紹介しています。
+HTMLファイルについても同様の手順でカスタマイズできます。
+
+@<list>{layout_html_erb}は、.reファイルなどがあるディレクトリの下に@<code>{layouts/layout.html.erb}というパスで配置するテンプレートの例です。
+Re:VIEWが生成する本文（@<code>{body}）の前後に「前へ」「次へ」というリンクを追加しています。
+章の順番はカレントディレクトリにあるcatalog.ymlファイルか、@<code>{--catalogfile}オプションで指定したYAMLファイルで決定します。
+catalog.ymlについての説明は@<hd>{review-introduction|catalog_yml}を参照してください。
+
+//list[layout_html_erb][layouts/layout.html.erb]{
+#@mapfile(../code/tips/layout.html.erb)
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+<% book = @builder.instance_variable_get(:@book) %>
+<% book.config["stylesheet"].each do |style| %>
+  <link rel="stylesheet" type="text/css" href="<%= style %>" />
+<% end %>
+  <title><%= title %></title>
+</head>
+<body>
+<% if @prev.present? %><a href='<%= @prev.id %>.html'>前へ</a><% end %>
+<%= body %>
+<% if @next.present? %><a href='<%= @next.id %>.html'>次へ</a><% end %>
+</body>
+</html>
+#@end
+//}
+
+@<list>{layout_html_erb}は、筆者の一人であるvvakameが執筆したTypeScript in Definitelyland（@<fn>{typescript-in-definitelyland}）のWeb公開版のソースを参考にしています。
+Re:VIEWで執筆した原稿を実際にHTMLで公開している例として一度目を通すと面白いでしょう。
+
+//footnote[typescript-in-definitelyland][@<href>{https://github.com/typescript-ninja/typescript-in-definitelyland}]
 
 == epubの生成方法とか
 

@@ -772,7 +772,7 @@ Re:VIEWは@<code>{#@〜}の行をPDFやHTMLファイルなどの最終的な成�
 
 TODO mstssk
 
-=== 章を設定するcatalog.yml
+==={catalog_yml} 章を設定するcatalog.yml
 
 #@# https://github.com/kmuto/review/wiki/catalog.yml
 #@# https://github.com/kmuto/review/blob/master/doc/catalog.ja.md

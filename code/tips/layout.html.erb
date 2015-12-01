@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+<% book = @builder.instance_variable_get(:@book) %>
+<% book.config["stylesheet"].each do |style| %>
+  <link rel="stylesheet" type="text/css" href="<%= style %>" />
+<% end %>
+  <title><%= title %></title>
+</head>
+<body>
+<% if @prev.present? %><a href='<%= @prev.id %>.html'>前へ</a><% end %>
+<%= body %>
+<% if @next.present? %><a href='<%= @next.id %>.html'>次へ</a><% end %>
+</body>
+</html>
