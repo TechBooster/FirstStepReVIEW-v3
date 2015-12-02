@@ -218,9 +218,43 @@ Re:VIEWで執筆した原稿を実際にHTMLで公開している例として一
 
 //footnote[typescript-in-definitelyland][@<href>{https://github.com/typescript-ninja/typescript-in-definitelyland}]
 
-== epubの生成方法とか
+== EPUBの生成方法
 
-TODO mstssk
+#@# この節は@<hd>{review-introduction|review-epubmaker}とあわせたほうがよくない？
+
+Re:VIEWでは.reファイルからEPUBファイルを出力することができます。
+EPUBファイルの実態はHTMLファイルやCSSファイルをZIP圧縮でアーカイブ化したものです。
+そのためRe:VIEWでは@<hd>{HTMLの生成方法}で紹介したオプションもEPUBの生成で使用できます。
+
+Re:VIEWはEPUBの生成処理で、システムにインストールされているZIPコマンドを使用します。
+事前にZIPコマンドをインストールしておいてください。
+
+EPUBの生成には@<code>{review-epubmaker}コマンドを使用します。
+config.ymlに必要な設定を記述して@<code>{review-epubmaker}コマンドに渡して実行します。
+出力ファイル名はconfig.ymlの@<code>{bookname}で指定したファイル名となります。
+
+//cmd{
+review-epubmaker config.yml
+//}
+
+出力ファイル名は第2引数で指定することも出来ます。
+次のコマンドの場合は、@<code>{output.epub}を出力します。
+
+//cmd{
+review-epubmaker config.yml output
+//}
+
+HTML生成のオプションにはconfig.ymlに項目がないものもあります。
+そういったオプションを使用するには@<code>{review-compile}コマンドのオプションを任意に記述できる@<code>{params}という項目を使います。
+@<list>{config_yml_chapterlink}は@<code>{--chapterlink}オプションを設定する例です。
+
+//list[config_yml_chapterlink][--chapterlinkオプションをconfig.ymlで指定する]{
+bookname: C89-FirstStepReVIEW-v2
+stylesheet: ["style.css"]
+epubversion: 3
+〜中略〜
+params: --chapterlink
+//}
 
 == 関連各所の紹介
 TechBoosterがRe:VIEWを使っているなかで関係したお世話になっている各所を紹介します。
