@@ -13,9 +13,9 @@ review.jsは現在のところ、PDFを生成することなどができませ�
 
 #@# TODO 入稿前にここのバージョンを再確認すること
 
- * Atom v1.2.3
+ * Atom v1.2.4
  * language-review 0.12.4
- * Re:VIEW 1.7.0 または review-peg 0.2.0
+ * Re:VIEW 1.7.1 または review-peg 0.2.2
 
 //footnote[atom][@<href>{https://atom.io/}]
 //footnote[language-review][@<href>{https://atom.io/packages/language-review}]
@@ -203,9 +203,12 @@ $ docker run -i -t vvakame/review -v $(pwd):/book /bin/bash
 //}
 
 コマンドを実行すると、reviewとlatexの実行環境が整った状態の環境が使えます。
-コマンド実行後のディレクトリは@<code>{/book}にマウントされます。適宜コンパイル用のコマンドを実行してください。
+コマンド実行後のディレクトリは@<code>{/book}にマウントされます。
+適宜コンパイル用のコマンドを実行してください。
 
-#@# TODO vvakame サンプルプロジェクトを用意する
+#@# prh:disable
+実用的な例を知りたい場合は、この本のリポジトリのbuild-in-docker.shを参照してください。
+@<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2/blob/master/build-in-docker.sh}
 
 ==[/column]
 

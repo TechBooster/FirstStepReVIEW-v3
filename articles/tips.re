@@ -137,8 +137,8 @@ $ review-epubmaker-peg config.yml
 pdf、epubについては利用するコマンドそのものが違うので注意します。
 
 これらを詰め込んだ、実際にTechBoosterで使っているgrunt用設定ファイルを公開しています。
-
-TODO vvakame サンプルプロジェクトを用意する
+@<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2/blob/master/Gruntfile.js}
+Node.js v4以上が必要ですので注意してください。
 
 //footnote[why-gradle][gradleはgradle wrapperという仕組みがあり、gradle自体を別途導入する必要がないため]
 
