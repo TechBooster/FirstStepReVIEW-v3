@@ -8,8 +8,8 @@
   "scripts": {
     "global": "gem install bundler",
     "postinstall": "bundle install",
-    "pdf": "$(npm bin)/grunt pdf",
-    "html": "$(npm bin)/grunt html"
+    "pdf": "grunt pdf",
+    "html": "grunt html"
   },
   "repository": {
     "type": "git",
