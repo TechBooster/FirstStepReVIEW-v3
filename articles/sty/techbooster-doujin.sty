@@ -1,3 +1,14 @@
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable}
+\renewenvironment{shaded}{
+ \vspace{\baselineskip}
+ \begin{tcolorbox}[breakable, enhanced jigsaw, colback=black!10!white, colframe=black!30!white]}
+ {\end{tcolorbox}}
+\renewenvironment{shadedb}{
+ \vspace{\baselineskip}
+ \begin{tcolorbox}[breakable, enhanced jigsaw, colback=black!80!white, colframe=black, colupper=white, sharp corners, rounded corners=southeast]}
+ {\end{tcolorbox}}
+
 %% サンプルコードを更に小さく
 \renewenvironment{reviewemlist}{%
   \medskip\footnotesize\begin{shaded}\setlength{\baselineskip}{1.2zw}\begin{alltt}}{%
@@ -48,3 +59,88 @@
    \fi%
 \fi%
 }
+
+\setlength{\paperheight}    {258 truemm}
+\setlength{\paperwidth}     {182 truemm}
+\setlength{\textheight}     {190 truemm}
+\setlength{\textwidth}      {130 truemm}
+\setlength{\marginparwidth} {15  truemm}
+\setlength{\marginparsep}   {2   truemm}
+\setlength{\oddsidemargin}  {26  truemm}
+\setlength{\evensidemargin} {26  truemm}
+\setlength{\topmargin}      {10  truemm}
+\setlength{\headsep}        {15  truemm}
+\setlength{\headheight}     {5   truemm}
+\setlength{\hoffset}{-1in}
+\setlength{\voffset}{-1in}
+\renewcommand{\baselinestretch}{0.96}
+
+\usepackage{seqsplit}
+\let\textttorg=\texttt
+\def\texttt#1{\textttorg{\seqsplit{#1\relax}}}
+
+\newcommand{\captionsize}{\fontsize{9}{9}\selectfont}
+\newlength{\captionnumwidth}
+\setlength{\captionnumwidth}{6zw}
+\newlength{\captionwidth}
+\setlength{\captionwidth}{\textwidth}
+\addtolength{\captionwidth}{-\captionnumwidth}
+\def\captionhead{\sffamily{\color{black!30!white}{▲}}}
+\long\def\@makecaption#1#2{%
+  \addvspace\abovecaptionskip
+  \buildcaption{!}{#1}{#2}
+  \vskip\belowcaptionskip
+}
+\long\def\buildcaption#1#2#3{%
+  \sbox\@tempboxa{\captionsize\sffamily #3}%
+  \ifdim \wd\@tempboxa <\captionwidth%
+    \def\capline{\captionsize\captionhead #2%
+                  \hskip1zw\relax\usebox{\@tempboxa}\mbox{}\relax}
+    \ifx#1!\relax\centerline{\capline}\else\noindent\capline\fi
+  \else
+    \noindent%
+    \parbox[t]{\captionnumwidth}{%
+      {\captionsize\captionhead #2%
+        \hskip1zw}}%
+    \parbox[t]{\captionwidth}{\captionsize\sffamily #3}
+  \fi
+}
+
+\long\def\listcaption#1:#2\relax{\buildcaption{}{#1}{#2}}
+
+\renewcommand{\reviewtablecaption}[1]{%
+  {\def\captionhead{\sffamily{\color{black!30!white}{▼}}}
+   \caption{#1}}}
+
+\renewcommand{\reviewlistcaption}[1]{%
+  {\def\captionhead{\sffamily{\color{black!30!white}{▼}}}
+   \medskip{\listcaption#1\relax}\vspace*{-1.3zw}}}
+
+\renewcommand{\reviewemlistcaption}[1]{%
+  {\def\captionhead{\sffamily{\color{black!30!white}{▼}}}
+   \medskip{\buildcaption{}{}{#1}\relax}\vspace*{-1.3zw}}}
+
+\renewcommand{\reviewcmdcaption}[1]{%
+  {\def\captionhead{\sffamily{\color{black!30!white}{▼}}}
+   \medskip{\listcaption#1\relax}\vspace*{-1.3zw}}}
+
+\renewcommand{\reviewindepimagecaption}[1]{%
+  \begin{center}#1\end{center}}
+
+\renewcommand{\reviewboxcaption}[1]{%
+  {\def\captionhead{\sffamily{\color{black!30!white}{▼}}}
+   \medskip{\captionsize\captionhead #1}\vspace*{-1.3zw}}}
+
+
+
+\renewenvironment{reviewcolumn}{%
+     \vspace{\baselineskip}
+     \begin{tcolorbox}[colback=white]
+   }{%
+      \end{tcolorbox}
+     \vspace{\baselineskip}
+}
+
+\renewcommand{\reviewcolumnhead}[2]{%
+{\noindent\large\sffamily #2}
+\vspace{\baselineskip}}
