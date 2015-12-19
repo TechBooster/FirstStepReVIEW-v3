@@ -13,7 +13,7 @@ review.jsは現在のところ、PDFを生成することなどができませ�
 
 #@# TODO 入稿前にここのバージョンを再確認すること
 
- * Atom v1.2.4
+ * Atom v1.3.2
  * language-review 0.12.4
  * Re:VIEW 1.7.1 または review-peg 0.2.2
 
@@ -111,7 +111,7 @@ Macの場合、何もしなくてもデフォルトでRubyが導入されてい�
 この状態だとgem installを実行するときにsudoが必要になります。
 またデフォルトのRubyのバージョンは若干古いため、最新のものを入れたほうがよいでしょう。
 システムのデフォルトのままだと、破壊的（かもしれない）操作をするのが怖いですし、イザという時にリセットすることもやりにくいです。
-万一の時に@<code>{rm -rf ~/.rbenv}すればよい環境を作ると精神的安らぎが得られます。
+万一のときに@<code>{rm -rf ~/.rbenv}すればよい環境を作ると精神的安らぎが得られます。
 
 そのため本書ではrbenvの利用をお勧めします。
 rbenvのインストール自体は公式サイト@<fn>{rbenv}に譲ります。
@@ -121,7 +121,7 @@ rbenvインストール後の手順は次のとおりです。
 $ rbenv install --list
 # 最新のを適当に入れれば良い 執筆時点では 2.2.3
 $ rbenv install 2.2.3
-# グローバルなrubyコマンドのバージョンを設定する localも可
+# グローバルなrubyコマンドのバージョンを設定する localも存在する
 $ rbenv global 2.2.3
 # reviewをインストール
 $ gem install review
@@ -135,8 +135,9 @@ $ rbenv rehash
 
 ===[column] Ruby導入の手引き Windows編
 
-たぶんRubyInstaller@<fn>{rubyinstaller}とかを使うといいと思います。
-しかし、TechBoosterではWindows環境下ではロクなLaTeX環境を構築できていないので素直に仮想環境を使っています。
+RubyInstaller@<fn>{rubyinstaller}を使うとよいでしょう。
+しかし、TechBoosterではWindows環境下ではロクなLaTeX環境を構築できていないので素直に仮想環境を利用しています。
+PDFを生成する必要がなければ、試す価値があるでしょう。
 
 ===[/column]
 
@@ -167,7 +168,7 @@ $ sudo apt-get install texlive-lang-cjk texlive-fonts-recommended
 
 ==== Windowsの場合
 
-LaTeX環境の構築の難易度が高いため、Dockerを使うなどしてください。
+LaTeX環境の構築の難易度が高いため、Dockerなどの仮想環境を使うとよいでしょう。
 
 ==[column] Dockerとは？
 
@@ -176,7 +177,7 @@ Linuxカーネルに組み込みの機能を使って、軽量かつ無駄の少
 そのため、Mac OS XやWindowsでは直接は利用できません。
 しかし、そのためのdocker-machineという仕組みが用意されています。
 
-docker-machineはデフォルトでVirtualBoxを利用して、Linux環境を立ち上げその中で仮想環境を作成します。
+docker-machineはデフォルトではVirtualBoxを利用して、Linux環境を立ち上げその中でDocker用仮想環境を作成します。
 このツールを使うと、Mac OS XやWindows環境でもDockerを利用することができます。
 
 Dockerはざっくり次の使い方をします。
@@ -202,8 +203,8 @@ Ruby入れたりTeX入れたりめんどくさすぎる！
 $ docker run -i -t vvakame/review -v $(pwd):/book /bin/bash
 //}
 
-コマンドを実行すると、reviewとlatexの実行環境が整った状態の環境が使えます。
-コマンド実行後のディレクトリは@<code>{/book}にマウントされます。
+コマンドを実行すると、reviewとlatexの実行環境が整った環境が直ちに使えます。
+コマンド実行後のディレクトリは@<code>{/book}ディレクトリにマウントされます。
 適宜コンパイル用のコマンドを実行してください。
 
 #@# prh:disable
@@ -216,4 +217,4 @@ $ docker run -i -t vvakame/review -v $(pwd):/book /bin/bash
 
 == トラブルシューティング
 
-TODO mhidaka
+TODO mhidaka そもそも何書く予定だったんだっけ…？
