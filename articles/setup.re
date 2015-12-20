@@ -7,7 +7,7 @@
 TechBoosterでは、GitHubが提供するエディタであるAtom@<fn>{atom}と追加パッケージであるlanguage-review@<fn>{language-review}を使って執筆しています。
 そしてGitHubなどにpushする前に、Ruby版のRe:VIEW@<fn>{review}を使ってHTMLやPDFの生成チェックを行う運用になっています。
 
-これは、language-reviewはreview.js@<fn>{review.js}というJavaScriptによるRe:VIEWの移植版を使っているためです。
+生成チェックは、language-reviewがreview.js@<fn>{review.js}というJavaScriptによるRe:VIEWの移植版を使っているために必要な作業です。
 review.jsは現在のところ、PDFを生成することなどができませんし、文章の解釈もRuby版と厳密には一致しません。
 
 本書執筆時点での各ツールのバージョンは次のとおりです。
@@ -27,15 +27,14 @@ review.jsは現在のところ、PDFを生成することなどができませ�
 
 #@# NOTE author:vvakame
 
-Atomエディタをインストールします。
+Atomエディタをインストールします。完了後、Atomを立ち上げ、設定からlanguage-reviewをインストールします（@<img>{install-language-review}）。
 
-インストールしたらAtomを立ち上げ、設定からlanguage-reviewをインストールします（@<img>{install-language-review}）。
-もしくは、Mac OS Xであれば一度Atomを起動すると@<code>{/usr/local/bin/}に@<code>{apm}コマンドがインストールされるので、ターミナルから@<code>{apm install language-review}を実行します。
+Mac OS Xであれば一度Atomを起動すると@<code>{/usr/local/bin/}に@<code>{apm}コマンドがインストールされるので、ターミナルから@<code>{apm install language-review}を実行します。
 
 //image[install-language-review][language-reviewをインストールする]{
 //}
 
-次に、適当な名前の@<tt>{.re}ファイル（例: test.re）を作ります。
+次に適当な名前の@<tt>{.re}ファイル（例: test.re）を作ります。
 
 作成後、このファイルをAtomで開きます。
 デフォルトの編集モードはRe:VIEW以外になっているため、クリックして@<fn>{atom-tips}Re:VIEWに切り替えます（@<img>{language-review-grammar1}、@<img>{language-review-grammar2}@<fn>{atom-images-disclaimer}）。
@@ -80,7 +79,7 @@ language-reviewは、Atomを通じてさまざまな便利な機能を提供し�
 これはPDFやepubの生成などの最終出力を行うのに必要です。
 
 RubyとRubyGemsは、すでに利用可能な環境になっているものとして解説します。
-インストールは単に次のコマンドを実行するだけです@<fn>{experimental-review}（Rubyのインストール方法次第ではsudoが必要となる場合もあります）。
+インストールは単に次のコマンド@<fn>{experimental-review}を実行するだけです（Rubyのインストール方法次第ではsudoが必要となる場合もあります）。
 
 //cmd{
 $ gem install review
@@ -113,7 +112,9 @@ $ rake clean epub
 Macの場合、何もしなくてもデフォルトでRubyが導入されています。
 この状態だとgem installを実行するときにsudoが必要になります。
 またデフォルトのRubyのバージョンは若干古いため、最新のものを入れたほうがよいでしょう。
+
 システムのデフォルトのままだと、破壊的（かもしれない）操作をするのが怖いですし、イザという時にリセットすることもやりにくいです。
+
 万一のときに@<code>{rm -rf ~/.rbenv}すればよい環境を作っておくと、精神的安らぎが得られます。
 
 そのため本書ではrbenvの利用を推奨しています。
@@ -179,16 +180,16 @@ LaTeX環境の構築の難易度が高いため、Dockerなどの仮想環境を
 Dockerは、最近はやりの仮想環境用のツールです。
 Linuxカーネルに組み込みの機能を使って、軽量かつ無駄の少ない仮想化環境を実現しています。
 そのため、Mac OS XやWindowsでは直接は利用できません。
-しかし、そのためのdocker-machineという仕組みが用意されています。
+しかし、そのためのdocker-machine@<fn>{docker-machine}という仕組みが用意されています。
 
 docker-machineは、デフォルトではVirtualBoxを利用してLinux環境を立ち上げ、その中でDocker用仮想環境を作成します。
 このツールを使うと、Mac OS XやWindows環境でもDockerを利用することができます。
 
-Dockerはざっくり次の使い方をします。
+Dockerはざっくり次の３つの設定方法があります。
 
- 1. Dockerfileを書く。Dockerfileはイメージの設計図で、主にコマンドの羅列である。
- 2. 他人が書いたDockerfileを元に、Docker, Incがtrusted buildを作成してくれる。
- 3. 他人の作ったイメージを元に自分のDockerfileを書く。
+ 1. Dockerfile（イメージの設計図で主にコマンドの羅列）を書く
+ 2. Docker, Incのtrusted build（他人が提供したDockerfile）を使う@<fn>{docker-hub}
+ 3. 他人の作ったイメージを元に自分のDockerfileを書く
 
 本書ではDockerやdocker-machineのインストール方法や使い方は解説しません。
 その時々で適切なやり方を調べてみてください。
@@ -213,7 +214,8 @@ $ docker run -i -t vvakame/review -v $(pwd):/book /bin/bash
 
 #@# prh:disable
 実用的な例を知りたい場合は、この本のリポジトリのbuild-in-docker.shを参照してください。
-@<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2/blob/master/build-in-docker.sh}
+
+ *  @<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2/blob/master/build-in-docker.sh}
 
 ==[/column]
 

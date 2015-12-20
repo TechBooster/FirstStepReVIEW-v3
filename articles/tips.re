@@ -56,6 +56,26 @@ articles/imagesやcodeの中は、原稿の章ごとに.reのファイル名と�
 vvakame.reというファイル名にしてしまえば、レビューを行ったりビルドエラーなどの問題が発生した時連絡する人がわかりやすい。
 という発想です。
 
+
+== 紙面レイアウトを変更する
+
+印刷所へ入稿する原稿を制作していると、Re:VIEWが標準で用意している構成そのものを変更する必要に迫られる時があります。
+Re:VIEWではPDFを出力するためにLaTeXを利用しています。そのため、レイアウトの変更にはLaTeXの知識が必要です。
+
+具体的には.ymlや.cssを配置しているディレクトリの下に@<code>{layouts/layout.tex.erb}を置くことで
+Re:VIEWが出力するLaTeXソースファイルの構成を変更できます。
+
+Re:VIEWは@<href>{https://github.com/kmuto/review}の@<code>{review/lib/review/review.tex.erb}を、
+LaTeXのソースファイルのテンプレートとして読み込みますが、@<code>{layouts/layout.tex.erb}がある場合、そちらを優先して適用します。
+
+//footnote[review_tex_erb][2013年11月時点。最新の情報についてはGitHubのRe:VIEWリポジトリを参照してください]
+
+カスタマイズに当たっては、@<code>{review/lib/review/review.tex.erb}を@<code>{layouts/layout.tex.erb}にコピーして変更するとよいでしょう。
+
+//image[how_to_convert_re_to_pdf2][layout.tex.erbの取り扱い][scale=0.35]{
+//}
+
+
 =={config_task_runner} タスクランナーの設定
 
 #@# NOTE author:vvakame
