@@ -9,7 +9,7 @@
 
 TechBoosterが推奨するディレクトリ構成を述べておきます。
 要点は次のとおりです。
-具体的には@<list>{directory}となります。
+具体的には@<list>{directory}です。
 
  * リポジトリのトップレベルにはファイルをあまり散らかさない
  * 複数人で執筆した時にそれぞれのファイルが混ざったり邪魔になったりしないようにする
@@ -21,7 +21,7 @@ TechBoosterが推奨するディレクトリ構成を述べておきます。
   ├── circle.yml            （CIサービスであるCircle CIの設定ファイル）
   ├── setup.sh              （執筆前にgemやnpmのインストールを行うスクリプト）
   ├── Gemfile               （bundler経由でRe:VIEWを利用するための設定ファイル）
-  ├── Gemfile.lock          （bundlerでインストールするライブラリのバージョンをロックする）
+  ├── Gemfile.lock          （ライブラリのバージョンをロックする）
   ├── package.json          （gruntを利用するためのnpm用設定ファイル）
   ├── npm-shrinkwrap.json   （ライブラリのバージョンをロックする）
   ├── Gruntfile.js          （gruntの動作設定ファイル）
@@ -74,6 +74,16 @@ LaTeXのソースファイルのテンプレートとして読み込みますが
 
 //image[how_to_convert_re_to_pdf2][layout.tex.erbの取り扱い][scale=0.35]{
 //}
+
+== 余白を調節する
+
+PDFで出力するページの余白を指定するには、.styファイルに@<code>{\geometry}を設定します（@<list>{set_margin}）。
+
+//list[set_margin][余白を設定]{
+\geometry{top=18mm,bottom=23mm,left=24mm,right=24mm}
+//}
+
+指定できる単位は、@<code>{cm}, @<code>{mm}の他にもLaTeXでサポートされている@<code>{in}, @<code>{pt}, @<code>{em/ex}, @<code>{zw/zh}, @<code>{Q}などがあります。
 
 
 =={config_task_runner} タスクランナーの設定
