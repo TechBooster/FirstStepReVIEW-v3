@@ -19,11 +19,11 @@ TechBoosterが推奨するディレクトリ構成を述べておきます。
 //list[directory][ディレクトリ構成]{
   ├── README.md
   ├── circle.yml            （CIサービスであるCircle CIの設定ファイル）
-  ├── setup.sh              （執筆を始めるためにgemやnpmのインストールを行うスクリプト）
+  ├── setup.sh              （執筆前にgemやnpmのインストールを行うスクリプト）
   ├── Gemfile               （bundler経由でRe:VIEWを利用するための設定ファイル）
   ├── Gemfile.lock          （bundlerでインストールするライブラリのバージョンをロックする）
   ├── package.json          （gruntを利用するためのnpm用設定ファイル）
-  ├── npm-shrinkwrap.json   （npmでインストールするライブラリのバージョンをロックする）
+  ├── npm-shrinkwrap.json   （ライブラリのバージョンをロックする）
   ├── Gruntfile.js          （gruntの動作設定ファイル）
   ├── articles
   │   ├── catalog.yml       （Re:VIEW用 章立ての設定ファイル）
@@ -129,9 +129,9 @@ $ review-compile --all --target=latex --footnotetext
 # idgxmlの生成
 $ review-compile --all --target=idgxml
 # pdfの生成
-$ review-pdfmaker-peg config.yml
+$ review-pdfmaker config.yml
 # epubの生成
-$ review-epubmaker-peg config.yml
+$ review-epubmaker config.yml
 //}
 
 欲しい出力結果に応じて、コマンドを使い分けます。
