@@ -43,9 +43,9 @@ HTML向け出力は、執筆時に「大まかにどのような出力になる�
 
 //cmd{
 > ls lib/review/*builder.rb
-lib/review/builder.rb        lib/review/ewbbuilder.rb    lib/review/idgxmlbuilder.rb
-lib/review/latexbuilder.rb   lib/review/textbuilder.rb   lib/review/epubbuilder.rb
-lib/review/htmlbuilder.rb    lib/review/inaobuilder.rb   lib/review/markdownbuilder.rb
+lib/review/builder.rb      lib/review/ewbbuilder.rb  lib/review/idgxmlbuilder.rb
+lib/review/latexbuilder.rb lib/review/textbuilder.rb lib/review/epubbuilder.rb
+lib/review/htmlbuilder.rb  lib/review/inaobuilder.rb lib/review/markdownbuilder.rb
 lib/review/topbuilder.rb
 //}
 
