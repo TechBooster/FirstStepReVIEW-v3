@@ -9,7 +9,7 @@
 
 @<code>{review-compile}Re:VIEWファイル１つを@<code>{--target}オプションで指定するフォーマットに変換します。
 
-最も簡単な例として、HTMLを出力する例を@<list>{review-compile-example-html-1}に示します。
+もっとも簡単な例として、HTMLを出力する例を@<list>{review-compile-example-html-1}に示します。
 
 //list[review-compile-example-html-1][review-compileでHTMLを出力する例]{
 > review-compile --target=html preface.re
@@ -39,7 +39,7 @@ HTML向け出力は、執筆時に「大まかにどのような出力になる�
 
 //footnote[target_epub_is_not_for_epub][@<code>{--target=epub}は圧縮してEPUB形式とする前のただのHTMLを出力します。]
 
-読者の環境で@<code>{--target}で指定できるフォーマットを調べるには、ReVIEW本体のインストール先にある@<code>{lib/review/???builder.rb}というファイル名のファイルを確認するのが早道です。
+読者の環境で@<code>{--target}で指定できるフォーマットを調べるには、Re:VIEW本体のインストール先にある@<code>{lib/review/???builder.rb}というファイル名のファイルを確認するのが早道です。
 
 //cmd{
 > ls lib/review/*builder.rb
@@ -49,7 +49,7 @@ lib/review/htmlbuilder.rb    lib/review/inaobuilder.rb   lib/review/markdownbuil
 lib/review/topbuilder.rb
 //}
 
-対応する出力形式の多くはReVIEW開発者らが仕事上利用するために用意されました。執筆時には@<code>{--target=html}を指定する機会が多いでしょう。
+対応する出力形式の多くはRe:VIEW開発者らが仕事上利用するために用意されました。執筆時には@<code>{--target=html}を指定する機会が多いでしょう。
 
 @<code>{--check}を指定すると結果は出力せず、そのフォーマットで入力したファイルが正しく変換できるかを確認します。
 たとえば、@<code>{footnote}と@<code>{fn}で対応がとれていなければ、その旨が表示されます。
@@ -60,10 +60,10 @@ lib/review/topbuilder.rb
 build.re:11: error: ReVIEW::KeyError
 //}
 
-//footnote[for_pdf][@<code>{review-pdfmaker}にはこの機能がない一方、前述した通り@<code>{review-compile}では直接はPDFを出力しません。対策として@<code>{review-compile --check --target=latex}とするとPDFで問題が起こる前に修正できます]
+//footnote[for_pdf][@<code>{review-pdfmaker}にはこの機能がない一方、前述したとおり@<code>{review-compile}では直接はPDFを出力しません。対策として@<code>{review-compile --check --target=latex}とするとPDFで問題が起こる前に修正できます]
 
-出力されたhtmlを、執筆時のデバッグ用途としてではなく見栄えの良い公開用ファイルにすることもできます。
-@<code>{--yaml=(ファイル名)}でReVIEWプロジェクトの設定を読みこませることでスタイルを変更するとよいでしょう。
+出力されたhtmlを、執筆時のデバッグ用途としてではなく見栄えのよい公開用ファイルにすることもできます。
+@<code>{--yaml=(ファイル名)}でRe:VIEWプロジェクトの設定を読みこませることでスタイルを変更するとよいでしょう。
 
 @<code>{--all}を指定すると、指定したファイルだけではなく、catalog.ymlに記載されている　すべてのファイルを一気にコンパイルすることもできます。
 
@@ -77,8 +77,9 @@ build.re:11: error: ReVIEW::KeyError
 現時点では@<code>{review-compile}からは直接PDFとEPUB形式のファイルを生成することはできません@<fn>{target_epub_is_not_for_epub}。
 後述する@<code>{review-pdfmaker}と@<code>{review-epubmaker}をそれぞれ利用してください。
 
-@<code>{review-compile}は主に単一のファイルに対して操作を行う一方、@<code>{review-pdfmaker}と@<code>{review-epubmaker}はReVIEWプロジェクト全体を対象とするため、用途も異なります。
-仮に執筆途中のReVIEWファイルのみ、PDFによるフォーマットを確認したい場合、自身でTeX形式から生成する、あるいは逆に全体を@<code>{review-pdfmaker}で生成したあと、該当する章を@<code>{pdktk}等のコマンドで切り出してください。
+@<code>{review-compile}は主に単一のファイルに対して操作を行う一方、@<code>{review-pdfmaker}と@<code>{review-epubmaker}はRe:VIEWプロジェクト全体を対象とするため、用途も異なります。
+仮に執筆途中のRe:VIEWファイルのみ、PDFによるフォーマットを確認したい場合、自身でTeX形式から生成する、あるいは逆に全体を@<code>{review-pdfmaker}で生成したあと、該当する章を@<code>{pdktk}等のコマンドで切り出してください。
+
 
 == review-pdfmaker
 
@@ -93,8 +94,8 @@ build.re:11: error: ReVIEW::KeyError
 YAMLファイルには本のタイトルや筆者名といった本のメタデータとなる設定を記述しておきます。
 その設定のひとつ「@<code>{bookname}」が出力されるPDFに対応しています。
 
-@<code>{bookname}が「book」となっている場合、ReVIEWは「@<code>{book-pdf/}」ディレクトリに、途中過程で生成されるファイルを保存した上で、最終的に「book.pdf」を自身のディレクトリに保存します。
-仮にこれらのファイル・ディレクトリがすでに存在している場合、ReVIEWはコマンドの実行を中止します。
+@<code>{bookname}が「book」となっている場合、Re:VIEWは「@<code>{book-pdf/}」ディレクトリに、途中過程で生成されるファイルを保存した上で、最終的に「book.pdf」を自身のディレクトリに保存します。
+仮にこれらのファイル・ディレクトリがすでに存在している場合、Re:VIEWはコマンドの実行を中止します。
 
 //list[review-pdfmaker-example-2][すでにPDFを一度作成したあとに再度review-pdfmakerしたときの実行例]{
 > review-pdfmaker config.yml
@@ -106,8 +107,8 @@ YAMLファイルには本のタイトルや筆者名といった本のメタデ�
 
 再度コンパイルする際には、まず手動でPDF（book.pdf）と中間ファイルを収めるディレクトリ（book-pdf/）を削除してから、再度@<code>{review-pdfmaker}を実行します。
 
-@<code>{review-pdfmaker}は内部で@<code>{review-compile --target=latex}を行ったあとに@<code>{platex}や@<code>{dvipdfmx}のようなTeX形式のファイルからPDFへ変換するReVIEW外部のコマンドを実行します。
-ReVIEWの外部のコマンドを実行している際には外部のログがそのまま標準出力や標準エラー出力に反映されるため、面食らうかもしれません。
+@<code>{review-pdfmaker}は内部で@<code>{review-compile --target=latex}を行ったあとに@<code>{platex}や@<code>{dvipdfmx}のようなTeX形式のファイルからPDFへ変換するRe:VIEW外部のコマンドを実行します。
+Re:VIEWの外部のコマンドを実行している際には外部のログがそのまま標準出力や標準エラー出力に反映されるため、面食らうかもしれません。
 
 === rakeで自動化
 
@@ -150,13 +151,13 @@ TechBoosterでは@<code>{grunt}を使って作業を自動化しています。
 
 === 執筆時の注意点
 
-@<code>{review-pdfmaker}は、その書籍に含まれるReVIEWファイルに問題があっても、一見正常にPDFを出力してしまいます。
+@<code>{review-pdfmaker}は、その書籍に含まれるRe:VIEWファイルに問題があっても、一見正常にPDFを出力してしまいます。
 この場合、コマンド自身は「成功」と報告するのですが、該当する章のデータが勝手に抜け落ちている、という事態につながります。
 
-最も単純な事例は、catalog.ymlの@<code>{CHAPS}での指定を忘れることです。
+もっとも単純な事例は、catalog.ymlの@<code>{CHAPS}での指定を忘れることです。
 また、一部の構文エラーについても、そのファイルがなかったこととして、PDFが生成されてしまいます。
 
-これは、複数のReVIEWファイルを用いて原稿執筆している際に若干厄介な問題です。
+これは、複数のRe:VIEWファイルを用いて原稿執筆している際に若干厄介な問題です。
 特に執筆後半では、見栄えの調整のために@<code>{review-compile}よりも頻繁に@<code>{review-pdfmaker}等を実行することがあるのですが、@<code>{review-compile}エラーで中止する代わりに、コマンドはエラーが発生した章を無視してPDFを生成します。
 
 対策として、執筆時には@<code>{review-compile --target=latex --check}を実行して執筆中の原稿単体で発生している問題を排除してから@<code>{review-pdfmaker}を実行することをおすすめします。
