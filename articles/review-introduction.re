@@ -7,17 +7,12 @@
 
 =={review_markup} 記法の紹介
 
-Re:VIEW記法は、文章を書き、見出しやコードなどなどをマークアップするための記法です。
-たとえば技術書では、本文にクラスやメソッドの名前を記述する場合、その部分を@<i>{イタリック}にしたり@<tt>{等幅フォント}にすることで、
-視覚的に差別化することは一般的に行われています。
+Re:VIEW記法は、文章を書き、見出しやコードなどをマークアップするための記法です。
+たとえば技術書では、文章や単語を強調したいときに@<b>{太字}にしたり、クラスやメソッドの名前を記述する場合、@<tt>{等幅フォント}にしたりすることで、視覚的に差別化することは一般的に行われています。
 #@# REVIEW vvakame i とか tt は見た目の情報なので code とかを使ったほうがいいような…。
 
-文章中でコード例や図版を挿入した時、文中からそれらを参照するために「リスト 2.1」などのように番号を振り分けます。
-ページという概念が存在する媒体に出す場合、コードや図を書いた場所と実際のレイアウトが必ずしも一致しない場合があるためです。
-これは、余白を少なくし紙面を効率的に使うために必要な措置です。
-そのため、本文中の記述とリスト・図の対応を示すために通し番号を振る必要があるためです。
-そんなものを人力でやっていては変更に弱すぎますし、手間がかかりすぎます。
-Re:VIEWにはそれを自動的にやるための仕組みがあるわけです（@<list>{list_sample}）。
+また、文章中でコード例や図版を挿入した時、文中からそれらを参照するために「リスト 2.1」などのように番号を振る必要がありますが、
+Re:VIEWにはリストや図版の採番を自動的にするための仕組みがあります（@<list>{list_sample}）。
 #@# REVIEW vvakame このあたりの解説、もうちょっと後ろに送ったほうがいいと思う…
 
 //list[list_sample][通し番号の割り当て＋キャプションを表示]{
@@ -25,7 +20,7 @@ Re:VIEWにはそれを自動的にやるための仕組みがあるわけです�
 //}
 
 Re:VIEW記法でマークアップすることで文章の構造や見た目を記述することができます。
-マークアップの巧拙が表現力の差となり、より良い表現力は、読者にとってのより良い文章につながります。
+マークアップの巧拙が表現力の差となります。そして、より良い表現は、読者にとってより良い情報になります。
 
 === インライン命令とブロック命令
 
@@ -442,8 +437,9 @@ protected void onCreate(Bundle savedInstanceState) {
 
 連番無しリストは、本文中からの参照はできません。
 
-行番号をつける場合は、通常、本文からの参照・説明を意図していることが多く、また、後述する不具合があるので、利用頻度がきわめて低い構文です。
+行番号をつける場合は、通常、本文からの参照・説明を意図していることが多く、利用頻度がきわめて低い構文です。
 #@# REVIEW vvakame 後述 が相当あとの予感がするので何かリンクなりが欲しい…
+#@# REVEIW KG 後述の不具合はもう直ってるで。前の本から内容を持ってくるのはいいけど、ちゃんと検証しような
 
 === コマンドライン
 
@@ -693,23 +689,23 @@ Re:VIEW記法では文字を装飾することができます。
 
 == プリプロセッサ命令
 
-Re:VIEWでは、最終的な見た目に影響する記法とは別に、外部の情報を.reファイルに反映するプリプロセッサ命令があります。
-プリプロセッサ命令を使うことで、外部ファイルとしているサンプルコードを自動で.reファイル内に反映したりできます。
+Re:VIEWでは、最終的な見た目に影響する記法とは別に、外部の情報を.reファイルに反映する「プリプロセッサ命令」があります。
+プリプロセッサ命令を使うことで、外部ファイルとしているサンプルコードを自動で.reファイル内に反映できます。
 
 プリプロセッサ命令を処理するには@<code>{review-preproc}コマンドを使用します。
-@<code>{review-preproc}コマンドはPDFのビルド時に自動で実行するようにしておくと便利です。
+@<code>{review-preproc}コマンドは、PDFのビルド時に自動で実行するようにしておくと便利です。
 @<hd>{tips|config_task_runner}を参照してください。
 
-あくまでプリプロセッサ命令は.reファイルの一部を書き換えるだけです。
+プリプロセッサ命令は、あくまで.reファイルの一部を書き換えるだけです。
 最終的に.reファイルの内容がビルドされることに変わりはありません。
 
 === ファイルの内容を読み込む
 
-@<code>{mapfile}命令は、外部ファイルの内容をまるっと読み込みます。
-.reファイルで外部ファイルを読み込む箇所に@<code>{#@mapfile(file_name)}と読み込み範囲の終了示す@<code>{#@end}を記述します。
-@<code>{review-preproc}コマンドは@<code>{#@mapfile(file_name)}と@<code>{#@end}の間に@<code>{file_name}というファイルを読み込みます。
+@<code>{mapfile}命令は、外部ファイルの内容をすべて読み込みます。
+外部ファイルを読み込む箇所に@<code>{#@mapfile(file_name)}と読み込み範囲の終了示す@<code>{#@end}を記述します。
+@<code>{review-preproc}コマンドは@<code>{#@mapfile(file_name)}と@<code>{#@end}の間にファイル@<code>{file_name}を読み込みます。
 
-たとえばサンプルコードfoo.rbを読み込む場合、@<list>{sample_mapfile_before}のように.reファイルに記述します。
+たとえばサンプルコードfoo.rbを読み込む場合、@<list>{sample_mapfile_before}のように記述します。
 
 //list[sample_mapfile_before][コンパイル前のmapfile記述]{
  //list[sample_code][サンプルコード]{
@@ -734,8 +730,8 @@ Re:VIEWは@<code>{#@〜}の行をPDFやHTMLファイルなどの最終的な成�
 @<code>{maprange}命令は、外部ファイルの一部を読み込みます。
 ただし、外部のファイル側に読み込み範囲を示すプリプロセッサ命令を記述しておく必要があります。
 
-範囲を示すには@<code>{#@range_begin(range_name)}と@<code>{#@range_end(range_name)}で範囲を括ります。
-@<list>{sample_maprange_source}は@<code>{#@range_begin(range_name)}と@<code>{#@range_end(range_name)}を記述した例です。
+@<code>{#@range_begin(range_name)}と@<code>{#@range_end(range_name)}で範囲を括ります。
+@<list>{sample_maprange_source}は、@<code>{#@range_begin(range_name)}と@<code>{#@range_end(range_name)}を記述した例です。
 
 //list[sample_maprange_source][maprangeで読み込むsrc.txt]{
  ここは読み込みません。
@@ -746,7 +742,7 @@ Re:VIEWは@<code>{#@〜}の行をPDFやHTMLファイルなどの最終的な成�
 //}
 
 @<list>{sample_maprange_source}で指定した範囲を読み込むには、.reファイルに@<list>{sample_maprange_before}のように記述します。
-ちなみに、@<code>{#@maprange(...)}は@<code>{#@map(...)}と記述しても動作します。
+また、@<code>{#@maprange(...)}は@<code>{#@map(...)}と記述しても動作します。
 
 //list[sample_maprange_before][コンパイル前のmaprange記述]{
  //list[sample_code][サンプルコード]{
@@ -768,8 +764,8 @@ Re:VIEWは@<code>{#@〜}の行をPDFやHTMLファイルなどの最終的な成�
 === 外部コマンドの結果を読み込む
 
 @<code>{mapoutput}命令は、外部コマンドの結果を読み込みます。
-この命令はRe:VIEWの記法の枠内に囚われず、任意の処理の結果を.reファイルに埋め込めるため便利です。
-しかし、あくまでコンパイルするマシンにインストールしているコマンドを使用するため、複数人で共同で執筆する場合は注意が必要です。
+この命令はRe:VIEWの記法の枠内に囚われず、任意の処理の結果を.reファイルに埋め込めます。
+しかし、あくまでコンパイルするマシンにインストールしているコマンドを使用するため、複数人で執筆する場合は注意が必要です。
 
 たとえば、筆者の環境のjavaのバージョンを自動で埋め込む場合は@<list>{sample_mapoutput_before}のように記述します。
 
@@ -778,7 +774,7 @@ Re:VIEWは@<code>{#@〜}の行をPDFやHTMLファイルなどの最終的な成�
  #@end
 //}
 
-@<list>{sample_mapoutput_before}はコンパイル後に@<list>{sample_mapoutput_after}のようになります。
+@<list>{sample_mapoutput_before}は、コンパイル後に@<list>{sample_mapoutput_after}のようになります。
 
 //list[sample_mapoutput_after][java -version]{
  #@mapoutput(java -version 2>&1)
@@ -788,6 +784,7 @@ Re:VIEWは@<code>{#@〜}の行をPDFやHTMLファイルなどの最終的な成�
  #@end
 //}
 
+#@# REVIEW KG ここからは前のでは別の章にあったと思うんだけど、なんでまとめたん？　ここからは「書き方」じゃないよね？
 == 設定ファイルの解説
 
 本節ではRe:VIEWを使う上で必要な各種設定ファイルを解説します。
@@ -1037,6 +1034,11 @@ amedama.re:11: error: ReVIEW::KeyError
 
 出力されたhtmlを、執筆時のデバッグ用途としてではなく見栄えの良い公開用ファイルにすることもできます。
 @<code>{--yaml=(ファイル名)}でReVIEWプロジェクトの設定を読みこませることでスタイルを変更するとよいでしょう。
+
+@<code>{--all}を指定すると、指定したファイルだけではなく、catalog.ymlに記載されている　全てのファイルを一気にコンパイルすることもできます。
+
+@<code>{＠<chapref>{chapter\}}や@<code>{＠<hd>{head\}}などの章・見出しの参照をリンクにする@<code>{--chapterlink}というオプションもあります。
+
 なお、@<code>{--help}を指定すると、ファイルを読み込んで変換する代わりに対応するオプションの一覧が表示されます。
 本章で説明されていないオプションも多々あるので、必要に応じて参照してください。
 
@@ -1123,6 +1125,10 @@ NumberOfPages: 103
 === review-epubmaker
 
 @<code>{review-pdfmaker}同様、@<code>{review-epubmaker}はプロジェクトのメタデータとなるYAMLファイルを引数としてEPUBファイルを生成します。
+EPUBファイルの実態はHTMLファイルやCSSファイルをZIP圧縮でアーカイブ化したものです。
+
+Re:VIEWはEPUBの生成処理で、システムにインストールされているZIPコマンドを使用します。
+事前にZIPコマンドをインストールしておいてください。
 
 //list[review-epubmaker-example-1][review-epubmakerの例]{
 > review-epubmaker config.yml
@@ -1136,3 +1142,15 @@ book.epub: EPUB ebook data
 
 また、コンパイルに関わる注意点も@<code>{review-pdfmaker}と同様です。
 PDFとは異なりEPUBでページ数をチェックすることはできませんが、EPUBは実質zip圧縮されたHTMLファイルの塊であるという点を利用して、@<code>{unzip -l}等で自身の原稿ファイルが最終的なEPUBファイルに含まれているかをチェックすることは出来るでしょう。
+
+HTML生成のオプションにはconfig.ymlに項目がないものもあります。
+そういったオプションを使用するには@<code>{review-compile}コマンドのオプションを任意に記述できる@<code>{params}という項目を使います。
+@<list>{config_yml_chapterlink}は@<code>{--chapterlink}オプションを設定する例です。
+
+//list[config_yml_chapterlink][--chapterlinkオプションをconfig.ymlで指定する]{
+bookname: C89-FirstStepReVIEW-v2
+stylesheet: ["style.css"]
+epubversion: 3
+〜中略〜
+params: --chapterlink
+//}
