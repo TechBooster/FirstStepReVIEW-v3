@@ -1037,6 +1037,11 @@ amedama.re:11: error: ReVIEW::KeyError
 
 出力されたhtmlを、執筆時のデバッグ用途としてではなく見栄えの良い公開用ファイルにすることもできます。
 @<code>{--yaml=(ファイル名)}でReVIEWプロジェクトの設定を読みこませることでスタイルを変更するとよいでしょう。
+
+@<code>{--all}を指定すると、指定したファイルだけではなく、catalog.ymlに記載されている　全てのファイルを一気にコンパイルすることもできます。
+
+@<code>{＠<chapref>{chapter\}}や@<code>{＠<hd>{head\}}などの章・見出しの参照をリンクにする@<code>{--chapterlink}というオプションもあります。
+
 なお、@<code>{--help}を指定すると、ファイルを読み込んで変換する代わりに対応するオプションの一覧が表示されます。
 本章で説明されていないオプションも多々あるので、必要に応じて参照してください。
 
@@ -1123,6 +1128,10 @@ NumberOfPages: 103
 === review-epubmaker
 
 @<code>{review-pdfmaker}同様、@<code>{review-epubmaker}はプロジェクトのメタデータとなるYAMLファイルを引数としてEPUBファイルを生成します。
+EPUBファイルの実態はHTMLファイルやCSSファイルをZIP圧縮でアーカイブ化したものです。
+
+Re:VIEWはEPUBの生成処理で、システムにインストールされているZIPコマンドを使用します。
+事前にZIPコマンドをインストールしておいてください。
 
 //list[review-epubmaker-example-1][review-epubmakerの例]{
 > review-epubmaker config.yml
@@ -1136,3 +1145,15 @@ book.epub: EPUB ebook data
 
 また、コンパイルに関わる注意点も@<code>{review-pdfmaker}と同様です。
 PDFとは異なりEPUBでページ数をチェックすることはできませんが、EPUBは実質zip圧縮されたHTMLファイルの塊であるという点を利用して、@<code>{unzip -l}等で自身の原稿ファイルが最終的なEPUBファイルに含まれているかをチェックすることは出来るでしょう。
+
+HTML生成のオプションにはconfig.ymlに項目がないものもあります。
+そういったオプションを使用するには@<code>{review-compile}コマンドのオプションを任意に記述できる@<code>{params}という項目を使います。
+@<list>{config_yml_chapterlink}は@<code>{--chapterlink}オプションを設定する例です。
+
+//list[config_yml_chapterlink][--chapterlinkオプションをconfig.ymlで指定する]{
+bookname: C89-FirstStepReVIEW-v2
+stylesheet: ["style.css"]
+epubversion: 3
+〜中略〜
+params: --chapterlink
+//}
