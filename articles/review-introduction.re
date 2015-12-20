@@ -555,16 +555,17 @@ URLに加えて、コンマで区切ってリンクを設定する文字列を�
 本文に差し込む画像ファイルは、Re:VIEWファイルがあるディレクトリに@<code>{images}ディレクトリを作成します。
 それぞれの画像ファイルは、その画像を差し込む章の名前のディレクトリの下に配置します。
 
-たとえば、@<tt>{markup.re}の章に表示する画像ファイル@<tt>{enlightened.png}の場合、@<tt>{images/markup/enlightened.png}となります。
+たとえば、@<tt>{markup.re}の章に表示する画像ファイル@<tt>{image_sample.png}の場合、@<tt>{images/markup/image_sample.png}となります。
 このことから解るとおり、Re:VIEWでは、異なる章の画像ファイルを直接参照することはできません。
 画像ファイルは、章ごとに配置する必要があります。
 
 画像ファイルとして利用できるフォーマットはRe:VIEWで出力する形式に依存しますが、
 PNG、JPEG、@<kw>{SVG,Scalable Vector Graphics}など、基本的なフォーマットには対応しています。
 
-//image[enlightened][enlightened.png]{
+//image[image_sample][image_sample.png]{
 //}
 #@# REVIEW vvakame 念のため 画像の権利大丈夫？コピーライトとかの表記いらん？
+#@# mstssk ↑対応しました。サンプル画像をテクブのロゴ画像に差し替え。
 
 #@# REVIEW vvakame 画像の対応フォーマットとか○○がインストールしてあると☓☓も使える…とかはいらない？
 
@@ -574,19 +575,19 @@ PNG、JPEG、@<kw>{SVG,Scalable Vector Graphics}など、基本的なフォー�
 キャプションは省略できません。
 
 //list[image_sample_with_seq][連番付きの図]{
- //image[enlightened][連番付きの図]{
+ //image[image_sample][連番付きの図]{
  ...代替テキスト等...
  //}
 //}
 
 @<list>{image_sample_with_seq}のマークアップは、次のように出力されます。
 
-//image[enlightened_dup1][連番付きの図]{
+//image[image_sample_dup1][連番付きの図]{
 //}
 
 ＠<img>{@<tt>{identifier}}で、本文から@<kw>{identifier,識別子}が示す図を参照できます。
 
-参照は出力時に「@<img>{enlightened_dup1}」のようにリスト番号に置き換わります。
+参照は出力時に「@<img>{image_sample_dup1}」のようにリスト番号に置き換わります。
 
 @<tt>{代替テキスト}は、出力時には無視されます。
 基本的にはアスキーアートや文章で画像の説明をして、執筆時にどんな画像を意図しているのか確認するために使いますが、何も書かなくても問題ありません。
@@ -597,12 +598,12 @@ PNG、JPEG、@<kw>{SVG,Scalable Vector Graphics}など、基本的なフォー�
 キャプションは省略できません。
 
 //list[image_sample_with_no_seq][連番なしの図]{
- //indepimage[enlightened][連番なしの図]
+ //indepimage[image_sample][連番なしの図]
 //}
 
 @<list>{image_sample_with_no_seq}のマークアップは、次のように出力されます。
 
-//indepimage[enlightened][連番なしの図]
+//indepimage[image_sample][連番なしの図]
 
 連番なしの図は、本文中からの参照はできません。また、@<tt>{代替テキスト}は指定できません。
 
@@ -615,20 +616,20 @@ PNG、JPEG、@<kw>{SVG,Scalable Vector Graphics}など、基本的なフォー�
 表示倍率は、@<tt>{1.0}を等倍、@<tt>{0.0}を下限として指定できます。
 
 //list[scaled_image_sample_with_seq][連番付きの図]{
- //image[enlightened][表示倍率50%]@<b>{[scale=0.5]}{
+ //image[image_sample][表示倍率50%]@<b>{[scale=0.5]}{
  ...代替テキスト等...
  //}
 //}
 
-//image[enlightened_dup2][表示倍率50%][scale=0.5]{
+//image[image_sample_dup2][表示倍率50%][scale=0.5]{
 ...代替テキスト等...
 //}
 
 //list[scaled_image_sample_with_no_seq][連番なしの図]{
- //indepimage[enlightened][表示倍率25%]@<b>{[scale=0.25]}
+ //indepimage[image_sample][表示倍率25%]@<b>{[scale=0.25]}
 //}
 
-//indepimage[enlightened][表示倍率25%][scale=0.25]
+//indepimage[image_sample][表示倍率25%][scale=0.25]
 
 スケールオプションを省略した場合、Re:VIEWは自動で適切なサイズを選択します。
 スケールを指定した結果、図が紙面からはみ出る場合もあるので注意してください。
