@@ -143,6 +143,7 @@ C言語のマクロとだいたい同じものだと思えばよいでしょう�
 
 詳細は@<chapref>{review-introduction}に譲ります。
 #@# REVIEW vvakame tabwidthについて言及されてなかった…
+#@# REVIEW mstssk tabwidthについて書きました
 
  * 各ターゲット向けのビルド用コマンドを実行する
 
