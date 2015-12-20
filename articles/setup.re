@@ -4,12 +4,13 @@
 
 まずはRe:VIEWで執筆するための環境を整えましょう。
 
-TechBoosterでは、GitHubが提供するエディタであるAtom@<fn>{atom}と追加パッケージであるlanguage-review@<fn>{language-review}を使い執筆を行います。
-そしてGitHubなどにpushする前にRuby版のRe:VIEW@<fn>{review}を使ってHTMLやPDFの生成チェックを行う運用になっています。
+TechBoosterでは、GitHubが提供するエディタであるAtom@<fn>{atom}と追加パッケージであるlanguage-review@<fn>{language-review}を使って執筆しています。
+そしてGitHubなどにpushする前に、Ruby版のRe:VIEW@<fn>{review}を使ってHTMLやPDFの生成チェックを行う運用になっています。
+
 これは、language-reviewはreview.js@<fn>{review.js}というJavaScriptによるRe:VIEWの移植版を使っているためです。
 review.jsは現在のところ、PDFを生成することなどができませんし、文章の解釈もRuby版と厳密には一致しません。
 
-本書執筆時点での各ツールのバージョンは次のとおり。
+本書執筆時点での各ツールのバージョンは次のとおりです。
 
 #@# TODO 入稿前にここのバージョンを再確認すること
 
@@ -22,37 +23,39 @@ review.jsは現在のところ、PDFを生成することなどができませ�
 //footnote[review][@<href>{https://github.com/kmuto/review}]
 //footnote[review.js][@<href>{https://github.com/vvakame/review.js}]
 
-== Atomとlanguage-reviewでエディタを用意する
+== Atomとlanguage-reviewのセットアップ
 
 #@# NOTE author:vvakame
 
-GitHubが作っているエディタであるAtomをインストールします。
+Atomエディタをインストールします。
 
 インストールしたらAtomを立ち上げ、設定からlanguage-reviewをインストールします（@<img>{install-language-review}）。
-もしくは、一度Atomを起動するとMac OS Xであれば@<code>{/usr/local/bin/}にapmコマンドがインストールされますので、@<code>{apm install language-review}とします。
+もしくは、Mac OS Xであれば一度Atomを起動すると@<code>{/usr/local/bin/}に@<code>{apm}コマンドがインストールされるので、ターミナルから@<code>{apm install language-review}を実行します。
 
 //image[install-language-review][language-reviewをインストールする]{
 //}
 
-次に、適当な名前の.reファイルを作ります。
-ここではtest.reとします。
-このファイルを開くと、デフォルトでは編集モードがRe:VIEW以外になっているため、クリックして@<fn>{atom-tips}Re:VIEWに切り替えます（@<img>{language-review-grammar1}、@<img>{language-review-grammar2}@<fn>{atom-images-disclaimer}）。
+次に、適当な名前の@<tt>{.re}ファイル（例: test.re）を作ります。
+
+作成後、このファイルをAtomで開きます。
+デフォルトの編集モードはRe:VIEW以外になっているため、クリックして@<fn>{atom-tips}Re:VIEWに切り替えます（@<img>{language-review-grammar1}、@<img>{language-review-grammar2}@<fn>{atom-images-disclaimer}）。
 
 //image[language-review-grammar1][モード切り替え前]{
 //}
 //image[language-review-grammar2][このように切り替えるのだ]{
 //}
 
-パッケージのインストール時に依存する別パッケージ（linter）のインストールも行っています。動作がおかしい気がする場合Atomを完全に終了させてから起動しなおしてみてください。
+パッケージのインストール時に、依存する別パッケージ（linter）のインストールも行っています。
+動作がおかしい気がする場合、Atomを完全に終了させてから起動しなおしてみてください。
 
-また人柱用ですがMac OS X環境ではAtomのインストールからlanguage-reviewの導入までを行うインストールスクリプトを用意してあります。
+また、人柱用ですがMac OS X環境ではAtomのインストールからlanguage-reviewの導入までを行うインストールスクリプトを用意してあります。
 
 //cmd{
 curl -L https://github.com/vvakame/language-review/raw/master/install.sh | bash
 //}
 
-Atomとlanguage-reviewは便利な機能を持っています。
-よく使うのは次のとおり。
+language-reviewは、Atomを通じてさまざまな便利な機能を提供します。
+よく使うのは次のとおりです。
 
  * シンタックスハイライト
  * 文法ミスの警告
@@ -74,10 +77,10 @@ Atomとlanguage-reviewは便利な機能を持っています。
 #@# NOTE author:vvakame
 
 次に、Ruby版Re:VIEWをインストールします。
-PDFやepubの生成などの最終出力を行うのに必要なので、重要です。
+これはPDFやepubの生成などの最終出力を行うのに必要です。
 
-RubyとRubyGemsはすでに利用可能な環境になっているものとします。
-インストールは単に次のコマンドを実行するだけです@<fn>{experimental-review}。Rubyのインストール方法次第ではsudoが必要かもしれません。
+RubyとRubyGemsは、すでに利用可能な環境になっているものとして解説します。
+インストールは単に次のコマンドを実行するだけです@<fn>{experimental-review}（Rubyのインストール方法次第ではsudoが必要となる場合もあります）。
 
 //cmd{
 $ gem install review
@@ -101,7 +104,7 @@ $ rake clean pdf
 $ rake clean epub
 //}
 
-このコマンドではHTML、PDF、EPUB形式でサンプルを出力しています。
+このコマンドではHTML、PDF、EPUB形式でサンプルをそれぞれ出力しています。
 
 //footnote[experimental-review][review-pegという実験的パッケージがありますが熱心なRe:VIEW信者でない限り通常のreviewを使えばよいでしょう]
 
@@ -111,10 +114,11 @@ Macの場合、何もしなくてもデフォルトでRubyが導入されてい�
 この状態だとgem installを実行するときにsudoが必要になります。
 またデフォルトのRubyのバージョンは若干古いため、最新のものを入れたほうがよいでしょう。
 システムのデフォルトのままだと、破壊的（かもしれない）操作をするのが怖いですし、イザという時にリセットすることもやりにくいです。
-万一のときに@<code>{rm -rf ~/.rbenv}すればよい環境を作ると精神的安らぎが得られます。
+万一のときに@<code>{rm -rf ~/.rbenv}すればよい環境を作っておくと、精神的安らぎが得られます。
 
-そのため本書ではrbenvの利用をお勧めします。
+そのため本書ではrbenvの利用を推奨しています。
 rbenvのインストール自体は公式サイト@<fn>{rbenv}に譲ります。
+
 rbenvインストール後の手順は次のとおりです。
 
 //cmd{
@@ -136,7 +140,7 @@ $ rbenv rehash
 ===[column] Ruby導入の手引き Windows編
 
 RubyInstaller@<fn>{rubyinstaller}を使うとよいでしょう。
-しかし、TechBoosterではWindows環境下ではロクなLaTeX環境を構築できていないので素直に仮想環境を利用しています。
+しかし、TechBoosterでは、Windows環境下ではロクなLaTeX環境を構築できていないのでPDFの出力に難があり、素直に仮想環境を利用しています。
 PDFを生成する必要がなければ、試す価値があるでしょう。
 
 ===[/column]
@@ -172,12 +176,12 @@ LaTeX環境の構築の難易度が高いため、Dockerなどの仮想環境を
 
 ==[column] Dockerとは？
 
-Dockerは最近はやりの仮想環境用のツールです。
+Dockerは、最近はやりの仮想環境用のツールです。
 Linuxカーネルに組み込みの機能を使って、軽量かつ無駄の少ない仮想化環境を実現しています。
 そのため、Mac OS XやWindowsでは直接は利用できません。
 しかし、そのためのdocker-machineという仕組みが用意されています。
 
-docker-machineはデフォルトではVirtualBoxを利用して、Linux環境を立ち上げその中でDocker用仮想環境を作成します。
+docker-machineは、デフォルトではVirtualBoxを利用してLinux環境を立ち上げ、その中でDocker用仮想環境を作成します。
 このツールを使うと、Mac OS XやWindows環境でもDockerを利用することができます。
 
 Dockerはざっくり次の使い方をします。
