@@ -16,9 +16,11 @@
 ずっと手軽に技術書を作れます。
 
 Re:VIEWは書籍制作のためのツールセットです。本を作る工程のうち（図をいれる）
-次のような役割を持ちます。
+次のような役割を持ちます（@<img>{review-cover}）。
 
-#@# TODO mhidaka 図を入れる
+//image[review-cover][Re:VIEWがカバーする領域]{
+//}
+
 
 TechBoosterではRe:VIEWを使うことで効率的に文書管理、執筆環境を構築できるようになりました@<fn>{products}。
 
