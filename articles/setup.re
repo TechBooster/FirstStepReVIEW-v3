@@ -153,7 +153,7 @@ Re:VIEW文書をPDFに変換するにはLaTeX（platexまたはlualatexなど）
 
 ==== Mac OS Xの場合
 
-MacTeX@<fn>{mactex}を使いましょう。
+MacTeX@<fn>{mactex}を使いましょう。執筆時点ではMacTeX 2015が最新バージョンです。
 
 //footnote[mactex][@<href>{https://www.tug.org/mactex/}]
 
@@ -214,7 +214,3 @@ $ docker run -i -t vvakame/review -v $(pwd):/book /bin/bash
 ==[/column]
 
 //footnote[docker-review][@<href>{https://hub.docker.com/r/vvakame/review/}]
-
-== トラブルシューティング
-
-TODO mhidaka そもそも何書く予定だったんだっけ…？
