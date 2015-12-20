@@ -69,7 +69,7 @@ Atomとlanguage-reviewは便利な機能を持っています。
 //footnote[atom-tips][Mac OS Xの場合、Command+Shift+Pでコマンドパレットが開くのでgrammarなどそれっぽいワードを投げ込むとマウスなしで操作できます]
 //footnote[atom-images-disclaimer][プラグインの導入状態やAtomのバージョンによって、画像どおりの見た目じゃない場合のほうが多いはずです]
 
-== Re:VIEWをインストールする
+=={install_review} Re:VIEWをインストールする
 
 #@# NOTE author:vvakame
 

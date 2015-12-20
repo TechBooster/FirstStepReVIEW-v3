@@ -4,6 +4,8 @@ CHAPS:
   - writing-book.re
   - setup.re
   - review-introduction.re
+  - configure.re
+  - build.re
   - workflow.re
   - tips.re
 
