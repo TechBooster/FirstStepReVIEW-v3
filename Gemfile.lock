@@ -1,14 +1,19 @@
+GIT
+  remote: https://github.com/kmuto/review.git
+  revision: 7616126a35974fcd63832792d9c1e4f06cccaee5
+  specs:
+    review (1.7.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
-    review (1.6.0)
     review-peg (0.2.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  review (= 1.6.0)
+  review!
   review-peg (= 0.2.2)
 
 BUNDLED WITH
