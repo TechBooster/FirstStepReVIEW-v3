@@ -14,40 +14,6 @@ TeXの話もレイアウト、スタイルみたいなのは飛ばしてしま�
 この章では、実際に本を作るワークフローを紹介していきます。
 TechBoosterがC81から練り上げてきた本を作るよくできた方法を解説します。
 
-== 校正支援ツールprhを導入する
-
-校正支援用ツールとしてprh@<fn>{prh}があります。
-prhはproofread helperの略です。
-proofreadで1単語だから略したらphだろ！とか言ってはいけません。
-
-#@# prh:disable
-prhは単純にルールに従い、文字列を置き換えるだけのものです。
-たとえば、「例えば」と書いた時に「たとえば」に置き換えるよう促してくれます。
-これを漢字をひらがなに「開く」操作といいます。
-
-一般的な表現を用いることで文章を読みやすくする効果があります。
-文章の質を高めるためにはこのような書き換え処理をたくさんこなす必要があるわけです。
-
-TechBoosterでは原稿をみんなが書き終えた後、羊（@mhidaka、サークル主催）くんが全員の原稿に手を加え、開く処理をいれるなどの作業を行っていました。
-そこでprhを作成し羊の作業から著者個人個人の作業に落とした@<fn>{crazy-mhidaka}わけです。
-面白いもので、規則をルール化し記述できるようにしたことで著者の中での校正に対する関心も高まってきました。
-
-肝心の使い方についてです。現状あまりコマンドラインツールとしての使い勝手はよくありません。
-language-reviewにはprhが組み込まれているため、language-review経由で使うのが楽でしょう。
-
-まずは、TechBoosterの設定ファイル（@<href>{https://github.com/vvakame/prh/blob/master/misc/techbooster.yml}）をダウンロードして試してみるのがよいでしょう。
-ダウンロードしたファイルをprh.ymlという名前で.reファイルと同じディレクトリに置くとlanguage-reviewが校正用ルールとして参照して、Lintを表示します。
-
-類似のツールとしてRedPen@<fn>{redpen}やtextlint@<fn>{textlint}などがあります。
-さらなる文章の改善を目指すのであれば、これらのツールを利用してみるのもよいでしょう。
-
-とはいえ、根本的に文章の目的と構造がしっかりしていないといくら枝葉末節を補ったところで意味はありません。
-
-//footnote[prh][@<href>{https://github.com/vvakame/prh}]
-//footnote[crazy-mhidaka][「羊の労力が減るぞ！」と僕が言ったら、彼は「じゃあもっと作れるな！」って言いました。あたまおかしい]
-//footnote[redpen][@<href>{http://redpen.cc/}]
-//footnote[textlint][@<href>{http://efcl.info/2015/09/10/introduce-textlint/}]
-
 == GitHub Oriented Writing
 
 略すとGoW… Gears of Warだ！
@@ -280,3 +246,37 @@ CIとlanguage-reviewがあればローカルで文法チェックを行ってCI�
 メソッド名、プログラムのソースコードからの引用はその限りではありません。
 とくに半角カッコはフォントの高さが全角文字と異なるため、沈んだ印象を受けます。
 全角カッコを利用するようにしてください。
+
+== 校正支援ツールprhを導入する
+
+校正支援用ツールとしてprh@<fn>{prh}があります。
+prhはproofread helperの略です。
+proofreadで1単語だから略したらphだろ！とか言ってはいけません。
+
+#@# prh:disable
+prhは単純にルールに従い、文字列を置き換えるだけのものです。
+たとえば、「例えば」と書いた時に「たとえば」に置き換えるよう促してくれます。
+これを漢字をひらがなに「開く」操作といいます。
+
+一般的な表現を用いることで文章を読みやすくする効果があります。
+文章の質を高めるためにはこのような書き換え処理をたくさんこなす必要があるわけです。
+
+TechBoosterでは原稿をみんなが書き終えた後、羊（@mhidaka、サークル主催）くんが全員の原稿に手を加え、開く処理をいれるなどの作業を行っていました。
+そこでprhを作成し羊の作業から著者個人個人の作業に落とした@<fn>{crazy-mhidaka}わけです。
+面白いもので、規則をルール化し記述できるようにしたことで著者の中での校正に対する関心も高まってきました。
+
+肝心の使い方についてです。現状あまりコマンドラインツールとしての使い勝手はよくありません。
+language-reviewにはprhが組み込まれているため、language-review経由で使うのが楽でしょう。
+
+まずは、TechBoosterの設定ファイル（@<href>{https://github.com/vvakame/prh/blob/master/misc/techbooster.yml}）をダウンロードして試してみるのがよいでしょう。
+ダウンロードしたファイルをprh.ymlという名前で.reファイルと同じディレクトリに置くとlanguage-reviewが校正用ルールとして参照して、Lintを表示します。
+
+類似のツールとしてRedPen@<fn>{redpen}やtextlint@<fn>{textlint}などがあります。
+さらなる文章の改善を目指すのであれば、これらのツールを利用してみるのもよいでしょう。
+
+とはいえ、根本的に文章の目的と構造がしっかりしていないといくら枝葉末節を補ったところで意味はありません。
+
+//footnote[prh][@<href>{https://github.com/vvakame/prh}]
+//footnote[crazy-mhidaka][「羊の労力が減るぞ！」と僕が言ったら、彼は「じゃあもっと作れるな！」って言いました。あたまおかしい]
+//footnote[redpen][@<href>{http://redpen.cc/}]
+//footnote[textlint][@<href>{http://efcl.info/2015/09/10/introduce-textlint/}]
