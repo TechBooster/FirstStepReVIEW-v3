@@ -15,19 +15,35 @@
 <body>
 
 <% if @prev.present? %>
-  <a class="prev" href='<%= @prev.id %>.html'><%= @prev.title %></a>
+  <a class="prev" href='<%= @prev.id %>.html'>
+		<<
+		<%= "第#{@prev.number}章" if @prev.number.present? %>
+		<%= @prev.title %>
+	</a>
 <% end %>
 <% if @next.present? %>
-  <a class="next" href='<%= @next.id %>.html'><%= @next.title %></a>
+	<a class="next" href='<%= @next.id %>.html'>
+		<%= "第#{@next.number}章" if @next.number.present? %>
+		<%= @next.title %>
+		>>
+	</a>
 <% end %>
 
 <%= body %>
 
 <% if @prev.present? %>
-  <a class="prev" href='<%= @prev.id %>.html'><%= @prev.title %></a>
+  <a class="prev" href='<%= @prev.id %>.html'>
+		<<
+		<%= "第#{@prev.number}章" if @prev.number.present? %>
+		<%= @prev.title %>
+	</a>
 <% end %>
 <% if @next.present? %>
-  <a class="next" href='<%= @next.id %>.html'><%= @next.title %></a>
+	<a class="next" href='<%= @next.id %>.html'>
+		<%= "第#{@next.number}章" if @next.number.present? %>
+		<%= @next.title %>
+		>>
+	</a>
 <% end %>
 
 </body>
