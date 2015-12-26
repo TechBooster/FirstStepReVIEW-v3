@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Re:VIEW" />
+<% book = @builder.instance_variable_get(:@book) %>
+<% unless book.config["stylesheet"].nil? %>
+  <% book.config["stylesheet"].each do |style| %>
+  <link rel="stylesheet" type="text/css" href="<%= style %>" />
+  <% end %>
+<% end %>
+  <title><%= title %></title>
+  </head>
+<body>
+
+<% if @prev.present? %>
+  <a class="prev" href='<%= @prev.id %>.html'><%= @prev.title %></a>
+<% end %>
+<% if @next.present? %>
+  <a class="next" href='<%= @next.id %>.html'><%= @next.title %></a>
+<% end %>
+
+<%= body %>
+
+<% if @prev.present? %>
+  <a class="prev" href='<%= @prev.id %>.html'><%= @prev.title %></a>
+<% end %>
+<% if @next.present? %>
+  <a class="next" href='<%= @next.id %>.html'><%= @next.title %></a>
+<% end %>
+
+</body>
+</html>
