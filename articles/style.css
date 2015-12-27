@@ -1,18 +1,64 @@
 @charset "UTF-8";
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, Meiryo, "メイリオ", sans-serif; }
+  font-family: "Helvetica Neue", Helvetica, Arial, Meiryo, "メイリオ", sans-serif;
+  font-size: 16px;
+  line-height: 1.5; }
 
 h1 {
   border-bottom: 1px solid #eee; }
 
+h1, h2, h3 {
+  margin-top: 28px;
+  margin-bottom: 14px; }
+
+h4, h5, h6 {
+  margin-top: 14px;
+  margin-bottom: 14px; }
+  h4:before, h5:before, h6:before {
+    content: "■"; }
+
+p {
+  margin-bottom: 12px; }
+
+dd {
+  margin-left: 3em; }
+
+div.column {
+  border: solid 3px;
+  border-radius: 10px;
+  padding-left: 1em;
+  padding-right: 1em; }
+  div.column h1, div.column h2, div.column h3 {
+    margin-top: 14px; }
+
+div.lead {
+  font-size: 16px;
+  margin-left: 3em; }
+
+.noteref {
+  vertical-align: super;
+  font-size: smaller; }
+
 p.footnote {
   font-size: 0.8em; }
 
-.caption {
+.image, .table, .caption-code, .cmd-code {
+  margin-bottom: 12px; }
+
+.image .caption, .table .caption {
   text-align: center; }
+
+.image .caption {
+  margin-top: 0; }
+  .image .caption:before {
+    content: "▲";
+    color: lightgray; }
 
 .caption-code .caption, .table .caption {
   margin-bottom: 0; }
+  .caption-code .caption:before, .table .caption:before {
+    content: "▼";
+    color: lightgray; }
 
 .image img {
   display: block;
@@ -30,6 +76,7 @@ p.footnote {
     content: ">>"; }
 
 .tb-footer {
+  margin-top: 16px;
   padding-top: 16px;
   padding-bottom: 16px;
   color: white;
