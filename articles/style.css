@@ -4,8 +4,8 @@ body {
   font-size: 16px;
   line-height: 1.5; }
 
-h1 {
-  border-bottom: 1px solid #eee; }
+h2 {
+  border-bottom: 1px solid #ccc; }
 
 h1, h2, h3 {
   margin-top: 28px;
