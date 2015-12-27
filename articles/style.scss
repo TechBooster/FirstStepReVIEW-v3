@@ -1,7 +1,10 @@
 // Variables
 $footer-link-color: #9e9e9e;
 
-// Re:VIEWの装飾を上書く
+// デフォルトの装飾を上書く
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, Meiryo, "メイリオ", sans-serif;
+}
 h1 {
 	border-bottom: 1px solid #eee;
 }
