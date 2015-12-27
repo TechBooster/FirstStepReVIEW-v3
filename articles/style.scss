@@ -1,3 +1,7 @@
+// Variables
+$footer-link-color: #9e9e9e;
+
+// Re:VIEWの装飾を上書く
 h1 {
 	border-bottom: 1px solid #eee;
 }
@@ -35,5 +39,26 @@ p.footnote {
 	}
 	a.next:after {
 		content: ">>";
+	}
+}
+
+// フッタ
+.tb-footer {
+	padding-top: 16px;
+	padding-bottom: 16px;
+	color: white;
+	background-color: #424242;
+	a {
+		color: $footer-link-color;
+	}
+	p {
+		margin-right: 10px;
+	}
+}
+.tb-footer-links {
+	li:nth-child(n+2)::before {
+		color: $footer-link-color;
+		content: "/";
+		margin-right: 16px;
 	}
 }

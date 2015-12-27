@@ -24,3 +24,18 @@ p.footnote {
     content: "<<"; }
   .tb-nav-link a.next:after {
     content: ">>"; }
+
+.tb-footer {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  color: white;
+  background-color: #424242; }
+  .tb-footer a {
+    color: #9e9e9e; }
+  .tb-footer p {
+    margin-right: 10px; }
+
+.tb-footer-links li:nth-child(n+2)::before {
+  color: #9e9e9e;
+  content: "/";
+  margin-right: 16px; }
