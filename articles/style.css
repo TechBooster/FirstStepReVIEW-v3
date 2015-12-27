@@ -1,0 +1,26 @@
+h1 {
+  border-bottom: 1px solid #eee; }
+
+p.footnote {
+  font-size: 0.8em; }
+
+.caption {
+  text-align: center; }
+
+.caption-code .caption, .table .caption {
+  margin-bottom: 0; }
+
+.image img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto; }
+
+.tb-nav-link {
+  margin-top: 1em;
+  margin-bottom: 1em; }
+  .tb-nav-link a.prev:before {
+    content: "<<"; }
+  .tb-nav-link a.next:after {
+    content: ">>"; }

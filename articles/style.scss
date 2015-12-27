@@ -1,0 +1,39 @@
+h1 {
+	border-bottom: 1px solid #eee;
+}
+p.footnote {
+	font-size: 0.8em;
+}
+
+// 画像やリストなどのキャプション系
+.caption {
+	text-align: center;
+}
+.caption-code, .table {
+	.caption {
+		margin-bottom: 0;
+	}
+}
+
+// 画像は中央余生にしとく
+.image {
+	img {
+		display: block;
+		max-width: 100%;
+		height: auto;
+		margin-left: auto;;
+		margin-right: auto;
+	}
+}
+
+// メニューまわり
+.tb-nav-link {
+	margin-top: 1em;
+	margin-bottom: 1em;
+	a.prev:before {
+		content: "<<";
+	}
+	a.next:after {
+		content: ">>";
+	}
+}

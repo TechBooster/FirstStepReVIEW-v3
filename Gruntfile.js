@@ -27,6 +27,16 @@ module.exports = grunt => {
 				]
 			}
 		},
+		sass: {
+			dist: {
+				options: {
+					sourcemap: 'none'
+				},
+				files: {
+					'articles/style.css': 'articles/style.scss'
+				}
+			}
+		},
 		exec: {
 			preprocess: {
 				cwd: articles,
@@ -38,7 +48,7 @@ module.exports = grunt => {
 			},
 			compile2html: {
 				cwd: articles,
-				cmd: `${reviewCompile} --all --target=html --stylesheet=style.css --chapterlink`
+				cmd: `${reviewCompile} --all --target=html --stylesheet=style.css --chapterlink --footnotetext`
 			},
 			compile2latex: {
 				cwd: articles,
@@ -59,8 +69,9 @@ module.exports = grunt => {
 		}
 	});
 
-	function generateTask(target) {
-		return ["clean", "exec:preprocess", `exec:compile2${target}`];
+	function generateTask(target, pretask) {
+		pretask = pretask || [];
+		return ["clean"].concat(pretask).concat(["exec:preprocess", `exec:compile2${target}`]);
 	}
 
 	grunt.registerTask(
@@ -76,7 +87,7 @@ module.exports = grunt => {
 	grunt.registerTask(
 		"html",
 		"原稿をコンパイルしてHTMLファイルにする",
-		generateTask("html"));
+		generateTask("html", ["sass"]));
 
 	grunt.registerTask(
 		"idgxml",

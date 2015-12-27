@@ -1,50 +1,63 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Re:VIEW" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="generator" content="Re:VIEW" />
+	<!-- stylesheets -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <% book = @builder.instance_variable_get(:@book) %>
 <% unless book.config["stylesheet"].nil? %>
-  <% book.config["stylesheet"].each do |style| %>
-  <link rel="stylesheet" href="<%= style %>" />
-  <% end %>
+	<% book.config["stylesheet"].each do |style| %>
+	<link rel="stylesheet" href="<%= style %>" />
+	<% end %>
 <% end %>
-  <title><%= title %></title>
-  </head>
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<title><%= title %></title>
+</head>
 <body>
+<div class="container">
+	<div class="row">
+		<div class="col-md-2"><!-- spacer --></div>
+		<div class="col-md-8" role="main">
 
-<% if @prev.present? %>
-  <a class="prev" href='<%= @prev.id %>.html'>
-		<<
-		<%= "第#{@prev.number}章" if @prev.number.present? %>
-		<%= @prev.title %>
-	</a>
-<% end %>
-<% if @next.present? %>
-	<a class="next" href='<%= @next.id %>.html'>
-		<%= "第#{@next.number}章" if @next.number.present? %>
-		<%= @next.title %>
-		>>
-	</a>
-<% end %>
+			<p class="tb-nav-link clearfix">
+				<% if @prev.present? %>
+						<a class="prev" href='<%= @prev.id %>.html'>
+							<%= "第#{@prev.number}章" if @prev.number.present? %>
+							<%= @prev.title %>
+						</a>
+				<% end %>
+				<% if @next.present? %>
+						<a class="next pull-right" href='<%= @next.id %>.html'>
+							<%= "第#{@next.number}章" if @next.number.present? %>
+							<%= @next.title %>
+						</a>
+				<% end %>
+			</p>
 
-<%= body %>
+			<%= body %>
 
-<% if @prev.present? %>
-  <a class="prev" href='<%= @prev.id %>.html'>
-		<<
-		<%= "第#{@prev.number}章" if @prev.number.present? %>
-		<%= @prev.title %>
-	</a>
-<% end %>
-<% if @next.present? %>
-	<a class="next" href='<%= @next.id %>.html'>
-		<%= "第#{@next.number}章" if @next.number.present? %>
-		<%= @next.title %>
-		>>
-	</a>
-<% end %>
+			<p class="tb-nav-link clearfix">
+				<% if @prev.present? %>
+						<a class="prev" href='<%= @prev.id %>.html'>
+							<%= "第#{@prev.number}章" if @prev.number.present? %>
+							<%= @prev.title %>
+						</a>
+				<% end %>
+				<% if @next.present? %>
+						<a class="next pull-right" href='<%= @next.id %>.html'>
+							<%= "第#{@next.number}章" if @next.number.present? %>
+							<%= @next.title %>
+						</a>
+				<% end %>
+			</p>
 
+		</div>
+		<div class="col-md-2"><!-- spacer --></div>
+	</div>
+</div>
 </body>
 </html>
