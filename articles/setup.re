@@ -16,7 +16,7 @@ review.jsは現在のところ、PDFを生成することなどができませ�
 
  * Atom v1.3.2
  * language-review 0.12.4
- * Re:VIEW 1.7.1 または review-peg 0.2.2
+ * Re:VIEW 1.7.2 または review-peg 0.2.2
 
 //footnote[atom][@<href>{https://atom.io/}]
 //footnote[language-review][@<href>{https://atom.io/packages/language-review}]
