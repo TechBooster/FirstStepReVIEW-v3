@@ -30,6 +30,7 @@ module.exports = grunt => {
 		sass: {
 			dist: {
 				options: {
+					bundleExec: true,
 					sourcemap: 'none'
 				},
 				files: {

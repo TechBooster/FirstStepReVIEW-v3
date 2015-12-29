@@ -3,6 +3,7 @@ GEM
   specs:
     review (1.7.2)
     review-peg (0.2.2)
+    sass (3.4.19)
 
 PLATFORMS
   ruby
@@ -10,6 +11,7 @@ PLATFORMS
 DEPENDENCIES
   review (= 1.7.2)
   review-peg (= 0.2.2)
+  sass (= 3.4.19)
 
 BUNDLED WITH
    1.10.6
