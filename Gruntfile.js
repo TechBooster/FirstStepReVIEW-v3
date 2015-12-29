@@ -48,7 +48,7 @@ module.exports = grunt => {
 			},
 			compile2html: {
 				cwd: articles,
-				cmd: `${reviewCompile} --all --target=html --stylesheet=style.css --chapterlink --footnotetext`
+				cmd: `${reviewCompile} --all --target=html --yaml=config.yml --chapterlink --footnotetext`
 			},
 			compile2latex: {
 				cwd: articles,
