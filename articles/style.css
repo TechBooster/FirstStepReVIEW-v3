@@ -67,6 +67,16 @@ p.footnote {
   margin-left: auto;
   margin-right: auto; }
 
+.tb-header {
+  background-image: url(images/html_header.jpg);
+  background-size: cover;
+  height: 20vw;
+  background-color: #64C1D7;
+  color: white;
+  text-indent: 150%;
+  overflow: hidden;
+  white-space: nowrap; }
+
 .tb-nav-link {
   margin-top: 1em;
   margin-bottom: 1em; }

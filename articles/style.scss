@@ -1,4 +1,5 @@
 // Variables
+$main-color: #64C1D7;
 $footer-link-color: #9e9e9e;
 $font-size: 16px;
 $paragraph-margin-bottom: $font-size * 0.75;
@@ -91,6 +92,20 @@ p.footnote {
 		margin-left: auto;;
 		margin-right: auto;
 	}
+}
+
+// ヘッダ
+.tb-header {
+	background-image: url(images/html_header.jpg);
+	background-size: cover;
+	height: 20vw;
+	background-color: $main-color;
+	color: white;
+	
+	// テキストは隠す
+	text-indent: 150%;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 // メニューまわり
