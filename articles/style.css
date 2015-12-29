@@ -27,7 +27,9 @@ div.column {
   border: solid 3px;
   border-radius: 10px;
   padding-left: 1em;
-  padding-right: 1em; }
+  padding-right: 1em;
+  margin-top: 12px;
+  margin-bottom: 12px; }
   div.column h1, div.column h2, div.column h3 {
     margin-top: 14px; }
 
@@ -41,6 +43,13 @@ div.lead {
 
 p.footnote {
   font-size: 0.8em; }
+
+.main-content {
+  display: flex;
+  flex-direction: column; }
+
+div.footnote {
+  order: 1; }
 
 .image, .table, .caption-code, .cmd-code {
   margin-bottom: 12px; }

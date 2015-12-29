@@ -37,6 +37,8 @@ div.column {
 	border-radius: 10px;
 	padding-left: 1em;
 	padding-right: 1em;
+	margin-top: $paragraph-margin-bottom;
+	margin-bottom: $paragraph-margin-bottom;
 	h1, h2, h3 {
 		margin-top: $font-size * 0.875;
 	}
@@ -55,6 +57,14 @@ div.lead {
 }
 p.footnote {
 	font-size: 0.8em;
+}
+// footnoteは最後に持ってくる
+.main-content {
+	display: flex;
+	flex-direction: column;
+}
+div.footnote {
+	order: 1;
 }
 
 // 画像やリストなどのキャプション系
