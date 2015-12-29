@@ -93,7 +93,7 @@ secnolevel: 2
 # 表紙にするHTMLファイル。ファイル名を指定すると表紙として入る
 # cover: _cover.html
 # 表紙に配置し、書籍の影絵にも利用する画像ファイル。省略した場合はnull (画像を使わない)
-# coverimage: cover.jpg
+coverimage: cover.jpg
 # 表紙の後に大扉ページを作成するか。省略した場合はnull (作成しない)
 titlepage: true
 # 自動生成される大扉ページを上書きするファイル。ファイル名を指定すると大扉として入る
@@ -182,6 +182,6 @@ colophon: true
 # fontdir内から取り込まれる対象となるファイル拡張子。省略した場合は以下
 # font_ext: ["ttf", "woff", "otf"]
 
-texstyle: techbooster-doujin
-texdocumentclass: ["jsbook", "b5j,twoside,openany"]
+texstyle: tatsumacro
+texdocumentclass: ["jsbook", "oneside,14pt"]
 debug: false
