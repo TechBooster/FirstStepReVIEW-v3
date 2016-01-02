@@ -4,6 +4,7 @@ let fs = require("fs");
 let yaml = require("js-yaml");
 
 const articles = "articles";
+const publish = 'publish';
 const bookConfig = yaml.safeLoad(fs.readFileSync(`${articles}/config.yml`, "utf8"));
 
 const reviewPrefix = process.env["REVIEW_PREFIX"] || "bundle exec ";
@@ -25,6 +26,9 @@ module.exports = grunt => {
 					`${articles}/*.xml`,
 					`${articles}/*.txt`
 				]
+			},
+			publish: {
+				src: `${publish}/`
 			}
 		},
 		sass: {
@@ -36,6 +40,18 @@ module.exports = grunt => {
 				files: {
 					'articles/style.css': 'articles/style.scss'
 				}
+			}
+		},
+		copy: {
+			publish: {
+				expand: true,
+				cwd: `${articles}/`,
+				src: [
+					'*.html',
+					'*.css',
+					'images/**'
+				],
+				dest: `${publish}/`
 			}
 		},
 		exec: {
@@ -88,7 +104,7 @@ module.exports = grunt => {
 	grunt.registerTask(
 		"html",
 		"原稿をコンパイルしてHTMLファイルにする",
-		generateTask("html", ["sass"]));
+		generateTask("html", ["sass"]).concat(['copy:publish']));
 
 	grunt.registerTask(
 		"idgxml",

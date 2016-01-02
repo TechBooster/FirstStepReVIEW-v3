@@ -34,3 +34,7 @@ Dockerがうまく動くようになっている場合、以下のコマンド�
 $ docker pull vvakame/review
 $ ./build-in-docker.sh
 ```
+
+### HTML出力
+
+`grunt html` を実行すると、`publish/`ディレクトリ以下に公開用HTMLファイルおよびcss,画像を出力する。
