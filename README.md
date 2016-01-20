@@ -7,6 +7,11 @@
 https://techbooster.booth.pm/
 でPDF版の販売予定があります
 
+### 物理本がほしい場合
+
+http://shop.comiczin.jp/products/list.php?category_id=4911
+ComicZinさんにて委託分があります
+
 ## この本のビルドの仕方
 
 rbenvやnodebrewを利用してRubyやNode.jsの準備をしている前提。
