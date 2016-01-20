@@ -4,10 +4,8 @@
 
 ### 電子書籍として閲覧する場合
 
-https://griflet.net/github/TechBooster/C89-FirstStepReVIEW-v2/
-
-Twitterログインが必要です。
-見られないときは @amedama か @mhidaka か @vvakame にお伝え下さい。
+https://techbooster.booth.pm/
+でPDF版の販売予定があります
 
 ## この本のビルドの仕方
 
