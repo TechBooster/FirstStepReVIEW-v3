@@ -137,7 +137,7 @@ texdocumentclass: ["jsbook", "b5j"]
 
 //table[papersize][設定できるページサイズ]{
 値	用紙サイズ
------------
+------------
 a4paper	A4
 b5paper	B5
 a4j	A4 JIS

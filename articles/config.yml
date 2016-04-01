@@ -73,7 +73,7 @@ stylesheet: ["style.css"]
 # ePUBのバージョン (2か3) 省略した場合は2
 epubversion: 3
 # HTMLのバージョン (4か5。epubversionを3にしたときには5にする)
-# htmlversion: 5
+htmlversion: 5
 
 # 目次を作成するか。省略した場合はnull（作成しない）
 toc: true
