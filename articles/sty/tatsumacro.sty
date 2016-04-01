@@ -20,7 +20,12 @@
 \cfoot{}
 \rfoot{\thepage}
 \renewcommand{\sectionmark}[1]{\markright{\thesection~#1}{}}
-\renewcommand{\chaptermark}[1]{\markboth{\prechaptername\ \thechapter\ \postchaptername~#1}{}}
+\renewcommand{\chaptermark}[1]{%
+  \if@mainmatter
+    \markboth{\prechaptername\ \thechapter\ \postchaptername~#1}{}
+  \else
+    \markboth{#1}{#1}
+  \fi}
 \renewcommand{\headfont}{\gtfamily\sffamily\bfseries}
 
 \fancypagestyle{plainhead}{%
