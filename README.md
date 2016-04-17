@@ -16,7 +16,7 @@ ComicZinさんにて委託分があります
 
 細かい準備(TeX入れたり)は[FirstStepReVIEW](https://github.com/TechBooster/FirstStepReVIEW)に準じます。
 
-TeXの導入が困難な場合でもHTML出力は可能です。Re:VIEWビルド用環境のDockerコンテナでビルドすることもできます。
+TeXの導入をしない場合でもHTML出力は可能です。Dockerコンテナでビルドすることもできます。
 
 ### PDF出力する
 
@@ -36,7 +36,7 @@ $ npm run pdf
 
 ### Dockerを使う
 
-Re:VIEWビルド用の[dockerイメージ](https://registry.hub.docker.com/u/vvakame/review/)を用意してあるので使ってください。
+TeXの環境構築が困難な場合、一式セットアップ済みの[dockerイメージ](https://registry.hub.docker.com/u/vvakame/review/)を用意してあるので使ってください。
 Dockerがうまく動くようになっている場合、以下のコマンドで細かい準備なしにビルドを行うことができます。
 
 ```
