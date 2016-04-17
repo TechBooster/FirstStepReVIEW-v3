@@ -14,7 +14,13 @@ ComicZinさんにて委託分があります
 
 ## この本のビルドの仕方
 
-rbenvやnodebrewを利用してRubyやNode.jsの準備をしている前提。
+細かい準備(TeX入れたり)は[FirstStepReVIEW](https://github.com/TechBooster/FirstStepReVIEW)に準じます。
+
+TeXの導入が困難な場合でもHTML出力は可能です。Re:VIEWビルド用環境のDockerコンテナでビルドすることもできます。
+
+### PDF出力する
+
+rbenvやnodebrewを利用してRubyやNode.jsの準備をしている前提です。
 もしそうではない場合、適宜sudoを補うこと。
 Node.jsは4.x系以上が必須です。
 
@@ -28,10 +34,10 @@ $ npm install
 $ npm run pdf
 ```
 
-その他細かい準備(tex入れたり)は[FirstStepReVIEW](https://github.com/TechBooster/FirstStepReVIEW)に準じる。
+### Dockerを使う
 
-めんどくさい場合はRe:VIEWビルド用の[dockerイメージ](https://registry.hub.docker.com/u/vvakame/review/)を用意してあるので使ってください。
-Dockerがうまく動くようになっている場合、以下のコマンドで細かい準備なしにビルドを行うことができる。
+Re:VIEWビルド用の[dockerイメージ](https://registry.hub.docker.com/u/vvakame/review/)を用意してあるので使ってください。
+Dockerがうまく動くようになっている場合、以下のコマンドで細かい準備なしにビルドを行うことができます。
 
 ```
 $ docker pull vvakame/review
@@ -40,4 +46,4 @@ $ ./build-in-docker.sh
 
 ### HTML出力
 
-`grunt html` を実行すると、`publish/`ディレクトリ以下に公開用HTMLファイルおよびcss,画像を出力する。
+`npm run html` を実行すると、`publish/`ディレクトリ以下に公開用HTMLファイルおよびcss,画像を出力します。
