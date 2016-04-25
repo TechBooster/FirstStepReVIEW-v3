@@ -12,3 +12,4 @@ C89-*/
 
 *.css
 !style.css
+!style-web.css
