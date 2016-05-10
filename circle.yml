@@ -4,12 +4,8 @@ machine:
   node:
     version: 4
 
-dependencies:
-  pre:
-    - npm run global
-
 test:
   override:
-    - npm run html:
+    - npm run web:
         environment:
           REVIEW_POSTFIX: " "
