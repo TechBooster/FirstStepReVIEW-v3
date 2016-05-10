@@ -275,7 +275,8 @@ epubmaker:
   # epubmaker:階層を使うものはここまで
 
 # LaTeX用のスタイルファイル(styディレクトリ以下に置くこと)
-# texstyle: tatsumacro 電子書籍版の制作に利用
+# tatsumacroは、電子書籍版の制作に利用する
+# texstyle: tatsumacro
 texstyle: techbooster-doujin
 #
 # LaTeX用のdocumentclassを指定する
