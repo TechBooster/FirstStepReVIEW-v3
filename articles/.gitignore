@@ -6,10 +6,9 @@
 
 *-pdf/
 C89-*/
+webroot/
 
 *.pdf
 *.epub
 
 *.css
-!style.css
-!style-web.css

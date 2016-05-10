@@ -46,14 +46,9 @@ module.exports = grunt => {
 		},
 		copy: {
 			publish: {
-				expand: true,
-				cwd: `${articles}/`,
-				src: [
-					'*.html',
-					'*.css',
-					'images/**'
-				],
-				dest: `${publish}/`
+				files: [
+					{expand: true, cwd: `${articles}/webroot/`, src: ['**'], dest: `${publish}/`}
+				]
 			}
 		},
 		exec: {
@@ -110,7 +105,7 @@ module.exports = grunt => {
 	grunt.registerTask(
 		"html",
 		"原稿をコンパイルしてHTMLファイルにする",
-		generateTask("html", ["sass"]).concat(['copy:publish']));
+		generateTask("html", ["sass"]));
 
 	grunt.registerTask(
 		"idgxml",
@@ -120,7 +115,7 @@ module.exports = grunt => {
 	grunt.registerTask(
 		"web",
 		"原稿をコンパイルしてwebページにする",
-		generateTask("web", ["sass"]));
+		generateTask("web", ["sass"]).concat(['copy:publish']));
 
 	grunt.registerTask(
 		"pdf",
