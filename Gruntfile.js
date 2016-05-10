@@ -63,19 +63,19 @@ module.exports = grunt => {
 			},
 			compile2text: {
 				cwd: articles,
-				cmd: `${reviewCompile} --all --target=text`
+				cmd: `${reviewCompile} --target=text`
 			},
 			compile2html: {
 				cwd: articles,
-				cmd: `${reviewCompile} --all --target=html --yaml=config.yml --chapterlink --footnotetext`
+				cmd: `${reviewCompile} --target=html --yaml=config.yml --chapterlink --footnotetext`
 			},
 			compile2latex: {
 				cwd: articles,
-				cmd: `${reviewCompile} --all --target=latex --footnotetext`
+				cmd: `${reviewCompile} --target=latex --footnotetext`
 			},
 			compile2idgxml: {
 				cwd: articles,
-				cmd: `${reviewCompile} --all --target=idgxml`
+				cmd: `${reviewCompile} --target=idgxml`
 			},
 			compile2web: {
 				cwd: articles,
