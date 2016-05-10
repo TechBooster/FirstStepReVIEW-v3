@@ -20,6 +20,9 @@
 \definecolor{reviewblue}{rgb}{0.2,0.2,0.4}
 \definecolor{reviewred}{rgb}{0.7,0,0}
 \definecolor{reviewdarkred}{rgb}{0.3,0,0}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
 \usepackage[utf8]{inputenc}
 \usepackage{ascmac}
 \usepackage{float}
@@ -35,7 +38,7 @@
  {\endMakeFramed}
 
 <%- unless ["utbook", "tbook"].include?(@documentclass)  -%>
-\usepackage[top=10zw,bottom=12zw,left=10zw,right=10zw]{geometry}
+%\usepackage[top=10zw,bottom=12zw,left=10zw,right=10zw]{geometry}
 %\usepackage[top=5zw,bottom=5zw,left=1zw,right=1zw]{geometry}
 <%- end -%>
 
