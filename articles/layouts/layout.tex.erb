@@ -4,7 +4,7 @@
 <%- else -%>
 \usepackage[deluxe]{otf}
 <%- end -%>
-\usepackage[dvipdfmx]{color}
+\usepackage[dvipdfmx]{xcolor}
 \usepackage[dvipdfmx]{graphicx}
 \usepackage{framed}
 \usepackage{wrapfig}
@@ -14,6 +14,9 @@
 \definecolor{reviewblue}{rgb}{0.2,0.2,0.4}
 \definecolor{reviewred}{rgb}{0.7,0,0}
 \definecolor{reviewdarkred}{rgb}{0.3,0,0}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
 \usepackage[utf8]{inputenc}
 \usepackage{ascmac}
 \usepackage{float}
@@ -29,7 +32,7 @@
  {\endMakeFramed}
 
 <%- unless ["utbook", "tbook"].include?(@documentclass)  -%>
-\usepackage[top=10zw,bottom=12zw,left=10zw,right=10zw]{geometry}
+%\usepackage[top=10zw,bottom=12zw,left=10zw,right=10zw]{geometry}
 %\usepackage[top=5zw,bottom=5zw,left=1zw,right=1zw]{geometry}
 <%- end -%>
 
@@ -221,6 +224,9 @@
 
 \reviewmainfont
 
+\frontmatter
+\pagenumbering{arabic}
+
 <%- if @config["titlepage"] -%>
 <%-   if @custom_titlepage -%>
 <%= @custom_titlepage %>
@@ -232,7 +238,8 @@
   \end{center}
   \clearpage
 <%-     end -%>
-\thispagestyle{empty}
+\thispagestyle{plainhead}
+\setcounter{page}{1}
 \begin{center}%
   \mbox{} \vskip5zw
    \reviewtitlefont%
@@ -250,9 +257,6 @@
 \end{titlepage}
 <%-   end -%>
 <%- end -%>
-
-\renewcommand{\chaptermark}[1]{{}}
-\frontmatter
 
 %%% originaltitle
 <%- if @config["originaltitlefile"] -%>
@@ -272,8 +276,17 @@
 \tableofcontents
 <%- end -%>
 
-\renewcommand{\chaptermark}[1]{\markboth{\prechaptername\thechapter\postchaptername~#1}{}}
+\begingroup
+  \cleardoublepage
+  \edef\continuenumber{\endgroup
+    \noexpand\mainmatter
+    \setcounter{page}{\the\value{page}}%
+  }
+
 \mainmatter
+\continuenumber
+
+\renewcommand{\chaptermark}[1]{\markboth{\prechaptername\thechapter\postchaptername~#1}{}}
 <%= @input_files["CHAPS"] %>
 \renewcommand{\chaptermark}[1]{\markboth{\appendixname\thechapter~#1}{}}
 \reviewappendix
@@ -305,7 +318,7 @@
 <%-   else -%>
 %% okuduke
 \reviewcolophon
-\thispagestyle{empty}
+\thispagestyle{plainhead}
 
 \vspace*{\fill}
 
