@@ -11,6 +11,7 @@ const reviewPrefix = process.env["REVIEW_PREFIX"] || "bundle exec ";
 const reviewPostfix = process.env["REVIEW_POSTFIX"] || "";             // REVIEW_POSTFIX="-peg" npm run pdf とかするとPEGでビルドできるよ
 const reviewPreproc = `${reviewPrefix}review-preproc${reviewPostfix}`;
 const reviewCompile = `${reviewPrefix}review-compile${reviewPostfix}`;
+const reviewWebMaker = `${reviewPrefix}review-webmaker${reviewPostfix}`;
 const reviewPdfMaker = `${reviewPrefix}review-pdfmaker${reviewPostfix}`;
 const reviewEpubMaker = `${reviewPrefix}review-epubmaker${reviewPostfix}`;
 
@@ -38,7 +39,8 @@ module.exports = grunt => {
 					sourcemap: 'none'
 				},
 				files: {
-					'articles/style.css': 'articles/style.scss'
+					'articles/style.css': 'articles/style.scss',
+					'articles/style-web.css': 'articles/style-web.scss',
 				}
 			}
 		},
@@ -61,19 +63,23 @@ module.exports = grunt => {
 			},
 			compile2text: {
 				cwd: articles,
-				cmd: `${reviewCompile} --all --target=text`
+				cmd: `${reviewCompile} --target=text`
 			},
 			compile2html: {
 				cwd: articles,
-				cmd: `${reviewCompile} --all --target=html --yaml=config.yml --chapterlink --footnotetext`
+				cmd: `${reviewCompile} --target=html --yaml=config.yml --chapterlink --footnotetext`
 			},
 			compile2latex: {
 				cwd: articles,
-				cmd: `${reviewCompile} --all --target=latex --footnotetext`
+				cmd: `${reviewCompile} --target=latex --footnotetext`
 			},
 			compile2idgxml: {
 				cwd: articles,
-				cmd: `${reviewCompile} --all --target=idgxml`
+				cmd: `${reviewCompile} --target=idgxml`
+			},
+			compile2web: {
+				cwd: articles,
+				cmd: `${reviewWebMaker} config.yml`
 			},
 			compile2pdf: {
 				cwd: articles,
@@ -110,6 +116,11 @@ module.exports = grunt => {
 		"idgxml",
 		"原稿をコンパイルしてInDesign用XMLファイルにする",
 		generateTask("idgxml"));
+
+	grunt.registerTask(
+		"web",
+		"原稿をコンパイルしてwebページにする",
+		generateTask("web", ["sass"]));
 
 	grunt.registerTask(
 		"pdf",
