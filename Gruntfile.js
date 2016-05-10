@@ -51,45 +51,77 @@ module.exports = grunt => {
 				]
 			}
 		},
-		exec: {
+		shell: {
 			preprocess: {
-				cwd: articles,
-				cmd: `${reviewPreproc} -r --tabwidth=2 *.re`
+				options: {
+					execOptions: {
+						cwd: articles,
+					}
+				},
+				command: `${reviewPreproc} -r --tabwidth=2 *.re`
 			},
 			compile2text: {
-				cwd: articles,
-				cmd: `${reviewCompile} --target=text`
+				options: {
+					execOptions: {
+						cwd: articles,
+					}
+				},
+				command: `${reviewCompile} --target=text`
 			},
 			compile2html: {
-				cwd: articles,
-				cmd: `${reviewCompile} --target=html --yaml=config.yml --chapterlink --footnotetext`
+				options: {
+					execOptions: {
+						cwd: articles,
+					}
+				},
+				command: `${reviewCompile} --target=html --yaml=config.yml --chapterlink --footnotetext`
 			},
 			compile2latex: {
-				cwd: articles,
-				cmd: `${reviewCompile} --target=latex --footnotetext`
+				options: {
+					execOptions: {
+						cwd: articles,
+					}
+				},
+				command: `${reviewCompile} --target=latex --footnotetext`
 			},
 			compile2idgxml: {
-				cwd: articles,
-				cmd: `${reviewCompile} --target=idgxml`
+				options: {
+					execOptions: {
+						cwd: articles,
+					}
+				},
+				command: `${reviewCompile} --target=idgxml`
 			},
 			compile2web: {
-				cwd: articles,
-				cmd: `${reviewWebMaker} config.yml`
+				options: {
+					execOptions: {
+						cwd: articles,
+					}
+				},
+				command: `${reviewWebMaker} config.yml`
 			},
 			compile2pdf: {
-				cwd: articles,
-				cmd: `${reviewPdfMaker} config.yml`
+				options: {
+					execOptions: {
+						cwd: articles,
+					}
+				},
+				command: `${reviewPdfMaker} config.yml`
 			},
 			compile2epub: {
-				cwd: articles,
-				cmd: `${reviewEpubMaker} config.yml`
-			}
+				options: {
+					execOptions: {
+						cwd: articles,
+					}
+				},
+				command: `${reviewEpubMaker} config.yml`
+			},
 		}
 	});
 
 	function generateTask(target, pretask) {
 		pretask = pretask || [];
-		return ["clean"].concat(pretask).concat(["exec:preprocess", `exec:compile2${target}`]);
+		return ["clean"].concat(pretask).concat(["shell:preprocess", `shell:compile2${target}`]);
 	}
 
 	grunt.registerTask(
