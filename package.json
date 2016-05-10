@@ -9,6 +9,7 @@
     "global": "gem install bundler",
     "postinstall": "bundle install",
     "pdf": "grunt pdf",
+    "web": "grunt web",
     "html": "grunt html"
   },
   "repository": {

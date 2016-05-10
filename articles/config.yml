@@ -4,6 +4,7 @@
 # 生成されます。
 # このファイルはUTF-8エンコーディングで記述してください。
 
+review_version: 2.0
 # ブック名(ファイル名になるもの。ASCII範囲の文字を使用)
 bookname: C89-FirstStepReVIEW-v2
 # 記述言語。省略した場合はja
@@ -17,7 +18,7 @@ urnid: urn:uid:https://github.com/TechBooster/C89-FirstStepReVIEW-v2
 # 著者名。["高橋征義", "John Doe"] のように配列を使うことで複数指定可
 aut: ["TechBooster編"]
 # 出版社。配列書式で複数指定可能
-prt: TechBooster
+pbl: TechBooster
 # 編集者。配列書式で複数指定可能
 edt: ["mhidaka"]
 # 刊行日。YYYY-MM-DD形式。省略した場合は本日の日付
@@ -67,6 +68,7 @@ rights: (C) 2015 TechBooster
 # coverage: 内容の範囲や領域
 
 # htmlext: HTMLファイルの拡張子(省略した場合はhtml)
+htmlext: html
 # CSSファイル(配列で複数指定可、yamlファイルおよびRe:VIEWファイルを置いたディレクトリにあること)
 stylesheet: ["style.css"]
 # stylesheet: ["epub_style.css"]
@@ -92,7 +94,7 @@ secnolevel: 2
 # appendix_format: null
 
 # 表紙にするHTMLファイル。ファイル名を指定すると表紙として入る
-# cover: _cover.html
+# cover: _cover.xhtml
 # 表紙に配置し、書籍の影絵にも利用する画像ファイル。省略した場合はnull (画像を使わない)
 coverimage: cover.jpg
 # 表紙の後に大扉ページを作成するか。省略した場合はnull (作成しない)
@@ -121,7 +123,8 @@ colophon: true
 #   ...
 # という構成にする必要がある(インデントさせる)
 
-# epubmaker:
+epubmaker:
+  htmlext: "xhtml"
 # 目次を要素の階層表現にしない。省略した場合(null)は階層化する。
 # 特に部扉が入るなどの理由で、構成によっては階層化目次でepubcheckに
 # パスしない目次ができるが、そのようなときにはこれをtrueにする
@@ -184,5 +187,8 @@ colophon: true
 # font_ext: ["ttf", "woff", "otf"]
 
 texstyle: tatsumacro
-texdocumentclass: ["jsbook", "oneside,14pt"]
+texdocumentclass: ["jsbook", "oneside,14pt,uplatex"]
 debug: false
+
+webmaker:
+    stylesheet: ["style.css","style-web.css"]
