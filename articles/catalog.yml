@@ -1,6 +1,7 @@
 PREDEF:
   - preface.re
 CHAPS:
+  - environment.re
   - writing-book.re
   - setup.re
   - review-introduction.re
