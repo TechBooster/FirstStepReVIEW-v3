@@ -8,7 +8,7 @@
 
 @<chapref>{writing-book}で述べたとおり、同人誌向けのRe:VIEW構成を使用する前提です。本書のリポジトリをCloneしている場合、ノンブル（通し番号）のような同人誌特有の問題を回避できます。
 
- * https://github.com/TechBooster/C89-FirstStepReVIEW-v2
+ * @<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2}
 
 ここから先はTechBoosterが日光企画さんへ入稿した場合の手順として解説していきます。実のところ、印刷所ごとに印刷工程が違い、すべてで通用するスタンダードな方法というものはありません。
 
@@ -47,7 +47,7 @@ TechBoosterが過去に遭遇した事例では次のとおりです（印刷所
 日光企画さんの場合はオンデマンド印刷、オフセット印刷どちらでもPDF入稿が可能です。
 つまり本書で紹介している手法で出力したらそのまま入稿形式となり、完璧！というわけです。便利ですね。
 
-=== 表紙データの作成方法
+== 表紙データの作成方法
 
 印刷所ごとのフォーマットに合わせて表紙を作成します。フォーマットはPSD形式です。
 イラストと表紙用の装丁をおこない、入稿用データを作成します（@<img>{hyoushi}）。
@@ -67,7 +67,7 @@ TechBoosterではデザイナーさんとイラストレーターさんが協力
 
 印刷所によってはAI形式でも大丈夫だったり、利用できるソフトウェアのバージョン指定があったりします。表紙のフォーマット（テンプレート）もかならず違うのでよく確認してからとりかかりましょう。
 
-=== 本文データの作成方法
+== 本文データの作成方法
 
 本文データはPDF形式で入稿します。またAdobe Acrobat Proが必要@<fn>{adobe}です。
 
@@ -88,41 +88,42 @@ review-pdfmaker config.yml
 しかし、これだけでは入稿に使えません。
 フォントの埋め込みとPDFのフォーマットをPDF/Xに変換、原稿のモノクロ化をして初めて印刷所で扱うことができます。
 
-==== フォントの埋め込み
-
-フォントの埋め込みをおこない、フォントがない環境で文字化けが起きないようにします。
-埋め込み方は「教授でもできる、TeXShop + MacTeX /UpTeX でのヒラギノ フォントの埋め込み」サイト@<fn>{mactex-font}が参考になります。次のコマンドはサイトからの引用です。
+=== フォントの確認
+MacTexを利用している場合、現在のフォントを次のコマンドで調べることができます。
 
 //cmd{
-sudo mkdir -p /usr/local/texlive/texmf-local/fonts/opentype/public/hiragino/
-cd /usr/local/texlive/texmf-local/fonts/opentype/public/hiragino/
+$ kanji-config-updmap status
 
-sudo ln -s "/Library/Fonts/ヒラギノ明朝 Pro W3.otf" HiraMinPro-W3.otf
-sudo ln -s "/Library/Fonts/ヒラギノ明朝 Pro W6.otf" HiraMinPro-W6.otf
-sudo ln -s "/Library/Fonts/ヒラギノ角ゴ Pro W3.otf" HiraKakuPro-W3.otf
-sudo ln -s "/Library/Fonts/ヒラギノ角ゴ Pro W6.otf" HiraKakuPro-W6.otf
-sudo ln -s "/Library/Fonts/ヒラギノ角ゴ Std W8.otf" HiraKakuStd-W8.otf
-sudo ln -s "/Library/Fonts/ヒラギノ丸ゴ Pro W4.otf" HiraMaruPro-W4.otf
-sudo ln -s "/System/Library/Fonts/ヒラギノ明朝 ProN W3.otf" HiraMinProN-W3.otf
-sudo ln -s "/System/Library/Fonts/ヒラギノ明朝 ProN W6.otf" HiraMinProN-W6.otf
-sudo ln -s "/System/Library/Fonts/ヒラギノ角ゴ ProN W3.otf" HiraKakuProN-W3.otf
-sudo ln -s "/System/Library/Fonts/ヒラギノ角ゴ ProN W6.otf" HiraKakuProN-W6.otf
-sudo ln -s "/Library/Fonts/ヒラギノ角ゴ StdN W8.otf" HiraKakuStdN-W8.otf
-sudo ln -s "/Library/Fonts/ヒラギノ丸ゴ ProN W4.otf" HiraMaruProN-W4.otf
-
-sudo mktexlsr
-sudo updmap-sys --setoption kanjiEmbed hiragino
-kanji-config-updmap hiragino
+CURRENT family for ja: ipaex
+Standby family : ipa
 //}
 
-//footnote[mactex-font][http://osksn2.hep.sci.osaka-u.ac.jp/~taku/osx/embed_hiragino.html]
+MacTex 2017ではデフォルトでIPAフォントを利用しています。埋め込まれていない場合は@<tt>{noEmbed}と表示しているはずです。
+後述の手法をつかうとヒラギノフォントなどデフォルト以外に変更できます。
+
+=== フォントの埋め込み
+
+フォントの埋め込みをおこない、フォントがない環境で文字化けが起きないようにします。
+埋め込み方は「Tex Wiki」サイト@<fn>{mactex-font}が参考になります。次のコマンドはサイトからの引用です。
+
+//cmd{
+cd /usr/local/texlive/2017/texmf-dist/scripts/cjk-gs-integrate
+sudo perl cjk-gs-integrate.pl --link-texmf --force
+sudo mktexlsr
+//}
+
+//cmd{
+sudo kanji-config-updmap-sys hiragino-elcapitan
+//}
+
+//footnote[mactex-font][@<href>{https://texwiki.texjp.org/?TeX%20Live%2FMac#elcapitan}]
 
 このコマンドを実行したあとに@<tt>{review-pdfmaker}コマンドでPDFを作成するとフォントが埋め込まれています。文書のプロパティで埋め込みフォントと表示があれば成功です（@<img>{font}）。
 
-//image[font][埋め込みフォント][scale=0.3]{
+//image[font][埋め込みフォント]{
 //}
 
-==== PDFフォーマットをPDF/Xに変換
+=== PDFフォーマットをPDF/Xに変換
 
 PDFと一口にいっても単純じゃありません。そこは長い歴史をもつPDFさんのことです。
 多数のバージョンが存在しています。TeXに続く深淵です。
@@ -138,7 +139,7 @@ PDFと一口にいっても単純じゃありません。そこは長い歴史�
 
 //footnote[engineer][エンジニアは仕様と言われると弱い]
 
-==== 原稿のモノクロ化
+=== 原稿のモノクロ化
 
 入稿の最終段階です。作成したPDFデータをモノクロ化します。モノクロ化にあたってはPDF/Xフォーマットであることが前提ですので、前述のフォーマット変換作業を忘れずにおこなってください。
 

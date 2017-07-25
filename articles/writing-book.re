@@ -20,7 +20,7 @@
 
 本を作る工程を@<img>{review-cover}に示します。
 
-//image[review-cover][Re:VIEWがカバーする領域][scale=0.35]{
+//image[review-cover][Re:VIEWがカバーする領域]{
 //}
 
 ご覧のとおり「Re:VIEW」は「執筆」「校正」「組版」「製版」までと、非常に幅広い範囲をサポートします。
