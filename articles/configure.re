@@ -150,7 +150,7 @@ toclevel: 2
 //image[toclevel3][toclevel:3を指定した場合の目次][scale=0.35]{
 //}
 
-== 紙面デザインを変更する
+=={layout} 紙面を変更する
 
 PDF形式で出力する紙面のデザインは差し替え可能です。@<tt>{config.yml}の@<code>{texstyle:}項目の値を変更します（@<list>{change_layout}）。
 
@@ -189,7 +189,7 @@ texstyle: tatsumacro
 texdocumentclass: ["jsbook", "oneside,14pt,uplatex"]
 //}
 
-== ページサイズを変更する
+== サイズを変更する
 
 PDF形式で出力するページサイズを指定するには@<tt>{config.yml}の@<code>{textdocumentclass:}項目の２番目の値を設定します（@<list>{change_pagesize}）。
 

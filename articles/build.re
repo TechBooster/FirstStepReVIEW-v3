@@ -1,4 +1,4 @@
-= コンパイルの仕方
+= 書籍をビルドする
 
 本章ではRe:VIEWファイルをコンパイルする方法を解説します。
 フォーマットを変換する@<code>{review-compile}、PDFを出力する@<code>{review-pdfmaker}、EPUBを出力する@<code>{review-epubmaker}を順番に紹介します。

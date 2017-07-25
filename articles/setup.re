@@ -1,4 +1,4 @@
-= 環境を整える
+= 執筆環境を整える
 
 #@# NOTE author:vvakame
 

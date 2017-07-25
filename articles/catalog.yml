@@ -1,16 +1,18 @@
 PREDEF:
   - preface.re
 CHAPS:
-  - environment.re
-  - writing-book.re
-  - setup.re
-  - review-introduction.re
-  - configure.re
-  - build.re
-  - workflow.re
-  - tips.re
+  - "技術書をかこう！":
+    - writing-book.re
+    - environment.re
+    - workflow.re
+  - "はじめてのRe:VIEW":
+    - setup.re
+    - review-introduction.re
+    - configure.re
+    - build.re
 
 APPENDIX:
 
 POSTDEF:
+  - tips.re
   - contributors.re

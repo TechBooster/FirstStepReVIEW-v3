@@ -1,4 +1,4 @@
-={review-introduction} はじめてのRe:VIEW記法
+={review-introduction} 記法を理解する
 
 //lead{
 本章ではRe:VIEWの記法を紹介します。
