@@ -234,9 +234,11 @@ TechBoosterでは原稿をみんなが書き終えた後、羊（@mhidaka、サ�
 肝心の使い方についてです。現状あまりコマンドラインツールとしての使い勝手はよくありません。
 language-reviewにはprhが組み込まれているため、language-review経由で使うのが楽でしょう。
 
-まずは、TechBoosterの設定ファイル（@<href>{https://github.com/vvakame/prh/blob/master/misc/techbooster.yml}）をダウンロードして試してみるのがよいでしょう。
+まずは、TechBoosterの設定ファイル@<fn>{prh_setting}をダウンロードして試してみるのがよいでしょう。
 ダウンロードしたファイルをprh.ymlという名前で.reファイルと同じディレクトリに置くとlanguage-reviewが校正用ルールとして参照して、Lintを表示します。
 また文章量が多いと処理が重くなるのでコミットの段階でチェックする使い方もお勧めです。
+
+#@# TODO 設定方法が更新されてるな、これ。
 
 類似のツールとしてRedPen@<fn>{redpen}やtextlint@<fn>{textlint}などがあります。
 さらなる文章の改善を目指すのであれば、これらのツールを利用してみるのもよいでしょう。
@@ -245,5 +247,6 @@ language-reviewにはprhが組み込まれているため、language-review経�
 
 //footnote[prh][@<href>{https://github.com/vvakame/prh}]
 //footnote[crazy-mhidaka][「羊の労力が減るぞ！」と僕が言ったら、彼は「じゃあもっと作れるな！」って言いました。あたまおかしい]
+//footnote[prh_setting][@<href>{https://github.com/prh/rules/blob/b21ed03ff752a961d22b7b47c1dc47a11c510f8f/media/techbooster.yml}]
 //footnote[redpen][@<href>{http://redpen.cc/}]
 //footnote[textlint][@<href>{http://efcl.info/2015/09/10/introduce-textlint/}]
