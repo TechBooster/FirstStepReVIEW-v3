@@ -99,6 +99,127 @@ Re:VIEWではPDF出力を得るためにLaTeXを利用しています。その�
 
 //footnote[book_latex2e][「LATEX2e美文書作成入門」 @<href>{http://www.amazon.co.jp/dp/4774160458} - 奥村晴彦著 技術評論社刊]
 
+
+
+== プリプロセッサ命令
+
+Re:VIEWでは、最終的な見た目に影響する記法とは別に、外部の情報を.reファイルに反映する「プリプロセッサ命令」があります。
+プリプロセッサ命令を使うことで、外部ファイルとしているサンプルコードを自動で.reファイル内に反映できます。
+
+プリプロセッサ命令を処理するには@<code>{review-preproc}コマンドを使用します。
+@<code>{review-preproc}コマンドは、PDFのビルド時に自動で実行するようにしておくと便利です。
+@<hd>{tips|config_task_runner}を参照してください。
+
+プリプロセッサ命令は、あくまで.reファイルの一部を書き換えるだけです。
+最終的に.reファイルの内容がビルドされることに変わりはありません。
+
+=== ファイルの内容を読み込む
+
+@<code>{mapfile}命令は、外部ファイルの内容をすべて読み込みます。
+外部ファイルを読み込む箇所に@<code>{#@mapfile(file_name)}と読み込み範囲の終了示す@<code>{#@end}を記述します。
+@<code>{review-preproc}コマンドは@<code>{#@mapfile(file_name)}と@<code>{#@end}の間にファイル@<code>{file_name}を読み込みます。
+
+たとえばサンプルコードfoo.rbを読み込む場合、@<list>{sample_mapfile_before}のように記述します。
+
+//list[sample_mapfile_before][コンパイル前のmapfile記述]{
+ //list[sample_code][サンプルコード]{
+ #@mapfile(foo.rb)
+ #@end
+ //}
+//}
+
+@<list>{sample_mapfile_before}は@<code>{review-preproc}コマンドの処理後に@<list>{sample_mapfile_after}のようになります。
+Re:VIEWは@<code>{#@〜}の行をPDFやHTMLファイルなどの最終的な成果物には出力せず、foo.rbの内容だけを出力します。
+
+//list[sample_mapfile_after][コンパイル後のmapfile記述]{
+ //list[sample_code][サンプルコード]{
+ #@mapfile(foo.rb)
+ puts "foo"
+ #@end
+ //}
+//}
+
+=== タブ文字をスペースに置換するtabwidthオプション
+
+@<code>{review-preproc}コマンドは@<code>{tabwidth}オプションを使うと、
+プリプロセッサ命令で読み込むファイルのタブ文字を任意の数のスペースに置換します。
+
+紙面の都合上、TechBoosterではサンプルコードのインデントは２スペースとしています。
+しかし、サンプルコードを最初から２スペースのインデントで書くというのはあまりやりたくありません。
+タブ文字でインデントしておけば原稿に反映する際に自動でインデントの文字幅を置換できます。
+サンプルコードを編集するエディタ上ではタブ文字を好みの幅で表示しましょう。
+
+@<code>{tabwidth}オプションは@<code>{--tabwidth=WIDTH}という形式で指定します。
+たとえば、sample.reに対して@<code>{review-preproc}コマンドを実行しタブ文字を２スペースに置換するには、次のようにします。
+
+//cmd{
+$ review-preproc -r --tabwidth=2 sample.re
+//}
+
+このオプションが効くのは、あくまでプリプロセッサ命令で読み込むファイルの内容のみです。
+@<code>{mapfile}などを使わず@<code>{list}ブロック内に直接コードを書いている場合は、
+@<code>{review-compile}コマンドの@<code>{tabwidth}オプションを使えば、出力結果のインデントを調整できます。
+
+=== ファイルの内容の一部を読み込む
+
+@<code>{maprange}命令は、外部ファイルの一部を読み込みます。
+ただし、外部のファイル側に読み込み範囲を示すプリプロセッサ命令を記述しておく必要があります。
+
+@<code>{#@range_begin(range_name)}と@<code>{#@range_end(range_name)}で範囲を括ります。
+@<list>{sample_maprange_source}は、@<code>{#@range_begin(range_name)}と@<code>{#@range_end(range_name)}を記述した例です。
+
+//list[sample_maprange_source][maprangeで読み込むsrc.txt]{
+ ここは読み込みません。
+ #@range_begin(sample)
+ ここを読み込みます。
+ #@range_end(sample)
+ ここは読み込みません。
+//}
+
+@<list>{sample_maprange_source}で指定した範囲を読み込むには、.reファイルに@<list>{sample_maprange_before}のように記述します。
+また、@<code>{#@maprange(...)}は@<code>{#@map(...)}と記述しても動作します。
+
+//list[sample_maprange_before][コンパイル前のmaprange記述]{
+ //list[sample_code][サンプルコード]{
+ #@maprange(src.txt, sample)
+ #@end
+ //}
+//}
+
+@<list>{sample_maprange_before}は@<code>{review-preproc}コマンドの処理後に@<list>{sample_maprange_after}のようになります。
+
+//list[sample_maprange_after][コンパイル後のmaprage]{
+ //list[sample_code][サンプルコード]{
+ #@maprange(src.txt, sample)
+ ここを読み込みます。
+ #@end
+ //}
+//}
+
+=== 外部コマンドの結果を読み込む
+
+@<code>{mapoutput}命令は、外部コマンドの結果を読み込みます。
+この命令はRe:VIEWの記法の枠内に囚われず、任意の処理の結果を.reファイルに埋め込めます。
+しかし、あくまでコンパイルするマシンにインストールしているコマンドを使用するため、複数人で執筆する場合は注意が必要です。
+
+たとえば、筆者の環境のjavaのバージョンを自動で埋め込む場合は@<list>{sample_mapoutput_before}のように記述します。
+
+//list[sample_mapoutput_before][java -version]{
+ #@mapoutput(java -version 2>&1)
+ #@end
+//}
+
+@<list>{sample_mapoutput_before}は、コンパイル後に@<list>{sample_mapoutput_after}のようになります。
+
+//list[sample_mapoutput_after][java -version]{
+ #@mapoutput(java -version 2>&1)
+ java version "1.8.0_05"
+ Java(TM) SE Runtime Environment (build 1.8.0_05-b13)
+ Java HotSpot(TM) 64-Bit Server VM (build 25.5-b02, mixed mode)
+ #@end
+//}
+
+
 =={config_task_runner} タスクランナーの設定
 
 #@# NOTE author:vvakame
