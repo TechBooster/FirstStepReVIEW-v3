@@ -10,9 +10,8 @@ CHAPS:
     - review-introduction.re
     - configure.re
     - build.re
-
 APPENDIX:
+  - tips.re
 
 POSTDEF:
-  - tips.re
   - contributors.re

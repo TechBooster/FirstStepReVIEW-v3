@@ -407,9 +407,9 @@ PNG、JPEG、@<kw>{SVG,Scalable Vector Graphics}など、基本的なフォー�
 
 スケールオプションで図の表示倍率を指定することができます。
 
-スケールオプションは、@<code>{image}、@<code>{indepimage}に括弧[]を追加して、@<tt>{scale=}に続いて表示倍率を指定します。
+スケールオプションは、@<code>{image}、@<code>{indepimage}に括弧[]を追加して、@<code>{scale=}に続いて表示倍率を指定します。
 
-表示倍率は、@<tt>{1.0}を等倍、@<tt>{0.0}を下限として指定できます。
+表示倍率は、@<code>{1.0}を紙面の横幅いっぱいとして、@<code>{0.0}を下限として指定できます。
 
 //list[scaled_image_sample_with_seq][連番付きの図]{
  //image[image_sample][表示倍率50%]@<b>{[scale=0.5]}{
@@ -534,7 +534,11 @@ Re:VIEW記法では文字を装飾することができます。
 ＠<strong>{文字列}	強調	@<strong>{abcdefg あいうえお}
 ＠<ami>{文字列}	網掛け	@<ami>{abcdefg あいうえお}
 ＠<kw>{キーワード,解説}	キーワードと解説	@<kw>{GNU,GNU is Not Unix}
+＠<code>{文字列}	コードに利用	@<code>{abcdefg}
 //}
+
+＠<kw>は初出の単語で利用するとよいでしょう。またコードは＠<tt>を使っても同じ装飾表現を得られますが
+＠<code>を利用してください。変換前の文章では＠<code>のほうが圧倒的に著者の意図をくみとりやすく、校正や編集で装飾のゆらぎを検出しやすくなります。
 
 == 参照
 
