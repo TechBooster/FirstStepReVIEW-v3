@@ -14,9 +14,9 @@ review.jsは現在のところ、PDFを生成することなどができませ�
 
 #@# TODO 入稿前にここのバージョンを再確認すること
 
- * Atom v1.3.2
- * language-review 0.12.4
- * Re:VIEW 1.7.2 または review-peg 0.2.2
+ * Atom v1.13.1
+ * language-review 0.15.3
+ * Re:VIEW 2.3.0
 
 //footnote[atom][@<href>{https://atom.io/}]
 //footnote[language-review][@<href>{https://atom.io/packages/language-review}]
@@ -124,10 +124,10 @@ rbenvインストール後の手順は次のとおりです。
 
 //cmd{
 $ rbenv install --list
-# 最新のを適当に入れれば良い 執筆時点では 2.2.3
-$ rbenv install 2.2.3
+# 最新のを適当に入れれば良い 執筆時点では 2.3.4
+$ rbenv install 2.3.4
 # グローバルなrubyコマンドのバージョンを設定する localも存在する
-$ rbenv global 2.2.3
+$ rbenv global 2.3.4
 # reviewをインストール
 $ gem install review
 # そのままではreview-compileにパスが通ってない状態なのでrehashする
@@ -158,7 +158,7 @@ Re:VIEW文書をPDFに変換するにはLaTeX（platexまたはlualatexなど）
 
 ==== Mac OS Xの場合
 
-MacTeX@<fn>{mactex}を使いましょう。執筆時点ではMacTeX 2015が最新バージョンです。
+MacTeX@<fn>{mactex}を使いましょう。執筆時点ではMacTeX 2017が最新バージョンです。
 
 //footnote[mactex][@<href>{https://www.tug.org/mactex/}]
 
