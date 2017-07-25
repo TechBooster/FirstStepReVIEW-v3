@@ -51,7 +51,7 @@ TechBoosterはAndroidをはじめとしたモバイルのための技術サー�
 
 == お問い合わせ先
 
-本書に関するお問い合わせ @<href>{https://plus.google.com/+TechboosterOrg/}
+本書に関するお問い合わせ：support@techbooster.zendesk.com
 
 
 == 免責事項

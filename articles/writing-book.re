@@ -27,7 +27,7 @@
 
 TechBoosterでは「Re:VIEW」を使うことで効率的に文書管理、執筆環境を構築できるようになりました@<fn>{products}。
 
-//footnote[products][制作する書籍は年間8冊、述べ1000ページ超を数えます。ヤバすぎ]
+//footnote[products][制作する書籍は年間12冊超、述べ2000ページ超を数えます。ヤバすぎ]
 
 =={requirement} 本を作るための技術的要求
 
@@ -100,7 +100,7 @@ Re:VIEWは優れた書籍制作ツールですが、そのままでは入稿で�
 
 それら入稿データを作成するはじめの一歩として、TechBoosterではリポジトリを公開しています。ノンブルもサポートしつつ、見やすいレイアウトに変更しています（本書も全ページに通し番号がついています）。
 
- * https://github.com/TechBooster/C89-FirstStepReVIEW-v2
+ * @<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2}
 
 同人誌制作が初めてという場合は上記リポジトリからのCloneを@<b>{強く推奨}します。
 
