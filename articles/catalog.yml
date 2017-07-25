@@ -5,6 +5,8 @@ CHAPS:
     - writing-book.re
     - environment.re
     - workflow.re
+    - publishing-book.re
+    - distribution.re
   - "はじめてのRe:VIEW":
     - setup.re
     - review-introduction.re
