@@ -255,11 +255,13 @@ TechBoosterでは原稿をみんなが書き終えた後、羊（@mhidaka、サ�
 language-reviewにはprhが組み込まれているため、language-review経由で使うのが楽でしょう。
 
 まずは、TechBoosterの設定ファイル@<fn>{prh_setting}をダウンロードして試してみるのがよいでしょう。
-ファイルをprh.ymlという名前で.reファイルと同じディレクトリに置くとlanguage-reviewが校正用ルールとして参照して、Lintを表示します。
+ファイルをprh.ymlという名前で.reファイルと同じディレクトリに置くとlanguage-reviewが校正用ルールとして参照して、Lintを表示します（@<img>{lint}）。
 
-#@# TODO 利用イメージを追加する
+//image[lint][校正の指摘例]{
 
-類似のツールとしてRedPen@<fn>{redpen}やtextlint@<fn>{textlint}などがあります。
+//}
+
+類似のツールにはRedPen@<fn>{redpen}やtextlint@<fn>{textlint}などがあります。
 さらなる文章の改善を目指すのであれば、これらのツールを利用してみるのもよいでしょう。
 
 とはいえ、根本的に文章の目的と構造がしっかりしていないといくら枝葉末節を補ったところで意味はありません。
