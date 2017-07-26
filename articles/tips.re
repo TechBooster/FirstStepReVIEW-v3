@@ -25,6 +25,7 @@ TechBoosterが推奨するディレクトリ構成を述べておきます。
   ├── package.json          （gruntを利用するためのnpm用設定ファイル）
   ├── npm-shrinkwrap.json   （ライブラリのバージョンをロックする）
   ├── Gruntfile.js          （gruntの動作設定ファイル）
+  ├── prh-rules             （prhのリポジトリ横断の共通設定）
   ├── articles
   │   ├── catalog.yml       （Re:VIEW用 章立ての設定ファイル）
   │   ├── config.yml        （Re:VIEW用 本を生成する時のメタデータ記述ファイル）
@@ -67,12 +68,10 @@ Re:VIEWではPDFを出力するためにLaTeXを利用しています。その�
 具体的には.ymlや.cssを配置しているディレクトリの下に@<code>{layouts/layout.tex.erb}を置くことで
 Re:VIEWが出力するLaTeXソースファイルの構成を変更できます。
 
-Re:VIEWは@<href>{https://github.com/kmuto/review}の@<code>{review/lib/review/review.tex.erb}を、
+Re:VIEWは@<href>{https://github.com/kmuto/review}の@<code>{templates/latex/layout.tex.erb}を、
 LaTeXのソースファイルのテンプレートとして読み込みますが、@<code>{layouts/layout.tex.erb}がある場合、そちらを優先して適用します。
 
-//footnote[review_tex_erb][2013年11月時点。最新の情報についてはGitHubのRe:VIEWリポジトリを参照してください]
-
-カスタマイズに当たっては、@<code>{review/lib/review/review.tex.erb}を@<code>{layouts/layout.tex.erb}にコピーして変更するとよいでしょう。
+カスタマイズに当たっては、@<code>{templates/latex/layout.tex.erb}を@<code>{layouts/layout.tex.erb}にコピーして変更するとよいでしょう。
 
 //image[how_to_convert_re_to_pdf2][layout.tex.erbの取り扱い][scale=0.35]{
 //}
@@ -85,7 +84,7 @@ PDFで出力するページの余白を指定するには、.styファイルに@
 \geometry{top=18mm,bottom=23mm,left=24mm,right=24mm}
 //}
 
-指定できる単位は、@<code>{cm}, @<code>{mm}の他にもLaTeXでサポートされている@<code>{in}, @<code>{pt}, @<code>{em/ex}, @<code>{zw/zh}, @<code>{Q}などがあります。
+指定できる単位は、@<code>{cm}、@<code>{mm}の他にもLaTeXでサポートされている@<code>{in}、@<code>{pt}、@<code>{em/ex}、@<code>{zw/zh}、@<code>{Q}などがあります。
 
 
 ===[column] レイアウトを変更する楽しみ
@@ -99,7 +98,7 @@ Re:VIEWではPDF出力を得るためにLaTeXを利用しています。その�
 
 ===[/column]
 
-//footnote[book_latex2e][「LATEX2e美文書作成入門」 @<href>{http://www.amazon.co.jp/dp/4774160458} - 奥村晴彦著 技術評論社刊]
+//footnote[book_latex2e][「LATEX2e美文書作成入門」 @<href>{https://www.amazon.co.jp/dp/4774187054/} - 奥村晴彦著 技術評論社刊]
 
 
 
@@ -108,9 +107,11 @@ Re:VIEWではPDF出力を得るためにLaTeXを利用しています。その�
 Re:VIEWでは、最終的な見た目に影響する記法とは別に、外部の情報を.reファイルに反映する「プリプロセッサ命令」があります。
 プリプロセッサ命令を使うことで、外部ファイルとしているサンプルコードを自動で.reファイル内に反映できます。
 
-プリプロセッサ命令を処理するには@<code>{review-preproc}コマンドを使用します。
+プリプロセッサ命令を処理するには@<code>{review-preproc}コマンド@<fn>{preproc-doc}を使用します。
 @<code>{review-preproc}コマンドは、PDFのビルド時に自動で実行するようにしておくと便利です。
 @<hd>{tips|config_task_runner}を参照してください。
+
+//footnote[preproc-doc][@<href>{https://github.com/kmuto/review/blob/master/doc/preproc.ja.md}]
 
 プリプロセッサ命令は、あくまで.reファイルの一部を書き換えるだけです。
 最終的に.reファイルの内容がビルドされることに変わりはありません。
@@ -198,6 +199,8 @@ $ review-preproc -r --tabwidth=2 sample.re
  //}
 //}
 
+#@# TODO #@@maprange 記法についても言及したい https://github.com/kmuto/review/blob/master/doc/preproc.ja.md#maprange-1
+
 === 外部コマンドの結果を読み込む
 
 @<code>{mapoutput}命令は、外部コマンドの結果を読み込みます。
@@ -215,9 +218,9 @@ $ review-preproc -r --tabwidth=2 sample.re
 
 //list[sample_mapoutput_after][java -version]{
  #@mapoutput(java -version 2>&1)
- java version "1.8.0_05"
- Java(TM) SE Runtime Environment (build 1.8.0_05-b13)
- Java HotSpot(TM) 64-Bit Server VM (build 25.5-b02, mixed mode)
+ java version "1.8.0_131"
+ Java(TM) SE Runtime Environment (build 1.8.0_131-b11)
+ Java HotSpot(TM) 64-Bit Server VM (build 25.131-b11, mixed mode)
  #@end
 //}
 
@@ -227,7 +230,7 @@ $ review-preproc -r --tabwidth=2 sample.re
 #@# NOTE author:vvakame
 
 複数人で執筆する場合、何らかの統一された手順でのビルド手順が必要です。
-TechBoosterではNode.js+gruntを利用しています。
+TechBoosterではNode.js+npm-scripts（裏はgrunt）を利用しています。
 この構成になっているのは、プロジェクト構成を主に行っているvvakameが一番使い慣れているから、という理由が大きいです。
 
 新規に書き起こすのであれば、執筆者があまり導入の手間をかけなくてもよいものを選ぶのがよいでしょう。
@@ -235,7 +238,7 @@ TechBoosterではNode.js+gruntを利用しています。
 
 タスクランナーが行うべき作業は少ないです。
 
- * 古い生成ファイルを消す（消さないとエラーになる場合がある）
+ * 古い生成ファイルを消す
  * review-preprocコマンドを実行する
  * 各ターゲット向けのビルド用コマンドを実行する
 
@@ -257,9 +260,8 @@ rm -rf articles/C89-FirstStepReVIEW-v2-pdf/ \
 //}
 
 #@# prh:disable
-それぞれ、pdf、epub、html、idgxml（Adobe InDesign用XML）、text生成時に作成される一時ファイルまたは最終出力ファイルです。
+それぞれ@<code>{--debug}オプション付きでpdfをビルドした時のtmpディレクトリ、pdf、epub、html、idgxml（Adobe InDesign用XML）、text生成時に作成される一時ファイルまたは最終出力ファイルです。
 一番最初の行の C89-FirstStepReVIEW-v2-pdf 部分はarticles/config.ymlのbooknameの設定により変化します。
-特に、最初の行は必ず行わないとPDFを生成しようとした時にエラーになるのでPDF生成処理前には必ず消すようにします。
 
  * review-preprocコマンドを実行する
 
@@ -271,15 +273,13 @@ $ review-preproc -r --tabwidth=2 *.re
 //}
 
 review-preprocコマンドはRe:VIEWの仕組みの中で、もっとも便利な、愛すべきコマンドといえます。
-review-preprocコマンドは文書中に埋め込まれたpragmaを処理し、サンプルコードを文書中に展開したり指定のコマンドの実行結果を文書中に展開してくれたりします。
+review-preprocコマンドは文書中に埋め込まれたpragmaを処理し、サンプルコードを文書中に展開したり指定のコマンドの実行結果を文書中に展開してくれます。
 C言語のマクロとだいたい同じものだと思えばよいでしょう。
 
 文書にソースコードを貼りこむ時、インデントは2スペースとします。
 このため、4スペース派の人はサンプルコードではタブを使うようにして、エディタ上では1タブ＝4スペースで作業し、文書中に貼りこむ時にタブを2スペースに変換するとよいでしょう。
 
 詳細は@<chapref>{review-introduction}に譲ります。
-#@# REVIEW vvakame tabwidthについて言及されてなかった…
-#@# REVIEW mstssk tabwidthについて書きました
 
  * 各ターゲット向けのビルド用コマンドを実行する
 
@@ -310,7 +310,7 @@ pdf、epubについては利用するコマンドそのものが違うので注�
 #@# prh:disable
 これらを詰め込んだ、実際にTechBoosterで使っているgrunt用設定ファイルを公開しています。
 @<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2/blob/master/Gruntfile.js}
-Node.js v4以上が必要ですので注意してください。
+Node.js v6以上が必要ですので注意してください。
 
 //footnote[why-gradle][gradleはgradle wrapperという仕組みがあり、gradle自体を別途導入する必要がないため]
 
@@ -333,7 +333,7 @@ TechBoosterがRe:VIEWを使っているなかで関係したお世話になっ�
  * レビューを実施する（読者の視点を作り出す）
  * 紙面を=や*で検索する（文法ミスを見つけるため）
  * 記号などの文字化け探し（TeX、フォントはUTF-8対応しているとは限らない）
- * 紙面のはみ出しチェック（TeXコンパイルのtoo lateという文字列を確認する）
+ * 紙面のはみ出しチェック（TeXコンパイル時のtoo lateというログの有無を確認する）
 
 実際には何度も読みなおし文章を推敲することが一番ですが、このようなステップを意識することで
 ケアレスミスを見つけられます（特にツールに不慣れな場合は有効です）。
@@ -364,3 +364,8 @@ TechBoosterがRe:VIEWを使っているなかで関係したお世話になっ�
 //list[after][変更後]{
 アプリの作ったServiceは、OS起動時またはタイマーによって定期的に実行できます。Serviceの中では、ContentRecommendationクラスを使ってNotificationを作り、ユーザに通知可能です。
 //}
+
+また、本書の筆者であるmhidakaとvvakameが書いた技術的な文章を書くための手引@<fn>{guide-mhidaka}@<fn>{guide-vvakame}も役に立つかもしれません。
+
+//footnote[guide-mhidaka][@<href>{http://qiita.com/mhidaka/items/c5fe729716c640b50ff7}]
+//footnote[guide-vvakame][@<href>{http://qiita.com/vvakame/items/d657baf26cf83ac98bd0}]
