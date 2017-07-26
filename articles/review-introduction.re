@@ -11,7 +11,7 @@ Re:VIEW記法は、文章を書き、見出しやコードなどをマークア�
 #@# REVIEW vvakame i とか tt は見た目の情報なので code とかを使ったほうがいいような…。
 
 Re:VIEW記法でマークアップすることで文章の構造や見た目を記述できます。
-マークアップの巧拙が表現力の差となります。そして、より良い表現は、読者にとってより良い情報になります。
+マークアップの巧拙が表現力の差となります。そして、よりよい表現は、読者にとってよりよい情報になります。
 
 == 見出し
 
@@ -193,7 +193,7 @@ Re:VIEWのリストには、連番付きと連番無しの２種類、行番号�
  ...ソースコード等...
 //}
 
-＠<list>{@<tt>{identifier}}で、@<kw>{identifier,識別子}が示すリストを参照できます。
+＠<list>{@<code>{identifier}}で、@<kw>{identifier,識別子}が示すリストを参照できます。
 参照は、出力時に「@<list>{list_sample_with_seq2}」のようにリスト番号に置き換わります。
 
 === 連番なしリスト
@@ -240,7 +240,7 @@ Re:VIEWのリストには、連番付きと連番無しの２種類、行番号�
  ...
 //}
 
-＠<list>{@<tt>{identifier}}で、@<kw>{identifier,識別子}が示すリストを参照できます。
+＠<list>{@<code>{identifier}}で、@<kw>{identifier,識別子}が示すリストを参照できます。
 参照は、出力時に「@<list>{listnum_sample_with_seq2}」のようにリスト番号に置き換わります。
 
 === 連番なしリスト（行番号有り）
@@ -269,8 +269,6 @@ Re:VIEWのリストには、連番付きと連番無しの２種類、行番号�
 連番無しリストは、本文中からの参照はできません。
 
 行番号をつける場合は、通常、本文からの参照・説明を意図していることが多く、利用頻度がきわめて低い構文です。
-#@# REVIEW vvakame 後述 が相当あとの予感がするので何かリンクなりが欲しい…
-#@# REVEIW KG 後述の不具合はもう直ってるで。前の本から内容を持ってくるのはいいけど、ちゃんと検証しような
 
 =={commandline} コマンドライン
 
@@ -327,23 +325,24 @@ URLをリンクとしてマークアップする構文です。
 @<list>{link_sample_with_url}は、URLを表示する場合です。
 
 //list[link_sample_with_url][URLリンク]{
-＠<href>{http://techbooster.org}
+＠<href>{https://techbooster.org}
 //}
 
-@<list>{link_sample_with_url}を出力した結果は、"@<href>{http://techbooster.org}"のようにURLがそのまま表示されます。
+@<list>{link_sample_with_url}を出力した結果は、"@<href>{https://techbooster.org}"のようにURLがそのまま表示されます。
 
 また@<list>{link_sample}は、URLを表示しない場合です。
 
 URLに加えて、コンマで区切ってリンクを設定する文字列を続けます。
 
 //list[link_sample][リンク（URL無し）]{
-＠<href>{http://techbooster.org,TechBooster}
+＠<href>{https://techbooster.org,TechBooster}
 //}
 
-@<list>{link_sample}を出力した結果は、"@<href>{http://techbooster.org,TechBooster}"のようにURLが表示されず、文字列にリンクが設定された状態になります。
+@<list>{link_sample}を出力した結果は、"@<href>{https://techbooster.org,TechBooster}"のようにURLが表示されず、文字列にリンクが設定された状態になります。
 
-当然のことながら、どちらの場合でも紙に印刷するとリンクは使えなくなりますが、URLを表示する方法では印刷後でもURLそのものは分かるので、
-最終的に印刷する場合は、URLを表示する方法が適しています。後述する脚注で使われることが多いでしょう。
+当然のことながら、どちらの場合でも紙に印刷するとリンクは使えなくなります。
+URLを表示する方法では印刷後でもURLそのものは分かるので、最終的に印刷したい場合はURLを表示する方法が適しています。
+後述する脚注で使われることが多いでしょう。
 
 == 図
 
@@ -356,7 +355,7 @@ URLに加えて、コンマで区切ってリンクを設定する文字列を�
 本文に差し込む画像ファイルは、Re:VIEWファイルがあるディレクトリに@<code>{images}ディレクトリを作成します。
 それぞれの画像ファイルは、その画像を差し込む章の名前のディレクトリの下に配置します。
 
-たとえば、@<tt>{markup.re}の章に表示する画像ファイル@<tt>{image_sample.png}の場合、@<tt>{images/markup/image_sample.png}となります。
+たとえば、@<code>{markup.re}の章に表示する画像ファイル@<code>{image_sample.png}の場合、@<code>{images/markup/image_sample.png}となります。
 このことから解るとおり、Re:VIEWでは、異なる章の画像ファイルを直接参照することはできません。
 画像ファイルは、章ごとに配置する必要があります。
 
@@ -381,7 +380,7 @@ PNG、JPEG、@<kw>{SVG,Scalable Vector Graphics}など、基本的なフォー�
 //image[image_sample_dup1][連番付きの図]{
 //}
 
-＠<img>{@<tt>{identifier}}で、本文から@<kw>{identifier,識別子}が示す図を参照できます。
+＠<img>{@<code>{identifier}}で、本文から@<kw>{identifier,識別子}が示す図を参照できます。
 
 参照は出力時に「@<img>{image_sample_dup1}」のようにリスト番号に置き換わります。
 
@@ -401,7 +400,7 @@ PNG、JPEG、@<kw>{SVG,Scalable Vector Graphics}など、基本的なフォー�
 
 //indepimage[image_sample][連番なしの図]
 
-連番なしの図は、本文中からの参照はできません。また、@<tt>{代替テキスト}は指定できません。
+連番なしの図は、本文中からの参照はできません。また、@<code>{代替テキスト}は指定できません。
 
 === 図のサイズを指定する
 
@@ -461,7 +460,7 @@ Re:VIEWでは、行は改行、セルとセルの間にはタブで区切りま�
 3	2014	900	1200	1.4	..18
 //}
 
-＠<table>{@<tt>{identifier}}で、@<kw>{identifier,識別子}が示す表を参照できます。
+＠<table>{@<code>{identifier}}で、@<kw>{identifier,識別子}が示す表を参照できます。
 参照は、出力時に「@<table>{table_sample}」のように表番号に置き換わります。
 
 == 脚注
@@ -570,8 +569,8 @@ Re:VIEW記法では文字を装飾することができます。
 
 これらの構文の参照先には、Re:VIEWの章の識別子を指定します。
 
-章の識別子は、Re:VIEWの章のファイル名から拡張子@<tt>{.re}を取り除いた名前です。
-たとえば、@<tt>{writing-book.re}の章を参照する場合、@<code>{writing-book}が識別子になります。
+章の識別子は、Re:VIEWの章のファイル名から拡張子@<code>{.re}を取り除いた名前です。
+たとえば、@<code>{writing-book.re}の章を参照する場合、@<code>{writing-book}が識別子になります。
 
 === 節の参照
 
@@ -587,8 +586,8 @@ Re:VIEW記法では文字を装飾することができます。
 
 異なる章の見出しを参照する場合、章の識別子を指定した上で、縦棒@<code>{|}で区切って節のキャプションを記述します。
 
-章の識別子は、Re:VIEWの章のファイル名から拡張子@<tt>{.re}を取り除いた名前です。
-たとえば、@<tt>{writing-book.re}の章を参照する場合、@<code>{writing-book}が識別子になります。
+章の識別子は、Re:VIEWの章のファイル名から拡張子@<code>{.re}を取り除いた名前です。
+たとえば、@<code>{writing-book.re}の章を参照する場合、@<code>{writing-book}が識別子になります。
 
 === 見出しラベル
 
@@ -616,7 +615,7 @@ Re:VIEW記法は、「インライン命令」と「ブロック命令」の２�
 
 ==== インライン命令
 
-インライン命令は@<tt>{＠<命令>{...}}のように、@<kw>{＠,アットマーク}に続けて括弧<>内に命令名を指定します。
+インライン命令は@<code>{＠<命令>{...}}のように、@<kw>{＠,アットマーク}に続けて括弧<>内に命令名を指定します。
 続く括弧{}の中が、インライン命令の効果が及ぶ範囲になります。
 #@# REVIEW vvakame tt より code が好きだなー
 
@@ -627,8 +626,8 @@ Re:VIEW記法は、「インライン命令」と「ブロック命令」の２�
 
 #@# REVIEW vvakame ブロック記法についてはインライン記法より先に書くべきだと思う。インライン記法がなくてもemlistなどで技術書は書けるが、逆は真ではないからだ。
 
-ブロック命令は@<list>{block_directive}のように、スラッシュ２つ（@<tt>{//}）に続けて命令名を指定します。
-続く括弧{から、次の@<tt>{//}}までが、ブロック命令の効果が及ぶ範囲になります。
+ブロック命令は@<list>{block_directive}のように、スラッシュ２つ（@<code>{//}）に続けて命令名を指定します。
+続く括弧{から、次の@<code>{//}}までが、ブロック命令の効果が及ぶ範囲になります。
 
 //list[block_directive][ブロック命令]{
  //命令{
