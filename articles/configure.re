@@ -1,17 +1,17 @@
-= 設定ファイルの解説
+={configure} 設定ファイルの解説
 
 本章ではRe:VIEWを使う上で必要な各種設定ファイルを解説します。
-Re:VIEWでは書籍に関する情報を章を設定する@<tt>{catalog.yml}と書籍のメタデータを指定する@<tt>{config.yml}に集約しています。
+Re:VIEWでは書籍に関する情報を章を設定する@<code>{catalog.yml}と書籍のメタデータを指定する@<code>{config.yml}に集約しています。
 
 =={catalog_yml} 章を構成するcatalog.yml
 
 #@# https://github.com/kmuto/review/wiki/catalog.yml
 #@# https://github.com/kmuto/review/blob/master/doc/catalog.ja.md
 
-@<tt>{catalog.yml}は章立ての設定ファイルです。
+@<code>{catalog.yml}は章立ての設定ファイルです。
 各章の.reファイルを列記し、PDFをビルドをした際の章の順序を定義します。
 
-@<list>{catalog_yml_sample}は、本書で使用している実際の@<tt>{catalog.yml}です。
+@<list>{catalog_yml_sample}は、本書で使用している実際の@<code>{catalog.yml}です。
 
 //list[catalog_yml_sample][catalog.yml]{
 #@mapfile(catalog.yml)
@@ -37,7 +37,7 @@ POSTDEF:
 #@end
 //}
 
-@<tt>{catalog.yml}の各項目の内容は次のとおりです。
+@<code>{catalog.yml}の各項目の内容は次のとおりです。
 
 : PREDEF
   前書きなど目次の前に記載するものを指定します
@@ -48,19 +48,8 @@ POSTDEF:
 : POSTDEF
   後書きを指定します
 
-加えて@<code>{CHAPS}はネストすることで部を構成できます。
-部を構成するには、@<list>{catalog_yml_nested_chaps}のように、部のタイトル名や.reファイル名の下に章のファイルを記述します。
-
-//list[catalog_yml_nested_chaps][部を構成するCHAPSの記述]{
-CHAPS:
-  - "部のタイトル":
-    - chapter1.re
-    - chapter2.re
-  - part2.re:
-    - chapter.3.re
-    - chapter4.re
-  - chapter5.re
-//}
+先の@<list>{catalog_yml_sample}のように@<code>{CHAPS}はネストすることで章を束ねる、部を構成できます。
+もちろん、ネストなしの部なしの章だけという構成もOKです。同人誌ではボリューム的にこちらのほうが一般的でしょう。
 
 YAMLに馴染みがないと忘れがちですが、Collection@<fn>{url_yaml_collection}にするのでコロン記号（：）を付け忘れないようにしましょう。
 
@@ -76,7 +65,7 @@ Re:VIEWでは本を生成（コンパイル）する時のメタデータをY
 ファイル名に決まりはありませんが慣例的にconfig.ymlとしています。
 書名や奥付の内容、どの深さまで目次に含めるかなどを設定できます。
 
-@<list>{config_yml}は本書で使っている@<tt>{config.yml}です。
+@<list>{config_yml}は本書で使っている@<code>{config.yml}です。
 
 //list[config_yml][config.yml]{
 # review-epubmaker向けの設定ファイルの例。
@@ -140,7 +129,8 @@ texdocumentclass: ["jsbook", "b5j,twoside,openany,uplatex"]
 
 == 目次に表示する項目をカスタマイズする
 
-目次として抽出する章や節の深さを変更するには、@<tt>{config.yml}の@<code>{toclevel:}項目を設定します（@<list>{toclevel}）。
+目次として抽出する章や節の深さを変更するには、@<code>{config.yml}の@<code>{toclevel:}項目を設定します（@<list>{toclevel}）。
+tocはtable of contentsの略ですね。
 
 //list[toclevel][抽出レベルを設定]{
 toclevel: 2
@@ -156,7 +146,7 @@ toclevel: 2
 
 =={layout} 紙面を変更する
 
-PDF形式で出力する紙面のデザインは差し替え可能です。@<tt>{config.yml}の@<code>{texstyle:}項目の値を変更します（@<list>{change_layout}）。
+PDF形式で出力する紙面のデザインは差し替え可能です。@<code>{config.yml}の@<code>{texstyle:}項目の値を変更します（@<list>{change_layout}）。
 
 //list[change_layout][config.ymlにてスタイルファイルを指定]{
 # LaTeX用のスタイルファイル(styディレクトリ以下に置くこと)
@@ -195,7 +185,7 @@ texdocumentclass: ["jsbook", "oneside,14pt,uplatex"]
 
 == サイズを変更する
 
-PDF形式で出力するページサイズを指定するには@<tt>{config.yml}の@<code>{textdocumentclass:}項目の２番目の値を設定します（@<list>{change_pagesize}）。
+PDF形式で出力するページサイズを指定するには@<code>{config.yml}の@<code>{textdocumentclass:}項目の２番目の値を設定します（@<list>{change_pagesize}）。
 
 この設定は、LaTeXにおけるドキュメントクラスのオプションに該当します。複数のオプションがある場合は、カンマで区切って列挙します。
 技術書であればb5jサイズが標準的です。
