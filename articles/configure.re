@@ -18,15 +18,19 @@ Re:VIEWでは書籍に関する情報を章を設定する@<tt>{catalog.yml}と�
 PREDEF:
   - preface.re
 CHAPS:
-  - writing-book.re
-  - setup.re
-  - review-introduction.re
-  - configure.re
-  - build.re
-  - workflow.re
-  - tips.re
-
+  - "技術書をかこう！":
+    - writing-book.re
+    - environment.re
+    - workflow.re
+    - publishing-book.re
+    - distribution.re
+  - "はじめてのRe:VIEW":
+    - setup.re
+    - review-introduction.re
+    - configure.re
+    - build.re
 APPENDIX:
+  - tips.re
 
 POSTDEF:
   - contributors.re
