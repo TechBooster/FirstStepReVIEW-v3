@@ -1,4 +1,4 @@
-= 書籍をビルドする
+={build} 書籍をビルドする
 
 本章ではRe:VIEWファイルをコンパイルする方法を解説します。
 フォーマットを変換する@<code>{review-compile}、PDFを出力する@<code>{review-pdfmaker}、EPUBを出力する@<code>{review-epubmaker}を順番に紹介します。
@@ -14,19 +14,20 @@
 //list[review-compile-example-html-1][review-compileでHTMLを出力する例]{
 > review-compile --target=html preface.re
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="ja">
+  xmlns:epub="http://www.idpf.org/2007/ops"
+  xmlns:ops="http://www.idpf.org/2007/ops"
+  xml:lang="ja">
 <head>
-  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-  <meta http-equiv="Content-Style-Type" content="text/css"/>
-  <meta name="generator" content="Re:VIEW"/>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <meta name="generator" content="Re:VIEW" />
   <title>はじめに</title>
 </head>
 <body>
 <h1><a id="h"></a>はじめに</h1>
-<p>はじめてのRe:VEIW 第2版を手に取っていただき、ありがとうございます。本書は色々な種類・性質の技術書がもっと世の中に溢れてほしい、という気持ちから生まれました。最新のRe:VIEWにあわせたアップデートはもちろん、技術書を書くことにフォーカスをあてたガイドブックです。</p>
+<p>技術書をかこう！〜はじめてのRe:VIEW〜を手に取っていただき、ありがとうございます。本書は色々な種類・性質の技術書がもっと世の中に溢れてほしい、という気持ちから生まれました。本書を支えるRe:VIEWというツールの解説に始まり、印刷を発注し紙の本として体裁を整えるところまでフォローします。つまり、この本は技術書をこの世に誕生させるためのスキルがひととおり身につくガイドブックなのです。</p>
 <p>タイトルにもあるRe:VIEWは書籍制作のためのツールセットです。すこしの文法をおぼえるだけで技術書がつくれる優れものです。</p>
 ... (以下省略)
 //}
@@ -50,6 +51,7 @@ lib/review/topbuilder.rb
 //}
 
 対応する出力形式の多くはRe:VIEW開発者らが仕事上利用するために用意されました。執筆時には@<code>{--target=html}を指定する機会が多いでしょう。
+#@# REVIEW vv: しょうみ、僕は執筆時pdfにしか変換しなくなりましたね… どう？これ以降も僕のやり方とは結構違っているかもしんない。
 
 @<code>{--check}を指定すると結果は出力せず、そのフォーマットで入力したファイルが正しく変換できるかを確認します。
 たとえば、@<code>{footnote}と@<code>{fn}で対応がとれていなければ、その旨が表示されます。
@@ -64,6 +66,7 @@ build.re:11: error: ReVIEW::KeyError
 
 出力されたhtmlを、執筆時のデバッグ用途としてではなく見栄えのよい公開用ファイルにすることもできます。
 @<code>{--yaml=(ファイル名)}でRe:VIEWプロジェクトの設定を読みこませることでスタイルを変更するとよいでしょう。
+#@# REVIEW vv: これなんだっけ config.ymlのこと？
 
 @<code>{--all}を指定すると、指定したファイルだけではなく、catalog.ymlに記載されている　すべてのファイルを一気にコンパイルすることもできます。
 
@@ -78,8 +81,9 @@ build.re:11: error: ReVIEW::KeyError
 後述する@<code>{review-pdfmaker}と@<code>{review-epubmaker}をそれぞれ利用してください。
 
 @<code>{review-compile}は主に単一のファイルに対して操作を行う一方、@<code>{review-pdfmaker}と@<code>{review-epubmaker}はRe:VIEWプロジェクト全体を対象とするため、用途も異なります。
-仮に執筆途中のRe:VIEWファイルのみ、PDFによるフォーマットを確認したい場合、自身でTeX形式から生成する、あるいは逆に全体を@<code>{review-pdfmaker}で生成したあと、該当する章を@<code>{pdktk}等のコマンドで切り出してください。
+仮に執筆途中のRe:VIEWファイルのみ、PDFによるフォーマットを確認したい場合、自身でTeX形式から生成する、あるいは逆に全体を@<code>{review-pdfmaker}で生成したあと、該当する章をpdktk@<fn>{pdftk}等のコマンドで切り出してください。
 
+//footnote[pdftk][@<href>{https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/}]
 
 == review-pdfmaker
 
@@ -92,64 +96,18 @@ build.re:11: error: ReVIEW::KeyError
 //}
 
 YAMLファイルには本のタイトルや筆者名といった本のメタデータとなる設定を記述しておきます。
-その設定のひとつ「@<code>{bookname}」が出力されるPDFに対応しています。
+その設定のひとつ「@<code>{bookname}」が出力されるPDFのファイル名に対応しています。
 
-@<code>{bookname}が「book」となっている場合、Re:VIEWは「@<code>{book-pdf/}」ディレクトリに、途中過程で生成されるファイルを保存した上で、最終的に「book.pdf」を自身のディレクトリに保存します。
-仮にこれらのファイル・ディレクトリがすでに存在している場合、Re:VIEWはコマンドの実行を中止します。
-
-//list[review-pdfmaker-example-2][すでにPDFを一度作成したあとに再度review-pdfmakerしたときの実行例]{
-> review-pdfmaker config.yml
-/opt/review/bin/review-pdfmaker:57:in `mkdir':
-        File exists - ./book-pdf (Errno::EEXIST)
-        from /opt/review/bin/review-pdfmaker:57:in `main'
-        from /opt/review/bin/review-pdfmaker:219:in `<main>'
-//}
-
-再度コンパイルする際には、まず手動でPDF（book.pdf）と中間ファイルを収めるディレクトリ（book-pdf/）を削除してから、再度@<code>{review-pdfmaker}を実行します。
+@<code>{bookname}が「book」となっている場合、生成した「book.pdf」を自身のディレクトリに保存します。
+#@# NOTE vv: この辺変わってる 基本はtmpdirに出力される --debug 有りでbook-pdfディレクトリに出力するが、その場合も古いディレクトリは自動的に削除されてから処理が実行される
+#@# https://github.com/kmuto/review/blob/331aa87595b5188fc765e04a81ae8205dac41785/lib/review/pdfmaker.rb#L63-L74
 
 @<code>{review-pdfmaker}は内部で@<code>{review-compile --target=latex}を行ったあとに@<code>{platex}や@<code>{dvipdfmx}のようなTeX形式のファイルからPDFへ変換するRe:VIEW外部のコマンドを実行します。
 Re:VIEWの外部のコマンドを実行している際には外部のログがそのまま標準出力や標準エラー出力に反映されるため、面食らうかもしれません。
 
-=== rakeで自動化
-
-コンパイル前にbook.pdf等を手動で削除する作業は少々面倒です。
-そこで、@<code>{rake}コマンドで自動化してしまいましょう。
-@<code>{rake}コマンドはRubyGemsから簡単にインストールできます。
-
-//cmd{
-gem install rake
-//}
-
-@<code>{rake}コマンドに行わせるタスクは@<code>{Rakefile}というファイルに記述します。
-@<hd>{setup|install_review}の解説のとおりに@<code>{review-init}コマンドを使って環境を構築していれば、
-すでに@<code>{Rakefile}というファイルが存在し、各種タスクが記述されています。
-
-@<code>{Rakefile}が無ければ作りましょう。
-@<list>{rakefile-example-1}はpdfのビルドを行う@<code>{Rakefile}の簡単なサンプルです。
-
-//list[rakefile-example-1][Rakefileにbook.pdfとbook-pdfの削除を行わせてしまう一例]{
-task :default => :pdf
-
-desc 'generate PDF file'
-task :pdf => "book.pdf"
-
-SRC = FileList['*.re'] +  ["config.yml"]
-file "book.pdf" => SRC do
-  sh "rm -f book.pdf"
-  sh "rm -rf book book-pdf"
-  sh "review-pdfmaker config.yml"
-end
-//}
-
-このように記述しておくと、@<code>{rake}コマンドは関連するReVEWファイルや@<code>{config.yml}に変更があった際に限って削除と@<code>{review-pdfmaker}の実行を行います。
-#@# REVIEW vvakame 本書でgruntによるタスクの記述を行ってるのでそのあたりにも言及してほしい感じが…
-#@# REVIEW mstssk 他章のreview-initの解説ありきだったので書き直しました。↓でタスクランナーの節に参照も追加。
-
-作業を自動化するツールは@<code>{Rakefile}だけではありません。
-TechBoosterでは@<code>{grunt}を使って作業を自動化しています。
-@<code>{grunt}による自動化は@<hd>{tips|config_task_runner}で解説しています。
-
 === 執筆時の注意点
+
+#@# REVIEW vv: これって今もそうなのかな（不明なインライン記法が含まれてたりするととりあえずちゃんと止まる）
 
 @<code>{review-pdfmaker}は、その書籍に含まれるRe:VIEWファイルに問題があっても、一見正常にPDFを出力してしまいます。
 この場合、コマンド自身は「成功」と報告するのですが、該当する章のデータが勝手に抜け落ちている、という事態につながります。
