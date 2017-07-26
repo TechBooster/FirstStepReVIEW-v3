@@ -286,7 +286,7 @@ texstyle: techbooster-doujin
 #
 # LaTeX用のdocumentclassを指定する
 # tatsumacro利用の場合はこちら
-# texdocumentclass: ["jsbook", "uplatex,oneside"]
+# texdocumentclass: ["jsbook", "oneside,14pt,uplatex"]
 # TechBoosterの指定は次の通り
 texdocumentclass: ["jsbook", "b5j,twoside,openany,uplatex"]
 
