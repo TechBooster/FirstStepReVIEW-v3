@@ -5,6 +5,7 @@
 
 ==== わかめ / @vvakame
 appengine/goやってる？僕はやってます。goにGenerics欲しい病が治りません。お前が…欲しい！
+ってC89版のときに書いたんですが、C92になっても考えてることが変わってなくて笑いました。
 
 ==== りんご / @mstssk
 Material Design Liteは人類には早すぎた
