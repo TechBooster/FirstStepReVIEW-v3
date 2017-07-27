@@ -3,7 +3,7 @@
 技術書をかこう！〜はじめてのRe:VIEW〜を手に取っていただき、ありがとうございます。
 本書は色々な種類・性質の技術書がもっと世の中に溢れてほしい、という気持ちから生まれました。
 本書を支えるRe:VIEWというツールの解説に始まり、印刷を発注し紙の本として体裁を整えるところまでフォローします。
-つまり、この本は技術書をこの世に誕生させるためのスキルがひととおり身につくガイドブックなのです。
+つまり、この本は技術書をこの世に誕生させるためのスキルがひととおり身につくガイドブックです。
 
 タイトルにもあるRe:VIEWは書籍制作のためのツールセットです。
 すこしの文法をおぼえるだけで技術書がつくれる優れものです。
@@ -53,15 +53,12 @@ TechBoosterはAndroidをはじめとしたモバイルのための技術サー�
 
 === 技術書典とは
 
-技術書典@<fn>{tbf-url}はTechBoosterと達人出版会@<fn>{tatsuzin-url}がホストする、技術書オンリーの同人誌即売会です。
-皆さんがこれから書く本をどうやって多くの人に届けよう？と考えたとき、もっとも有効な方法は技術書典に参加することです。
-国内最大級の技術者参加人数を誇るイベントですので、ぜひチェックしてみてください。
-ユーザ登録をしておくとサークル参加募集が開始される時期にメールでおしらせが届きますので是非登録してください。
+技術書典@<fn>{tbf-url}はTechBoosterと達人出版会@<fn>{tatsuzin-url}が主催する技術書オンリーイベント@<fn>{twitter}です。
+国内最大級の技術者参加人数を誇るイベントなので本を届けるのに最適です！ユーザ登録するとメールでおしらせが届きますのでぜひ登録してください。
 
-公式Twitterもあります！ @<href>{https://twitter.com/techbookfest/}
-
-//footnote[tbf-url][@<href>{https://techbookfest.org/}]
-//footnote[tatsuzin-url][達人出版会のWebサイト @<href>{https://tatsu-zine.com/}]
+//footnote[tbf-url][技術書典 @<href>{https://techbookfest.org/}]
+//footnote[tatsuzin-url][達人出版会 @<href>{https://tatsu-zine.com/}]
+//footnote[twitter][公式Twitter @<href>{https://twitter.com/techbookfest/}]
 
 == お問い合わせ先
 
