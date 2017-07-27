@@ -73,7 +73,7 @@ LaTeXのソースファイルのテンプレートとして読み込みますが
 
 カスタマイズに当たっては、@<code>{templates/latex/layout.tex.erb}を@<code>{layouts/layout.tex.erb}にコピーして変更するとよいでしょう。
 
-//image[how_to_convert_re_to_pdf2][layout.tex.erbの取り扱い][scale=0.35]{
+//image[how_to_convert_re_to_pdf2][layout.tex.erbの取り扱い]{
 //}
 
 == 余白を調節する
