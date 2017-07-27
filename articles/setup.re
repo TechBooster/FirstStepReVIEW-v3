@@ -78,7 +78,7 @@ language-reviewは、Atomを通じてさまざまな便利な機能を提供し�
 #@# NOTE author:vvakame
 
 次に、Ruby版Re:VIEWをインストールします。
-これはPDFやepubの生成などの最終出力を行うのに必要です。
+これはPDFやEPUBの生成などの最終出力を行うのに必要です。
 
 RubyとRubyGemsは、すでに利用可能な環境になっているものとして解説します。
 インストールは単に次のコマンド@<fn>{experimental-review}を実行するだけです（Rubyのインストール方法次第ではsudoが必要となる場合もあります）。
@@ -187,15 +187,7 @@ Dockerはざっくり次の３つの利用方法があります。
  3. 他人の書いたDockerfileを元に自分のDockerfileを書く
 
 本書ではDockerのインストール方法や使い方は解説しません。
-その時々で適切なやり方を調べてみてください。
-
-==[/column]
-
-//footnote[docker-hub][@<href>{https://hub.docker.com/}]
-
-==[column] Dockerを使ってどこでもビルド
-
-Ruby入れたりTeX入れたりめんどくさすぎる！
+その時々で適切なやり方を調べてみてください。Ruby入れたりTeX入れたりめんどくさすぎる！
 という人のために、Dockerのイメージを用意@<fn>{docker-review}してあります。
 
 //cmd{
@@ -211,6 +203,8 @@ $ docker run -i -t vvakame/review -v $(pwd):/book /bin/bash
 
  *  @<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2/blob/master/build-in-docker.sh}
 
-==[/column]
 
+//footnote[docker-hub][@<href>{https://hub.docker.com/}]
 //footnote[docker-review][@<href>{https://hub.docker.com/r/vvakame/review/}]
+
+==[/column]
