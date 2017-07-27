@@ -3,7 +3,7 @@
 本章ではRe:VIEWを使う上で必要な各種設定ファイルを解説します。
 Re:VIEWでは書籍に関する情報を章を設定する@<tt>{catalog.yml}と書籍のメタデータを指定する@<tt>{config.yml}に集約しています。
 
-=={catalog_yml} 章を構成するcatalog.yml
+=={catalog_yml} 目次を構成するcatalog.yml
 
 #@# https://github.com/kmuto/review/wiki/catalog.yml
 #@# https://github.com/kmuto/review/blob/master/doc/catalog.ja.md
@@ -11,30 +11,22 @@ Re:VIEWでは書籍に関する情報を章を設定する@<tt>{catalog.yml}と�
 @<tt>{catalog.yml}は章立ての設定ファイルです。
 各章の.reファイルを列記し、PDFをビルドをした際の章の順序を定義します。
 
-@<list>{catalog_yml_sample}は、本書で使用している実際の@<tt>{catalog.yml}です。
+@<list>{catalog_yml_sample}は、@<tt>{catalog.yml}の設定例です。
 
-//list[catalog_yml_sample][catalog.yml]{
-#@mapfile(catalog.yml)
+//list[catalog_yml_sample][５つの章をもつcatalog.yml]{
 PREDEF:
   - preface.re
 CHAPS:
-  - "技術書をかこう！":
-    - writing-book.re
-    - environment.re
-    - workflow.re
-    - publishing-book.re
-    - distribution.re
-  - "はじめてのRe:VIEW":
-    - setup.re
-    - review-introduction.re
-    - configure.re
-    - build.re
+  - writing-book.re
+  - environment.re
+  - workflow.re
+  - publishing-book.re
+  - distribution.re
 APPENDIX:
   - tips.re
 
 POSTDEF:
   - contributors.re
-#@end
 //}
 
 @<tt>{catalog.yml}の各項目の内容は次のとおりです。
@@ -66,7 +58,7 @@ YAMLに馴染みがないと忘れがちですが、Collection@<fn>{url_yaml_col
 
 //footnote[url_yaml_collection][@<href>{http://www.yaml.org/spec/1.2/spec.html#id2759963}]
 
-=={config_yml} メタデータを記述するconfig.yml
+=={config_yml} 書籍情報を記述するconfig.yml
 
 #@# https://github.com/kmuto/review/wiki/config.yml
 
@@ -148,13 +140,13 @@ toclevel: 2
 
 抽出レベルを変更すると、値に応じた深さの見出しを出力します（@<img>{toclevel2}および@<img>{toclevel3}）。
 
-//image[toclevel2][toclevel:2を指定した場合の目次][scale=0.35]{
+//image[toclevel2][toclevel:2を指定した場合の目次][scale=0.75]{
 //}
 
-//image[toclevel3][toclevel:3を指定した場合の目次][scale=0.35]{
+//image[toclevel3][toclevel:3を指定した場合の目次][scale=0.75]{
 //}
 
-=={layout} 紙面を変更する
+=={layout} デザインを変更する
 
 PDF形式で出力する紙面のデザインは差し替え可能です。@<tt>{config.yml}の@<code>{texstyle:}項目の値を変更します（@<list>{change_layout}）。
 
