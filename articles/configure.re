@@ -62,7 +62,7 @@ YAMLに馴染みがないと忘れがちですが、Collection@<fn>{url_yaml_col
 
 #@# https://github.com/kmuto/review/wiki/config.yml
 
-Re:VIEWでは本を生成（コンパイル）する時のメタデータをYAMLで記述します。
+Re:VIEWでは本を生成（コンパイル）するときのメタデータをYAMLで記述します。
 コンパイル時の指定方法は@<chapref>{build}を参照してください。
 
 ファイル名に決まりはありませんが慣例的にconfig.ymlとしています。
