@@ -1,4 +1,4 @@
-={setup} 執筆環境を整える
+={setup} Re:VIEWでの執筆環境を整える
 
 #@# NOTE author:vvakame
 
