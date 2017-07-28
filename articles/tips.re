@@ -13,8 +13,8 @@ TechBoosterが推奨するディレクトリ構成を述べておきます。
 
  * リポジトリのトップレベルにはファイルをあまり散らかさない
  * 複数人で執筆したときにそれぞれのファイルが混ざったり邪魔になったりしないようにする
- * 著者全員で利用するreviewのバージョンを固定する
- * ビルド手順を統一するために何らかのタスクランナーを使う（TechBoosterの場合、Node.js+grunt）
+ * 著者全員で利用するRe:VIEWのバージョンを固定する
+ * ビルド手順を統一するために何らかのタスクランナーを使う（TechBoosterの場合、Node.js+npm-scripts）
 
 //list[directory][ディレクトリ構成]{
   ├── README.md
@@ -50,11 +50,11 @@ TechBoosterが推奨するディレクトリ構成を述べておきます。
           └── flush.js
 //}
 
-原稿はarticlesディレクトリに、サンプルコードはcodeディレクトリに入れています。
-articles/imagesやcodeの中は、原稿の章ごとに.reのファイル名と同名のディレクトリを用意し、その中で活動します。
+原稿は@<tt>{articles}ディレクトリに、サンプルコードは@<tt>{code}ディレクトリに入れています。
+@<tt>{articles/images}や@<tt>{code}の中は、原稿の章ごとに.reのファイル名と同名のディレクトリを用意し、その中で活動します。
 
-原稿のファイル名は、わかりやすいのが一番！ということで複数名で執筆する場合筆者の名前にしてしまう場合があります。
-vvakame.reというファイル名にしてしまえば、レビューを行ったりビルドエラーなどの問題が発生したとき連絡する人がわかりやすい。
+原稿のファイル名は、わかりやすいのが一番！ということで複数名で執筆する場合、筆者の名前にしてしまう場合があります。
+@<tt>{vvakame.re}というファイル名にしてしまえば、レビューを行ったりビルドエラーなどの問題が発生したとき連絡する人がわかりやすい。
 という発想です。
 
 
@@ -69,12 +69,12 @@ Re:VIEWではPDFを出力するためにLaTeXを利用しています。その�
 Re:VIEWが出力するLaTeXソースファイルの構成を変更できます。
 
 Re:VIEWは@<href>{https://github.com/kmuto/review}の@<code>{templates/latex/layout.tex.erb}を、
-LaTeXのソースファイルのテンプレートとして読み込みますが、@<code>{layouts/layout.tex.erb}がある場合、そちらを優先して適用します。
-
-カスタマイズに当たっては、@<code>{templates/latex/layout.tex.erb}を@<code>{layouts/layout.tex.erb}にコピーして変更するとよいでしょう。
+LaTeXのソースファイルのテンプレートとして読み込みますが、@<code>{layouts/layout.tex.erb}がある場合、そちらを優先して適用します（@<img>{how_to_convert_re_to_pdf2}）。
 
 //image[how_to_convert_re_to_pdf2][layout.tex.erbの取り扱い]{
 //}
+
+カスタマイズに当たっては、@<code>{templates/latex/layout.tex.erb}を@<code>{layouts/layout.tex.erb}にコピーして変更するとよいでしょう。
 
 == 余白を調節する
 
@@ -91,7 +91,8 @@ PDFで出力するページの余白を指定するには、.styファイルに@
 
 ヘッダやフッタを変えたい、ノンブルを隠したい（隠しノンブルと呼びます）など紙面に凝ってくるとレイアウトへの要望がでてきます。紙面作りを楽しんでいる証拠ともいえるでしょう。
 
-Re:VIEWではPDF出力を得るためにLaTeXを利用しています。そのためレイアウトに関する部分の多くはLaTeXの知識を必要とします。自由度が高い一方、独特の記法への馴染みの薄さやパッケージ、環境の依存関係などカスタマイズが困難なため、入門を目的とする本書では触れていません。
+Re:VIEWではPDF出力を得るためにLaTeXを利用しています。そのためレイアウトに関する部分の多くはLaTeXの知識を必要とします。
+自由度が高い一方、独特の記法への馴染みの薄さやパッケージ、環境の依存関係などカスタマイズが困難なため、入門を目的とする本書では触れていません。
 
 そんなあなたには、奥村晴彦氏の「LATEX2e 美文書作成入門」@<fn>{book_latex2e}がお勧めです。
 深淵を覗けますよ！
@@ -99,8 +100,6 @@ Re:VIEWではPDF出力を得るためにLaTeXを利用しています。その�
 ===[/column]
 
 //footnote[book_latex2e][「LATEX2e美文書作成入門」 @<href>{https://www.amazon.co.jp/dp/4774187054/} - 奥村晴彦著 技術評論社刊]
-
-
 
 == プリプロセッサ命令
 
@@ -119,10 +118,10 @@ Re:VIEWでは、最終的な見た目に影響する記法とは別に、外部�
 === ファイルの内容を読み込む
 
 @<code>{mapfile}命令は、外部ファイルの内容をすべて読み込みます。
-外部ファイルを読み込む箇所に@<code>{#@mapfile(file_name)}と読み込み範囲の終了示す@<code>{#@end}を記述します。
+外部ファイルを読み込む箇所に@<code>{#@mapfile(file_name)}と読み込み範囲の終了を示す@<code>{#@end}を記述します。
 @<code>{review-preproc}コマンドは@<code>{#@mapfile(file_name)}と@<code>{#@end}の間にファイル@<code>{file_name}を読み込みます。
 
-たとえばサンプルコードfoo.rbを読み込む場合、@<list>{sample_mapfile_before}のように記述します。
+たとえばサンプルコード@<tt>{foo.rb}を読み込む場合、@<list>{sample_mapfile_before}のように記述します。
 
 //list[sample_mapfile_before][コンパイル前のmapfile記述]{
  //list[sample_code][サンプルコード]{
@@ -132,7 +131,7 @@ Re:VIEWでは、最終的な見た目に影響する記法とは別に、外部�
 //}
 
 @<list>{sample_mapfile_before}は@<code>{review-preproc}コマンドの処理後に@<list>{sample_mapfile_after}のようになります。
-Re:VIEWは@<code>{#@〜}の行をPDFやHTMLファイルなどの最終的な成果物には出力せず、foo.rbの内容だけを出力します。
+Re:VIEWは@<code>{#@〜}の行をPDFやHTMLファイルなどの最終的な成果物には出力せず、@<tt>{foo.rb}の内容だけを出力します。
 
 //list[sample_mapfile_after][コンパイル後のmapfile記述]{
  //list[sample_code][サンプルコード]{
@@ -153,7 +152,7 @@ Re:VIEWは@<code>{#@〜}の行をPDFやHTMLファイルなどの最終的な成�
 サンプルコードを編集するエディタ上ではタブ文字を好みの幅で表示しましょう。
 
 @<code>{tabwidth}オプションは@<code>{--tabwidth=WIDTH}という形式で指定します。
-たとえば、sample.reに対して@<code>{review-preproc}コマンドを実行しタブ文字を２スペースに置換するには、次のようにします。
+たとえば、@<tt>{sample.re}に対して@<code>{review-preproc}コマンドを実行しタブ文字を２スペースに置換するには、次のようにします。
 
 //cmd{
 $ review-preproc -r --tabwidth=2 sample.re
@@ -199,7 +198,8 @@ $ review-preproc -r --tabwidth=2 sample.re
  //}
 //}
 
-#@# TODO #@@maprange 記法についても言及したい https://github.com/kmuto/review/blob/master/doc/preproc.ja.md#maprange-1
+#@# #@@maprange 記法についても言及したい https://github.com/kmuto/review/blob/master/doc/preproc.ja.md#maprange-1
+#@# mhidaka 言及したっぽい
 
 === 外部コマンドの結果を読み込む
 
@@ -239,7 +239,7 @@ TechBoosterではNode.js+npm-scripts（裏はgrunt）を利用しています。
 タスクランナーが行うべき作業は少ないです。
 
  * 古い生成ファイルを消す
- * review-preprocコマンドを実行する
+ * @<code>{review-preproc}コマンドを実行する
  * 各ターゲット向けのビルド用コマンドを実行する
 
 これだけです。
@@ -261,9 +261,9 @@ rm -rf articles/C89-FirstStepReVIEW-v2-pdf/ \
 
 #@# prh:disable
 それぞれ@<code>{--debug}オプション付きでpdfをビルドしたときのtmpディレクトリ、pdf、epub、html、idgxml（Adobe InDesign用XML）、text生成時に作成される一時ファイルまたは最終出力ファイルです。
-一番最初の行の C89-FirstStepReVIEW-v2-pdf 部分はarticles/config.ymlのbooknameの設定により変化します。
+一番最初の行のC89-FirstStepReVIEW-v2-pdf部分はarticles/config.ymlのbooknameの設定により変化します。
 
- * review-preprocコマンドを実行する
+ * @<code>{review-preproc}コマンドを実行する
 
 最低限必要なのは次のコマンドの実行です。
 
@@ -272,8 +272,8 @@ rm -rf articles/C89-FirstStepReVIEW-v2-pdf/ \
 $ review-preproc -r --tabwidth=2 *.re
 //}
 
-review-preprocコマンドはRe:VIEWの仕組みの中で、もっとも便利な、愛すべきコマンドといえます。
-review-preprocコマンドは文書中に埋め込まれたpragmaを処理し、サンプルコードを文書中に展開したり指定のコマンドの実行結果を文書中に展開してくれます。
+@<code>{review-preproc}コマンドはRe:VIEWの仕組みの中で、もっとも便利な、愛すべきコマンドといえます。
+@<code>{review-preproc}コマンドは文書中に埋め込まれたpragmaを処理し、サンプルコードを文書中に展開したり指定のコマンドの実行結果を文書中に展開してくれます。
 C言語のマクロとだいたい同じものだと思えばよいでしょう。
 
 文書にソースコードを貼りこむとき、インデントは2スペースとします。
@@ -286,7 +286,7 @@ C言語のマクロとだいたい同じものだと思えばよいでしょう�
 最低限必要なのは次のコマンドの実行です。
 
 //emlist{
-# 全て、articlesディレクトリ内で実行する想定
+# すべて、articlesディレクトリ内で実行する想定
 # textの生成
 $ review-compile --all --target=text
 # htmlの生成
@@ -302,8 +302,8 @@ $ review-epubmaker config.yml
 //}
 
 欲しい出力結果に応じて、コマンドを使い分けます。
-pdf、epubについては利用するコマンドそのものが違うので注意します。
-詳細は@<chapref>{review-introduction}を参照してください。
+PDF、EPUBについては利用するコマンドそのものが違うので注意します。
+詳細は@<chapref>{publishing-book}を参照してください。
 
 あとはそれぞれのターゲット向けに下準備とビルドを行うタスクを作成するだけです。
 
@@ -331,11 +331,11 @@ TechBoosterがRe:VIEWを使っているなかで関係したお世話になっ�
  * 一人でかかない（共同執筆がお勧め）
  * 執筆時点は早めの締め切りを設定する（こうしておくと致命傷で済む）
  * レビューを実施する（読者の視点を作り出す）
- * 紙面を=や*で検索する（文法ミスを見つけるため）
+ * 紙面を@<code>{=}や@<code>{*}で検索する（文法ミスを見つけるため）
  * 記号などの文字化け探し（TeX、フォントはUTF-8対応しているとは限らない）
  * 紙面のはみ出しチェック（TeXコンパイル時のtoo lateというログの有無を確認する）
 
-実際には何度も読みなおし文章を推敲することが一番ですが、このようなステップを意識することで
+実際には何度も読みなおして文章を推敲することが一番ですが、このようなステップを意識することで
 ケアレスミスを見つけられます（特にツールに不慣れな場合は有効です）。
 
 具体的には編集（校正）フェーズでは次のように変更しました。
