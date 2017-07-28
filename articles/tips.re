@@ -365,10 +365,6 @@ TechBoosterがRe:VIEWを使っているなかで関係したお世話になっ�
 アプリの作ったServiceは、OS起動時またはタイマーによって定期的に実行できます。Serviceの中では、ContentRecommendationクラスを使ってNotificationを作り、ユーザに通知可能です。
 //}
 
-#@# 本書の筆者であるmhidakaとvvakameが書いた技術的な文章を書くための手引@<fn>{guide}も役に立つかもしれません。
-#@#
-#@# //footnote[guide][@<href>{http://qiita.com/mhidaka/items/c5fe729716c640b50ff7}@<br>{}@<href>{http://qiita.com/vvakame/items/d657baf26cf83ac98bd0}]
-
 == Re:VIEW記法チートシート
 
 //indepimage[sheet-page1][][scale=0.80]
