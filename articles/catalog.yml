@@ -1,17 +1,15 @@
 PREDEF:
   - preface.re
 CHAPS:
-  - "技術書をかこう！":
-    - writing-book.re
-    - planning-book.re
-    - workflow.re
-    - publishing-book.re
-    - distribution.re
-  - "はじめてのRe:VIEW":
-    - setup.re
-    - review-introduction.re
-    - configure.re
-    - build.re
+  - writing-book.re
+  - planning-book.re
+  - workflow.re
+  - publishing-book.re
+  - distribution.re
+  - setup.re
+  - review-introduction.re
+  - configure.re
+  - build.re
 APPENDIX:
   - tips.re
 

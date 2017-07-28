@@ -333,7 +333,7 @@ TechBoosterがRe:VIEWを使っているなかで関係したお世話になっ�
  * レビューを実施する（読者の視点を作り出す）
  * 紙面を@<code>{=}や@<code>{*}で検索する（文法ミスを見つけるため）
  * 記号などの文字化け探し（TeX、フォントはUTF-8対応しているとは限らない）
- * 紙面のはみ出しチェック（TeXコンパイル時のtoo lateというログの有無を確認する）
+ * 紙面のはみ出しチェック（TeXコンパイル時のtoo late表示の有無を確認する）
 
 実際には何度も読みなおして文章を推敲することが一番ですが、このようなステップを意識することで
 ケアレスミスを見つけられます（特にツールに不慣れな場合は有効です）。
@@ -365,7 +365,13 @@ TechBoosterがRe:VIEWを使っているなかで関係したお世話になっ�
 アプリの作ったServiceは、OS起動時またはタイマーによって定期的に実行できます。Serviceの中では、ContentRecommendationクラスを使ってNotificationを作り、ユーザに通知可能です。
 //}
 
-また、本書の筆者であるmhidakaとvvakameが書いた技術的な文章を書くための手引@<fn>{guide-mhidaka}@<fn>{guide-vvakame}も役に立つかもしれません。
+#@# 本書の筆者であるmhidakaとvvakameが書いた技術的な文章を書くための手引@<fn>{guide}も役に立つかもしれません。
+#@#
+#@# //footnote[guide][@<href>{http://qiita.com/mhidaka/items/c5fe729716c640b50ff7}@<br>{}@<href>{http://qiita.com/vvakame/items/d657baf26cf83ac98bd0}]
 
-//footnote[guide-mhidaka][@<href>{http://qiita.com/mhidaka/items/c5fe729716c640b50ff7}]
-//footnote[guide-vvakame][@<href>{http://qiita.com/vvakame/items/d657baf26cf83ac98bd0}]
+== Re:VIEW記法チートシート
+
+//indepimage[sheet-page1][][scale=0.80]
+//indepimage[sheet-page2][][scale=0.80]
+//indepimage[sheet-page3][][scale=0.80]
+//indepimage[sheet-page4][][scale=0.80]
