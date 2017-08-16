@@ -25,98 +25,98 @@ module.exports = grunt => {
 					`${articles}/*.epub`,
 					`${articles}/*.html`,
 					`${articles}/*.xml`,
-					`${articles}/*.txt`
-				]
+					`${articles}/*.txt`,
+				],
 			},
 			publish: {
-				src: `${publish}/`
-			}
+				src: `${publish}/`,
+			},
 		},
 		sass: {
 			dist: {
 				options: {
 					bundleExec: true,
-					sourcemap: 'none'
+					sourcemap: 'none',
 				},
 				files: {
 					'articles/style.css': 'articles/style.scss',
 					'articles/style-web.css': 'articles/style-web.scss',
-				}
-			}
+				},
+			},
 		},
 		copy: {
 			publish: {
 				files: [
-					{expand: true, cwd: `${articles}/webroot/`, src: ['**'], dest: `${publish}/`}
-				]
-			}
+					{expand: true, cwd: `${articles}/webroot/`, src: ['**'], dest: `${publish}/`},
+				],
+			},
 		},
 		shell: {
 			preprocess: {
 				options: {
 					execOptions: {
 						cwd: articles,
-					}
+					},
 				},
-				command: `${reviewPreproc} -r --tabwidth=2 *.re`
+				command: `${reviewPreproc} -r --tabwidth=2 *.re`,
 			},
 			compile2text: {
 				options: {
 					execOptions: {
 						cwd: articles,
-					}
+					},
 				},
-				command: `${reviewCompile} --target=text`
+				command: `${reviewCompile} --target=text`,
 			},
 			compile2html: {
 				options: {
 					execOptions: {
 						cwd: articles,
-					}
+					},
 				},
-				command: `${reviewCompile} --target=html --yaml=config.yml --chapterlink --footnotetext`
+				command: `${reviewCompile} --target=html --yaml=config.yml --chapterlink --footnotetext`,
 			},
 			compile2latex: {
 				options: {
 					execOptions: {
 						cwd: articles,
-					}
+					},
 				},
-				command: `${reviewCompile} --target=latex --footnotetext`
+				command: `${reviewCompile} --target=latex --footnotetext`,
 			},
 			compile2idgxml: {
 				options: {
 					execOptions: {
 						cwd: articles,
-					}
+					},
 				},
-				command: `${reviewCompile} --target=idgxml`
+				command: `${reviewCompile} --target=idgxml`,
 			},
 			compile2web: {
 				options: {
 					execOptions: {
 						cwd: articles,
-					}
+					},
 				},
-				command: `${reviewWebMaker} config.yml`
+				command: `${reviewWebMaker} config.yml`,
 			},
 			compile2pdf: {
 				options: {
 					execOptions: {
 						cwd: articles,
-					}
+					},
 				},
-				command: `${reviewPdfMaker} config.yml`
+				command: `${reviewPdfMaker} config.yml`,
 			},
 			compile2epub: {
 				options: {
 					execOptions: {
 						cwd: articles,
-					}
+					},
 				},
-				command: `${reviewEpubMaker} config.yml`
+				command: `${reviewEpubMaker} config.yml`,
 			},
-		}
+		},
 	});
 
 	function generateTask(target, pretask) {
@@ -159,5 +159,5 @@ module.exports = grunt => {
 		"原稿をコンパイルしてepubファイルにする",
 		generateTask("epub"));
 
-	require('load-grunt-tasks')(grunt);
+	require("load-grunt-tasks")(grunt);
 };

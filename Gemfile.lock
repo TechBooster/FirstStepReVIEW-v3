@@ -5,9 +5,9 @@ GEM
       rouge
       rubyzip
     review-peg (0.2.2)
-    rouge (2.1.1)
+    rouge (2.2.0)
     rubyzip (1.2.1)
-    sass (3.4.19)
+    sass (3.4.25)
 
 PLATFORMS
   ruby
@@ -15,7 +15,7 @@ PLATFORMS
 DEPENDENCIES
   review (= 2.3.0)
   review-peg (= 0.2.2)
-  sass (= 3.4.19)
+  sass (= 3.4.25)
 
 BUNDLED WITH
-   1.12.5
+   1.15.3
