@@ -5,7 +5,7 @@ GEM
       rouge
       rubyzip
     review-peg (0.2.2)
-    rouge (2.1.1)
+    rouge (2.2.0)
     rubyzip (1.2.1)
     sass (3.4.25)
 
@@ -18,4 +18,4 @@ DEPENDENCIES
   sass (= 3.4.25)
 
 BUNDLED WITH
-   1.12.5
+   1.15.3

@@ -202,6 +202,11 @@
 \newcommand{\reviewcolophon}[0]{\clearpage}
 \newcommand{\reviewappendix}[0]{\appendix}
 
+%% 部構成を取るとき、付録の目次が1段下がるので追加する
+%% \renewcommand{\reviewappendix}[0]{%
+%% \addcontentsline{toc}{part}{付録}
+%% \appendix}
+
 \makeatletter
 %% maxwidth is the original width if it is less than linewidth
 %% otherwise use linewidth (to make sure the graphics do not exceed the margin)

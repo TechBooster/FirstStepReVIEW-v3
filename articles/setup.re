@@ -1,4 +1,4 @@
-= 環境を整える
+={setup} Re:VIEWでの執筆環境を整える
 
 #@# NOTE author:vvakame
 
@@ -14,9 +14,9 @@ review.jsは現在のところ、PDFを生成することなどができませ�
 
 #@# TODO 入稿前にここのバージョンを再確認すること
 
- * Atom v1.3.2
- * language-review 0.12.4
- * Re:VIEW 1.7.2 または review-peg 0.2.2
+ * Atom v1.18.0
+ * language-review 0.15.3
+ * Re:VIEW 2.3.0
 
 //footnote[atom][@<href>{https://atom.io/}]
 //footnote[language-review][@<href>{https://atom.io/packages/language-review}]
@@ -29,7 +29,8 @@ review.jsは現在のところ、PDFを生成することなどができませ�
 
 Atomエディタをインストールします。完了後、Atomを立ち上げ、設定からlanguage-reviewをインストールします（@<img>{install-language-review}）。
 
-Mac OS Xであれば一度Atomを起動すると@<code>{/usr/local/bin/}に@<code>{apm}コマンドがインストールされるので、ターミナルから@<code>{apm install language-review}を実行します。
+#@# Mac OS XであればAtomを起動した後、メニューのAtom > Install Shell Commandsを選ぶと@<code>{/usr/local/bin/}に@<code>{apm}コマンドがインストールされるので、ターミナルから@<code>{apm install language-review}を実行でもOKです。
+#@# vv: https://github.com/atom/atom/issues/7570 この辺のIssueにワイの新MBP引っかかってるんだけど他の人の環境だとどうなのかわからない…
 
 //image[install-language-review][language-reviewをインストールする]{
 //}
@@ -38,6 +39,7 @@ Mac OS Xであれば一度Atomを起動すると@<code>{/usr/local/bin/}に@<cod
 
 作成後、このファイルをAtomで開きます。
 デフォルトの編集モードはRe:VIEW以外になっているため、クリックして@<fn>{atom-tips}Re:VIEWに切り替えます（@<img>{language-review-grammar1}、@<img>{language-review-grammar2}@<fn>{atom-images-disclaimer}）。
+#@# vv TODO この辺新規の環境でどうなるか再確認したさがある…（新PCでこの操作必要だった記憶がないけど無意識にやってるかもしれないしわからん）
 
 //image[language-review-grammar1][モード切り替え前]{
 //}
@@ -47,11 +49,11 @@ Mac OS Xであれば一度Atomを起動すると@<code>{/usr/local/bin/}に@<cod
 パッケージのインストール時に、依存する別パッケージ（linter）のインストールも行っています。
 動作がおかしい気がする場合、Atomを完全に終了させてから起動しなおしてみてください。
 
-また、人柱用ですがMac OS X環境ではAtomのインストールからlanguage-reviewの導入までを行うインストールスクリプトを用意してあります。
+#@# また、人柱用ですがMac OS X環境ではAtomのインストールからlanguage-reviewの導入までを行うインストールスクリプトを用意してあります。
 
-//cmd{
-curl -L https://github.com/vvakame/language-review/raw/master/install.sh | bash
-//}
+#@# //cmd{
+#@# curl -L https://github.com/vvakame/language-review/raw/master/install.sh | bash
+#@# //}
 
 language-reviewは、Atomを通じてさまざまな便利な機能を提供します。
 よく使うのは次のとおりです。
@@ -76,7 +78,7 @@ language-reviewは、Atomを通じてさまざまな便利な機能を提供し�
 #@# NOTE author:vvakame
 
 次に、Ruby版Re:VIEWをインストールします。
-これはPDFやepubの生成などの最終出力を行うのに必要です。
+これはPDFやEPUBの生成などの最終出力を行うのに必要です。
 
 RubyとRubyGemsは、すでに利用可能な環境になっているものとして解説します。
 インストールは単に次のコマンド@<fn>{experimental-review}を実行するだけです（Rubyのインストール方法次第ではsudoが必要となる場合もあります）。
@@ -113,7 +115,7 @@ Macの場合、何もしなくてもデフォルトでRubyが導入されてい�
 この状態だとgem installを実行するときにsudoが必要になります。
 またデフォルトのRubyのバージョンは若干古いため、最新のものを入れたほうがよいでしょう。
 
-システムのデフォルトのままだと、破壊的（かもしれない）操作をするのが怖いですし、イザという時にリセットすることもやりにくいです。
+システムのデフォルトのままだと、破壊的（かもしれない）操作をするのが怖いですし、イザというときにリセットすることもやりにくいです。
 
 万一のときに@<code>{rm -rf ~/.rbenv}すればよい環境を作っておくと、精神的安らぎが得られます。
 
@@ -124,14 +126,12 @@ rbenvインストール後の手順は次のとおりです。
 
 //cmd{
 $ rbenv install --list
-# 最新のを適当に入れれば良い 執筆時点では 2.2.3
-$ rbenv install 2.2.3
+# 最新のを適当に入れれば良い 執筆時点では 2.4.1
+$ rbenv install 2.4.1
 # グローバルなrubyコマンドのバージョンを設定する localも存在する
-$ rbenv global 2.2.3
+$ rbenv global 2.4.1
 # reviewをインストール
 $ gem install review
-# そのままではreview-compileにパスが通ってない状態なのでrehashする
-$ rbenv rehash
 //}
 
 ===[/column]
@@ -158,7 +158,7 @@ Re:VIEW文書をPDFに変換するにはLaTeX（platexまたはlualatexなど）
 
 ==== Mac OS Xの場合
 
-MacTeX@<fn>{mactex}を使いましょう。執筆時点ではMacTeX 2015が最新バージョンです。
+MacTeX@<fn>{mactex}を使いましょう。執筆時点ではMacTeX 2017が最新バージョンです。
 
 //footnote[mactex][@<href>{https://www.tug.org/mactex/}]
 
@@ -179,29 +179,15 @@ LaTeX環境の構築の難易度が高いため、Dockerなどの仮想環境を
 
 Dockerは、最近はやりの仮想環境用のツールです。
 Linuxカーネルに組み込みの機能を使って、軽量かつ無駄の少ない仮想化環境を実現しています。
-そのため、Mac OS XやWindowsでは直接は利用できません。
-しかし、そのためのdocker-machine@<fn>{docker-machine}という仕組みが用意されています。
 
-docker-machineは、デフォルトではVirtualBoxを利用してLinux環境を立ち上げ、その中でDocker用仮想環境を作成します。
-このツールを使うと、Mac OS XやWindows環境でもDockerを利用することができます。
-
-Dockerはざっくり次の３つの設定方法があります。
+Dockerはざっくり次の３つの利用方法があります。
 
  1. Dockerfile（イメージの設計図で主にコマンドの羅列）を書く
- 2. Docker, Incのtrusted build（他人が提供したDockerfile）を使う@<fn>{docker-hub}
- 3. 他人の作ったイメージを元に自分のDockerfileを書く
+ 2. Docker Hub@<fn>{docker-hub}などでホストされている他人が提供したDockerイメージを使う
+ 3. 他人の書いたDockerfileを元に自分のDockerfileを書く
 
-本書ではDockerやdocker-machineのインストール方法や使い方は解説しません。
-その時々で適切なやり方を調べてみてください。
-
-==[/column]
-
-//footnote[docker-machine][@<href>{https://docs.docker.com/machine/}]
-//footnote[docker-hub][@<href>{https://hub.docker.com/}]
-
-==[column] Dockerを使ってどこでもビルド
-
-Ruby入れたりTeX入れたりめんどくさすぎる！
+本書ではDockerのインストール方法や使い方は解説しません。
+その時々で適切なやり方を調べてみてください。Ruby入れたりTeX入れたりめんどくさすぎる！
 という人のために、Dockerのイメージを用意@<fn>{docker-review}してあります。
 
 //cmd{
@@ -217,6 +203,8 @@ $ docker run -i -t vvakame/review -v $(pwd):/book /bin/bash
 
  *  @<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2/blob/master/build-in-docker.sh}
 
-==[/column]
 
+//footnote[docker-hub][@<href>{https://hub.docker.com/}]
 //footnote[docker-review][@<href>{https://hub.docker.com/r/vvakame/review/}]
+
+==[/column]
