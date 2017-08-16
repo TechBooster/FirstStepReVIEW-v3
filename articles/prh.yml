@@ -4,8 +4,8 @@
 version: 1
 
 imports:
-  # 気合で移行した気持ちになった
   - ../prh-rules/media/techbooster.yml
+  - ../prh-rules/files/review.yml
 
 rules:
   - expected: asm.js

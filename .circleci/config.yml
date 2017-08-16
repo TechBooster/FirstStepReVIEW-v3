@@ -19,6 +19,8 @@ jobs:
           paths:
             - ./node_modules
 
+      - run: npm run check
+
       - run: npm run pdf
       - store_artifacts:
           path: ./articles/C89-FirstStepReVIEW-v2.pdf

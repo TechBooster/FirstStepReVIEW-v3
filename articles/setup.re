@@ -201,6 +201,7 @@ $ docker run -i -t vvakame/review -v $(pwd):/book /bin/bash
 #@# prh:disable
 実用的な例を知りたい場合は、この本のリポジトリのbuild-in-docker.shを参照してください。
 
+#@# prh:disable
  *  @<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2/blob/master/build-in-docker.sh}
 
 
