@@ -1,7 +1,7 @@
 # C89-FirstStepReVIEW-v2
 
 「技術書をかこう！〜はじめてのRe:VIEW〜改訂版」はRe:VIEW 2.3.0に対応した執筆ノウハウ本です。
-ReVIEWの使い方と制作にあたっての企画〜執筆〜編集〜告知〜会場頒布までのノウハウをギュッと詰めています。
+Re:VIEWの使い方と制作にあたっての企画〜執筆〜編集〜告知〜会場頒布までのノウハウをギュッと詰めています。
 またTechBoosterが利用してる書籍レイアウト（B5/A5/電子書籍）は[ReVIEW-Templateリポジトリ](https://github.com/TechBooster/ReVIEW-Template)で公開しています
 
 ## 本を読むには？
