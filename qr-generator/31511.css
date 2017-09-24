@@ -1,0 +1,7 @@
+svg { margin: 0px }
+body { margin: 0px }
+/* これらのstrokeはデバッグしたい時に指定しましょう */
+.sheet-outer { fill: white; stroke: none; }
+.sheet-inner { fill: white; stroke: none; rx: 15mm; ry: 15mm }
+.label { font-size: 2.6mm; text-overflow: ellipsis }
+.label-small { font-size: 2.0mm; font-family: monospace; text-overflow: ellipsis }

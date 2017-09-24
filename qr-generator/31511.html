@@ -1,0 +1,125 @@
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="31511.css" />
+
+<script>
+
+const paper_width = 210;
+const paper_height = 297;
+const horizontalMargin = 6;
+const verticalMargin = 13;
+const sheetWidth = 66;
+const sheetHeight = 34;
+const sheetPaddingHeight = 0;
+const numberOfColumns = 3;
+const numberOfRows = 8;
+
+const svgNS = "http://www.w3.org/2000/svg";
+const xlinkNS = "http://www.w3.org/1999/xlink";
+
+function loadContent (expiryDate, json, start)
+{
+	var svg = document.createElementNS (svgNS, "svg");
+	svg.setAttribute ("width", paper_width - horizontalMargin * 2 + "mm");
+	svg.setAttribute ("height", paper_height - verticalMargin * 2 + "mm");
+
+	var defs = document.createElementNS (svgNS, "defs");
+	svg.appendChild (defs);
+	
+	var style = document.createElementNS (svgNS, "style");
+	style.setAttribute ("href", "31511.css");
+	defs.appendChild (style);
+	
+	for (var h = 0; h < numberOfColumns; h++) {
+		for (var v = 0; v < numberOfRows; v++) {
+			if (start + h * numberOfRows + v >= json.length)
+				continue;
+
+			var x = h * sheetWidth;
+			var y = v * sheetHeight + sheetPaddingHeight;
+			var item = json [start + h * numberOfRows + v];
+			
+			var rectOuter = document.createElementNS (svgNS, "rect");
+			rectOuter.setAttribute ("class", "sheet-inner");
+			rectOuter.setAttribute ("x", (h * sheetWidth) + "mm");
+			rectOuter.setAttribute ("y", (v * sheetHeight) + "mm");
+			rectOuter.setAttribute ("width", sheetWidth + "mm");
+			rectOuter.setAttribute ("height", sheetHeight + "mm");
+			svg.appendChild (rectOuter);
+			
+			var image = document.createElementNS (svgNS, "image");
+			image.setAttributeNS (xlinkNS, "href", "qrimages/" + item.id + ".png");
+			image.setAttribute ("x", x + 3 + "mm");
+			image.setAttribute ("y", y + 5 + "mm");
+			image.setAttribute ("width", "24mm");
+			image.setAttribute ("height", "24mm");
+			svg.appendChild (image);
+
+			var title = document.createElementNS (svgNS, "text");
+			title.setAttribute ("class", "label");
+			title.setAttribute ("x", x + 30 + "mm");
+			title.setAttribute ("y", y + 10 + "mm");
+			title.setAttribute ("width", "50mm");
+			title.setAttribute ("height", "8mm");
+			title.appendChild (document.createTextNode (item.title));
+			svg.appendChild (title);
+
+			var alabel = document.createElementNS (svgNS, "text");
+			alabel.setAttribute ("class", "label");
+			alabel.setAttribute ("x", x + 30 + "mm");
+			alabel.setAttribute ("y", y + 18 + "mm");
+			alabel.setAttribute ("width", "50mm");
+			alabel.setAttribute ("height", "8mm");
+			alabel.appendChild (document.createTextNode ("管理番号:" + item.id));
+			svg.appendChild (alabel);
+
+			var expiry = document.createElementNS (svgNS, "text");
+			expiry.setAttribute ("class", "label");
+			expiry.setAttribute ("x", x + 30 + "mm");
+			expiry.setAttribute ("y", y + 26 + "mm");
+			expiry.setAttribute ("width", "50mm");
+			expiry.setAttribute ("height", "8mm");
+			expiry.appendChild (document.createTextNode ("使用期限: " + expiryDate));
+			svg.appendChild (expiry);
+		}
+	}
+	
+	document.body.appendChild (svg);
+}
+
+function openFile(evt)
+{
+	var expiryDate = document.getElementById ("expiryDate").value;
+	
+	var reader = new FileReader();
+	reader.onload = function() {
+		while (document.body.firstChild != null)
+			document.body.removeChild (document.body.firstChild);
+		
+		var json = JSON.parse(reader.result);
+		for (idx = 0; idx < json.length; idx += numberOfColumns * numberOfRows)
+			loadContent (expiryDate, json, idx);
+	};
+	reader.readAsText(evt.target.files[0]);
+}
+
+function onHtmlLoad()
+{
+	document.getElementById ('top-margin-label').innerText = verticalMargin + "mm";
+	document.getElementById ('horizontal-margin-label').innerText = horizontalMargin + "mm";
+}
+
+//</script>
+
+</head>
+<body onload='onHtmlLoad()'>
+
+<h1>[[印刷前に注意してほしいこと]]</h1>
+<p>使用期限は<input id='expiryDate' type='text' value='2017年5月31日' />です。</p>
+<p>プリンタの印刷用紙設定で、上マージン<span id='top-margin-label'>Xmm</span>、左右マージン<span id='horizontal-margin-label'>Xmm</span>に設定してください</p>
+<p><input type='file' onchange='openFile(event)' /></p>
+
+
+</body>
+</html>
