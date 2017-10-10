@@ -8,6 +8,8 @@
   "scripts": {
     "global": "gem install bundler",
     "postinstall": "bundle install",
+    "check:prh": "prh --verify --verbose articles/*.re",
+    "check": "npm run check:prh",
     "pdf": "grunt pdf",
     "epub": "grunt epub",
     "web": "grunt web",
@@ -32,6 +34,8 @@
     "grunt-open": "^0.2.3",
     "grunt-shell": "^1.3.0",
     "js-yaml": "^3.6.0",
-    "load-grunt-tasks": "^3.5.0"
+    "load-grunt-tasks": "^3.5.0",
+    "prh": "^5.4.0",
+    "prh-languageserver": "^0.4.0"
   }
 }

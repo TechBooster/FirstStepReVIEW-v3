@@ -70,8 +70,10 @@ epubversion: 3
 params: --chapterlink
 //}
 
+#@# prh:disable
 == review-webmaker
 
+#@# prh:disable
 @<code>{review-webmaker}はプロジェクトのメタデータとなるYAMLファイルを引数としてWebサイト用ファイルを生成します。
 HTMLファイルやCSSファイル、画像を@<tt>{webroot}ディレクトリに出力します。
 
@@ -84,6 +86,7 @@ webroot: directory
 
 読み込むCSSファイルなどは参照するYAMLファイル内の@<code>{webmaker}パラメータを元にして設定しています（@<img>{webroot}）。
 
+#@# prh:disable
 //image[webroot][review-webmakerの出力例][scale=0.75]{
 //}
 
