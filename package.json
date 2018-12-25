@@ -7,7 +7,6 @@
   },
   "scripts": {
     "global": "gem install bundler",
-    "postinstall": "bundle install",
     "check:prh": "prh --verify --verbose articles/*.re",
     "check": "npm run check:prh",
     "pdf": "grunt pdf",
