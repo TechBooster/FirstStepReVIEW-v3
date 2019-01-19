@@ -13,7 +13,7 @@ jobs:
             - npm-cache-{{ checksum "package-lock.json" }}
       - run: npm run global
       - run: npm install --no-save
-      - run: npm run postinstall
+      - run: bundle install --path vendor/bundle
       - save_cache:
           key: npm-cache-{{ checksum "package-lock.json" }}
           paths:
