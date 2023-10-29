@@ -31,14 +31,14 @@ POSTDEF:
 
 @<tt>{catalog.yml}の各項目の内容は次のとおりです。
 
-: PREDEF
-  前書きなど目次の前に記載するものを指定します
-: CHAPS
-  本文となる各章です。並べた順番で出力します
-: APPENDIX
-  付録を指定します
-: POSTDEF
-  後書きを指定します
+ : PREDEF
+   前書きなど目次の前に記載するものを指定します
+ : CHAPS
+   本文となる各章です。並べた順番で出力します
+ : APPENDIX
+   付録を指定します
+ : POSTDEF
+   後書きを指定します
 
 加えて@<code>{CHAPS}はネストすることで部を構成できます。
 部を構成するには、@<list>{catalog_yml_nested_chaps}のように、部のタイトル名や.reファイル名の下に章のファイルを記述します。
@@ -124,10 +124,10 @@ texdocumentclass: ["jsbook", "b5j,twoside,openany,uplatex"]
 
 記述できる項目は多いので、Re:VIEW公式のサンプルとWikiを参照してください。
 
-: サンプル
-  @<href>{https://github.com/kmuto/review/blob/master/doc/sample.yml}
-: Wiki
-  @<href>{https://github.com/kmuto/review/wiki/config.yml}
+ : サンプル
+   @<href>{https://github.com/kmuto/review/blob/master/doc/sample.yml}
+ : Wiki
+   @<href>{https://github.com/kmuto/review/wiki/config.yml}
 
 
 == 目次に表示する項目をカスタマイズする
@@ -160,14 +160,14 @@ texstyle: techbooster-doujin
 
 Re:VIEW、または本書のリポジトリには次の3つの設定が用意されています。
 
-: reviewmacro
-  Re:VIEWのデフォルトスタイルです。紙面にはあまり向いていません
+ : reviewmacro
+   Re:VIEWのデフォルトスタイルです。紙面にはあまり向いていません
 
-: tatsumacro
-  電子書籍向けのスタイルです。タブレットなどで見やすいように余白やフォントサイズを調整しています
+ : tatsumacro
+   電子書籍向けのスタイルです。タブレットなどで見やすいように余白やフォントサイズを調整しています
 
-: techbooster-doujin
-  TechBooster製のスタイルです。紙面（B5サイズ）にむけて最適化しています
+ : techbooster-doujin
+   TechBooster製のスタイルです。紙面（B5サイズ）にむけて最適化しています
 
 印刷が前提の場合、特にこだわりがなければ@<code>{techbooster-doujin}を利用してください。もちろん独自のスタイルを作ることも可能です。
 
