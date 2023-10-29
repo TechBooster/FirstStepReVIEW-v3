@@ -1,10 +1,11 @@
-.DS_Store
 node_modules/
-npm-debug.log
-vendor
-.bundle
-
-*~
-
+Gemfile.lock
+*.pdf
 .sass-cache/
-publish/
+
+articles/*.pdf
+articles/*.epub
+articles/*.html
+# articles/*.md
+articles/*.xml
+articles/*.txt
