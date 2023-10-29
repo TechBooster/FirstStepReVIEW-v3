@@ -22,7 +22,6 @@ bookname: C89-FirstStepReVIEW-v2
 language: ja
 
 # 書名
-booktitle: 技術書をかこう！～はじめてのRe:VIEW～
 booktitle: {name: "技術書をかこう！～はじめてのRe:VIEW～", file-as: "ギジュツショヲカコウ"}
 
 # 著者名。「, 」で区切って複数指定できる
