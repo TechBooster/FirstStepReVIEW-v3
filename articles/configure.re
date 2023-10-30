@@ -5,7 +5,6 @@ Re:VIEWでは書籍に関する情報を章を設定する@<tt>{catalog.yml}と�
 
 =={catalog_yml} 目次を構成するcatalog.yml
 
-#@# https://github.com/kmuto/review/wiki/catalog.yml
 #@# https://github.com/kmuto/review/blob/master/doc/catalog.ja.md
 
 @<tt>{catalog.yml}は章立ての設定ファイルです。
@@ -54,7 +53,7 @@ CHAPS:
   - chapter5.re
 //}
 
-YAMLに馴染みがないと忘れがちですが、Collection@<fn>{url_yaml_collection}にするのでコロン記号（：）を付け忘れないようにしましょう。
+YAMLに馴染みがないと忘れがちですがCollection@<fn>{url_yaml_collection}にするのでコロン記号（：）を付け忘れないようにしましょう。
 
 //footnote[url_yaml_collection][@<href>{http://www.yaml.org/spec/1.2/spec.html#id2759963}]
 
@@ -65,40 +64,39 @@ YAMLに馴染みがないと忘れがちですが、Collection@<fn>{url_yaml_col
 Re:VIEWでは本を生成（コンパイル）するときのメタデータをYAMLで記述します。
 コンパイル時の指定方法は@<chapref>{build}を参照してください。
 
-ファイル名に決まりはありませんが慣例的にconfig.ymlとしています。
+ファイル名に決まりはありませんが慣例的に@<tt>{config.yml}としています。
 書名や奥付の内容、どの深さまで目次に含めるかなどを設定できます。
 
 @<list>{config_yml}は本書で使っている@<tt>{config.yml}です。
 
 //list[config_yml][config.yml]{
-# review-epubmaker向けの設定ファイルの例。
 # ブック名(ファイル名になるもの。ASCII範囲の文字を使用)
 bookname: C89-FirstStepReVIEW-v2
 # 記述言語。省略した場合はja
 language: ja
 # 書名
-booktitle: 技術書をかこう！～はじめてのRe:VIEW～
+booktitle: {name: "技術書をかこう！～はじめてのRe:VIEW～", file-as: "ギジュツショヲカコウ"}
 # 著者名。「, 」で区切って複数指定できる
-aut: ["TechBooster編"]
+aut: [{name: "TechBooster編", file-as: "techboosterヘン"}]
+
 # a-edt, edt: 編集者
 edt: ["mhidaka"]
 # a-pbl, pbl: 出版社（発行所）
 pbl: TechBooster
-# 刊行日(省略した場合は実行時の日付)
-date: 2017-8-11
-# 発行年月。YYYY-MM-DD形式による配列指定。省略した場合はdateを使用する
-history: [["2015-12-31 C89版 v1.0.0"],["2017-8-11 C92版 v2.0.0"]]
-# 権利表記
-rights: (C) 2017 TechBooster
-# 固有IDに使用するドメイン。指定しない場合には、時刻に基づくランダムUUIDが入る
-urnid: urn:uid:https://github.com/TechBooster/C89-FirstStepReVIEW-v2
 
-# CSSファイル(配列で複数指定可)
-stylesheet: ["style.css"]
-# ePUBのバージョン (2か3) 省略した場合は2
-epubversion: 3
-# HTMLのバージョン (4か5。epubversionを3にしたときには5にする)
-htmlversion: 5
+# 刊行日(省略した場合は実行時の日付)
+date: 2023-10-31
+# 発行年月。YYYY-MM-DD形式による配列指定。省略した場合はdateを使用する
+# 複数指定する場合は次のように記述する
+# [["初版第1刷の日付", "初版第2刷の日付"], ["第2版第1刷の日付"]]
+# 日付の後ろを空白文字で区切り、任意の文字列を置くことも可能。
+history: [["2015-12-31 C89版 v1.0.0"],["2017-8-11 C92版 v2.0.0"],["2023-10-31 技術書典15版 v3.0.0"]]
+# 権利表記(配列で複数指定可)
+# rights: (C) 2016 Re:VIEW Developers
+rights: (C) 2017-2023 TechBooster
+
+# 固有IDに使用するドメイン。省略した場合は時刻に基づくランダムUUIDが入る
+urnid: urn:uid:https://github.com/TechBooster/C89-FirstStepReVIEW-v2
 
 # 目次として抽出する見出しレベル
 toclevel: 2
@@ -108,24 +106,22 @@ secnolevel: 2
 # 本文中に目次ページを作成するか。省略した場合はnull (作成しない)
 toc: true
 
-# 表紙の後に大扉ページを作成するか。省略した場合はnull (作成しない)
+# 表紙に配置し、書籍の影絵にも利用する画像ファイル。省略した場合はnull (画像を使わない)。画像ディレクトリ内に置いてもディレクトリ名は不要(例: cover.jpg)
+# PDFMaker 固有の表紙設定は pdfmaker セクション内で上書き可能
+coverimage: cover.jpg
+#
+# 表紙の後に大扉ページを作成するか。省略した場合はtrue (作成する)
 titlepage: true
+
 # 奥付を作成するか。デフォルトでは作成されない。trueを指定するとデフォルトの奥付、ファイル名を指定するとそれがcolophon.htmlとしてコピーされる
+# デフォルトの奥付における各項目の名前（「著　者」など）を変えたいときにはlocale.ymlで文字列を設定する（詳細はdoc/format.ja.mdを参照）
 colophon: true
-# ページ送りの送り方向、page-progression-directionの値("ltr"|"rtl"|"default")
-direction: "ltr"
-
-# tatsumacroは、電子書籍版の制作に利用する
-texstyle: techbooster-doujin
-
-# LaTeX用のdocumentclassを指定する
-texdocumentclass: ["jsbook", "b5j,twoside,openany,uplatex"]
 //}
 
 記述できる項目は多いので、Re:VIEW公式のサンプルとWikiを参照してください。
 
  : サンプル
-   @<href>{https://github.com/kmuto/review/blob/master/doc/sample.yml}
+   @<href>{https://github.com/kmuto/review/blob/master/doc/config.yml.sample}
  : Wiki
    @<href>{https://github.com/kmuto/review/wiki/config.yml}
 
@@ -146,65 +142,91 @@ toclevel: 2
 //image[toclevel3][toclevel:3を指定した場合の目次][scale=0.75]{
 //}
 
-=={layout} デザインを変更する
+=={layout} 用紙サイズやデザインを変更する
 
 PDF形式で出力する紙面のデザインは差し替え可能です。@<tt>{config.yml}の@<code>{texstyle:}項目の値を変更します（@<list>{change_layout}）。
 
 //list[change_layout][config.ymlにてスタイルファイルを指定]{
 # LaTeX用のスタイルファイル(styディレクトリ以下に置くこと)
-# texstyle: reviewmacro
-# tatsumacroは、電子書籍版の制作に利用する
-# texstyle: tatsumacro
-texstyle: techbooster-doujin
+# texstyle: ["reviewmacro"]
 //}
-
-Re:VIEW、または本書のリポジトリには次の3つの設定が用意されています。
 
  : reviewmacro
-   Re:VIEWのデフォルトスタイルです。紙面にはあまり向いていません
+   Re:VIEWのデフォルトスタイルです。
+ : viewermacro
+   電子書籍向けのスタイルです。タブレットなどで見やすいように余白やフォントサイズを調整しています。TechBooster製のスタイルです。
 
- : tatsumacro
-   電子書籍向けのスタイルです。タブレットなどで見やすいように余白やフォントサイズを調整しています
+ReVIEW-Templateテンプレートリポジトリまたは本書のリポジトリには次の4つの@<code>{texdocumentclass:}が用意されています。
 
- : techbooster-doujin
-   TechBooster製のスタイルです。紙面（B5サイズ）にむけて最適化しています
+ * B5の設定(10pt 40文字×35行) - 紙版
+ * B5の設定(10pt 40文字×35行) - 電子版
+ * A5の設定(9pt 38文字×37行) - 紙版
+ * A5の設定(9pt 38文字×37行) - 電子版
 
-印刷が前提の場合、特にこだわりがなければ@<code>{techbooster-doujin}を利用してください。もちろん独自のスタイルを作ることも可能です。
-
-==== B5サイズでのお勧め設定
+==== B5サイズでの標準設定
 
 //emlist[config.ymlの印刷用設定]{
-texstyle: techbooster-doujin
-texdocumentclass: ["jsbook", "b5j,twoside,openany,uplatex"]
+texstyle: ["reviewmacro"]
+texdocumentclass: ["review-jsbook", "media=print,paper=b5,serial_pagination=true,
+    hiddenfolio=nikko-pc,openany,fontsize=10pt,baselineskip=15.4pt,line_length=40zw,
+    number_of_lines=35,head_space=30mm,headsep=10mm,headheight=5mm,footskip=10mm"]
 //}
 
-==== 電子書籍（PDF）でのお勧め設定
+==== 電子書籍（PDF）での標準設定
 
 //emlist[config.ymlの電子書籍用設定]{
-texstyle: tatsumacro
-texdocumentclass: ["jsbook", "oneside,14pt,uplatex"]
+texstyle: ["reviewmacro"]
+texdocumentclass: ["review-jsbook", "media=ebook,paper=b5,serial_pagination=true,
+    openany,fontsize=10pt,baselineskip=15.4pt,line_length=40zw,
+    number_of_lines=35,head_space=30mm,headsep=10mm,headheight=5mm,footskip=10mm"]
 //}
 
-== サイズを変更する
+B5ではなく少し小さいA5にしたい等で書籍にあった用紙サイズへ変更するだけであれば、これらのプリセットの利用を強く推奨します。
 
-PDF形式で出力するページサイズを指定するには@<tt>{config.yml}の@<code>{textdocumentclass:}項目の２番目の値を設定します（@<list>{change_pagesize}）。
+== スタイルにカスタマイズを加える
 
-この設定は、LaTeXにおけるドキュメントクラスのオプションに該当します。複数のオプションがある場合は、カンマで区切って列挙します。
-技術書であればb5jサイズが標準的です。
+@<tt>{config.yml}の@<code>{textdocumentclass}はLaTeXにおけるドキュメントのクラスオプションに相当します。
+複数のオプションがある場合は、カンマで区切って列挙でき、ある程度のカスタマイズも可能です。
 
-//list[change_pagesize][config.ymlにてページサイズをb5jに指定]{
-texdocumentclass: ["jsbook", "b5j"]
+前節で触れた標準設定でも多くのクラスオプションが登場していました。たとえば出力するページサイズを指定するには@<tt>{config.yml}の@<code>{textdocumentclass}を次のようにします（@<list>{change_pagesize}）。
+
+//list[change_pagesize][用紙サイズをB5に指定する例]{
+texdocumentclass: ["review-jsbook", "paper=b5"]
 //}
 
-//table[papersize][設定できるページサイズ]{
+@<table>{papersize}は@<code>{review-jsbook}ドキュメントクラスに設定できる代表的な用紙サイズ（@<code>{paper}クラスオプション）です。
+指定するドキュメントクラスによってクラスオプションで設定できる値が異なるので注意してください。
+
+//table[papersize][設定できる用紙サイズ]{
 値	用紙サイズ
 ------------
-a4paper	A4
-b5paper	B5
-a4j	A4 JIS
-a5j	A5 JIS
-b5j	B5 JIS
+a4	A4
+a5	A5
+a6	A6
+b5	JIS B5
+b6	JIS B6
 //}
 
-@<table>{papersize}は、@<code>{jsbook}ドキュメントクラスに設定できる代表的な用紙サイズです。
-指定するドキュメントクラスによっては、設定できる値が異なる場合があるので注意してください。
+=== review-jsbookに設定できる主な設定項目
+
+@<code>{review-jsbook}に設定可能なクラスオプションは公式ドキュメントにまとまっています。@<table>{review-jsbook}では、
+どのようなカスタマイズができるのか理解しやすいものを挙げています。
+
+ * @<href>{https://github.com/kmuto/review/blob/master/templates/latex/review-jsbook/README.md}
+
+//table[review-jsbook][設定できる主なクラスオプションと説明]{
+オプション名	説明
+------------
+media	印刷用、電子用いずれかの用途
+cover_fit_page	カバー画像を紙面に合わせる
+paper	用紙サイズの変更
+fontsize	文字サイズ
+startpage	ページ開始番号。デフォルトは1
+//}
+
+Re:VIEWで利用している@<code>{review-jsbook}はドキュメントクラスは標準的な@<code>{jsbook}ドキュメントクラスを含んでいるので、一部のオプションはそのまま指定できます。
+たとえば@<code>{onecolumn}であれば1段組の体裁、@<code>{twocolumn}であれば2段組の体裁を実現します。
+ただし、このようなドキュメントの見た目に対して調整を行うにはTeXと書籍の専門知識が要求されます。
+
+たとえば本のルールには章の始まりを左ページ（偶数）、右ページ（奇数）に固定できるというものがあります。一般人からすると改ページの位置が左右どっちにくるのかという問題自体に馴染みがありませんよね。@<code>{openany}を指定すると左右どちらからでも章を開始できる！と気づいてしまい、ページ数を減らせるから印刷代もちょっと安くなるじゃないか？と考えたとしても入稿直前の疲れたタイミングで変更することは推奨しません。期せず発生する副作用に悩まないように十分検証期間を設けるなど余裕を持って作業してください。
+
