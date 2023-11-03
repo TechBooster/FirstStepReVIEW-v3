@@ -1,21 +1,43 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    review (2.3.0)
+    concurrent-ruby (1.2.2)
+    image_size (3.3.0)
+    mime-types (3.4.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2023.0218.1)
+    pandoc2review (1.4.0)
+      unicode-eaw
+    pastel (0.8.0)
+      tty-color (~> 0.5)
+    playwright-ruby-client (1.35.0)
+      concurrent-ruby (>= 1.1.6)
+      mime-types (>= 3.0)
+    playwright-runner (1.2.0)
+      playwright-ruby-client (~> 1.0)
+    rake (13.0.6)
+    review (5.8.0)
+      image_size
+      rexml
       rouge
       rubyzip
-    review-peg (0.2.2)
-    rouge (2.2.0)
-    rubyzip (1.2.1)
-    sass (3.4.25)
+      tty-logger
+    rexml (3.2.5)
+    rouge (4.1.2)
+    rubyzip (2.3.2)
+    tty-color (0.6.0)
+    tty-logger (0.6.0)
+      pastel (~> 0.8)
+    unicode-eaw (2.2.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  review (= 2.3.0)
-  review-peg (= 0.2.2)
-  sass (= 3.4.25)
+  pandoc2review
+  playwright-runner
+  rake
+  review (= 5.8.0)
 
 BUNDLED WITH
    1.15.3

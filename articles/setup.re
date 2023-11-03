@@ -1,211 +1,186 @@
 ={setup} Re:VIEWでの執筆環境を整える
 
-#@# NOTE author:vvakame
+#@# NOTE author:mhidaka
 
-まずはRe:VIEWで執筆するための環境を整えましょう。
+本章ではRe:VIEWで執筆するための環境を整えましょう。
 
-TechBoosterでは、GitHubが提供するエディタであるAtom@<fn>{atom}と追加パッケージであるlanguage-review@<fn>{language-review}を使って執筆しています。
-そしてGitHubなどにpushする前に、Ruby版のRe:VIEW@<fn>{review}を使ってHTMLやPDFの生成チェックを行う運用になっています。
+TechBoosterの著者陣は、もれなく全員がRe:VIEW記法で執筆するスタイルです。
+慣れないうちはエラーに遭遇したり、やり方に迷ったりしているので、CI/CD環境があってこそ運用できているといえます。
+Re:VIEW記法は、馴染みがないものなので覚えるのはちょっと面倒ですね。書籍作りを支えるものなので表現したい内容を優先し、手を動かしながら学びノウハウを貯めてください。
 
-生成チェックは、language-reviewがreview.js@<fn>{review.js}というJavaScriptによるRe:VIEWの移植版を使っているために必要な作業です。
-review.jsは現在のところ、PDFを生成することなどができませんし、文章の解釈もRuby版と厳密には一致しません。
+2023年11月現在では、Microsoftが開発提供するエディタVisual Studio Codeと@<kw>{Extensions,拡張機能}のvscode-language-reviewを利用することが一般的です。
 
-本書執筆時点での各ツールのバージョンは次のとおりです。
+ * @<href>{https://code.visualstudio.com/}
+ * @<href>{https://github.com/atsushieno/vscode-language-review}
+
+いきなりRe:VIEWで書き始めるのはハードルが高いなと感じた場合はMarkdownで書いたあとにRe:VIEWファイルに変換する手法をおすすめします。
+しかしMarkdownで執筆する場合は、図表の細やかな調整やリストへの参照など本らしい表現に対応するMarkdown記法がありません。
+慣れるにしたがってRe:VIEWファイル上で、最終調整することも多くなるのでRe:VIEWファイルでの執筆・編集を前提にセットアップ手順を知っておきましょう。
+
+本書執筆時点での検証済みのバージョンは次のとおりです。
 
 #@# TODO 入稿前にここのバージョンを再確認すること
 
- * Atom v1.18.0
- * language-review 0.15.3
- * Re:VIEW 2.3.0
+ * Visual Studio Code October 2023 (version 1.84)
+ * vscode-language-review v0.7.4
+ * Re:VIEW 5.8.0
 
-//footnote[atom][@<href>{https://atom.io/}]
-//footnote[language-review][@<href>{https://atom.io/packages/language-review}]
-//footnote[review][@<href>{https://github.com/kmuto/review}]
-//footnote[review.js][@<href>{https://github.com/vvakame/review.js}]
+== Visual Studio CodeとExtensionsのセットアップ
 
-== Atomとlanguage-reviewのセットアップ
+Visual Studio Codeをダウンロードしてインストールします。Visual Studio Codeを起動し、Extensionsを表示します。
+メニューから@<tt>{基本設定 > Extensions}または@<tt>{表示 > Extensions}どちらからで表示できます。
 
-#@# NOTE author:vvakame
+サイドバーの上部にマーケットの検索ウインドウがあるので検索ワード「Language Review」と入力してvscode-language-reviewを探してください（@<img>{vscode_extensions}）。
 
-Atomエディタをインストールします。完了後、Atomを立ち上げ、設定からlanguage-reviewをインストールします（@<img>{install-language-review}）。
-
-#@# Mac OS XであればAtomを起動した後、メニューのAtom > Install Shell Commandsを選ぶと@<code>{/usr/local/bin/}に@<code>{apm}コマンドがインストールされるので、ターミナルから@<code>{apm install language-review}を実行でもOKです。
-#@# vv: https://github.com/atom/atom/issues/7570 この辺のIssueにワイの新MBP引っかかってるんだけど他の人の環境だとどうなのかわからない…
-
-//image[install-language-review][language-reviewをインストールする]{
+//image[vscode_extensions][vscode-language-reviewをインストールする]{
 //}
 
-次に適当な名前の@<tt>{.re}ファイル（例: test.re）を作ります。
+画面のインストールボタンを押せば完了です。
+vscode-language-reviewは、Visual Studio Code上で、Re:VIEW記法を使いやすくする便利な拡張機能を持っています。
 
-作成後、このファイルをAtomで開きます。
-デフォルトの編集モードはRe:VIEW以外になっているため、クリックして@<fn>{atom-tips}Re:VIEWに切り替えます（@<img>{language-review-grammar1}、@<img>{language-review-grammar2}@<fn>{atom-images-disclaimer}）。
-#@# vv TODO この辺新規の環境でどうなるか再確認したさがある…（新PCでこの操作必要だった記憶がないけど無意識にやってるかもしれないしわからん）
-
-//image[language-review-grammar1][モード切り替え前]{
-//}
-//image[language-review-grammar2][このように切り替えるのだ]{
-//}
-
-パッケージのインストール時に、依存する別パッケージ（linter）のインストールも行っています。
-動作がおかしい気がする場合、Atomを完全に終了させてから起動しなおしてみてください。
-
-#@# また、人柱用ですがMac OS X環境ではAtomのインストールからlanguage-reviewの導入までを行うインストールスクリプトを用意してあります。
-
-#@# //cmd{
-#@# curl -L https://github.com/vvakame/language-review/raw/master/install.sh | bash
-#@# //}
-
-language-reviewは、Atomを通じてさまざまな便利な機能を提供します。
-よく使うのは次のとおりです。
-
+ * Liveプレビュー
  * シンタックスハイライト
- * 文法ミスの警告
+ * アウトライン表示とコードジャンプ
+ * Re:VIEW記法のチェックと警告、参照先入力支援
  * 文章の校正支援
- * HTMLプレビュー
- * Re:VIEWの記法一覧
- * アウトライン表示とジャンプ
 
-@<img>{language-review-sample}がサンプルです。
+@<img>{vscode-language-review-sample1}はRe:VIEW記法でかかれた@<tt>{.re}ファイルを
+開いたものです。見出しや箇条書き、ハイパーリンクなどRe:VIEW記法部分をシンタックスハイライト機能でわかりやすく表示します。
 
-//image[language-review-sample][language-reviewの画面サンプル]{
+//image[vscode-language-review-sample1][シンタックスハイライト機能]{
 //}
 
-//footnote[atom-tips][Mac OS Xの場合、Command+Shift+Pでコマンドパレットが開くのでgrammarなどそれっぽいワードを投げ込むとマウスなしで操作できます]
-//footnote[atom-images-disclaimer][プラグインの導入状態やAtomのバージョンによって、画像どおりの見た目じゃない場合のほうが多いはずです]
+Visual Studio Codeの画面右上部の@<tt>{Show preview}ボタンがあります。
+Show preview（@<img>{vscode-language-review-sample2}）はRe:VIEWでのシンタックスがどのように働いているかをプレビューできます。
 
-=={install_review} Re:VIEWをインストールする
+//image[vscode-language-review-sample2][便利なプレビュー機能]{
+//}
 
-#@# NOTE author:vvakame
+正確にはHTMLでのプレビューですので実際の紙面とはレイアウトが違います@<fn>{scale-note}。
+Re:VIEW記法のミスがないかの確認用と考えてください。
 
-次に、Ruby版Re:VIEWをインストールします。
-これはPDFやEPUBの生成などの最終出力を行うのに必要です。
+//footnote[scale-note][差分は文章の折り返し位置がわかりやすいです。そのほかの例としてはRe:VIEWにはimageという画像表示のためのブロック命令がありますが、オプションパラメータ@<code>{scale}のサイズ指定は最終出力のフォーマットや判型で見栄が異なります]
 
-RubyとRubyGemsは、すでに利用可能な環境になっているものとして解説します。
-インストールは単に次のコマンド@<fn>{experimental-review}を実行するだけです（Rubyのインストール方法次第ではsudoが必要となる場合もあります）。
+TechBoosterではVisul Studio Codeとvscode-language-review拡張機能で執筆し、
+LiveプレビューでエラーチェックしてGitHubのリポジトリにpush、CIでPDFを確認するというワークフローを運用しています。
+
+=={install_review} Re:VIEW image for Dockerのセットアップ
+
+Docker上でRe:VIEWを動かすための手順を解説します。Dockerはコンテナ型仮想化技術のプラットフォームです。
+Re:VIEW image for Dockerは最新のRe:VIEWをどの環境でも安定して使えるコンテナイメージで、vvakameが公開、メンテナンスしています。
+
+本書執筆時点での検証済みのバージョンは次のとおりです。
+
+#@# TODO 入稿前にここのバージョンを再確認すること
+
+ * macOS Sonoma
+ * Docker Desktop Version 4.25.0 (126437)
+
+Re:VIEWツールそのものはRuby言語で書かれており、macOS、Windows、LinuxどのOSでも動作します。
+ただしRubyのバージョンやPDFを出力するLaTeXを構築する手順がプラットフォームごとに微妙に異なるので、
+Re:VIEWの環境構築でトラブルに遭遇した場合の解決は困難を極めました。
+
+Re:VIEWの環境を仮想化できたことで現在は多くの書籍がRe:VIEW image for Dockerを使って作られています。
+
+Docker Desktopを次のURLからダウンロードしてインストールします。
+
+ * @<href>{https://www.docker.com/}
+
+Windowsの場合の手順は次のURLで詳しく触れられています。
+
+ * @<href>{https://github.com/vvakame/docker-review/blob/master/doc/windows-review.md}
+
+2023年11月現在、Docker Desktopのライセンスは有償と無償どちらも存在しています。無償のパーソナルプランから試してみてください。パーソナルプランでは個人開発者の利用、教育目的、非商用のオープンソースプロジェクトでの利用を想定しており、これらに加えてFAQには小規模なビジネス向け（従業員 250名未満、かつ収益 1 千万ドル未満）に対しても無償提供を継続すると記載@<fn>{docker-faq}があります。
+
+//footnote[docker-faq][@<href>{https://matsuand.github.io/docs.docker.jp.onthefly/desktop/faqs/#do-i-need-to-pay-to-use-docker-desktop}]
+
+Dockerのインストールが完了したあとはRe:VIEW image for Dockerをダウンロードします。
 
 //cmd{
-$ gem install review
+docker pull vvakame/review:5.8
 //}
 
-これだけです。
-詳しい使い方は@<chapref>{review-introduction}で解説します。
+コマンドは@<code>{5.8}を指定しています。Re:VIEW image for DockerでサポートしているRe:VIEWは5.3〜5.8です。
 
-とりあえず試してみたい場合、次のコマンドを実行してください。
+  * @<href>{https://github.com/vvakame/docker-review}
+
+===[column] 取得済みイメージの確認方法
+
+次のコマンドでpullしているDockerイメージを確認できます。
 
 //cmd{
-$ review-init sample
-$ cd sample
-
-# もしrakeコマンドがまだ入っていなかったら（sudoが必要な場合もある）
-$ gem install rake
-
-# 各種ビルド HTML & PDF & EPUB
-$ rake html_all
-$ rake clean pdf
-$ rake clean epub
+docker images vvakame/review  
 //}
 
-このコマンドではHTML、PDF、EPUB形式でサンプルをそれぞれ出力しています。
-
-//footnote[experimental-review][review-pegという実験的パッケージがありますが熱心なRe:VIEW信者でない限り通常のreviewを使えばよいでしょう]
-
-===[column] Ruby導入の手引き Mac OS X、Linux編
-
-Macの場合、何もしなくてもデフォルトでRubyが導入されています。
-この状態だとgem installを実行するときにsudoが必要になります。
-またデフォルトのRubyのバージョンは若干古いため、最新のものを入れたほうがよいでしょう。
-
-システムのデフォルトのままだと、破壊的（かもしれない）操作をするのが怖いですし、イザというときにリセットすることもやりにくいです。
-
-万一のときに@<code>{rm -rf ~/.rbenv}すればよい環境を作っておくと、精神的安らぎが得られます。
-
-そのため本書ではrbenvの利用を推奨しています。
-rbenvのインストール自体は公式サイト@<fn>{rbenv}に譲ります。
-
-rbenvインストール後の手順は次のとおりです。
+本書の手順を実行したあとでは@<tt>{vvakame/review}リポジトリのタグ@<code>{5.8}を確認できます。
 
 //cmd{
-$ rbenv install --list
-# 最新のを適当に入れれば良い 執筆時点では 2.4.1
-$ rbenv install 2.4.1
-# グローバルなrubyコマンドのバージョンを設定する localも存在する
-$ rbenv global 2.4.1
-# reviewをインストール
-$ gem install review
+REPOSITORY       TAG       IMAGE ID       CREATED        SIZE
+vvakame/review   5.8       5cb030602a81   4 months ago   3.28GB
 //}
+
+書籍制作環境を全部含んでいるのでイメージサイズが3GB超と大きめです。
 
 ===[/column]
 
-//footnote[rbenv][@<href>{https://github.com/sstephenson/rbenv#installation}]
+== PDFファイルを出力する
 
-===[column] Ruby導入の手引き Windows編
+Docker経由でのPDF出力を試しましょう。
+前節で少し触れましたがRe:VIEWでPDFに変換するにはLaTeX（platexまたはlualatexなど）を使います。
 
-RubyInstaller@<fn>{rubyinstaller}を使うとよいでしょう。
-しかし、TechBoosterでは、Windows環境下ではロクなLaTeX環境を構築できていないのでPDFの出力に難があり、素直に仮想環境を利用しています。
-PDFを生成する必要がなければ、試す価値があるでしょう。
+Re:VIEW image for Docker内部のワークフローは@<tt>{.re}ファイルを含んだプロジェクトからRe:VIEWツールを実行し、出力対象がPDFファイルなのであればLaTeX形式に変換、TeXLive実行し、PDFファイルをローカルマシンにコピーして完了という流れです。
 
-===[/column]
+TechBoosterが提供しているReVIEW-templateリポジトリをベースに執筆している場合のPDF出力から説明します。
 
-//footnote[rubyinstaller][@<href>{http://rubyinstaller.org/}]
+ * @<href>{https://github.com/TechBooster/ReVIEW-Template}
 
-== PDF出力を準備する
-
-#@# NOTE author:vvakame
-
-PDF出力の準備をします。
-Re:VIEW文書をPDFに変換するにはLaTeX（platexまたはlualatexなど）を使います。
-出力時の処理はreview形式→reviewツール実行→latex形式→platex実行→PDF という流れです。
-
-==== Mac OS Xの場合
-
-MacTeX@<fn>{mactex}を使いましょう。執筆時点ではMacTeX 2017が最新バージョンです。
-
-//footnote[mactex][@<href>{https://www.tug.org/mactex/}]
-
-==== Linuxの場合
-
-texliveパッケージを利用します。
-Ubuntu、Debianともに次のコマンドで導入できます。
-
-//emlist{
-$ sudo apt-get install texlive-lang-cjk texlive-fonts-recommended
-//}
-
-==== Windowsの場合
-
-LaTeX環境の構築の難易度が高いため、Dockerなどの仮想環境を使うとよいでしょう。
-
-==[column] Dockerとは？
-
-Dockerは、最近はやりの仮想環境用のツールです。
-Linuxカーネルに組み込みの機能を使って、軽量かつ無駄の少ない仮想化環境を実現しています。
-
-Dockerはざっくり次の３つの利用方法があります。
-
- 1. Dockerfile（イメージの設計図で主にコマンドの羅列）を書く
- 2. Docker Hub@<fn>{docker-hub}などでホストされている他人が提供したDockerイメージを使う
- 3. 他人の書いたDockerfileを元に自分のDockerfileを書く
-
-本書ではDockerのインストール方法や使い方は解説しません。
-その時々で適切なやり方を調べてみてください。Ruby入れたりTeX入れたりめんどくさすぎる！
-という人のために、Dockerのイメージを用意@<fn>{docker-review}してあります。
+Dockerで出力するスクリプトは@<tt>{C89-FirstStepReVIEW-v2}などプロジェクトルートから実行します（直下に@<tt>{articles}ディレクトリがあることを確認してください）。
 
 //cmd{
-$ docker run -i -t vvakame/review -v $(pwd):/book /bin/bash
+yourbook_dir % pwd
+/Users/mhidaka/repos/C89-FirstStepReVIEW-v2
+
+yourbook_dir % ./build-in-docker.sh
 //}
 
-コマンドを実行すると、reviewとlatexの実行環境が整った環境が直ちに使えます。
-コマンド実行後のディレクトリは@<code>{/book}ディレクトリにマウントされます。
-適宜コンパイル用のコマンドを実行してください。
+//cmd{
+yourbook_dir/articles/yourbookname.pdf
+//}
+
+PDFファイルは@<tt>{articles/}ディレクトリの下に@<tt>{書籍名.pdf}という名前で出力されます。
+
 
 #@# prh:disable
-実用的な例を知りたい場合は、この本のリポジトリのbuild-in-docker.shを参照してください。
+スクリプトファイルではRe:VIEWの設定ファイルに@<tt>{articles/config.yml}を指定しています。書籍ごとに変えたいなど中身を知りたい場合は、この本のリポジトリの@<tt>{build-in-docker.sh}を参照してください。
 
 #@# prh:disable
  *  @<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2/blob/master/build-in-docker.sh}
 
+スクリプトを使わず@<code>{docker}コマンドを手で打ち込んで実行する場合は次のコマンドです。
 
-//footnote[docker-hub][@<href>{https://hub.docker.com/}]
-//footnote[docker-review][@<href>{https://hub.docker.com/r/vvakame/review/}]
+//cmd{
+docker run -t --rm -v `pwd`:/book vvakame/review:5.8 /bin/bash -ci 
+         "cd /book && ./setup.sh && REVIEW_CONFIG_FILE=config.yml npm run pdf"
+//}
 
-==[/column]
+毎回コマンドを打ち込むのは大変なので@<tt>{build-in-docker.sh}のようにまとめておくといいでしょう。
+
+===[column] Re:VIEW image for Dockerのすごさ
+
+本節で説明したワークフローでは、わかりやすさのためにRe:VIEWツールの内部で行なっている処理も含んでいます。
+
+Re:VIEW image for DockerにはMeCabといった日本語形態素解析システムも入っているので、Re:VIEWで索引を作るといった真の書籍っぽい機能を引き出せます。索引がついた同人誌はあまり見かけませんが商業利用も盛んなRe:VIEWならではです。
+
+利用可能なフォントも豊富で、デフォルトでは原ノ味フォントを使います。オプションでIPAフォント、Notoフォントを導入可能です。いずれもフォント埋め込み済みのPDFファイルを出力できるので入稿でも安心です。
+
+原ノ味フォントは明朝体、ゴシック体ともにマルチウェイトなのでRegular、Medium、Boldといった太さも7種類に対応していて利用実績が多く、読み慣れています。
+
+IPAフォントは明朝体、ゴシック体それぞれに等幅とプロポーショナルがあるオープンソースのフォントです。
+ウェイトに対応していないため、太字にしたい場合にはシステム側で後処理が必要です。
+
+NotoフォントはGoogleによって開発されたオープンソースフォントです。明朝体、ゴシック体の日本語フォント以外にも数多くのNotoフォントファミリーから構成されており、馴染みのある欧文フォントであるRobotoとの相性も抜群です。
+
+Re:VIEW image for Docker登場以前はフォントのセットアップだけでも一苦労で文字化けや意図しない表示に悩まされることも多かったものです。Re:VIEWの作者とコンテナのメンテナを褒め称えましょう。
+
+===[/column]
+
