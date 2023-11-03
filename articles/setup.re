@@ -2,7 +2,7 @@
 
 #@# NOTE author:mhidaka
 
-本章ではRe:VIEWで執筆するための環境を整えましょう。
+本章ではRe:VIEWで執筆するための環境を整えます。
 
 TechBoosterの著者陣は、もれなく全員がRe:VIEW記法で執筆するスタイルです。
 慣れないうちはエラーに遭遇したり、やり方に迷ったりしているので、CI/CD環境があってこそ運用できているといえます。
@@ -184,3 +184,104 @@ Re:VIEW image for Docker登場以前はフォントのセットアップだけ�
 
 ===[/column]
 
+
+== 応用編：書籍をローカル環境でビルドするには
+
+本節ではRe:VIEWファイルをローカル環境でコンパイルする方法を紹介します。Re:VIEWは、Markdown、プレーンテキスト、HTMLやEPUBなど多様なフォーマットに対応しています。
+ローカル環境の構築ドキュメントとPDFを出力する@<code>{review-pdfmaker}、EPUBを出力する@<code>{review-epubmaker}、Webページを出力する@<code>{review-webmaker}に触れますが
+入稿に利用する形式は@<code>{review-pdfmaker}コマンドでのPDF形式です。
+
+本書ではDocker経由の利用を推奨していること、ローカル環境での構築でトラブルが起きると解決が大変なことの2点を鑑みて各OSでのインストール手順を丁寧に記述することを意図的に避けています。
+しかしローカル環境があると色々な試行錯誤、とくにレイアウト調整やデバッグなどに便利ですので試したい読者のためにポインタを示します。
+TechBoosterでは編集者は手元の環境で確認するようにしています。ページ数の調整や記法の修正、図表の見栄で頻繁なPDF再出力を行うためです。
+
+=== ローカル環境の構築
+
+RubyのインストールおよびPDF出力を目的とするならTeXLive 2023を導入してください。OSごとのインストール手順は次のドキュメントを参照して実施してください。
+
+ * @<href>{https://github.com/kmuto/review/blob/master/doc/quickstart.ja.md}
+ * @<href>{https://texwiki.texjp.org/?TeX%20Live}
+
+Re:VIEWのインストールは次のとおりRubyGemsを使うのがいいでしょう。
+
+//cmd{
+gem install review
+//}
+
+Re:VIEWの開発チームは、定期的に新しいバージョンをリリースしています。
+執筆を終えた書籍で追従する場合は変更点を確認し、レイアウトが意図せず崩れないよう互換性に気をつけてください。
+
+=== review-pdfmaker
+
+@<code>{review-pdfmaker}はそのプロジェクトのPDFを生成します。
+引数としてYAMLファイル（@<tt>{config.yml}）をひとつ指定します。
+
+//cmd{
+> review-pdfmaker config.yml
+(出力省略)
+//}
+
+YAMLファイルには本のタイトルや筆者名といった本のメタデータとなる設定を記述しておきます。
+その設定のひとつ@<code>{bookname}が出力ファイル名に対応しています。
+
+@<code>{bookname}が「book」となっている場合、生成した@<tt>{book.pdf}を自身のディレクトリに保存します。
+
+@<code>{review-pdfmaker}の内部では別のコマンド@<code>{review-compile --target=latex}を実行しています。
+そのあとに@<code>{platex}や@<code>{dvipdfmx}のようなTeX形式のファイルからPDFへ変換するRe:VIEW以外の外部コマンドを実行します。
+
+=== 制作時に出会うエラーたち
+
+@<code>{review-pdfmaker}をはじめて使うときは作法がわからず戸惑うかもしれません。
+もっとも単純な事例では@<tt>{catalog.yml}の@<code>{CHAPS}で追加した@<tt>{.re}ファイルを書き忘れることです。
+単純に参照がない場合もビルドが成功するので（機械にはわからないエラーなので）追加分が見えないため慣れないうちは困惑します。
+
+検出しにくい見た目の問題も挙げましょう。
+
+ * 本文中にリストとして掲載したソースコードが長すぎて紙面をはみ出している場合
+ * 箇条書きのつもりで書いた「@<code>{*}」が半角スペースを忘れていて直接本文に表示されている場合
+ * 表に複数行のテキストを入れたら折返しがうまくいかず不格好になる場合
+
+装飾やレイアウトの問題についてはビルドエラーとはなりません。意図したレイアウトでPDFが出力されているかは作成者によるケアが必要です。
+
+最後にRe:VIEW記法を間違えたときは構文エラーが起きます。エラーが発生すると標準出力に発生時点のログが残るのでとりあえず眺めることになるでしょう。
+前述の説明のとおり、TeXの出力ログやエラーも含まれているので急に大量のログがでるので驚くことになります。
+エラーログから間違えた場所を探すのは苦労するので、沢山書いてからRe:VIEW記法に書き直せばいいやというスタンスより、ちょっとずつ取り込んでおくほうが安心です。
+テンプレートリポジトリのCIはそのために存在しています。
+
+=== review-epubmaker
+
+@<code>{review-pdfmaker}同様、@<code>{review-epubmaker}はプロジェクトのメタデータとなるYAMLファイルを引数としてEPUBファイルを生成します。
+EPUBファイルの実態はHTMLファイルやCSSファイルをZIPでアーカイブ化したものです。
+
+Re:VIEWはEPUBの生成処理で、システムにインストールされているZIPコマンドを使用します。
+事前にZIPコマンドをインストールしておいてください。
+
+//cmd{
+> review-epubmaker config.yml
+(出力省略)
+> file book.epub
+book.epub: EPUB ebook data
+（電子書籍リーダに読み込ませることで内容を確認出来る）
+//}
+
+YAMLファイル内の@<code>{bookname}を元にして出力ファイル名を決定します。
+
+#@# prh:disable
+=== review-webmaker
+
+#@# prh:disable
+@<code>{review-webmaker}はプロジェクトのメタデータとなるYAMLファイルを引数としてWebサイト用ファイルを生成します。
+HTMLファイルやCSSファイル、画像を@<tt>{webroot}ディレクトリに出力します。
+
+//cmd{
+> review-webmaker config.yml
+(出力省略)
+> file webroot
+webroot: directory
+//}
+
+読み込むCSSファイルなどは参照するYAMLファイル内の@<code>{webmaker}パラメータを元にして設定しています（@<img>{webroot}）。
+
+#@# prh:disable
+//image[webroot][review-webmakerの出力例][scale=0.75]{
+//}
