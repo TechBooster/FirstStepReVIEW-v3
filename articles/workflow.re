@@ -152,7 +152,7 @@ Re:VIEWはPDFだけでなくEPUBやHTMLなど各種フォーマットに対応�
  : Re:VIEW image for Docker
    @<href>{https://hub.docker.com/r/vvakame/review/}
  : Re:VIEW-build-artifact-action
-   @<href>{@<href>{https://github.com/marketplace/actions/review-build-artifact-action}}
+   @<href>{https://github.com/marketplace/actions/review-build-artifact-action}
 
 TechBoosterではDocker上でRe:VIEWを動かすツールおよびGitHub Actionsとして実行するラッパーツールを用意して常に最新のPDF出力が得られるような運用をしています。これには多くのメリットがありますが中でも次のような点で執筆に貢献しています。
 
