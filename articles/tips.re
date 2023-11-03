@@ -101,6 +101,13 @@ Re:VIEWではPDF出力を得るためにLaTeXを利用しています。その�
 
 //footnote[book_latex2e][「LATEX2e美文書作成入門」 @<href>{https://www.amazon.co.jp/dp/4774187054/} - 奥村晴彦著 技術評論社刊]
 
+== 表紙をつける
+#@# TODO mhidaka
+@<code>{cover.jpg}は@<tt>{config.yml}の位置をルートに@<tt>{image/cover.jpg}へ配置してください。
+カバー画像がない場合は署名が表示されます。
+
+== 大扉を変える
+
 == プリプロセッサ命令
 
 Re:VIEWでは、最終的な見た目に影響する記法とは別に、外部の情報を.reファイルに反映する「プリプロセッサ命令」があります。
