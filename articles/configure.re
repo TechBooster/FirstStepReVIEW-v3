@@ -15,12 +15,14 @@ Re:VIEWでは書籍に関する情報を章を設定する@<tt>{catalog.yml}と�
 //list[catalog_yml_sample][５つの章をもつcatalog.yml]{
 PREDEF:
   - preface.re
+
 CHAPS:
   - writing-book.re
   - environment.re
   - workflow.re
   - publishing-book.re
   - distribution.re
+
 APPENDIX:
   - tips.re
 
@@ -29,6 +31,7 @@ POSTDEF:
 //}
 
 @<tt>{catalog.yml}の各項目の内容は次のとおりです。
+CHAPSのみを必須として前書き、付録、後書きなど本を構成する構造を定義しています。
 
  : PREDEF
    前書きなど目次の前に記載するものを指定します
@@ -134,15 +137,16 @@ colophon: true
 目次として抽出する章や節の深さを変更するには、@<tt>{config.yml}の@<code>{toclevel}項目を設定します（@<list>{toclevel}）。
 
 //list[toclevel][抽出レベルを設定]{
+# 目次として抽出する見出しレベル
 toclevel: 2
 //}
 
 抽出レベルを変更すると、値に応じた深さの見出しを出力します（@<img>{toclevel2}および@<img>{toclevel3}）。
 
-//image[toclevel2][toclevel:2を指定した場合の目次][scale=0.75]{
+//image[toclevel2][toclevel:2を指定した場合の目次][scale=0.85]{
 //}
 
-//image[toclevel3][toclevel:3を指定した場合の目次][scale=0.75]{
+//image[toclevel3][toclevel:3を指定した場合の目次][scale=0.85]{
 //}
 
 =={layout} 用紙サイズやデザインを変更する

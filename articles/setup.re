@@ -74,7 +74,7 @@ Re:VIEW image for Dockerは最新のRe:VIEWをどの環境でも安定して使�
 #@# TODO 入稿前にここのバージョンを再確認すること
 
 #@# prh:disable
- * macOS Sonoma
+ * macOS Ventura 13.5.1
  * Docker Desktop Version 4.25.0 (126437)
 
 Re:VIEWツールそのものはRuby言語で書かれており、macOS、Windows、LinuxどのOSでも動作します。
@@ -134,20 +134,19 @@ Docker経由でのPDF出力を試しましょう。
 Re:VIEW image for Docker内部のワークフローは@<tt>{.re}ファイルを含んだプロジェクトからRe:VIEWツールを実行し、出力対象がPDFファイルであればLaTeX形式に変換、TeXLiveを実行して生成したPDFファイルをローカルマシンにコピーして完了という流れです。
 
 #@# prh:disable
-TechBoosterが提供しているReVIEW-templateリポジトリをベースに執筆している場合のPDF出力から説明します。
+TechBoosterが提供しているReVIEW-templateリポジトリをベースに執筆している場合のPDF出力方法を説明します。
 
 #@# prh:disable
  * @<href>{https://github.com/TechBooster/ReVIEW-Template}
 
 #@# prh:disable
-Dockerで出力するスクリプトは@<tt>{C89-FirstStepReVIEW-v2}などプロジェクトルートから実行します（直下に@<tt>{articles}ディレクトリがあることを確認してください）。
+Docker実行用のスクリプトは@<tt>{C89-FirstStepReVIEW-v2}などプロジェクトルートから実行します（直下に@<tt>{articles}ディレクトリがあることを確認してください）。
 
 #@# prh:disable
 //cmd{
-yourbook_dir % pwd
+$ pwd
 /Users/mhidaka/repos/C89-FirstStepReVIEW-v2
-
-yourbook_dir % ./build-in-docker.sh
+$ ./build-in-docker.sh
 //}
 
 //cmd{
@@ -158,7 +157,7 @@ PDFファイルは@<tt>{articles/}ディレクトリの下に@<tt>{書籍名.pdf
 
 
 #@# prh:disable
-スクリプトファイルのなかでRe:VIEWの設定ファイル@<tt>{articles/config.yml}を指定しています。書籍ごとに変えたいなど中身を知りたい場合は、この本のリポジトリにある@<tt>{build-in-docker.sh}を参照してください。
+スクリプトファイルのなかでRe:VIEWの設定ファイル@<tt>{articles/config.yml}を指定しています。処理を変えたいなど中身を知りたい場合は、本書のリポジトリにある@<tt>{build-in-docker.sh}を参照してください。
 
 #@# prh:disable
  *  @<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2/blob/master/build-in-docker.sh}
@@ -174,7 +173,7 @@ docker run -t --rm -v `pwd`:/book vvakame/review:5.8 /bin/bash -ci
 
 ===[column] Re:VIEW image for Dockerのすごさ
 
-本節で説明したワークフローでは、わかりやすさのためにRe:VIEWツールの内部で行なっている処理も含んでいます。
+本節で説明したワークフローでは、わかりやすさのためにRe:VIEWツールの内部で行なっている処理も含んで解説しています。
 
 Re:VIEW image for DockerにはMeCabといった日本語形態素解析システムも入っているので、Re:VIEWで索引を作るといった真の書籍っぽい機能を引き出せます。索引がついた同人誌はあまり見かけませんが商業利用も盛んなRe:VIEWならではです。
 
@@ -185,9 +184,9 @@ Re:VIEW image for DockerにはMeCabといった日本語形態素解析システ
 IPAフォントは明朝体、ゴシック体それぞれに等幅とプロポーショナルがあるオープンソースのフォントです。
 ウェイトに対応していないため、太字にしたい場合にはシステム側で後処理が必要です。
 
-NotoフォントはGoogleによって開発されたオープンソースフォントです。明朝体、ゴシック体の日本語フォント以外にも数多くのNotoフォントファミリーから構成されており、馴染みのある欧文フォントであるRobotoとの相性も抜群です。
+NotoフォントはGoogleによって開発されたオープンソースフォントです。明朝体、ゴシック体の日本語フォント以外にも数多くのNotoフォントファミリーから構成されており、馴染みの欧文フォントであるRobotoとの相性も抜群です。
 
-Re:VIEW image for Docker登場以前はフォントのセットアップだけでも一苦労で文字化けや意図しない表示に悩まされることも多かったものです。Re:VIEWの作者とコンテナのメンテナを褒め称えましょう。
+Re:VIEW image for Docker登場以前はフォントのセットアップだけでも一苦労でした。文字化けや意図しない表示に悩まされることも多かったものです。Re:VIEWの作者とコンテナのメンテナを褒め称えましょう。
 
 ===[/column]
 
@@ -195,7 +194,7 @@ Re:VIEW image for Docker登場以前はフォントのセットアップだけ�
 == 応用編：書籍をローカル環境でビルドするには
 
 #@# prh:disable
-本節ではRe:VIEWファイルをローカル環境でコンパイルする方法を紹介します。Re:VIEWは、Markdown、プレーンテキスト、HTMLやEPUBなど多様なフォーマットに対応しています。
+本節ではRe:VIEWファイルをローカル環境でコンパイルする方法を紹介します。Re:VIEWはMarkdown、プレーンテキスト、HTMLやEPUBなど多様なフォーマットに対応しています。
 ローカル環境の構築ドキュメントとPDFを出力する@<code>{review-pdfmaker}、EPUBを出力する@<code>{review-epubmaker}、Webページを出力する@<code>{review-webmaker}に触れますが
 入稿に利用する形式は@<code>{review-pdfmaker}コマンドでのPDF形式です。
 
@@ -218,7 +217,7 @@ gem install review
 //}
 
 Re:VIEWの開発チームは、定期的に新しいバージョンをリリースしています。
-執筆中、または執筆を完了した書籍のアップデートなどでバージョンを変更する場合はチェンジログを確認し、意図せずレイアウトが崩れないよう互換性確保に気をつけてください。
+執筆中、または執筆を完了した書籍のアップデートなどでバージョンを変更する際にはチェンジログを確認し、意図せずレイアウトが崩れないよう互換性確保に気をつけてください。
 
 === review-pdfmaker
 
@@ -241,8 +240,8 @@ YAMLファイルには本のタイトルや筆者名といった本のメタデ�
 === 制作時に出会うエラーたち
 
 @<code>{review-pdfmaker}をはじめて使うときは作法がわからず戸惑うかもしれません。
-もっとも単純な事例では@<tt>{catalog.yml}の@<code>{CHAPS}で追加した@<tt>{.re}ファイルを書き忘れることです。
-単純に参照がない場合もビルドが成功するので（機械にはわからないエラーなので）追加分が見えないため慣れないうちは困惑します。
+ありがちな事例は@<tt>{catalog.yml}の@<code>{CHAPS}に作成した@<tt>{.re}ファイルを書き忘れることです。
+単純に参照がない場合もビルドが成功するので（機械にはわからないエラーなので）追加分がPDFファイルに書き出されない現象が起きます。慣れないうちは困惑します。
 
 検出しにくい見た目の問題も挙げましょう。
 
@@ -292,8 +291,12 @@ webroot: directory
 //}
 
 #@# prh:disable
-読み込むCSSファイルなどは参照するYAMLファイル内の@<code>{webmaker}パラメータを元にして設定しています（@<img>{webroot}）。
+読み込むCSSファイルなどは参照するYAMLファイル内の@<code>{webmaker}パラメータを元にして設定しています（@<img>{webroot}、@<img>{webroot_browsing}）。
 
 #@# prh:disable
-//image[webroot][review-webmakerの出力例][scale=0.75]{
+//image[webroot][review-webmakerの出力例（ファイル構成）]{
+//}
+
+#@# prh:disable
+//image[webroot_browsing][review-webmakerの出力例（ブラウザ表示）]{
 //}

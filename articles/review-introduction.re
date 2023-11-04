@@ -609,6 +609,9 @@ Re:VIEWでは、見出しキャプションとは別に参照用のラベルを�
 
 //list[refer_section_label][見出しの参照]{
 ＠<hd>{commandline}
+
+別の章からの参照
+＠<hd>{chapter_filename|commandline}
 //}
 
 通常の節の参照同様、違う章の節を参照できる優れものです。

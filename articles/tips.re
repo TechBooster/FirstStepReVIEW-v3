@@ -58,15 +58,17 @@ TechBoosterが推奨するディレクトリ構成を述べておきます。
 
 == 紙面レイアウトを変更する
 
-印刷所へ入稿する原稿を制作しているとRe:VIEWが標準で用意している構成そのものを変更する必要に迫られるときがあります。
+印刷所へ入稿する原稿を制作しているとRe:VIEWが標準で用意している標準構成に手を加える必要に迫られるときがあります。
 Re:VIEWではPDFを出力するためにLaTeXを利用しています。そのため、レイアウトの変更にはLaTeXの知識が必要です。
 
 @<tt>{config.yml}の設定値を変更したい場合@<hd>{configure|layout}を参照してください。既存のスタイルとお勧めの組み合わせを紹介しています。きっと欲しいパラメータが見つかるでしょう。
 
 さらにRe:VIEWが出力するLaTeXソースファイルの構成を変更する拡張例としてRe:VIEWテンプレートリポジトリの内容を紹介します。
+
+この独自設定の内容は、表紙および裏表紙を実寸ではなく仕上がりサイズにリサイズするというものです。なにか設定項目を追加する際のよい手本になるはずです。
+
 テンプレートリポジトリでは@<tt>{articles}ディレクトリの下に@<tt>{layouts/config-local.tex.erb}と@<tt>{sty/techbooster-doujin-base.sty}を置いて
 @<tt>{config.yml}パラメータにTechBooster独自の設定を追加しています。
-この独自設定の内容は、表紙および裏表紙を実寸ではなく仕上がりサイズにリサイズするというものです。なにか設定項目を追加する際のよい手本になるはずです。
 
 Re:VIEWでの紙面レイアウトやデザインを自分でカスタマイズしたいと感じましたか？そんな方のために開発者ガイドラインがあります。
 
@@ -75,12 +77,12 @@ Re:VIEWでの紙面レイアウトやデザインを自分でカスタマイズ�
  : Re:VIEW 3からのLaTeX処理
    @<href>{https://review-knowledge-ja.readthedocs.io/ja/latest/latex/review3-latex.html}
 
-カスタマイズにあたってはリストや紙面の飾りといった影響範囲の小さいものから試していくと満足度が得やすいです。
-そこまで複雑なことがしたいわけじゃなくて行あたりの文字数やフォントサイズを変えたい場合@<fn>{new_layout}にはRe:VIEWの初期設定コマンド（@<code>{review-init -w プロジェクト名}）がGUI上で取り組めて便利です。
+カスタマイズにあたってはリストや図のキャプションやヘッダといった紙面の飾りなど影響範囲の小さいものから試していくと満足度が得やすいです。
+そこまで複雑なことがしたいわけじゃないよ、行あたりの文字数やフォントサイズを変えたいんだよという場合@<fn>{new_layout}にはRe:VIEWの初期設定コマンド（@<code>{review-init -w プロジェクト名}）がGUI上で取り組めて便利です。
 
 //footnote[new_layout][@<href>{https://review-knowledge-ja.readthedocs.io/ja/latest/faq/faq-tex.html#5da91055a04a506c0d01a78b804b70a3}]
 
-== 余白を調節する
+== ページの余白を調節する
 
 PDFで出力するページの余白を指定するには@<tt>{config.yml}の@<code>{texdocumentclass}項目を調整します。
 前述の@<code>{review-init -w プロジェクト名}で調整することも可能ですが、すでにあるプロジェクトには適用できないため@<code>{texdocumentclass}を手でコピーするなど
@@ -181,8 +183,8 @@ TeXファイルの中身は自由です。ここではRe:VIEWが提供してい�
 //}
 
 @<code>{\includefullpagegraphics}マクロでは@<tt>{hontobira.jpg}ファイルを白ページに中心寄せで読み込んでいます。
-このとき画像ファイルは@<tt>{articles/images}ディレクトリ内に配置してください。サンプルでは@<tt>{.jpg}ファイルを使っていますがPDFファイルを指定することもできます。
-判型を合わせて作り込むとより美しく満足度が高いものが仕上がります。
+画像ファイルは@<tt>{articles/images}ディレクトリ内に配置してください。サンプルでは@<tt>{.jpg}ファイルを使っていますがPDFファイルを指定することもできます。
+判型に合わせて作り込むとより美しく満足度が高いものが仕上がります。
 
 
 ===[column] レイアウトを変更する楽しみ
@@ -327,9 +329,9 @@ $ review-preproc -r --tabwidth=2 sample.re
 #@# prh:disable
 //list[sample_mapoutput_after][java -version]{
  #@mapoutput(java -version 2>&1)
- java version "1.8.0_131"
- Java(TM) SE Runtime Environment (build 1.8.0_131-b11)
- Java HotSpot(TM) 64-Bit Server VM (build 25.131-b11, mixed mode)
+ openjdk version "11.0.15" 2022-04-19 LTS
+ OpenJDK Runtime Environment Zulu11.56+19-CA (build 11.0.15+10-LTS)
+ OpenJDK 64-Bit Server VM Zulu11.56+19-CA (build 11.0.15+10-LTS, mixed mode)
  #@end
 //}
 
@@ -414,7 +416,7 @@ $ review-epubmaker config.yml
 
 欲しい出力結果に応じて、コマンドを使い分けます。
 PDF、EPUBについては利用するコマンドそのものが違うので注意します。
-詳細は@<chapref>{publishing-book}を参照してください。
+詳細は@<chapref>{setup}を参照してください。
 
 あとはそれぞれのターゲット向けに下準備とビルドを行うタスクを作成するだけです。
 
@@ -469,7 +471,10 @@ TechBoosterがRe:VIEWを使っているなかで関係したお世話になっ�
  * 表現の統一：「どうか」でのGrep → 大抵は不要。～正しいかどうか。→  検証する
  * 表現の統一：箇条書き、リストや図のキャプションが体言止めなのか、動詞で終わっているのか、統一する
 
+列挙したチェックリストをはじめての執筆で満たすのは難しいはずです。書く訓練を積むとある程度できるようになりますが一朝一夕ではありません。自分なりの基準を作ってください。
+
 また文章単体では、かかりつけの距離を確認し、読みやすく訂正しています。
+主語と述語の距離は近いほどわかりやすいなど分割するコツがありますのでチェックリストを使って適切な表現をみつけてください。
 
 //list[before][変更前]{
 アプリはOSの起動やタイマーによって定期的に起動されるアプリのServiceを作成し、RecommendationパッケージのContentRecommendationを使用してNotificaitonを作成することができます。
