@@ -102,7 +102,7 @@ history: [["2015-12-31 C89版 v1.0.0"],["2017-8-11 C92版 v2.0.0"],["2023-11-12 
 rights: (C) 2017-2023 TechBooster
 
 # 固有IDに使用するドメイン。省略した場合は時刻に基づくランダムUUIDが入る
-urnid: urn:uid:https://github.com/TechBooster/C89-FirstStepReVIEW-v2
+urnid: urn:uid:https://github.com/TechBooster/FirstStepReVIEW-v3
 
 # 目次として抽出する見出しレベル
 toclevel: 2

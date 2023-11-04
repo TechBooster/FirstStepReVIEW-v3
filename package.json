@@ -1,19 +1,19 @@
 {
-  "name": "c89-firststepreview-v2",
+  "name": "firststepreview-v3",
   "version": "0.0.3",
   "private": true,
   "description": "",
   "main": "Gruntfile.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TechBooster/C89-FirstStepReVIEW-v2.git"
+    "url": "git+https://github.com/TechBooster/FirstStepReVIEW-v3.git"
   },
   "author": "TechBooster(mhidaka)",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/TechBooster/C89-FirstStepReVIEW-v2/issues"
+    "url": "https://github.com/TechBooster/FirstStepReVIEW-v3/issues"
   },
-  "homepage": "https://github.com/TechBooster/C89-FirstStepReVIEW-v2#readme",
+  "homepage": "https://github.com/TechBooster/FirstStepReVIEW-v3#readme",
   "engines": {
     "node": ">=6.0.0"
   },

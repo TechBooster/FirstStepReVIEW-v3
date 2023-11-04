@@ -110,7 +110,7 @@ Re:VIEWは優れた書籍制作ツールですが、そのままでは入稿で�
 
 #@# prh:disable
  : 本書のリポジトリ
-   @<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2}
+   @<href>{https://github.com/TechBooster/FirstStepReVIEW-v3}
  : テンプレートリポジトリ
    @<href>{https://github.com/TechBooster/ReVIEW-Template}
 

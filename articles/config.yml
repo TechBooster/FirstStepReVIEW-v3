@@ -92,7 +92,7 @@ rights: (C) 2017-2023 TechBooster
 debug: null
 
 # 固有IDに使用するドメイン。省略した場合は時刻に基づくランダムUUIDが入る
-urnid: urn:uid:https://github.com/TechBooster/C89-FirstStepReVIEW-v2
+urnid: urn:uid:https://github.com/TechBooster/FirstStepReVIEW-v3
 #
 # ISBN。省略した場合はurnidが入る
 # isbn: null

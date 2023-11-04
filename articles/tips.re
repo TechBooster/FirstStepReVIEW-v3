@@ -364,7 +364,7 @@ TechBoosterではNode.js+npm-scripts（裏はgrunt）を利用しています。
 
 #@# prh:disable
 //emlist{
-rm -rf articles/C89-FirstStepReVIEW-v2-pdf/ \
+rm -rf articles/FirstStepReVIEW-v3/ \
        articles/*.pdf  \
        articles/*.epub \
        articles/*.html \
@@ -374,7 +374,7 @@ rm -rf articles/C89-FirstStepReVIEW-v2-pdf/ \
 
 #@# prh:disable
 それぞれ@<code>{--debug}オプション付きでpdfをビルドしたときのtmpディレクトリ、pdf、epub、html、idgxml（Adobe InDesign用XML）、text生成時に作成される一時ファイルまたは最終出力ファイルです。
-一番最初の行のC89-FirstStepReVIEW-v2-pdf部分は@<tt>{articles/config.yml}の@<code>{bookname}の設定により変化します。
+一番最初の行のFirstStepReVIEW-v3部分は@<tt>{articles/config.yml}の@<code>{bookname}の設定により変化します。
 
  * @<code>{review-preproc}コマンドを実行する
 
@@ -424,7 +424,7 @@ PDF、EPUBについては利用するコマンドそのものが違うので注�
 これらを詰め込んだ、実際にTechBoosterで使っているgrunt用設定ファイルを公開しています。
 
 #@# prh:disable
- * @<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2/blob/master/Gruntfile.js}
+ * @<href>{https://github.com/TechBooster/FirstStepReVIEW-v3/blob/main/Gruntfile.js}
 
 Node.jsのバージョンといった動作条件はリポジトリのメンテナンスなどで更新があります。利用前にリポジトリを確認してください。
 
