@@ -40,7 +40,7 @@ POSTDEF:
    後書きを指定します
 
 加えて@<code>{CHAPS}はネストすることで部を構成できます。
-部を構成するには、@<list>{catalog_yml_nested_chaps}のように、部のタイトル名や.reファイル名の下に章のファイルを記述します。
+部を構成するには、@<list>{catalog_yml_nested_chaps}のように、部のタイトル名や@<tt>{.re}ファイル名の下に章のファイルを記述します。
 
 //list[catalog_yml_nested_chaps][部を構成するCHAPSの記述]{
 CHAPS:
@@ -53,7 +53,7 @@ CHAPS:
   - chapter5.re
 //}
 
-YAMLに馴染みがないと忘れがちですがCollection@<fn>{url_yaml_collection}にするのでコロン記号（：）を付け忘れないようにしましょう。
+YAMLの記法に馴染みがないと忘れがちですがCollection@<fn>{url_yaml_collection}にするのでコロン記号（：）を付け忘れないようにしましょう。
 
 //footnote[url_yaml_collection][@<href>{http://www.yaml.org/spec/1.2/spec.html#id2759963}]
 
@@ -67,9 +67,9 @@ Re:VIEWでは本を生成（コンパイル）するときのメタデータ�
 ファイル名に決まりはありませんが慣例的に@<tt>{config.yml}としています。
 書名や奥付の内容、どの深さまで目次に含めるかなどを設定できます。
 
-@<list>{config_yml}は本書で使っている@<tt>{config.yml}です。
+@<list>{config_yml}は本書で使っている@<tt>{config.yml}の一部を抜粋したものです。
 
-//list[config_yml][config.yml]{
+//list[config_yml][config.ymlの中身]{
 # ブック名(ファイル名になるもの。ASCII範囲の文字を使用)
 bookname: C89-FirstStepReVIEW-v2
 # 記述言語。省略した場合はja
@@ -86,11 +86,13 @@ pbl: TechBooster
 
 # 刊行日(省略した場合は実行時の日付)
 date: 2023-10-31
+
 # 発行年月。YYYY-MM-DD形式による配列指定。省略した場合はdateを使用する
 # 複数指定する場合は次のように記述する
 # [["初版第1刷の日付", "初版第2刷の日付"], ["第2版第1刷の日付"]]
 # 日付の後ろを空白文字で区切り、任意の文字列を置くことも可能。
 history: [["2015-12-31 C89版 v1.0.0"],["2017-8-11 C92版 v2.0.0"],["2023-10-31 技術書典15版 v3.0.0"]]
+
 # 権利表記(配列で複数指定可)
 # rights: (C) 2016 Re:VIEW Developers
 rights: (C) 2017-2023 TechBooster
@@ -128,7 +130,7 @@ colophon: true
 
 == 目次に表示する項目をカスタマイズする
 
-目次として抽出する章や節の深さを変更するには、@<tt>{config.yml}の@<code>{toclevel:}項目を設定します（@<list>{toclevel}）。
+目次として抽出する章や節の深さを変更するには、@<tt>{config.yml}の@<code>{toclevel}項目を設定します（@<list>{toclevel}）。
 
 //list[toclevel][抽出レベルを設定]{
 toclevel: 2
@@ -144,7 +146,7 @@ toclevel: 2
 
 =={layout} 用紙サイズやデザインを変更する
 
-PDF形式で出力する紙面のデザインは差し替え可能です。@<tt>{config.yml}の@<code>{texstyle:}項目の値を変更します（@<list>{change_layout}）。
+PDF形式で出力する紙面のデザインは差し替え可能です。@<tt>{config.yml}の@<code>{texstyle}項目の値を変更します（@<list>{change_layout}）。
 
 //list[change_layout][config.ymlにてスタイルファイルを指定]{
 # LaTeX用のスタイルファイル(styディレクトリ以下に置くこと)
@@ -152,11 +154,11 @@ PDF形式で出力する紙面のデザインは差し替え可能です。@<tt>
 //}
 
  : reviewmacro
-   Re:VIEWのデフォルトスタイルです。
+   Re:VIEWのデフォルトスタイルです
  : viewermacro
-   電子書籍向けのスタイルです。タブレットなどで見やすいように余白やフォントサイズを調整しています。TechBooster製のスタイルです。
+   電子書籍向けのスタイルです。タブレットなどで見やすいように余白やフォントサイズを調整しています。TechBooster製のスタイルです
 
-ReVIEW-Templateテンプレートリポジトリまたは本書のリポジトリには次の4つの@<code>{texdocumentclass:}が用意されています。
+ReVIEW-Templateテンプレートリポジトリまたは本書のリポジトリには次の4つの@<code>{texdocumentclass}が用意されています。
 
  * B5の設定(10pt 40文字×35行) - 紙版
  * B5の設定(10pt 40文字×35行) - 電子版
@@ -168,8 +170,8 @@ ReVIEW-Templateテンプレートリポジトリまたは本書のリポジト�
 //emlist[config.ymlの印刷用設定]{
 texstyle: ["reviewmacro"]
 texdocumentclass: ["review-jsbook", "media=print,paper=b5,serial_pagination=true,
-    hiddenfolio=nikko-pc,openany,fontsize=10pt,baselineskip=15.4pt,line_length=40zw,
-    number_of_lines=35,head_space=30mm,headsep=10mm,headheight=5mm,footskip=10mm"]
+  hiddenfolio=nikko-pc,openany,fontsize=10pt,baselineskip=15.4pt,line_length=40zw,
+  number_of_lines=35,head_space=30mm,headsep=10mm,headheight=5mm,footskip=10mm"]
 //}
 
 ==== 電子書籍（PDF）での標準設定
@@ -177,16 +179,16 @@ texdocumentclass: ["review-jsbook", "media=print,paper=b5,serial_pagination=true
 //emlist[config.ymlの電子書籍用設定]{
 texstyle: ["reviewmacro"]
 texdocumentclass: ["review-jsbook", "media=ebook,paper=b5,serial_pagination=true,
-    openany,fontsize=10pt,baselineskip=15.4pt,line_length=40zw,
-    number_of_lines=35,head_space=30mm,headsep=10mm,headheight=5mm,footskip=10mm"]
+  openany,fontsize=10pt,baselineskip=15.4pt,line_length=40zw,
+  number_of_lines=35,head_space=30mm,headsep=10mm,headheight=5mm,footskip=10mm"]
 //}
 
-B5ではなく少し小さいA5にしたい等で書籍にあった用紙サイズへ変更するだけであれば、これらのプリセットの利用を強く推奨します。
+B5ではなく少し小さいA5にしたいなど書籍に合う用紙サイズへ変更するのであれば、これらのプリセットの利用を強く推奨します。
 
 == スタイルにカスタマイズを加える
 
 @<tt>{config.yml}の@<code>{textdocumentclass}はLaTeXにおけるドキュメントのクラスオプションに相当します。
-複数のオプションがある場合は、カンマで区切って列挙でき、ある程度のカスタマイズも可能です。
+複数のオプションがある場合はカンマで区切って列挙でき、ある程度のカスタマイズも可能です。
 
 前節で触れた標準設定でも多くのクラスオプションが登場していました。たとえば出力するページサイズを指定するには@<tt>{config.yml}の@<code>{textdocumentclass}を次のようにします（@<list>{change_pagesize}）。
 
@@ -209,10 +211,11 @@ b6	JIS B6
 
 === review-jsbookに設定できる主な設定項目
 
-@<code>{review-jsbook}に設定可能なクラスオプションは公式ドキュメントにまとまっています。@<table>{review-jsbook}では、
-どのようなカスタマイズができるのか理解しやすいものを挙げています。
+@<code>{review-jsbook}に設定可能なクラスオプションは公式ドキュメントにまとまっています。
 
  * @<href>{https://github.com/kmuto/review/blob/master/templates/latex/review-jsbook/README.md}
+
+@<table>{review-jsbook}では、どのようなカスタマイズができるのか理解しやすいものを挙げています。
 
 //table[review-jsbook][設定できる主なクラスオプションと説明]{
 オプション名	説明
@@ -225,7 +228,7 @@ startpage	ページ開始番号。デフォルトは1
 //}
 
 Re:VIEWで利用している@<code>{review-jsbook}はドキュメントクラスは標準的な@<code>{jsbook}ドキュメントクラスを含んでいるので、一部のオプションはそのまま指定できます。
-たとえば@<code>{onecolumn}であれば1段組の体裁、@<code>{twocolumn}であれば2段組の体裁を実現します。
+ここに@<code>{onecolumn}を指定すれば1段組の体裁、@<code>{twocolumn}であれば2段組の体裁を実現します。
 ただし、このようなドキュメントの見た目に対して調整を行うにはTeXと書籍の専門知識が要求されます。
 
 たとえば本のルールには章の始まりを左ページ（偶数）、右ページ（奇数）に固定できるというものがあります。一般人からすると改ページの位置が左右どっちにくるのかという問題自体に馴染みがありませんよね。@<code>{openany}を指定すると左右どちらからでも章を開始できる！と気づいてしまい、ページ数を減らせるから印刷代もちょっと安くなるじゃないか？と考えたとしても入稿直前の疲れたタイミングで変更することは推奨しません。期せず発生する副作用に悩まないように十分検証期間を設けるなど余裕を持って作業してください。

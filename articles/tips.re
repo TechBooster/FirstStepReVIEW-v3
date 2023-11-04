@@ -12,13 +12,12 @@ TechBoosterが推奨するディレクトリ構成を述べておきます。
 具体的には@<list>{directory}です。
 
  * リポジトリのトップレベルにはファイルをあまり散らかさない
- * 複数人で執筆したときにそれぞれのファイルが混ざったり邪魔になったりしないようにする
+ * 複数人で執筆したときにそファイルが混ざったり邪魔になったりしないようにする
  * 著者全員で利用するRe:VIEWのバージョンを固定する
- * ビルド手順を統一するために何らかのタスクランナーを使う（TechBoosterの場合、Node.js+npm-scripts）
+ * ビルド手順を統一できるタスクランナーを使う（TechBoosterの場合、Node.js+npm-scripts）
 
 //list[directory][ディレクトリ構成]{
   ├── README.md
-  ├── circle.yml            （CIサービスであるCircle CIの設定ファイル）
   ├── setup.sh              （執筆前にgemやnpmのインストールを行うスクリプト）
   ├── Gemfile               （bundler経由でRe:VIEWを利用するための設定ファイル）
   ├── Gemfile.lock          （ライブラリのバージョンをロックする）
@@ -51,48 +50,59 @@ TechBoosterが推奨するディレクトリ構成を述べておきます。
 //}
 
 原稿は@<tt>{articles}ディレクトリに、サンプルコードは@<tt>{code}ディレクトリに入れています。
-@<tt>{articles/images}や@<tt>{code}の中は、原稿の章ごとに.reのファイル名と同名のディレクトリを用意し、その中で活動します。
+@<tt>{articles/images}や@<tt>{code}の中は、原稿の章ごとに@<tt>{.re}ファイル名と同名のディレクトリを用意し、その中で活動します。
 
 原稿のファイル名は、わかりやすいのが一番！ということで複数名で執筆する場合、筆者の名前にしてしまう場合があります。
-@<tt>{vvakame.re}というファイル名にしてしまえば、レビューを行ったりビルドエラーなどの問題が発生したとき連絡する人がわかりやすい。
-という発想です。
+@<tt>{vvakame.re}というファイル名にしてしまえば、レビューを行ったりビルドエラーが出ていたりと問題が発生したとき連絡する人がわかりやすいという発想です。
 
 
 == 紙面レイアウトを変更する
 
-印刷所へ入稿する原稿を制作していると、Re:VIEWが標準で用意している構成そのものを変更する必要に迫られるときがあります。
+印刷所へ入稿する原稿を制作しているとRe:VIEWが標準で用意している構成そのものを変更する必要に迫られるときがあります。
 Re:VIEWではPDFを出力するためにLaTeXを利用しています。そのため、レイアウトの変更にはLaTeXの知識が必要です。
 
 @<tt>{config.yml}の設定値を変更したい場合@<hd>{configure|layout}を参照してください。既存のスタイルとお勧めの組み合わせを紹介しています。きっと欲しいパラメータが見つかるでしょう。
 
-具体的には.ymlや.cssを配置しているディレクトリの下に@<code>{layouts/layout.tex.erb}を置くことで
-Re:VIEWが出力するLaTeXソースファイルの構成を変更できます。
+さらにRe:VIEWが出力するLaTeXソースファイルの構成を変更する拡張例としてRe:VIEWテンプレートリポジトリの内容を紹介します。
+テンプレートリポジトリでは@<tt>{articles}ディレクトリの下に@<tt>{layouts/config-local.tex.erb}と@<tt>{sty/techbooster-doujin-base.sty}を置いて
+@<tt>{config.yml}パラメータにTechBooster独自の設定を追加しています。
+この独自設定の内容は、表紙および裏表紙を実寸ではなく仕上がりサイズにリサイズするというものです。なにか設定項目を追加する際のよい手本になるはずです。
 
-Re:VIEWは@<href>{https://github.com/kmuto/review}の@<code>{templates/latex/layout.tex.erb}を、
-LaTeXのソースファイルのテンプレートとして読み込みますが、@<code>{layouts/layout.tex.erb}がある場合、そちらを優先して適用します（@<img>{how_to_convert_re_to_pdf2}）。
+Re:VIEWでの紙面レイアウトやデザインを自分でカスタマイズしたいと感じましたか？そんな方のために開発者ガイドラインがあります。
 
-//image[how_to_convert_re_to_pdf2][layout.tex.erbの取り扱い]{
-//}
+ : review-jsbook.clsの基本版面設計
+   @<href>{https://review-knowledge-ja.readthedocs.io/ja/latest/latex/paper-layout.html}
+ : Re:VIEW 3からのLaTeX処理
+   @<href>{https://review-knowledge-ja.readthedocs.io/ja/latest/latex/review3-latex.html}
 
-カスタマイズに当たっては、@<code>{templates/latex/layout.tex.erb}を@<code>{layouts/layout.tex.erb}にコピーして変更するとよいでしょう。
+カスタマイズにあたってはリストや紙面の飾りといった影響範囲の小さいものから試していくと満足度が得やすいです。
+そこまで複雑なことがしたいわけじゃなくて行あたりの文字数やフォントサイズを変えたい場合@<fn>{new_layout}にはRe:VIEWの初期設定コマンド@<code>{review-init -w プロジェクト名}がGUI上で取り組めて便利です。
+
+//footnote[new_layout][@<href>{https://review-knowledge-ja.readthedocs.io/ja/latest/faq/faq-tex.html#5da91055a04a506c0d01a78b804b70a3}]
 
 == 余白を調節する
 
-PDFで出力するページの余白を指定するには、.styファイルに@<code>{\geometry}を設定します（@<list>{set_margin}）。
+PDFで出力するページの余白を指定するには@<tt>{config.yml}の@<code>{texdocumentclass}項目を調整します。
+前述の@<code>{review-init -w プロジェクト名}で調整することも可能ですが、既にあるプロジェクトには適用できないため@<code>{texdocumentclass}を手でコピーするなど
+ひと工夫してください。
 
-//list[set_margin][余白を設定]{
-\geometry{top=18mm,bottom=23mm,left=24mm,right=24mm}
+//emlist[config.ymlでの余白設定]{
+texstyle: ["reviewmacro"]
+texdocumentclass: ["review-jsbook", "media=print,paper=b5,serial_pagination=true,
+  hiddenfolio=nikko-pc,openany,fontsize=10pt,baselineskip=15.4pt,line_length=40zw,
+  number_of_lines=35,head_space=30mm,headsep=10mm,headheight=5mm,footskip=10mm"]
 //}
 
-指定できる単位は、@<code>{cm}、@<code>{mm}の他にもLaTeXでサポートされている@<code>{in}、@<code>{pt}、@<code>{em/ex}、@<code>{zw/zh}、@<code>{Q}などがあります。
-
+リストはテンプレートリポジトリの標準設定です。@<code>{head_space=30mm}は上部（天）の余白が30mmと設定しています。
+ここで指定できる単位は@<code>{cm}、@<code>{mm}の他にもLaTeXでサポートされている@<code>{in}、@<code>{pt}、@<code>{em/ex}、@<code>{zw/zh}、@<code>{Q}などがあります。
 
 ===[column] レイアウトを変更する楽しみ
 
-ヘッダやフッタを変えたい、ノンブルを隠したい（隠しノンブルと呼びます）など紙面に凝ってくるとレイアウトへの要望がでてきます。紙面作りを楽しんでいる証拠ともいえるでしょう。
+ヘッダやフッタを変えたい、ノンブルを隠したい（隠しノンブルと呼びます）、コードハイライトがついたもっとイケているリスト表示にしたいなど
+紙面に凝ってくるとレイアウトへの要望がでてきます。紙面作りを楽しんでいる証拠ともいえるでしょう。
 
-Re:VIEWではPDF出力を得るためにLaTeXを利用しています。そのためレイアウトに関する部分の多くはLaTeXの知識を必要とします。
-自由度が高い一方、独特の記法への馴染みの薄さやパッケージ、環境の依存関係などカスタマイズが困難なため、入門を目的とする本書では触れていません。
+Re:VIEWでのレイアウトに関する部分の多くはLaTeXの知識を必要とします。
+自由度が高い一方、独特の記法への馴染みの薄さやパッケージ、環境の依存関係などカスタマイズが困難なため入門を目的とする本書では触れていません。
 
 そんなあなたには、奥村晴彦氏の「LATEX2e 美文書作成入門」@<fn>{book_latex2e}がお勧めです。
 深淵を覗けますよ！
@@ -110,8 +120,8 @@ Re:VIEWではPDF出力を得るためにLaTeXを利用しています。その�
 
 == プリプロセッサ命令
 
-Re:VIEWでは、最終的な見た目に影響する記法とは別に、外部の情報を.reファイルに反映する「プリプロセッサ命令」があります。
-プリプロセッサ命令を使うことで、外部ファイルとしているサンプルコードを自動で.reファイル内に反映できます。
+Re:VIEWでは最終的な見た目に影響する記法とは別に、外部の情報を@<tt>{.re}ファイルに反映する@<kw>{プリプロセッサ命令}があります。
+プリプロセッサ命令を使うことで、外部ファイルとしているサンプルコードを自動で@<tt>{.re}ファイル内に反映できます。
 
 プリプロセッサ命令を処理するには@<code>{review-preproc}コマンド@<fn>{preproc-doc}を使用します。
 @<code>{review-preproc}コマンドは、PDFのビルド時に自動で実行するようにしておくと便利です。
@@ -119,8 +129,8 @@ Re:VIEWでは、最終的な見た目に影響する記法とは別に、外部�
 
 //footnote[preproc-doc][@<href>{https://github.com/kmuto/review/blob/master/doc/preproc.ja.md}]
 
-プリプロセッサ命令は、あくまで.reファイルの一部を書き換えるだけです。
-最終的に.reファイルの内容がビルドされることに変わりはありません。
+プリプロセッサ命令は、あくまで@<tt>{.re}ファイルの一部を書き換えるだけです。
+最終的に@<tt>{.re}ファイルの内容がビルドされることに変わりはありません。
 
 === ファイルの内容を読み込む
 
@@ -211,17 +221,17 @@ $ review-preproc -r --tabwidth=2 sample.re
 === 外部コマンドの結果を読み込む
 
 @<code>{mapoutput}命令は、外部コマンドの結果を読み込みます。
-この命令はRe:VIEWの記法の枠内に囚われず、任意の処理の結果を.reファイルに埋め込めます。
+この命令はRe:VIEWの記法の枠内に囚われず、任意の処理の結果を@<tt>{.re}ファイルに埋め込めます。
 しかし、あくまでコンパイルするマシンにインストールしているコマンドを使用するため、複数人で執筆する場合は注意が必要です。
 
-たとえば、筆者の環境のjavaのバージョンを自動で埋め込む場合は@<list>{sample_mapoutput_before}のように記述します。
+たとえば、筆者の環境のJavaバージョンを自動で埋め込む場合は@<list>{sample_mapoutput_before}のように記述します。
 
 //list[sample_mapoutput_before][java -version]{
  #@mapoutput(java -version 2>&1)
  #@end
 //}
 
-@<list>{sample_mapoutput_before}は、コンパイル後に@<list>{sample_mapoutput_after}のようになります。
+@<list>{sample_mapoutput_before}はコンパイル後に@<list>{sample_mapoutput_after}のようになります。
 
 //list[sample_mapoutput_after][java -version]{
  #@mapoutput(java -version 2>&1)
@@ -238,10 +248,13 @@ $ review-preproc -r --tabwidth=2 sample.re
 
 複数人で執筆する場合、何らかの統一された手順でのビルド手順が必要です。
 TechBoosterではNode.js+npm-scripts（裏はgrunt）を利用しています。
-この構成になっているのは、プロジェクト構成を主に行っているvvakameが一番使い慣れているから、という理由が大きいです。
+この構成になっているのは、プロジェクト構成を担当しているvvakameが一番使い慣れているからという理由が大きいです。
 
 新規に書き起こすのであれば、執筆者があまり導入の手間をかけなくてもよいものを選ぶのがよいでしょう。
-候補としては、RubyはRe:VIEWのためにすでに入っているはずなのでRuby上で動作するrakeを使うか、色々なOS・環境で導入済みである場合の多いJavaと、gradle@<fn>{why-gradle}の組み合わせがよいかもしれません。
+候補としては、RubyはRe:VIEWのためにすでに入っているはずなのでRuby上で動作するrakeを使うか、いろいろなOSや環境で導入済みである場合の多いJavaやGradle@<fn>{why-gradle}の組み合わせがよいかもしれません。
+
+//footnote[why-gradle][GradleにはGradle Wrapperという仕組みがあり、Gradleの実行環境を別途用意する必要がないため便利]
+
 
 タスクランナーが行うべき作業は少ないです。
 
@@ -249,9 +262,7 @@ TechBoosterではNode.js+npm-scripts（裏はgrunt）を利用しています。
  * @<code>{review-preproc}コマンドを実行する
  * 各ターゲット向けのビルド用コマンドを実行する
 
-これだけです。
-
-ひとつひとつ、どういうコマンドと等価な処理をしていけばよいかを解説します。
+これだけです。ひとつひとつ、どういうコマンドと等価な処理をしていけばよいかを解説します。
 
  * 古い生成ファイルを消す（消さないとエラーになる場合がある）
 
@@ -268,7 +279,7 @@ rm -rf articles/C89-FirstStepReVIEW-v2-pdf/ \
 
 #@# prh:disable
 それぞれ@<code>{--debug}オプション付きでpdfをビルドしたときのtmpディレクトリ、pdf、epub、html、idgxml（Adobe InDesign用XML）、text生成時に作成される一時ファイルまたは最終出力ファイルです。
-一番最初の行のC89-FirstStepReVIEW-v2-pdf部分はarticles/config.ymlのbooknameの設定により変化します。
+一番最初の行のC89-FirstStepReVIEW-v2-pdf部分は@<tt>{articles/config.yml}の@<code>{bookname}の設定により変化します。
 
  * @<code>{review-preproc}コマンドを実行する
 
@@ -283,8 +294,8 @@ $ review-preproc -r --tabwidth=2 *.re
 @<code>{review-preproc}コマンドは文書中に埋め込まれたpragmaを処理し、サンプルコードを文書中に展開したり指定のコマンドの実行結果を文書中に展開してくれます。
 C言語のマクロとだいたい同じものだと思えばよいでしょう。
 
-文書にソースコードを貼りこむとき、インデントは2スペースとします。
-このため、4スペース派の人はサンプルコードではタブを使うようにして、エディタ上では1タブ＝4スペースで作業し、文書中に貼りこむときにタブを2スペースに変換するとよいでしょう。
+TechBoosterでは文書にソースコードを貼りこむとき、インデントは2スペースと整理しています。
+このため4スペース派の人はサンプルコードではタブを使うようにして、エディタ上では1タブ＝4スペースで作業し、文書中に貼りこむときにタブを2スペースに変換するとよいでしょう。
 
 詳細は@<chapref>{review-introduction}に譲ります。
 
@@ -316,10 +327,10 @@ PDF、EPUBについては利用するコマンドそのものが違うので注�
 
 #@# prh:disable
 これらを詰め込んだ、実際にTechBoosterで使っているgrunt用設定ファイルを公開しています。
-@<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2/blob/master/Gruntfile.js}
-Node.js v6以上が必要ですので注意してください。
 
-//footnote[why-gradle][gradleはgradle wrapperという仕組みがあり、gradle自体を別途導入する必要がないため]
+ * @<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2/blob/master/Gruntfile.js}
+
+Node.jsのバージョンといった動作条件はリポジトリのメンテナンスなどで更新があります。利用前にリポジトリを確認してください。
 
 == 関連各所の紹介
 TechBoosterがRe:VIEWを使っているなかで関係したお世話になっている各所を紹介します。
@@ -338,7 +349,7 @@ TechBoosterがRe:VIEWを使っているなかで関係したお世話になっ�
  * 一人でかかない（共同執筆がお勧め）
  * 執筆時点は早めの締め切りを設定する（こうしておくと致命傷で済む）
  * レビューを実施する（読者の視点を作り出す）
- * 紙面を@<code>{=}や@<code>{*}で検索する（文法ミスを見つけるため）
+ * 紙面を@<code>{=}や@<code>{*}、@<code>{@}で検索する（文法ミスを見つけるため）
  * 記号などの文字化け探し（TeX、フォントはUTF-8対応しているとは限らない）
  * 紙面のはみ出しチェック（TeXコンパイル時のtoo late表示の有無を確認する）
 

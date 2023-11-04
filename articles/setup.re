@@ -1,11 +1,10 @@
 ={setup} Re:VIEWでの執筆環境を整える
-
 #@# NOTE author:mhidaka
 
 本章ではRe:VIEWで執筆するための環境を整えます。
-
 TechBoosterの著者陣は、もれなく全員がRe:VIEW記法で執筆するスタイルです。
 慣れないうちはエラーに遭遇したり、やり方に迷ったりしているので、CI/CD環境があってこそ運用できているといえます。
+
 Re:VIEW記法は、馴染みがないものなので覚えるのはちょっと面倒ですね。書籍作りを支えるものなので表現したい内容を優先し、手を動かしながら学びノウハウを貯めてください。
 
 2023年11月現在では、Microsoftが開発提供するエディタVisual Studio Codeと@<kw>{Extensions,拡張機能}のvscode-language-reviewを利用することが一般的です。
@@ -36,7 +35,7 @@ Visual Studio Codeをダウンロードしてインストールします。Visua
 //}
 
 画面のインストールボタンを押せば完了です。
-vscode-language-reviewは、Visual Studio Code上で、Re:VIEW記法を使いやすくする便利な拡張機能を持っています。
+vscode-language-reviewは、Visual Studio Code上で、Re:VIEW記法を使いやすくする便利な拡張機能を提供します。
 
  * Liveプレビュー
  * シンタックスハイライト
@@ -67,7 +66,7 @@ LiveプレビューでエラーチェックしてGitHubのリポジトリにpush
 =={install_review} Re:VIEW image for Dockerのセットアップ
 
 Docker上でRe:VIEWを動かすための手順を解説します。Dockerはコンテナ型仮想化技術のプラットフォームです。
-Re:VIEW image for Dockerは最新のRe:VIEWをどの環境でも安定して使えるコンテナイメージで、vvakameが公開、メンテナンスしています。
+Re:VIEW image for Dockerは最新のRe:VIEWをどの環境でも安定して使えるコンテナイメージで、vvakameが公開とメンテナンスをしています。
 
 本書執筆時点での検証済みのバージョンは次のとおりです。
 
@@ -77,16 +76,16 @@ Re:VIEW image for Dockerは最新のRe:VIEWをどの環境でも安定して使�
  * Docker Desktop Version 4.25.0 (126437)
 
 Re:VIEWツールそのものはRuby言語で書かれており、macOS、Windows、LinuxどのOSでも動作します。
-ただしRubyのバージョンやPDFを出力するLaTeXを構築する手順がプラットフォームごとに微妙に異なるので、
-Re:VIEWの環境構築でトラブルに遭遇した場合の解決は困難を極めました。
+ただしRubyのバージョンやPDFを出力するLaTeXを構築する手順はプラットフォームごとに微妙に異なるので、
+Re:VIEWの環境構築でトラブルに遭遇した場合に解決は困難を極めます。
 
 Re:VIEWの環境を仮想化できたことで現在は多くの書籍がRe:VIEW image for Dockerを使って作られています。
 
-Docker Desktopを次のURLからダウンロードしてインストールします。
+導入には、まずDocker Desktopを次のURLからダウンロードしてインストールします。
 
  * @<href>{https://www.docker.com/}
 
-Windowsの場合の手順は次のURLで詳しく触れられています。
+Windowsでの手順は次のURLで詳しく触れられています。
 
  * @<href>{https://github.com/vvakame/docker-review/blob/master/doc/windows-review.md}
 
@@ -94,15 +93,13 @@ Windowsの場合の手順は次のURLで詳しく触れられています。
 
 //footnote[docker-faq][@<href>{https://matsuand.github.io/docs.docker.jp.onthefly/desktop/faqs/#do-i-need-to-pay-to-use-docker-desktop}]
 
-Dockerのインストールが完了したあとはRe:VIEW image for Dockerをダウンロードします。
+Dockerのインストールが完了したあとはRe:VIEW image for Dockerをダウンロードします。コマンドラインに次のとおり入力してください。
 
 //cmd{
 docker pull vvakame/review:5.8
 //}
 
-コマンドは@<code>{5.8}を指定しています。Re:VIEW image for DockerでサポートしているRe:VIEWは5.3〜5.8です。
-
-  * @<href>{https://github.com/vvakame/docker-review}
+コマンドではタグに@<code>{5.8}を指定しています。Re:VIEW image for DockerでサポートしているRe:VIEWは5.3〜5.8です。
 
 ===[column] 取得済みイメージの確認方法
 
@@ -120,6 +117,10 @@ vvakame/review   5.8       5cb030602a81   4 months ago   3.28GB
 //}
 
 書籍制作環境を全部含んでいるのでイメージサイズが3GB超と大きめです。
+Dockerイメージは次のリポジトリで公開しています。インストールされているコマンドや初期設定を確認したい場合にアクセスしてください。
+
+  * @<href>{https://github.com/vvakame/docker-review}
+
 
 ===[/column]
 
@@ -128,7 +129,7 @@ vvakame/review   5.8       5cb030602a81   4 months ago   3.28GB
 Docker経由でのPDF出力を試しましょう。
 前節で少し触れましたがRe:VIEWでPDFに変換するにはLaTeX（platexまたはlualatexなど）を使います。
 
-Re:VIEW image for Docker内部のワークフローは@<tt>{.re}ファイルを含んだプロジェクトからRe:VIEWツールを実行し、出力対象がPDFファイルなのであればLaTeX形式に変換、TeXLive実行し、PDFファイルをローカルマシンにコピーして完了という流れです。
+Re:VIEW image for Docker内部のワークフローは@<tt>{.re}ファイルを含んだプロジェクトからRe:VIEWツールを実行し、出力対象がPDFファイルであればLaTeX形式に変換、TeXLiveを実行して生成したPDFファイルをローカルマシンにコピーして完了という流れです。
 
 TechBoosterが提供しているReVIEW-templateリポジトリをベースに執筆している場合のPDF出力から説明します。
 
@@ -144,14 +145,14 @@ yourbook_dir % ./build-in-docker.sh
 //}
 
 //cmd{
-yourbook_dir/articles/yourbookname.pdf
+yourbook_dir/articles/bookname.pdf
 //}
 
 PDFファイルは@<tt>{articles/}ディレクトリの下に@<tt>{書籍名.pdf}という名前で出力されます。
 
 
 #@# prh:disable
-スクリプトファイルではRe:VIEWの設定ファイルに@<tt>{articles/config.yml}を指定しています。書籍ごとに変えたいなど中身を知りたい場合は、この本のリポジトリの@<tt>{build-in-docker.sh}を参照してください。
+スクリプトファイルのなかでRe:VIEWの設定ファイル@<tt>{articles/config.yml}を指定しています。書籍ごとに変えたいなど中身を知りたい場合は、この本のリポジトリにある@<tt>{build-in-docker.sh}を参照してください。
 
 #@# prh:disable
  *  @<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2/blob/master/build-in-docker.sh}
@@ -191,13 +192,14 @@ Re:VIEW image for Docker登場以前はフォントのセットアップだけ�
 ローカル環境の構築ドキュメントとPDFを出力する@<code>{review-pdfmaker}、EPUBを出力する@<code>{review-epubmaker}、Webページを出力する@<code>{review-webmaker}に触れますが
 入稿に利用する形式は@<code>{review-pdfmaker}コマンドでのPDF形式です。
 
-本書ではDocker経由の利用を推奨していること、ローカル環境での構築でトラブルが起きると解決が大変なことの2点を鑑みて各OSでのインストール手順を丁寧に記述することを意図的に避けています。
+わたしたちはDocker経由の利用を推奨していること、ローカル環境での構築でトラブルが起きると解決が大変なことの2点を鑑みて各OSでのインストール手順の解説を避ける構成を採っています。
+
 しかしローカル環境があると色々な試行錯誤、とくにレイアウト調整やデバッグなどに便利ですので試したい読者のためにポインタを示します。
-TechBoosterでは編集者は手元の環境で確認するようにしています。ページ数の調整や記法の修正、図表の見栄で頻繁なPDF再出力を行うためです。
+TechBoosterでは編集者は手元の環境でPDFファイルを確認しています。これはページ数の調整や記法の修正、図表の見栄で頻繁なPDF再出力を行うためです。
 
 === ローカル環境の構築
 
-RubyのインストールおよびPDF出力を目的とするならTeXLive 2023を導入してください。OSごとのインストール手順は次のドキュメントを参照して実施してください。
+Re:VIEWを使うにはRubyのインストールおよびTeXLive 2023を導入してください。PDF出力を目的としない場合はTeXLive 2023は不要です。OSごとのインストール手順はそれぞれのドキュメントを参照して実施してください。
 
  * @<href>{https://github.com/kmuto/review/blob/master/doc/quickstart.ja.md}
  * @<href>{https://texwiki.texjp.org/?TeX%20Live}
@@ -209,11 +211,11 @@ gem install review
 //}
 
 Re:VIEWの開発チームは、定期的に新しいバージョンをリリースしています。
-執筆を終えた書籍で追従する場合は変更点を確認し、レイアウトが意図せず崩れないよう互換性に気をつけてください。
+執筆中、または執筆を完了した書籍のアップデートなどでバージョンを変更する場合はチェンジログを確認し、意図せずレイアウトが崩れないよう互換性確保に気をつけてください。
 
 === review-pdfmaker
 
-@<code>{review-pdfmaker}はそのプロジェクトのPDFを生成します。
+@<code>{review-pdfmaker}はそのプロジェクトのPDFファイルを生成します。
 引数としてYAMLファイル（@<tt>{config.yml}）をひとつ指定します。
 
 //cmd{
@@ -237,20 +239,21 @@ YAMLファイルには本のタイトルや筆者名といった本のメタデ�
 
 検出しにくい見た目の問題も挙げましょう。
 
- * 本文中にリストとして掲載したソースコードが長すぎて紙面をはみ出している場合
- * 箇条書きのつもりで書いた「@<code>{*}」が半角スペースを忘れていて直接本文に表示されている場合
- * 表に複数行のテキストを入れたら折返しがうまくいかず不格好になる場合
+ * 本文中にリスト掲載したソースコードが長すぎて紙面をはみ出している
+ * 箇条書きで書いた「@<code>{*}」の先頭に付与すべき半角スペースを忘れていて本文に直接@<code>{*}が表示されている
+ * 表に複数行のテキストを入れたら折返しがうまくいかず不格好になる
 
 装飾やレイアウトの問題についてはビルドエラーとはなりません。意図したレイアウトでPDFが出力されているかは作成者によるケアが必要です。
 
-最後にRe:VIEW記法を間違えたときは構文エラーが起きます。エラーが発生すると標準出力に発生時点のログが残るのでとりあえず眺めることになるでしょう。
-前述の説明のとおり、TeXの出力ログやエラーも含まれているので急に大量のログがでるので驚くことになります。
-エラーログから間違えた場所を探すのは苦労するので、沢山書いてからRe:VIEW記法に書き直せばいいやというスタンスより、ちょっとずつ取り込んでおくほうが安心です。
+なおRe:VIEW記法を間違えたときは構文エラーが起きます。エラーが発生すると標準出力に発生時点のログが残るのでとりあえず眺めることになるでしょう。
+
+前述のとおり、TeXの出力ログやエラーも含まれているので大量のログが急にでて驚くかもしれませんね。
+エラーログから間違えた場所を探すのは苦労するので、たくさん書いてからRe:VIEW記法に書き直せばいいやというスタンスより、ちょっとずつ取り込んでおくほうが安心です。
 テンプレートリポジトリのCIはそのために存在しています。
 
 === review-epubmaker
 
-@<code>{review-pdfmaker}同様、@<code>{review-epubmaker}はプロジェクトのメタデータとなるYAMLファイルを引数としてEPUBファイルを生成します。
+@<code>{review-epubmaker}はプロジェクトのメタデータとなるYAMLファイルを引数としてEPUBファイルを生成します。
 EPUBファイルの実態はHTMLファイルやCSSファイルをZIPでアーカイブ化したものです。
 
 Re:VIEWはEPUBの生成処理で、システムにインストールされているZIPコマンドを使用します。
