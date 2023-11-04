@@ -4,16 +4,19 @@ let fs = require("fs");
 let yaml = require("js-yaml");
 
 const articles = "articles";
-const publish = 'publish';
 const bookConfig = yaml.safeLoad(fs.readFileSync(`${articles}/config.yml`, "utf8"));
 
 const reviewPrefix = process.env["REVIEW_PREFIX"] || "bundle exec ";
 const reviewPostfix = process.env["REVIEW_POSTFIX"] || "";             // REVIEW_POSTFIX="-peg" npm run pdf とかするとPEGでビルドできるよ
+const reviewConfig = process.env["REVIEW_CONFIG_FILE"] || "config.yml"; // REVIEW_CONFIG_FILE="config-ebook.yml" npm run pdf のようにすると別のconfigでビルドできるよ
 const reviewPreproc = `${reviewPrefix}review-preproc${reviewPostfix}`;
 const reviewCompile = `${reviewPrefix}review-compile${reviewPostfix}`;
-const reviewWebMaker = `${reviewPrefix}review-webmaker${reviewPostfix}`;
-const reviewPdfMaker = `${reviewPrefix}review-pdfmaker${reviewPostfix}`;
-const reviewEpubMaker = `${reviewPrefix}review-epubmaker${reviewPostfix}`;
+const reviewPdfMaker = `${reviewPrefix}rake pdf ${reviewPostfix}`;
+const reviewEpubMaker = `${reviewPrefix}rake epub ${reviewPostfix}`;
+const reviewWebMaker = `${reviewPrefix}rake web ${reviewPostfix}`;
+const reviewTextMaker = `${reviewPrefix}rake text ${reviewPostfix}`;
+const reviewIDGXMLMaker = `${reviewPrefix}rake idgxml ${reviewPostfix}`;
+const reviewVivliostyle = `${reviewPrefix}rake vivliostyle ${reviewPostfix}`;
 
 module.exports = grunt => {
 	grunt.initConfig({
@@ -26,102 +29,104 @@ module.exports = grunt => {
 					`${articles}/*.html`,
 					`${articles}/*.xml`,
 					`${articles}/*.txt`,
-				],
-			},
-			publish: {
-				src: `${publish}/`,
-			},
-		},
-		sass: {
-			dist: {
-				options: {
-					bundleExec: true,
-					sourcemap: 'none',
-				},
-				files: {
-					'articles/style.css': 'articles/style.scss',
-					'articles/style-web.css': 'articles/style-web.scss',
-				},
-			},
-		},
-		copy: {
-			publish: {
-				files: [
-					{expand: true, cwd: `${articles}/webroot/`, src: ['**'], dest: `${publish}/`},
-				],
-			},
+					`${articles}/webroot`
+				]
+			}
 		},
 		shell: {
 			preprocess: {
 				options: {
 					execOptions: {
 						cwd: articles,
-					},
+					}
 				},
-				command: `${reviewPreproc} -r --tabwidth=2 *.re`,
+				command: `${reviewPreproc} -r --tabwidth=2 *.re`
 			},
 			compile2text: {
 				options: {
 					execOptions: {
 						cwd: articles,
-					},
+					}
 				},
-				command: `${reviewCompile} --target=text`,
+				command: `${reviewTextMaker}`
+			},
+			compile2markdown: {
+				options: {
+					execOptions: {
+						cwd: articles,
+					}
+				},
+				command: `${reviewCompile} --target=markdown`
 			},
 			compile2html: {
 				options: {
 					execOptions: {
 						cwd: articles,
-					},
+					}
 				},
-				command: `${reviewCompile} --target=html --yaml=config.yml --chapterlink --footnotetext`,
+				command: `${reviewCompile} --target=html --stylesheet=style.css --chapterlink`
 			},
 			compile2latex: {
 				options: {
 					execOptions: {
 						cwd: articles,
-					},
+					}
 				},
-				command: `${reviewCompile} --target=latex --footnotetext`,
+				command: `${reviewCompile} --target=latex --footnotetext`
 			},
 			compile2idgxml: {
 				options: {
 					execOptions: {
 						cwd: articles,
-					},
+					}
 				},
-				command: `${reviewCompile} --target=idgxml`,
-			},
-			compile2web: {
-				options: {
-					execOptions: {
-						cwd: articles,
-					},
-				},
-				command: `${reviewWebMaker} config.yml`,
+				command: `${reviewCompile} --target=idgxml`
 			},
 			compile2pdf: {
 				options: {
 					execOptions: {
 						cwd: articles,
-					},
+					}
 				},
-				command: `${reviewPdfMaker} config.yml`,
+				command: `${reviewPdfMaker}`
 			},
 			compile2epub: {
 				options: {
 					execOptions: {
 						cwd: articles,
-					},
+					}
 				},
-				command: `${reviewEpubMaker} config.yml`,
+				command: `${reviewEpubMaker}`
 			},
-		},
+			compile2web: {
+				options: {
+					execOptions: {
+						cwd: articles,
+					}
+				},
+				command: `${reviewWebMaker}`
+			},
+			compile2idgxmlmaker: {
+				options: {
+					execOptions: {
+						cwd: articles,
+					}
+				},
+				command: `${reviewIDGXMLMaker}`
+			},
+			compile2vivliostyle: {
+				options: {
+					execOptions: {
+						cwd: articles,
+					}
+				},
+				command: `${reviewVivliostyle}`
+			}
+		}
 	});
 
-	function generateTask(target, pretask) {
-		pretask = pretask || [];
-		return ["clean"].concat(pretask).concat(["shell:preprocess", `shell:compile2${target}`]);
+	function generateTask(target) {
+		return ["clean", "shell:preprocess", `shell:compile2${target}`];
 	}
 
 	grunt.registerTask(
@@ -135,23 +140,23 @@ module.exports = grunt => {
 		generateTask("text"));
 
 	grunt.registerTask(
+		"markdown",
+		"原稿をコンパイルしてMarkdownファイルにする",
+		generateTask("markdown"));
+
+	grunt.registerTask(
 		"html",
 		"原稿をコンパイルしてHTMLファイルにする",
-		generateTask("html", ["sass"]));
+		generateTask("html"));
 
 	grunt.registerTask(
-		"idgxml",
+		"idgxmlmaker",
 		"原稿をコンパイルしてInDesign用XMLファイルにする",
-		generateTask("idgxml"));
-
-	grunt.registerTask(
-		"web",
-		"原稿をコンパイルしてwebページにする",
-		generateTask("web", ["sass"]).concat(['copy:publish']));
+		generateTask("idgxmlmaker"));
 
 	grunt.registerTask(
 		"pdf",
-		"原稿をコンパイルしてpdfファイルにする",
+		"原稿をコンパイルしてLaTeXでpdfファイルにする",
 		generateTask("pdf"));
 
 	grunt.registerTask(
@@ -159,5 +164,15 @@ module.exports = grunt => {
 		"原稿をコンパイルしてepubファイルにする",
 		generateTask("epub"));
 
-	require("load-grunt-tasks")(grunt);
+	grunt.registerTask(
+		"web",
+		"原稿をコンパイルしてWebページファイルにする",
+		generateTask("web"));
+
+	grunt.registerTask(
+		"vivliostyle",
+		"原稿をコンパイルしてVivliostyle-CLIでpdfファイルにする",
+		generateTask("vivliostyle"));
+
+	require('load-grunt-tasks')(grunt);
 };

@@ -4,14 +4,10 @@
 *.xml
 *.tex
 
-*-pdf/
-C89-*/
+FirstStepReVIEW-*/
 webroot/
 
 *.pdf
 *.epub
 
-*.css
-
 prh.yml
-

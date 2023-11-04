@@ -1,5 +1,6 @@
 PREDEF:
   - preface.re
+
 CHAPS:
   - writing-book.re
   - planning-book.re
@@ -9,7 +10,8 @@ CHAPS:
   - setup.re
   - review-introduction.re
   - configure.re
-  - build.re
+  - textlint.re
+
 APPENDIX:
   - tips.re
 

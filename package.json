@@ -1,40 +1,45 @@
 {
   "name": "c89-firststepreview-v2",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "private": true,
-  "engines": {
-    "node": ">=4.0.0"
-  },
-  "scripts": {
-    "global": "gem install bundler",
-    "check:prh": "prh --verify --verbose articles/*.re",
-    "check": "npm run check:prh",
-    "pdf": "grunt pdf",
-    "epub": "grunt epub",
-    "web": "grunt web",
-    "html": "grunt html"
-  },
+  "description": "",
+  "main": "Gruntfile.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TechBooster/C89-FirstStepReVIEW-v2.git"
   },
-  "author": "",
+  "author": "TechBooster(mhidaka)",
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/TechBooster/C89-FirstStepReVIEW-v2/issues"
   },
   "homepage": "https://github.com/TechBooster/C89-FirstStepReVIEW-v2#readme",
-  "dependencies": {},
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "global-bundler": "gem install bundler",
+    "global": "npm run global-bundler",
+    "pdf": "grunt pdf",
+    "md": "grunt markdown",
+    "html": "grunt html",
+    "text": "grunt text",
+    "epub": "grunt epub",
+    "web": "grunt web",
+    "idgxml": "grunt idgxmlmaker",
+    "vivliostyle": "grunt vivliostyle",
+    "test": "npm run html"
+  },
+  "dependencies": {
+    "prh": "^5.4.4",
+    "prh-languageserver": "^1.0.1"
+  },
   "devDependencies": {
-    "grunt": "^1.0.1",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-sass": "^1.0.0",
-    "grunt-open": "^0.2.3",
-    "grunt-shell": "^1.3.0",
-    "js-yaml": "^3.6.0",
-    "load-grunt-tasks": "^3.5.0",
-    "prh": "^5.4.0",
-    "prh-languageserver": "^0.4.0"
+    "grunt": "^1.5.3",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-shell": "^3.0.1",
+    "js-yaml": "^3.13.1",
+    "load-grunt-tasks": "^4.0.0"
   }
 }
