@@ -139,7 +139,7 @@ Visual Studio Codeを起動し、サイドバーの上部にマーケットプ�
 === prhで校正する
 
 #@# prh:disable
-インストール後は本書のリポジトリを開いて試してみてください。@<tt>{メニュー > フォルダを開く}からC89-FirstStepReVIEW-v2ディレクトリを対象とするとわかりやすいでしょう。
+インストール後は本書のリポジトリを開いて試してみてください。@<tt>{メニュー > フォルダを開く}からFirstStepReVIEW-v3ディレクトリを対象とするとわかりやすいでしょう。
 @<tt>{articles/prh.yml}ファイルがTechBoosterの設定ファイル@<fn>{prh_setting}です。prhによる校正はターミナルに表示します（@<img>{vscode-prh-warning}）。
 
 //footnote[prh_setting][@<href>{https://github.com/prh/rules/blob/a05c35d285d08dc7ba0a78dd791160116d39e9f4/media/techbooster.yml}]

@@ -4,7 +4,7 @@ export BOOK_DIR=../articles
 
 # 書籍PDFファイル名、書籍タイトル、ID開始番号をここで調整
 # これらは、それぞれ空白で区切って複数指定可
-export BOOKS=("C89-FirstStepReVIEW-v2.pdf")
+export BOOKS=("FirstStepReVIEW-v3.pdf")
 export TITLES=("技術書をかこう！～はじめてのRe:VIEW～")
 export IDSTARTS=(10000)
 

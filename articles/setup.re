@@ -140,12 +140,12 @@ TechBoosterが提供しているReVIEW-templateリポジトリをベースに執
  * @<href>{https://github.com/TechBooster/ReVIEW-Template}
 
 #@# prh:disable
-Docker実行用のスクリプトは@<tt>{C89-FirstStepReVIEW-v2}などプロジェクトルートから実行します（直下に@<tt>{articles}ディレクトリがあることを確認してください）。
+Docker実行用のスクリプトは@<tt>{FirstStepReVIEW-v3}などプロジェクトルートから実行します（直下に@<tt>{articles}ディレクトリがあることを確認してください）。
 
 #@# prh:disable
 //cmd{
 $ pwd
-/Users/mhidaka/repos/C89-FirstStepReVIEW-v2
+/Users/mhidaka/repos/FirstStepReVIEW-v3
 $ ./build-in-docker.sh
 //}
 
@@ -160,7 +160,7 @@ PDFファイルは@<tt>{articles/}ディレクトリの下に@<tt>{書籍名.pdf
 スクリプトファイルのなかでRe:VIEWの設定ファイル@<tt>{articles/config.yml}を指定しています。処理を変えたいなど中身を知りたい場合は、本書のリポジトリにある@<tt>{build-in-docker.sh}を参照してください。
 
 #@# prh:disable
- *  @<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2/blob/master/build-in-docker.sh}
+ *  @<href>{https://github.com/TechBooster/FirstStepReVIEW-v3/blob/main/build-in-docker.sh}
 
 スクリプトを使わず@<code>{docker}コマンドを手で打ち込んで実行する場合は次のコマンドです。
 
