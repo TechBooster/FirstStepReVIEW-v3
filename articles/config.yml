@@ -17,12 +17,14 @@ review_version: 5.0
 # inherit: ["A.yml", "B.yml"]
 
 # ブック名(ファイル名になるもの。ASCII範囲の文字を使用)
-bookname: C89-FirstStepReVIEW-v2
+bookname: FirstStepReVIEW-v3
 # 記述言語。省略した場合はja
 language: ja
 
 # 書名
-booktitle: {name: "技術書をかこう！～はじめてのRe:VIEW～", file-as: "ギジュツショヲカコウ"}
+booktitle: {name: "技術書をかこう！", file-as: "ギジュツショヲカコウ"}
+# サブタイトルはオプション。コメントアウトで省略します。
+subtitle: {name: "～はじめてのRe:VIEW～", file-as: "ハジメテノレビュー"}
 
 # 著者名。「, 」で区切って複数指定できる
 aut: [{name: "TechBooster編", file-as: "techboosterヘン"}]
@@ -69,12 +71,12 @@ pbl: TechBooster
 # contact: 連絡先
 
 # 刊行日(省略した場合は実行時の日付)
-date: 2023-10-31
+date: 2023-11-12
 # 発行年月。YYYY-MM-DD形式による配列指定。省略した場合はdateを使用する
 # 複数指定する場合は次のように記述する
 # [["初版第1刷の日付", "初版第2刷の日付"], ["第2版第1刷の日付"]]
 # 日付の後ろを空白文字で区切り、任意の文字列を置くことも可能。
-history: [["2015-12-31 C89版 v1.0.0"],["2017-8-11 C92版 v2.0.0"],["2023-10-31 技術書典15版 v3.0.0"]]
+history: [["2015-12-31 C89版 v1.0.0"],["2017-8-11 C92版 v2.0.0"],["2023-11-12 技術書典15版 v3.0.0"]]
 # 権利表記(配列で複数指定可)
 # rights: (C) 2016 Re:VIEW Developers
 rights: (C) 2017-2023 TechBooster
@@ -485,6 +487,6 @@ webmaker:
 techbooster:
   # 表紙および裏表紙を実寸ではなく仕上がりサイズにリサイズするか
   # texdocumentclassでcover_fit_page=trueを付けるのと同じ
-  # cover_fit_page: true
+  cover_fit_page: true
   # 裏表紙画像指定。画像はimages/から探索される
   # backcoverimage: backcover.jpg

@@ -106,7 +106,7 @@ WIP@<fn>{wip}として、書き終わるまでmain branchにmergeしない方法
 ==== レビューを受ける
 
 レビューは執筆の進捗に応じて２回程度行っています。プログラミングでのレビューと同じく複数の観点があります。
-慣れないうちは意識して使い分けることをおすすめします。
+慣れないうちは意識して使い分けることをお勧めします。
 
  : 構造のレビュー
    章の目次や節の順序など執筆者の主張が適切な形で含まれているか、前提や節など構成の不足を確認します
@@ -169,7 +169,9 @@ TechBoosterでは40人程度が執筆に関わるので全員に特定のプラ�
 
 レビュー期間も同様です。著者からのpushを停止させずにレビューしようと考えると、どこかにレビュー用のPDFがあることが望ましいわけです。そこで前述の仕組みが活きます。CIでは入校時と同じスタイルを利用して常に入稿形式に準じたPDFを生成しています。レビューでも紙面レイアウトでチェックすることで文字のはみ出しなど些細な問題でも素早く気づき、筆者にフィードバックを返せます。
 
+#@# prh:disable
 実際のところCIサーバの構築は手間がかかるのでTechBoosterでオープンに公開し、メンテナンスしています。手軽に得られるビルド環境としてDockerイメージRe:VIEW image for Docker@<fn>{docker-image}を提供し、CI基盤にはDockerイメージを流用しやすいGitHub Actionsを作っています。ReVIEW-Templateリポジトリ@<fn>{yattane}をテンプレートとして使うだけで、これらの環境が整います。すごいね！やったね！
 
+#@# prh:disable
 //footnote[docker-image][@<href>{https://hub.docker.com/r/vvakame/review/}]
 //footnote[yattane][@<href>{https://github.com/TechBooster/ReVIEW-Template}]

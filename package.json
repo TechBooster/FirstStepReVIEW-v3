@@ -30,7 +30,10 @@
     "vivliostyle": "grunt vivliostyle",
     "test": "npm run html"
   },
-  "dependencies": {},
+  "dependencies": {
+    "prh": "^5.4.4",
+    "prh-languageserver": "^1.0.1"
+  },
   "devDependencies": {
     "grunt": "^1.5.3",
     "grunt-cli": "^1.2.0",

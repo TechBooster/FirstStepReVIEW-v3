@@ -48,7 +48,7 @@ CHAPS:
     - chapter1.re
     - chapter2.re
   - part2.re:
-    - chapter.3.re
+    - chapter3.re
     - chapter4.re
   - chapter5.re
 //}
@@ -69,9 +69,10 @@ Re:VIEWでは本を生成（コンパイル）するときのメタデータ�
 
 @<list>{config_yml}は本書で使っている@<tt>{config.yml}の一部を抜粋したものです。
 
+#@# prh:disable
 //list[config_yml][config.ymlの中身]{
-# ブック名(ファイル名になるもの。ASCII範囲の文字を使用)
-bookname: C89-FirstStepReVIEW-v2
+# ブック名（ファイル名になるもの。ASCII範囲の文字を使用）
+bookname: FirstStepReVIEW-v3
 # 記述言語。省略した場合はja
 language: ja
 # 書名
@@ -84,16 +85,16 @@ edt: ["mhidaka"]
 # a-pbl, pbl: 出版社（発行所）
 pbl: TechBooster
 
-# 刊行日(省略した場合は実行時の日付)
-date: 2023-10-31
+# 刊行日（省略した場合は実行時の日付）
+date: 2023-11-12
 
 # 発行年月。YYYY-MM-DD形式による配列指定。省略した場合はdateを使用する
 # 複数指定する場合は次のように記述する
 # [["初版第1刷の日付", "初版第2刷の日付"], ["第2版第1刷の日付"]]
 # 日付の後ろを空白文字で区切り、任意の文字列を置くことも可能。
-history: [["2015-12-31 C89版 v1.0.0"],["2017-8-11 C92版 v2.0.0"],["2023-10-31 技術書典15版 v3.0.0"]]
+history: [["2015-12-31 C89版 v1.0.0"],["2017-8-11 C92版 v2.0.0"],["2023-11-12 技術書典15版 v3.0.0"]]
 
-# 権利表記(配列で複数指定可)
+# 権利表記（配列で複数指定可）
 # rights: (C) 2016 Re:VIEW Developers
 rights: (C) 2017-2023 TechBooster
 
@@ -105,14 +106,14 @@ toclevel: 2
 # 本文でセクション番号を表示する見出しレベル
 secnolevel: 2
 
-# 本文中に目次ページを作成するか。省略した場合はnull (作成しない)
+# 本文中に目次ページを作成するか。省略した場合はnull（作成しない）
 toc: true
 
-# 表紙に配置し、書籍の影絵にも利用する画像ファイル。省略した場合はnull (画像を使わない)。画像ディレクトリ内に置いてもディレクトリ名は不要(例: cover.jpg)
+# 表紙に配置し、書籍の影絵にも利用する画像ファイル。省略した場合はnull（画像を使わない）。画像ディレクトリ内に置いてもディレクトリ名は不要（例: cover.jpg）
 # PDFMaker 固有の表紙設定は pdfmaker セクション内で上書き可能
 coverimage: cover.jpg
 #
-# 表紙の後に大扉ページを作成するか。省略した場合はtrue (作成する)
+# 表紙の後に大扉ページを作成するか。省略した場合はtrue（作成する）
 titlepage: true
 
 # 奥付を作成するか。デフォルトでは作成されない。trueを指定するとデフォルトの奥付、ファイル名を指定するとそれがcolophon.htmlとしてコピーされる
@@ -148,6 +149,7 @@ toclevel: 2
 
 PDF形式で出力する紙面のデザインは差し替え可能です。@<tt>{config.yml}の@<code>{texstyle}項目の値を変更します（@<list>{change_layout}）。
 
+#@# prh:disable
 //list[change_layout][config.ymlにてスタイルファイルを指定]{
 # LaTeX用のスタイルファイル(styディレクトリ以下に置くこと)
 # texstyle: ["reviewmacro"]
@@ -158,12 +160,13 @@ PDF形式で出力する紙面のデザインは差し替え可能です。@<tt>
  : viewermacro
    電子書籍向けのスタイルです。タブレットなどで見やすいように余白やフォントサイズを調整しています。TechBooster製のスタイルです
 
+#@# prh:disable
 ReVIEW-Templateテンプレートリポジトリまたは本書のリポジトリには次の4つの@<code>{texdocumentclass}が用意されています。
 
- * B5の設定(10pt 40文字×35行) - 紙版
- * B5の設定(10pt 40文字×35行) - 電子版
- * A5の設定(9pt 38文字×37行) - 紙版
- * A5の設定(9pt 38文字×37行) - 電子版
+ * B5の設定（10pt 40文字×35行）- 紙版
+ * B5の設定（10pt 40文字×35行）- 電子版
+ * A5の設定（9pt 38文字×37行）- 紙版
+ * A5の設定（9pt 38文字×37行）- 電子版
 
 ==== B5サイズでの標準設定
 

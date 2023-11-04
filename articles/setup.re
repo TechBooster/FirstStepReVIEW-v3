@@ -12,7 +12,7 @@ Re:VIEW記法は、馴染みがないものなので覚えるのはちょっと�
  * @<href>{https://code.visualstudio.com/}
  * @<href>{https://github.com/atsushieno/vscode-language-review}
 
-いきなりRe:VIEWで書き始めるのはハードルが高いなと感じた場合はMarkdownで書いたあとにRe:VIEWファイルに変換する手法をおすすめします。
+いきなりRe:VIEWで書き始めるのはハードルが高いなと感じた場合はMarkdownで書いたあとにRe:VIEWファイルに変換する手法をお勧めします。
 しかしMarkdownで執筆する場合は、図表の細やかな調整やリストへの参照など本らしい表現に対応するMarkdown記法がありません。
 慣れるにしたがってRe:VIEWファイル上で、最終調整することも多くなるのでRe:VIEWファイルでの執筆・編集を前提にセットアップ手順を知っておきましょう。
 
@@ -20,11 +20,12 @@ Re:VIEW記法は、馴染みがないものなので覚えるのはちょっと�
 
 #@# TODO 入稿前にここのバージョンを再確認すること
 
+#@# prh:disable
  * Visual Studio Code October 2023 (version 1.84)
  * vscode-language-review v0.7.4
  * Re:VIEW 5.8.0
 
-== Visual Studio CodeとExtensionsのセットアップ
+=={vscode} Visual Studio CodeとExtensionsのセットアップ
 
 Visual Studio Codeをダウンロードしてインストールします。Visual Studio Codeを起動し、Extensionsを表示します。
 メニューから@<tt>{基本設定 > Extensions}または@<tt>{表示 > Extensions}どちらからで表示できます。
@@ -58,7 +59,7 @@ Show preview（@<img>{vscode-language-review-sample2}）はRe:VIEWでのシン�
 正確にはHTMLでのプレビューですので実際の紙面とはレイアウトが違います@<fn>{scale-note}。
 Re:VIEW記法のミスがないかの確認用と考えてください。
 
-//footnote[scale-note][差分は文章の折り返し位置がわかりやすいです。そのほかの例としてはRe:VIEWにはimageという画像表示のためのブロック命令がありますが、オプションパラメータ@<code>{scale}のサイズ指定は最終出力のフォーマットや判型で見栄が異なります]
+//footnote[scale-note][差分は文章の折り返し位置がわかりやすいです。その他の例としてはRe:VIEWにはimageという画像表示のためのブロック命令がありますが、オプションパラメータ@<code>{scale}のサイズ指定は最終出力のフォーマットや判型で見栄が異なります]
 
 TechBoosterではVisul Studio Codeとvscode-language-review拡張機能で執筆し、
 LiveプレビューでエラーチェックしてGitHubのリポジトリにpush、CIでPDFを確認するというワークフローを運用しています。
@@ -72,6 +73,7 @@ Re:VIEW image for Dockerは最新のRe:VIEWをどの環境でも安定して使�
 
 #@# TODO 入稿前にここのバージョンを再確認すること
 
+#@# prh:disable
  * macOS Sonoma
  * Docker Desktop Version 4.25.0 (126437)
 
@@ -131,12 +133,16 @@ Docker経由でのPDF出力を試しましょう。
 
 Re:VIEW image for Docker内部のワークフローは@<tt>{.re}ファイルを含んだプロジェクトからRe:VIEWツールを実行し、出力対象がPDFファイルであればLaTeX形式に変換、TeXLiveを実行して生成したPDFファイルをローカルマシンにコピーして完了という流れです。
 
+#@# prh:disable
 TechBoosterが提供しているReVIEW-templateリポジトリをベースに執筆している場合のPDF出力から説明します。
 
+#@# prh:disable
  * @<href>{https://github.com/TechBooster/ReVIEW-Template}
 
+#@# prh:disable
 Dockerで出力するスクリプトは@<tt>{C89-FirstStepReVIEW-v2}などプロジェクトルートから実行します（直下に@<tt>{articles}ディレクトリがあることを確認してください）。
 
+#@# prh:disable
 //cmd{
 yourbook_dir % pwd
 /Users/mhidaka/repos/C89-FirstStepReVIEW-v2
@@ -188,6 +194,7 @@ Re:VIEW image for Docker登場以前はフォントのセットアップだけ�
 
 == 応用編：書籍をローカル環境でビルドするには
 
+#@# prh:disable
 本節ではRe:VIEWファイルをローカル環境でコンパイルする方法を紹介します。Re:VIEWは、Markdown、プレーンテキスト、HTMLやEPUBなど多様なフォーマットに対応しています。
 ローカル環境の構築ドキュメントとPDFを出力する@<code>{review-pdfmaker}、EPUBを出力する@<code>{review-epubmaker}、Webページを出力する@<code>{review-webmaker}に触れますが
 入稿に利用する形式は@<code>{review-pdfmaker}コマンドでのPDF形式です。
@@ -220,7 +227,7 @@ Re:VIEWの開発チームは、定期的に新しいバージョンをリリー�
 
 //cmd{
 > review-pdfmaker config.yml
-(出力省略)
+（出力省略）
 //}
 
 YAMLファイルには本のタイトルや筆者名といった本のメタデータとなる設定を記述しておきます。
@@ -261,10 +268,10 @@ Re:VIEWはEPUBの生成処理で、システムにインストールされてい
 
 //cmd{
 > review-epubmaker config.yml
-(出力省略)
+（出力省略）
 > file book.epub
 book.epub: EPUB ebook data
-（電子書籍リーダに読み込ませることで内容を確認出来る）
+（電子書籍リーダに読み込ませることで内容を確認できる）
 //}
 
 YAMLファイル内の@<code>{bookname}を元にして出力ファイル名を決定します。
@@ -276,6 +283,7 @@ YAMLファイル内の@<code>{bookname}を元にして出力ファイル名を�
 @<code>{review-webmaker}はプロジェクトのメタデータとなるYAMLファイルを引数としてWebサイト用ファイルを生成します。
 HTMLファイルやCSSファイル、画像を@<tt>{webroot}ディレクトリに出力します。
 
+#@# prh:disable
 //cmd{
 > review-webmaker config.yml
 (出力省略)
@@ -283,6 +291,7 @@ HTMLファイルやCSSファイル、画像を@<tt>{webroot}ディレクトリ�
 webroot: directory
 //}
 
+#@# prh:disable
 読み込むCSSファイルなどは参照するYAMLファイル内の@<code>{webmaker}パラメータを元にして設定しています（@<img>{webroot}）。
 
 #@# prh:disable

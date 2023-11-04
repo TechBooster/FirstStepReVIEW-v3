@@ -76,14 +76,14 @@ Re:VIEWでの紙面レイアウトやデザインを自分でカスタマイズ�
    @<href>{https://review-knowledge-ja.readthedocs.io/ja/latest/latex/review3-latex.html}
 
 カスタマイズにあたってはリストや紙面の飾りといった影響範囲の小さいものから試していくと満足度が得やすいです。
-そこまで複雑なことがしたいわけじゃなくて行あたりの文字数やフォントサイズを変えたい場合@<fn>{new_layout}にはRe:VIEWの初期設定コマンド@<code>{review-init -w プロジェクト名}がGUI上で取り組めて便利です。
+そこまで複雑なことがしたいわけじゃなくて行あたりの文字数やフォントサイズを変えたい場合@<fn>{new_layout}にはRe:VIEWの初期設定コマンド（@<code>{review-init -w プロジェクト名}）がGUI上で取り組めて便利です。
 
 //footnote[new_layout][@<href>{https://review-knowledge-ja.readthedocs.io/ja/latest/faq/faq-tex.html#5da91055a04a506c0d01a78b804b70a3}]
 
 == 余白を調節する
 
 PDFで出力するページの余白を指定するには@<tt>{config.yml}の@<code>{texdocumentclass}項目を調整します。
-前述の@<code>{review-init -w プロジェクト名}で調整することも可能ですが、既にあるプロジェクトには適用できないため@<code>{texdocumentclass}を手でコピーするなど
+前述の@<code>{review-init -w プロジェクト名}で調整することも可能ですが、すでにあるプロジェクトには適用できないため@<code>{texdocumentclass}を手でコピーするなど
 ひと工夫してください。
 
 //emlist[config.ymlでの余白設定]{
@@ -95,6 +95,95 @@ texdocumentclass: ["review-jsbook", "media=print,paper=b5,serial_pagination=true
 
 リストはテンプレートリポジトリの標準設定です。@<code>{head_space=30mm}は上部（天）の余白が30mmと設定しています。
 ここで指定できる単位は@<code>{cm}、@<code>{mm}の他にもLaTeXでサポートされている@<code>{in}、@<code>{pt}、@<code>{em/ex}、@<code>{zw/zh}、@<code>{Q}などがあります。
+
+== 表紙をつける
+電子書籍用のPDFファイルに表紙を含めたい場合は@<tt>{config.yml}を次のとおり変更してください。
+大事な部分だけ抜粋して紹介します。
+
+//image[coverimage][電子書籍に表紙を設定する]{
+//}
+
+//emlist[config.ymlで表紙を設定する]{
+# 表紙にするファイル。ファイル名を指定すると表紙として入る （PDFMaker向けにはLaTeXソース断片、EPUBMaker向けにはHTMLファイル）
+# cover: null
+#
+# 表紙に配置し、書籍の影絵にも利用する画像ファイル。省略した場合はnull （画像を使わない）。画像ディレクトリ内に置いてもディレクトリ名は不要（例: cover.jpg）
+# PDFMaker 固有の表紙設定は pdfmaker セクション内で上書き可能
+coverimage: cover.jpg
+
+# B5の設定（10pt 40文字×35行） - 紙版
+# texdocumentclass: ["review-jsbook", "media=print,paper=b5,serial_pagi...（省略）
+# B5の設定（10pt 40文字×35行） - 電子版
+texdocumentclass: ["review-jsbook", "media=ebook,paper=b5,serial_pagination=true,
+  openany,fontsize=10pt,baselineskip=15.4pt,line_length=40zw,number_of_...（省略）
+
+# TechBooster Re:VIEW-Template独自設定
+techbooster:
+  # 表紙および裏表紙を実寸ではなく仕上がりサイズにリサイズするか
+  # texdocumentclassでcover_fit_page=trueを付けるのと同じ
+  cover_fit_page: true
+  # 裏表紙画像指定。画像はimages/から探索される
+  # backcoverimage: backcover.jpg
+//}
+
+@<code>{coverimage}へは表紙画像を指定します。プロジェクトの設定ファイルが@<tt>{articles/config.yml}に位置している場合には
+@<tt>{articles/images/cover.jpg}へ配置します。
+
+カバーとなる表紙画像は@<code>{texdocumentclass}項目のメディア設定が電子書籍であるとき（@<code>{media=ebook}）に出力します。@<code>{media=print}の場合には無視します。
+もし最初のページに表紙画像が表示されないときはメディア設定を再確認してください。
+
+@<code>{cover_fit_page}項目は用紙サイズにあわせて画像をリサイズします。表示品質に影響するためデフォルトでは無効化していますが、
+電子版の判型に合わせて画像を作成するのも手間ということでTechBoosterで独自拡張している設定項目です。
+電子書籍にも表紙があったほうが華やかでいいですね。
+
+== 大扉を変える
+Re:VIEWをつかっていて@<kw>{大扉,タイトルページ}が気になるときがあります。大扉は本を開いた最初に本のタイトルや著者名がかかれたページです。
+
+//image[hontobira_subtitle][大扉にサブタイトルをつけた例]{
+//}
+
+改行位置であったりタイトルが入りきらなかったりと気になる理由はさまざまですが、ここでは回避する設定をふたつ紹介します。
+
+=== サブタイトルを使いたいとき
+書名が長くて改行したいときやサブタイトルが入っている場合は@<tt>{config.yml}を次のとおり変更してください。
+
+//emlist[config.ymlで大扉にサブタイトルを追加する]{
+# 書名
+booktitle: {name: "技術書をかこう！", file-as: "ギジュツショヲカコウ"}
+subtitle: {name: "～はじめてのRe:VIEW～", file-as: "ハジメテノレビュー"}
+//}
+
+@<code>{subtitle}項目は正式なものではありませんが、Re:VIEWテンプレートリポジトリに含まれている自動生成の大扉ページに入っているので実は使えます。
+タイトルに比べて少し小さく表示され、収まりもいいので改行を避けたいときは使いやすい方法です。
+
+=== 完全に差し替えたいとき
+大扉をオリジナルで作成したいときはTeXで書くか別の画像ファイルまたはPDFファイルなどで差し替えられます。
+@<tt>{config.yml}を次のとおり変更してください。
+
+//emlist[config.ymlで大扉を指定する]{
+# 表紙の後に大扉ページを作成するか。省略した場合はtrue （作成する）
+titlepage: true
+#
+# 自動生成される大扉ページを上書きするファイル。ファイル名を指定すると大扉として入る （PDFMaker向けにはLaTeXソース断片、EPUBMaker向けにはHTMLファイル）
+titlefile: mytitle.tex
+//}
+
+@<code>{titlefile}項目に@<code>{mytitle.tex}を指定します。このときプロジェクトの設定ファイルが@<tt>{articles/config.yml}に位置している場合には
+@<tt>{articles/mytitle.tex}へ配置します。
+
+TeXファイルの中身は自由です。ここではRe:VIEWが提供している便利マクロを使って画像やPDFファイルで差し替えます。
+
+//emlist[mytitle.texの作成例]{
+\begin{titlepage}
+    \thispagestyle{empty}
+    \includefullpagegraphics{images/hontobira.jpg}
+\end{titlepage}\clearpage
+//}
+
+@<code>{\includefullpagegraphics}マクロでは@<tt>{hontobira.jpg}ファイルを白ページに中心寄せで読み込んでいます。
+このとき画像ファイルは@<tt>{articles/images}ディレクトリ内に配置してください。サンプルでは@<tt>{.jpg}ファイルを使っていますがPDFファイルを指定することもできます。
+判型を合わせて作り込むとより美しく満足度が高いものが仕上がります。
+
 
 ===[column] レイアウトを変更する楽しみ
 
@@ -110,13 +199,6 @@ Re:VIEWでのレイアウトに関する部分の多くはLaTeXの知識を必�
 ===[/column]
 
 //footnote[book_latex2e][「LATEX2e美文書作成入門」 @<href>{https://www.amazon.co.jp/dp/4774187054/} - 奥村晴彦著 技術評論社刊]
-
-== 表紙をつける
-#@# TODO mhidaka
-@<code>{cover.jpg}は@<tt>{config.yml}の位置をルートに@<tt>{image/cover.jpg}へ配置してください。
-カバー画像がない場合は署名が表示されます。
-
-== 大扉を変える
 
 == プリプロセッサ命令
 
@@ -134,12 +216,14 @@ Re:VIEWでは最終的な見た目に影響する記法とは別に、外部の�
 
 === ファイルの内容を読み込む
 
+#@# prh:disable
 @<code>{mapfile}命令は、外部ファイルの内容をすべて読み込みます。
 外部ファイルを読み込む箇所に@<code>{#@mapfile(file_name)}と読み込み範囲の終了を示す@<code>{#@end}を記述します。
 @<code>{review-preproc}コマンドは@<code>{#@mapfile(file_name)}と@<code>{#@end}の間にファイル@<code>{file_name}を読み込みます。
 
 たとえばサンプルコード@<tt>{foo.rb}を読み込む場合、@<list>{sample_mapfile_before}のように記述します。
 
+#@# prh:disable
 //list[sample_mapfile_before][コンパイル前のmapfile記述]{
  //list[sample_code][サンプルコード]{
  #@mapfile(foo.rb)
@@ -150,6 +234,7 @@ Re:VIEWでは最終的な見た目に影響する記法とは別に、外部の�
 @<list>{sample_mapfile_before}は@<code>{review-preproc}コマンドの処理後に@<list>{sample_mapfile_after}のようになります。
 Re:VIEWは@<code>{#@〜}の行をPDFやHTMLファイルなどの最終的な成果物には出力せず、@<tt>{foo.rb}の内容だけを出力します。
 
+#@# prh:disable
 //list[sample_mapfile_after][コンパイル後のmapfile記述]{
  //list[sample_code][サンプルコード]{
  #@mapfile(foo.rb)
@@ -184,9 +269,11 @@ $ review-preproc -r --tabwidth=2 sample.re
 @<code>{maprange}命令は、外部ファイルの一部を読み込みます。
 ただし、外部のファイル側に読み込み範囲を示すプリプロセッサ命令を記述しておく必要があります。
 
+#@# prh:disable
 @<code>{#@range_begin(range_name)}と@<code>{#@range_end(range_name)}で範囲を括ります。
 @<list>{sample_maprange_source}は、@<code>{#@range_begin(range_name)}と@<code>{#@range_end(range_name)}を記述した例です。
 
+#@# prh:disable
 //list[sample_maprange_source][maprangeで読み込むsrc.txt]{
  ここは読み込みません。
  #@range_begin(sample)
@@ -195,9 +282,11 @@ $ review-preproc -r --tabwidth=2 sample.re
  ここは読み込みません。
 //}
 
+#@# prh:disable
 @<list>{sample_maprange_source}で指定した範囲を読み込むには、.reファイルに@<list>{sample_maprange_before}のように記述します。
 また、@<code>{#@maprange(...)}は@<code>{#@map(...)}と記述しても動作します。
 
+#@# prh:disable
 //list[sample_maprange_before][コンパイル前のmaprange記述]{
  //list[sample_code][サンプルコード]{
  #@maprange(src.txt, sample)
@@ -207,6 +296,7 @@ $ review-preproc -r --tabwidth=2 sample.re
 
 @<list>{sample_maprange_before}は@<code>{review-preproc}コマンドの処理後に@<list>{sample_maprange_after}のようになります。
 
+#@# prh:disable
 //list[sample_maprange_after][コンパイル後のmaprage]{
  //list[sample_code][サンプルコード]{
  #@maprange(src.txt, sample)
@@ -226,6 +316,7 @@ $ review-preproc -r --tabwidth=2 sample.re
 
 たとえば、筆者の環境のJavaバージョンを自動で埋め込む場合は@<list>{sample_mapoutput_before}のように記述します。
 
+#@# prh:disable
 //list[sample_mapoutput_before][java -version]{
  #@mapoutput(java -version 2>&1)
  #@end
@@ -233,6 +324,7 @@ $ review-preproc -r --tabwidth=2 sample.re
 
 @<list>{sample_mapoutput_before}はコンパイル後に@<list>{sample_mapoutput_after}のようになります。
 
+#@# prh:disable
 //list[sample_mapoutput_after][java -version]{
  #@mapoutput(java -version 2>&1)
  java version "1.8.0_131"
@@ -268,6 +360,7 @@ TechBoosterではNode.js+npm-scripts（裏はgrunt）を利用しています。
 
 最低限必要なのは次のコマンドと同様の動作です。
 
+#@# prh:disable
 //emlist{
 rm -rf articles/C89-FirstStepReVIEW-v2-pdf/ \
        articles/*.pdf  \
@@ -328,6 +421,7 @@ PDF、EPUBについては利用するコマンドそのものが違うので注�
 #@# prh:disable
 これらを詰め込んだ、実際にTechBoosterで使っているgrunt用設定ファイルを公開しています。
 
+#@# prh:disable
  * @<href>{https://github.com/TechBooster/C89-FirstStepReVIEW-v2/blob/master/Gruntfile.js}
 
 Node.jsのバージョンといった動作条件はリポジトリのメンテナンスなどで更新があります。利用前にリポジトリを確認してください。
