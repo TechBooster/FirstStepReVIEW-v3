@@ -1,0 +1,22 @@
+% Re:VIEW 2互換のlayout.tex.erb記載相当の内容
+\RequirePackage{review-base}
+
+% Re:VIEW 2互換のreviewmacro.sty(装飾カスタマイズ)内容
+\RequirePackage{review-style}
+
+% 過去、config.ymlに dvioptions: "-f ../sty/fonts.map" を指定してdvipdfmxの変換時にフォント指定していたがRe:VIEW 3系より不要になった
+% システムのTeXデフォルトフォントの明朝を自動的に選択します。
+% デフォルトのゴシックを利用する
+\RequirePackage{techbooster-viewer-base}
+% デフォルトの明朝体を利用する
+% \RequirePackage{techbooster-viewer-base-mintyo}
+
+% ユーザー固有の定義
+\RequirePackage{review-custom}
+
+%% run \@endofreviewmacrohook at the end of reviewmacro style
+\@ifundefined{@endofreviewmacrohook}{}{%
+\let\AtEndOfReVIEWMacro\@firstofone
+\@endofreviewmacrohook}
+
+\endinput

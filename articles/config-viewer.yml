@@ -1,0 +1,14 @@
+# 電子版用の上書き設定
+# 以下のいずれかのコマンドでPDFをビルドできる
+#  - REVIEW_CONFIG_FILE=config-viewer.yml rake pdf
+#  - review-pdfmaker config-viewer.yml
+#  - REVIEW_CONFIG_FILE=config-viewer.yml npm run pdf
+
+# 継承元設定
+inherit: ["config.yml"]
+
+# LaTeX用のスタイルファイル(styディレクトリ以下に置くこと)
+texstyle: ["viewermacro"]
+
+# A4の設定(14pt 42文字×32行) - 電子版
+texdocumentclass: ["review-jsbook", "media=ebook,paper=a4,serial_pagination=false,oneside,fontsize=14pt,line_length=42zw,number_of_lines=32,head_space=22mm"]

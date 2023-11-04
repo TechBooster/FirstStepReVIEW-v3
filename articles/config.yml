@@ -292,7 +292,7 @@ playwright_options:
 epubmaker:
   # HTMLファイルの拡張子
   htmlext: xhtml
-  stylesheet: ["style.css", "epub_style.css"]
+  stylesheet: ["epub_style.css", "epub_style.scss"]
   #
   # 目次を要素の階層表現にしない。省略した場合(null)は階層化する。
   # 特に部扉が入るなどの理由で、構成によっては階層化目次でepubcheckに
@@ -481,7 +481,7 @@ pdfmaker:
 # という構成にする必要がある(インデントさせる)
 #
 webmaker:
-    stylesheet: ["style.css", "style-web.css"]
+    stylesheet: ["style-web.css", "style-web.scss"]
 
 # TechBooster Re:VIEW-Template独自設定
 techbooster:
